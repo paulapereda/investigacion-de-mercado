@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 1 Actualizado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ───────────────────────────────────── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 40px 44px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #d4a0a0;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .meta-chip {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+  }
+  .meta-chip.highlight { border-color: var(--accent); color: #f0a0a0; }
+  .header-bg {
+    position: absolute;
+    top: 0; right: 0;
+    width: 420px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%);
+    pointer-events: none;
+  }
+  .header-rule {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%);
+  }
+
+  /* ── LAYOUT ───────────────────────────────────── */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ──────────────────────────────────── */
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-right: 1px solid var(--border);
+    background: var(--cream);
+  }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .nav-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-item {
+    display: block;
+    padding: 9px 12px;
+    margin-bottom: 2px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active {
+    background: var(--paper);
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--border);
+    padding: 14px 12px 4px;
+    font-family: 'DM Mono', monospace;
+  }
+  .legend {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN CONTENT ─────────────────────────────── */
+  main {
+    padding: 40px 48px 80px;
+    max-width: 820px;
+  }
+
+  /* ── SECTION ──────────────────────────────────── */
+  .section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-header {
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .section-intro {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 620px;
+  }
+
+  /* ── OLD CONTENT BOX ──────────────────────────── */
+  .old-box {
+    background: #f5f0eb;
+    border: 1px solid var(--border);
+    border-left: 4px solid #b0a898;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .old-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #9a9088;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  /* ── UPDATE CARD ──────────────────────────────── */
+  .update-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 30px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .update-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+  .update-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag {
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+
+  /* ── CASE HIGHLIGHT ───────────────────────────── */
+  .case-highlight {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    border-radius: 10px;
+    padding: 28px 30px;
+    margin: 20px 0;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .case-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .case-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .case-highlight h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  /* ── REFERENCE BOX ────────────────────────────── */
+  .ref-box {
+    background: var(--tag-bg);
+    border: 1px solid #b8d0e8;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .ref-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .ref-item {
+    font-size: 13px;
+    color: #2a3a50;
+    padding: 5px 0;
+    border-bottom: 1px solid #d0e0f0;
+    line-height: 1.6;
+  }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  /* ── LATAM BOX ────────────────────────────────── */
+  .latam-box {
+    background: var(--lat-bg);
+    border: 1px solid var(--lat-border);
+    border-left: 4px solid var(--lat-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .latam-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--lat-border);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+
+  /* ── TOOL BOX ─────────────────────────────────── */
+  .tool-box {
+    background: var(--tool-bg);
+    border: 1px solid var(--tool-border);
+    border-left: 4px solid var(--tool-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .tool-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--tool-border);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .tool-item {
+    background: white;
+    border: 1px solid #c0d4e8;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  /* ── DIVIDER ──────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* ── COMPARISON TABLE ─────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 16px 0;
+  }
+  .compare-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .compare-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+  .compare-table tr:hover td { background: #f0ece4; }
+  .old-val { color: #9a8878; text-decoration: line-through; font-size: 13px; }
+  .new-val { color: #1a3a1a; font-weight: 500; }
+
+  /* ── CALLOUT ──────────────────────────────────── */
+  .callout {
+    border-left: 4px solid var(--gold);
+    background: var(--new-bg);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #4a3a10;
+    line-height: 1.75;
+  }
+  .callout strong { color: var(--gold); }
+
+  /* ── FOOTER NAV ───────────────────────────────── */
+  .footer-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ── RESPONSIVE ───────────────────────────────── */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+    header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 1</div>
+    <h1>Introducción a la<br><em>Investigación<br>de Mercados</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+
+    <div class="nav-section-label">Fundamentos</div>
+    <a class="nav-item active" onclick="showSection('definicion')">1. Definición</a>
+    <a class="nav-item" onclick="showSection('clasificacion')">2. Clasificación</a>
+    <a class="nav-item" onclick="showSection('proceso')">3. Proceso (6 pasos)</a>
+
+    <div class="nav-section-label">Contexto</div>
+    <a class="nav-item" onclick="showSection('toma-decisiones')">4. Toma de Decisiones</a>
+    <a class="nav-item" onclick="showSection('proveedores')">5. Sector y Proveedores</a>
+
+    <div class="nav-section-label">Temas Emergentes</div>
+    <a class="nav-item" onclick="showSection('social-media')">6. Social Media y Datos</a>
+    <a class="nav-item" onclick="showSection('internacional')">7. Internacional y Ética</a>
+
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real nuevo</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 1: DEFINICIÓN -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="definicion" class="section active">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>Definición de Investigación de Mercado</h2>
+        <p class="section-intro">La definición clásica de Malhotra sigue siendo válida en su estructura, pero el contexto digital amplía significativamente qué datos se recopilan, cómo y en qué tiempos.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Definición original — Malhotra 2016</div>
+        <p>"La investigación de mercado es el proceso de identificación, recopilación, análisis, difusión y uso sistemáticos y objetivos de la información, con el propósito de mejorar la toma de decisiones relacionadas con la identificación y solución de problemas y oportunidades de marketing."</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>¿Qué ha cambiado en la definición?</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>La definición de Malhotra sigue siendo el punto de partida correcto, pero la literatura reciente añade dos dimensiones clave que no existían en 2016:</p>
+        <p><strong>1. Datos no estructurados en tiempo real.</strong> Hoy, gran parte de la información de mercado no proviene de encuestas planeadas, sino de conversaciones en redes sociales, reseñas, videos y comportamientos digitales. Esto cambia quién recopila, cómo y cuándo.</p>
+        <p><strong>2. La investigación como proceso continuo, no puntual.</strong> Empresas como Spotify o Netflix no "hacen una investigación" y esperan resultados: tienen pipelines de datos que producen insights de forma permanente.</p>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias para ampliar</div>
+          <div class="ref-item"><strong>Wedel & Kannan (2016).</strong> "Marketing Analytics for Data-Rich Environments." <em>Journal of Marketing</em>, 80(6), 97–121. — Introduce la idea de investigación continua basada en datos masivos.</div>
+          <div class="ref-item"><strong>Lemon & Verhoef (2016).</strong> "Understanding Customer Experience Throughout the Customer Journey." <em>Journal of Marketing</em>, 80(6), 69–96. — Plantea que la investigación debe capturar la experiencia completa del consumidor, no solo momentos de compra.</div>
+          <div class="ref-item"><strong>Malhotra, N. (2019).</strong> <em>Marketing Research: An Applied Orientation</em>, 7ª ed. Pearson. — Versión más reciente del mismo autor, con actualización metodológica.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso para clase: Amazon y la investigación silenciosa</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>Amazon es hoy el ejemplo más potente de una empresa que realiza investigación de mercado de forma continua y automatizada, sin que el consumidor lo note. Cada clic, cada búsqueda sin compra, cada producto añadido al carrito y abandonado es un dato.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🔍 Caso en clase</div>
+          <h4>Amazon: Cuando cada clic es una encuesta</h4>
+          <p>Amazon tiene más de 300 millones de cuentas activas. En lugar de hacer focus groups para decidir qué mostrar en su página principal, realiza millones de experimentos A/B simultáneos: versión A para un grupo de usuarios, versión B para otro, y mide cuál genera más conversión.</p>
+          <p>Para introducir el Amazon Echo (Alexa), la empresa no lanzó una encuesta tradicional: analizó patrones de búsqueda por voz, reseñas de competidores y conversaciones en foros de tecnología antes de definir el producto. La investigación precedió al diseño, no al revés.</p>
+          <p><em>Pregunta para clase: ¿Cómo encaja esto con la definición de Malhotra? ¿Qué pasos del proceso clásico está realizando Amazon, aunque de forma no tradicional?</em></p>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Contexto latinoamericano: Mercado Libre como laboratorio</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 América Latina</div>
+          <p><strong>Mercado Libre</strong> (Argentina, con operaciones en 18 países de la región) es el caso latinoamericano equivalente a Amazon. Su división de datos — Mercado Libre Data — genera informes públicos periódicos sobre comportamiento del consumidor en e-commerce que son excelentes fuentes secundarias para proyectos de investigación estudiantil.</p>
+          <p>Para México en particular, el <strong>Estudio de Venta Online AMVO</strong> (Asociación Mexicana de Ventas Online) publica anualmente datos sobre hábitos de compra digital que actualizan cualquier caso del libro.</p>
+          <p><strong>Fuente:</strong> AMVO (2024). <em>Estudio de Venta Online México</em>. Disponible en: amvo.org.mx</p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('clasificacion')">Siguiente: Clasificación →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 2: CLASIFICACIÓN -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="clasificacion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Clasificación de la Investigación de Mercado</h2>
+        <p class="section-intro">La distinción entre investigación para identificar problemas e investigación para resolverlos sigue siendo válida y didáctica. Los casos que la ilustran, sin embargo, necesitan actualizarse.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Casos originales — Malhotra 2016</div>
+        <p>El libro usa los casos de <strong>Scott Products / Kimberly-Clark</strong> (competencia de precios regionales) y <strong>Kellogg's Nutri-Grain</strong> (declive de ventas de cereales) para ilustrar la clasificación. Ambos son anteriores a 2014 y han perdido relevancia para estudiantes actuales.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Netflix y la crisis del password sharing</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Netflix entre 2022 y 2023 es el caso más completo y documentado para ilustrar ambos tipos de investigación en secuencia:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📋 Investigación para identificar problemas</div>
+          <h4>¿Por qué caían los suscriptores?</h4>
+          <p>En 2022 Netflix perdió suscriptores por primera vez en una década. Para diagnosticar el problema realizó análisis de datos internos (¿desde cuántas IPs se conecta cada cuenta?), encuestas a usuarios que cancelaron, y análisis de conversaciones en redes sociales. El diagnóstico: el "password sharing" —compartir contraseñas— representaba 100 millones de usuarios sin pagar.</p>
+        </div>
+
+        <div class="case-highlight" style="margin-top:12px; background: linear-gradient(135deg, #1a2a3a 0%, #1a3a2a 100%);">
+          <div class="case-label" style="color:#4db87a;">🔧 Investigación para solucionar problemas</div>
+          <h4>¿Cómo convertir a esos usuarios en suscriptores?</h4>
+          <p>La investigación para resolver el problema incluyó pruebas A/B en mercados como Chile, Perú y Costa Rica (antes del lanzamiento global), encuestas sobre disposición a pagar, y análisis de segmentación para diseñar el plan con anuncios. El resultado: en 2023 Netflix sumó 29 millones de nuevos suscriptores.</p>
+          <p><em>Pregunta para clase: ¿Qué tipo de investigación se realizó primero? ¿Podría haberse saltado algún paso?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuente</div>
+          <div class="ref-item"><strong>Gomez-Uribe, C. & Hunt, N. (2016).</strong> "The Netflix Recommender System: Algorithms, Business Value, and Innovation." <em>ACM TMIS</em>, 6(4). — Aunque es de 2016, es el artículo académico canónico sobre el sistema de decisiones basado en datos de Netflix.</div>
+          <div class="ref-item"><strong>Netflix Investor Relations (2023).</strong> Q4 2023 Earnings Letter. — Fuente primaria con datos del impacto de la medida. Disponible en ir.netflix.net</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso latinoamericano: Rappi y la expansión a nuevas categorías</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 América Latina</div>
+          <p><strong>Rappi</strong> (Colombia, con operaciones en México, Argentina, Brasil, Chile, entre otros) comenzó como app de domicilios de comida. Para expandirse a farmacias, supermercados y hasta servicios financieros (RappiPay), realizó investigación en dos etapas que ilustra perfectamente la clasificación del libro:</p>
+          <p><strong>Identificación:</strong> Análisis de los patrones de pedido mostraron que usuarios frecuentes hacían búsquedas de categorías que Rappi no ofrecía (medicamentos, artículos de limpieza). Eso señaló la oportunidad.</p>
+          <p><strong>Solución:</strong> Encuestas a usuarios, pruebas piloto en ciudades específicas y análisis de precios competitivos para diseñar RappiMax y RappiFarma.</p>
+          <p><strong>Fuente:</strong> Cases de Harvard Business School disponibles en: hbs.edu (buscar "Rappi")</p>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Nuevas categorías a añadir a la Figura 1.2</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>La Figura 1.2 del libro muestra la clasificación clásica. Hoy se discute una tercera categoría emergente en la literatura:</p>
+
+        <table class="compare-table">
+          <tr>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Ejemplo actual</th>
+          </tr>
+          <tr>
+            <td><strong>Identificar problemas</strong></td>
+            <td>Detectar problemas no evidentes</td>
+            <td>Netflix analizando caída de suscriptores</td>
+          </tr>
+          <tr>
+            <td><strong>Solucionar problemas</strong></td>
+            <td>Encontrar cómo resolver el problema identificado</td>
+            <td>Netflix diseñando plan con anuncios</td>
+          </tr>
+          <tr>
+            <td><strong>Investigación predictiva</strong> <span style="color:var(--accent);font-size:11px;">NUEVO</span></td>
+            <td>Anticipar problemas antes de que ocurran, con modelos de datos</td>
+            <td>Spotify detectando usuarios en riesgo de cancelar antes de que cancelen</td>
+          </tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Kumar, V. & Reinartz, W. (2018).</strong> <em>Customer Relationship Management</em>, 3ª ed. Springer. — Capítulo 4 desarrolla la investigación predictiva en el contexto de CRM y retención de clientes.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('definicion')">← Definición</button>
+        <button class="nav-btn primary" onclick="showSection('proceso')">Siguiente: Proceso →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 3: PROCESO -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="proceso" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>El Proceso de Investigación de Mercado</h2>
+        <p class="section-intro">Los 6 pasos del proceso clásico siguen siendo estructuralmente válidos. La actualización clave está en cómo se ejecuta cada paso con herramientas modernas, y en la tensión con los enfoques ágiles.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Proceso original — Malhotra 2016</div>
+        <p>El libro presenta un proceso lineal de 6 pasos: (1) Definición del problema, (2) Desarrollo del enfoque, (3) Formulación del diseño, (4) Trabajo de campo, (5) Preparación y análisis de datos, (6) Informe. Se describe como secuencial, aunque señala que es iterativo.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Los 6 pasos con herramientas actuales</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Cada paso del proceso clásico hoy se apoya en herramientas específicas que los estudiantes encontrarán en el mercado laboral:</p>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Paso 1 — Definición del problema</div>
+          <p style="font-size:14px;color:#1a2a3a;margin-bottom:12px;">Las entrevistas con tomadores de decisión (descrito en Malhotra) se complementan hoy con análisis de datos secundarios digitales para validar que el problema existe antes de diseñar la investigación.</p>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Google Trends</strong><span>Validar si un problema o tema tiene búsqueda real</span></div>
+            <div class="tool-item"><strong>Semrush / SimilarWeb</strong><span>Análisis competitivo digital como dato antecedente</span></div>
+            <div class="tool-item"><strong>Statista</strong><span>Datos secundarios de industria para contextualizar</span></div>
+          </div>
+        </div>
+
+        <div class="tool-box" style="margin-top:14px;">
+          <div class="tool-label">🛠 Paso 3 — Formulación del diseño</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Qualtrics</strong><span>Diseño de encuestas con lógica avanzada y paneles</span></div>
+            <div class="tool-item"><strong>Typeform</strong><span>Encuestas conversacionales, mayor tasa de respuesta</span></div>
+            <div class="tool-item"><strong>UserTesting</strong><span>Investigación de usabilidad y producto en remoto</span></div>
+          </div>
+        </div>
+
+        <div class="tool-box" style="margin-top:14px;">
+          <div class="tool-label">🛠 Paso 4 — Recopilación de datos</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Prolific / Cint</strong><span>Paneles online de encuestados verificados</span></div>
+            <div class="tool-item"><strong>Dynata</strong><span>Proveedor global de paneles (reemplaza a muchos de la Tabla 1.1)</span></div>
+            <div class="tool-item"><strong>Brandwatch</strong><span>Recopilación de datos de social media a escala</span></div>
+          </div>
+        </div>
+
+        <div class="tool-box" style="margin-top:14px;">
+          <div class="tool-label">🛠 Paso 5 — Análisis de datos</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>SPSS / R / Python</strong><span>Análisis estadístico (SPSS sigue siendo estándar en investigación de mercado)</span></div>
+            <div class="tool-item"><strong>Tableau / Power BI</strong><span>Visualización y dashboards ejecutivos</span></div>
+            <div class="tool-item"><strong>NVivo</strong><span>Análisis de datos cualitativos (entrevistas, focus groups)</span></div>
+          </div>
+        </div>
+
+        <div class="ref-box" style="margin-top:16px;">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Hair, J.F. et al. (2021).</strong> <em>Multivariate Data Analysis</em>, 8ª ed. Cengage Learning. — El libro de referencia metodológica más actualizado para los pasos 3–5.</div>
+          <div class="ref-item"><strong>Qualtrics XM Institute (2023).</strong> <em>State of Customer Experience Research.</em> — Reporte anual gratuito sobre herramientas y prácticas de investigación en empresas. Disponible en: qualtrics.com/xm-institute</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El debate: ¿proceso lineal o investigación ágil?</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Una de las críticas más discutidas al modelo de Malhotra en la academia y en la práctica es su carácter lineal. En empresas de tecnología y startups, se practica la <strong>investigación ágil</strong> (<em>agile research</em>): ciclos cortos de 1–2 semanas con validación continua, en lugar de proyectos de 3–6 meses.</p>
+
+        <div class="callout">
+          <strong>Para discutir en clase:</strong> ¿El modelo de 6 pasos y la investigación ágil son incompatibles, o el proceso clásico simplemente se ejecuta más rápido? ¿Qué tipo de empresa usaría cada enfoque?
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias para el debate</div>
+          <div class="ref-item"><strong>Ries, E. (2011).</strong> <em>The Lean Startup.</em> Crown Business. — Aunque no es un libro de investigación de mercado, introduce el concepto de "validated learning" que redefine cómo se recopila información en startups.</div>
+          <div class="ref-item"><strong>Christensen, C., Hall, T., Dillon, K. & Duncan, D. (2016).</strong> "Know Your Customers' Jobs to Be Done." <em>Harvard Business Review</em>, sept–oct. — Propone un marco alternativo para la definición del problema (Paso 1) centrado en el "trabajo" que el cliente quiere resolver.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Contexto latinoamericano: Desafíos en el trabajo de campo</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 América Latina · Paso 4</div>
+          <p>El Paso 4 (trabajo de campo) tiene particularidades importantes en América Latina que el libro no menciona:</p>
+          <p><strong>Acceso digital desigual:</strong> Según CEPAL (2023), el 37% de los hogares rurales en América Latina no tiene acceso a internet, lo que limita las encuestas online y requiere combinar métodos digitales con presenciales.</p>
+          <p><strong>Cultura de respuesta:</strong> Los estudios sobre sesgo de aquiescencia muestran que en contextos latinoamericanos existe una mayor tendencia a responder "de acuerdo" o positivamente, lo que afecta el diseño de escalas.</p>
+          <p><strong>Fuente:</strong> CEPAL (2023). <em>Perspectivas del Comercio Internacional de América Latina y el Caribe.</em> cepal.org — Capítulo sobre economía digital incluye datos de conectividad actualizados.</p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('clasificacion')">← Clasificación</button>
+        <button class="nav-btn primary" onclick="showSection('toma-decisiones')">Siguiente: Toma de Decisiones →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 4: TOMA DE DECISIONES -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="toma-decisiones" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>El Papel en la Toma de Decisiones de Marketing</h2>
+        <p class="section-intro">La Figura 1.4 del libro (variables controlables vs. no controlables) sigue siendo un marco conceptual válido. El caso de Apple/iPad que la ilustra, en cambio, ya no conecta con estudiantes actuales.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Caso original — Malhotra 2016</div>
+        <p>El libro usa el lanzamiento del iPad (2010) y el iPhone 5 (2012) para ilustrar cómo la investigación de mercado apoya las decisiones de marketing. Estos eventos ocurrieron hace más de 12 años.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Spotify y las decisiones basadas en datos</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Spotify es ideal para ilustrar la Figura 1.4 porque muestra cómo las variables controlables (producto, precio, promoción, distribución) se ajustan continuamente en función de investigación interna:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🎵 Spotify · Decisiones de producto basadas en investigación</div>
+          <h4>De encuestas a algoritmos: cómo Spotify toma decisiones</h4>
+          <p><strong>Variable controlable: Producto.</strong> La función "Discover Weekly" (lista personalizada cada lunes) nació de una investigación cualitativa que mostró que los usuarios querían descubrir música nueva pero no querían buscarla activamente. La investigación definió el problema; el algoritmo fue la solución.</p>
+          <p><strong>Variable controlable: Precio.</strong> El modelo freemium se rediseñó en varios mercados (India, Indonesia) tras investigación sobre disposición a pagar en economías emergentes. En India, el precio mensual es 3x menor que en EE.UU.</p>
+          <p><strong>Variable no controlable: Competencia.</strong> El crecimiento de Apple Music y YouTube Music generó investigación continua sobre percepción de marca y atributos de diferenciación.</p>
+          <p><em>Pregunta para clase: ¿Cuáles de las acciones de Spotify corresponden a investigación para identificar problemas y cuáles a investigación para solucionarlos?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Pasick, A. (2015).</strong> "The magic that makes Spotify's Discover Weekly so damn good." <em>Quartz.</em> — Artículo periodístico accesible que explica la investigación detrás del algoritmo.</div>
+          <div class="ref-item"><strong>van Dijck, J. (2021).</strong> <em>The Platform Society.</em> Oxford University Press. — Contextualiza cómo las plataformas digitales integran investigación en tiempo real en sus decisiones estratégicas.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso latinoamericano: Grupo Bimbo y la investigación de mercado regional</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 México / América Latina</div>
+          <p><strong>Grupo Bimbo</strong> (México) es la panificadora más grande del mundo con presencia en 33 países. Es un caso excepcional porque ilustra cómo una empresa latinoamericana usa investigación de mercado para tomar decisiones tanto locales como globales.</p>
+          <p>Para adaptar sus productos al mercado de EE.UU. (población hispana), realizó investigación etnográfica —observación en hogares— para entender cómo se consume el pan en familias mexicanas inmigrantes. El resultado fue una línea específica que conserva atributos culturales (color de la bolsa, textura) pero ajusta el tamaño y el precio.</p>
+          <p>Este caso conecta directamente con la Figura 1.4: variables controlables (producto, empaque, precio) ajustadas en función de investigación sobre grupos de clientes específicos dentro de factores no controlables (cambios culturales, regulaciones de etiquetado).</p>
+          <p><strong>Fuente:</strong> Khanna, T. & Palepu, K. (2010). <em>Winning in Emerging Markets.</em> Harvard Business Press. — Capítulo sobre empresas latinoamericanas con estrategias globales.</p>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Actualización conceptual: del SIM al "Data Stack"</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro habla del SIM (Sistema de Información de Marketing) como la integración de datos internos y externos. Hoy este concepto se llama <strong>"marketing data stack"</strong> o <strong>CDP (Customer Data Platform)</strong> y es mucho más sofisticado:</p>
+
+        <table class="compare-table">
+          <tr>
+            <th>Malhotra 2016: SIM</th>
+            <th>Equivalente actual</th>
+          </tr>
+          <tr>
+            <td>Facturación interna + investigación de mercado</td>
+            <td>CRM (Salesforce, HubSpot) + datos de comportamiento digital</td>
+          </tr>
+          <tr>
+            <td>Almacén centralizado de datos</td>
+            <td>CDP (Customer Data Platform): Segment, Amplitude</td>
+          </tr>
+          <tr>
+            <td>Reportes periódicos a gerentes</td>
+            <td>Dashboards en tiempo real (Tableau, Looker, Power BI)</td>
+          </tr>
+          <tr>
+            <td>SAD: modelos de análisis para decisiones</td>
+            <td>AI/ML integrado: recomendaciones algorítmicas automáticas</td>
+          </tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Davenport, T. & Harris, J. (2017).</strong> <em>Competing on Analytics: Updated, with a New Introduction.</em> Harvard Business Review Press. — El libro de referencia sobre cómo las empresas usan datos para tomar decisiones de marketing y negocio.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('proceso')">← Proceso</button>
+        <button class="nav-btn primary" onclick="showSection('proveedores')">Siguiente: Proveedores →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 5: PROVEEDORES -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="proveedores" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>El Sector de la Investigación de Mercado</h2>
+        <p class="section-intro">La Tabla 1.1 del libro (top 10 proveedores, datos de 2012) es la sección más desactualizada del capítulo. El sector se transformó radicalmente entre 2016 y 2024.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Tabla original — Malhotra 2016 (datos de 2012)</div>
+        <p>El libro lista como top proveedores a: Nielsen (#1), Kantar (#2), Ipsos (#3), GfK (#4), IMS Health (#5), IRI (#6), INTAGE (#7), Westat (#8), Arbitron (#9), NPD Group (#10). Varios de estos han sido fusionados, adquiridos o reemplazados.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Tabla actualizada: Top proveedores 2022–2023</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Según el ESOMAR Global Market Research Report 2023, el ranking y la estructura del sector cambiaron significativamente:</p>
+
+        <table class="compare-table">
+          <tr>
+            <th>#</th>
+            <th>Proveedor (2023)</th>
+            <th>Nota de actualización</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td><strong>Nielsen IQ</strong></td>
+            <td>Nielsen se dividió en 2023: Nielsen (medición de audiencias) y NielsenIQ (datos de consumo). Son empresas separadas.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>Kantar</strong></td>
+            <td>Vendida parcialmente a Bain Capital en 2019. Sigue siendo #2 global.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>IQVIA</strong> (antes IMS Health)</td>
+            <td>IMS Health se fusionó con Quintiles en 2016 para formar IQVIA. Especializada en salud.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>Ipsos</strong></td>
+            <td>Mantiene posición, con fuerte crecimiento en estudios de opinión pública y política.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>GfK / NIQ</strong></td>
+            <td>GfK fue adquirida por NielsenIQ en 2023. Fusión en proceso.</td>
+          </tr>
+          <tr>
+            <td>—</td>
+            <td><strong>Qualtrics</strong> <span style="color:var(--accent);font-size:11px;">NUEVO</span></td>
+            <td>No existía en la lista de 2012. Hoy es uno de los mayores proveedores de software de investigación (fue adquirida por SAP, luego relistada). Especialmente relevante para experiencia del cliente.</td>
+          </tr>
+          <tr>
+            <td>—</td>
+            <td><strong>Dynata</strong> <span style="color:var(--accent);font-size:11px;">NUEVO</span></td>
+            <td>Fusión de Research Now y SSI (Survey Sampling International). Mayor proveedor de paneles de encuestados del mundo.</td>
+          </tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuente primaria</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report 2023.</em> Amsterdam: ESOMAR. — El informe anual más completo del sector. Disponible (parcialmente gratis) en esomar.org. Contiene el ranking actualizado y tendencias globales.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Nueva categoría: proveedores de investigación con IA</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>La Figura 1.5 del libro (clasificación de proveedores) necesita una nueva rama: los proveedores que usan inteligencia artificial para automatizar partes del proceso de investigación.</p>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Nuevas categorías de proveedores no contempladas en Malhotra</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Yabble</strong><span>Síntesis automática de datos cualitativos con IA (reemplaza análisis manual de focus groups)</span></div>
+            <div class="tool-item"><strong>Stravito</strong><span>Plataforma de gestión de insights (organiza investigaciones previas de una empresa)</span></div>
+            <div class="tool-item"><strong>Remesh</strong><span>Focus groups online con IA que analiza respuestas en tiempo real</span></div>
+            <div class="tool-item"><strong>Synthesio / Brandwatch</strong><span>Social listening a escala industrial</span></div>
+            <div class="tool-item"><strong>SurveyMonkey / Momentive</strong><span>Plataforma de encuestas self-service (democratizó la investigación para PYMEs)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Contexto latinoamericano: el sector de investigación en la región</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 América Latina</div>
+          <p>El libro habla casi exclusivamente de proveedores globales con sede en EE.UU. o Europa. Para México y América Latina, los proveedores locales relevantes son:</p>
+          <p><strong>INEGI</strong> (México): El proveedor más grande de datos secundarios para investigación de mercado en México. Sus encuestas (ENIGH, ENOE, ENIG) son fuentes primarias para cualquier investigación sobre consumo, empleo o demografía.</p>
+          <p><strong>Kantar Ibope Media</strong> (regional): Medición de audiencias y paneles de consumidores en México, Brasil, Argentina y Colombia.</p>
+          <p><strong>Consultora BAIN / McKinsey México:</strong> Para segmentos corporativos, producen reportes anuales sobre consumidor mexicano de acceso público.</p>
+          <p><strong>AMIPCI / IAB México:</strong> Reportes anuales de hábitos digitales de los mexicanos, gratis y actualizados.</p>
+          <p><strong>Fuente clave:</strong> INEGI (2024). <em>Encuesta Nacional sobre Disponibilidad y Uso de Tecnologías de la Información en los Hogares (ENDUTIH).</em> inegi.org.mx — Fuente primaria gratuita para proyectos estudiantiles.</p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('toma-decisiones')">← Toma de Decisiones</button>
+        <button class="nav-btn primary" onclick="showSection('social-media')">Siguiente: Social Media →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 6: SOCIAL MEDIA -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="social-media" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Social Media, Datos Digitales e IA</h2>
+        <p class="section-intro">Esta es la sección que requiere la actualización más sustancial. El caso de Starbucks/My Starbucks Idea (MSI) quedó obsoleto — el blog cerró en 2018. El ecosistema digital de 2024 es radicalmente distinto al de 2016.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Contenido original — Malhotra 2016</div>
+        <p>El libro destaca el blog "My Starbucks Idea" (cerrado en 2018), la página de Facebook de Starbucks con 34 millones de seguidores, y Twitter como canales de investigación. Las plataformas mencionadas como "social media" incluyen MySpace-era: Second Life, Farmville, ivillage. Facebook se describe como herramienta central, sin mencionar Instagram, TikTok, ni YouTube Shorts.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El ecosistema de social media en 2024: lo que cambió</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+
+        <table class="compare-table">
+          <tr>
+            <th>Malhotra 2016 mencionaba</th>
+            <th>Estado actual (2024)</th>
+          </tr>
+          <tr>
+            <td class="old-val">My Starbucks Idea (blog)</td>
+            <td class="new-val">Cerrado en 2018. Reemplazado por Starbucks Idea en app y crowdsourcing en Instagram.</td>
+          </tr>
+          <tr>
+            <td class="old-val">Facebook como plataforma central</td>
+            <td class="new-val">Facebook perdió relevancia en Gen Z. TikTok es la plataforma dominante para tendencias de consumo en 18-25 años.</td>
+          </tr>
+          <tr>
+            <td class="old-val">Twitter como herramienta de investigación</td>
+            <td class="new-val">X (antes Twitter) perdió usuarios y acceso a API. Reemplazado por Bluesky, Threads y Reddit para investigación de opinión.</td>
+          </tr>
+          <tr>
+            <td class="old-val">Second Life / Farmville como "social media"</td>
+            <td class="new-val">Obsoletos. El equivalente hoy: Roblox, Discord, Reddit como comunidades para investigación.</td>
+          </tr>
+          <tr>
+            <td>—</td>
+            <td class="new-val"><strong>TikTok, Instagram Reels, YouTube Shorts:</strong> Las 3 plataformas más importantes para investigar tendencias en consumidores jóvenes. No existían o eran marginales en 2016.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: L'Oréal y el social listening en beauty</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+
+        <div class="case-highlight">
+          <div class="case-label">💄 Caso en clase — Relevante para el contexto de la industria</div>
+          <h4>L'Oréal: De encuestas a TikTok como fuente de insights</h4>
+          <p>L'Oréal es una de las empresas que más ha evolucionado en el uso de social media para investigación de mercado. En lugar de esperar a que una tendencia madure para estudiarla, detectan tendencias emergentes antes de que se conviertan en mainstream.</p>
+          <p><strong>Metodología:</strong> L'Oréal usa Brandwatch (social listening) para monitorear millones de conversaciones diarias sobre belleza en inglés, español, francés y mandarín. Cuando un ingrediente, técnica o formato de contenido aparece con crecimiento acelerado en TikTok, se activa una investigación de producto.</p>
+          <p><strong>Resultado concreto:</strong> El "skinminimalism" (rutina de skincare minimalista) fue detectado por L'Oréal en TikTok 8 meses antes de que apareciera en medios mainstream. Eso les permitió lanzar una línea de productos alineada con la tendencia antes que competidores.</p>
+          <p><em>Pregunta para clase: ¿Esto reemplaza la investigación tradicional o la complementa? ¿Qué limitaciones tiene este enfoque?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Lamberton, C. & Stephen, A.T. (2016).</strong> "A Thematic Exploration of Digital, Social Media, and Mobile Marketing." <em>Journal of Marketing</em>, 80(6), 146–172. — El artículo académico de referencia para integrar social media en el proceso de investigación.</div>
+          <div class="ref-item"><strong>Arora, A. et al. (2020).</strong> "Trigger Marketing." <em>Journal of Marketing Research</em>, 57(2). — Cómo los datos de social media pueden anticipar el comportamiento del consumidor.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo nuevo que el libro no menciona: IA generativa en investigación</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Desde 2022, la IA generativa (ChatGPT, Claude, Gemini) está cambiando cómo se realizan varios pasos del proceso de investigación. Es importante que los estudiantes conozcan tanto las posibilidades como las limitaciones:</p>
+
+        <div class="tool-box">
+          <div class="tool-label">🤖 IA generativa en el proceso de investigación de mercado</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Síntesis de investigación secundaria</strong><span>Resumir reportes de industria y literatura previa (Paso 1–2)</span></div>
+            <div class="tool-item"><strong>Diseño de cuestionarios</strong><span>Generar borradores de encuestas para revisión experta (Paso 3)</span></div>
+            <div class="tool-item"><strong>Análisis de texto</strong><span>Categorizar respuestas abiertas, identificar temas en entrevistas (Paso 5)</span></div>
+            <div class="tool-item"><strong>Personas sintéticas</strong><span>Simular respuestas de segmentos — útil para pilotear encuestas, no para reemplazar datos reales</span></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Limitación crítica para clase:</strong> Los modelos de IA generativa tienen "fechas de corte" de conocimiento y pueden alucinar datos. En investigación de mercado, nunca deben usarse para generar cifras de mercado o citas sin verificación independiente. Son herramientas de proceso, no de datos.
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia emergente</div>
+          <div class="ref-item"><strong>Anthropic / OpenAI Research Blogs (2023–2024).</strong> — Para contexto técnico sobre capacidades y limitaciones de LLMs en análisis de texto. blog.anthropic.com, openai.com/research</div>
+          <div class="ref-item"><strong>Hagberg, J. et al. (2023).</strong> "AI and Marketing Research: Opportunities and Challenges." <em>Journal of Marketing Management</em> — Uno de los primeros papers académicos sobre integración de IA en investigación de mercado.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Contexto latinoamericano: TikTok como fuente de investigación en México</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <div class="latam-box">
+          <div class="latam-label">🌎 México</div>
+          <p>México tiene una de las audiencias más grandes de TikTok en América Latina: más de 57 millones de usuarios activos en 2023 (Statista, 2024). Para investigadores de mercados en México, TikTok es especialmente relevante para estudiar:</p>
+          <p>• Tendencias de consumo en 15–29 años<br>• Comportamiento de compra influenciado por creadores de contenido<br>• Percepción de marcas en tiempo real</p>
+          <p>El <strong>TikTok Creative Center</strong> (ads.tiktok.com/business/creativecenter) ofrece datos gratuitos sobre hashtags trending, categorías de contenido y comportamiento de audiencia segmentado por país — una fuente de datos secundarios accesible para proyectos estudiantiles.</p>
+          <p><strong>Fuente:</strong> IAB México (2024). <em>Estudio de Consumo de Medios y Dispositivos 2024.</em> iabmexico.com — Datos anuales de comportamiento digital de mexicanos, descarga gratuita.</p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('proveedores')">← Proveedores</button>
+        <button class="nav-btn primary" onclick="showSection('internacional')">Siguiente: Internacional y Ética →</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN 7: INTERNACIONAL Y ÉTICA -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Internacional, Ética y Temas Emergentes</h2>
+        <p class="section-intro">La sección de investigación internacional del libro es conceptualmente sólida pero sus datos de mercado son de 2012. La sección de ética necesita incorporar temas que en 2016 apenas emergían: privacidad de datos, sesgo algorítmico e IA.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Actualización de datos: distribución global de la investigación</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+
+        <p>El libro indica que EE.UU. realiza el 40% del gasto mundial en investigación, Europa Occidental otro 40%, Japón el 10% y el resto del mundo el 10%. Los datos de ESOMAR 2023 muestran un desplazamiento significativo:</p>
+
+        <table class="compare-table">
+          <tr>
+            <th>Región</th>
+            <th class="old-val">Malhotra 2016</th>
+            <th>ESOMAR 2023</th>
+          </tr>
+          <tr>
+            <td>América del Norte</td>
+            <td>~40%</td>
+            <td>~38%</td>
+          </tr>
+          <tr>
+            <td>Europa</td>
+            <td>~40%</td>
+            <td>~34% (bajó)</td>
+          </tr>
+          <tr>
+            <td>Asia-Pacífico</td>
+            <td>~10%</td>
+            <td>~21% (subió fuerte)</td>
+          </tr>
+          <tr>
+            <td>América Latina</td>
+            <td>incluido en "otros"</td>
+            <td>~4% (mercado en crecimiento)</td>
+          </tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuente</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report 2023.</em> — Contiene los datos de gasto global más actualizados y el crecimiento del mercado en Asia y América Latina.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: McDonald's en India — actualización</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El caso de McDonald's en India del libro es válido conceptualmente pero tiene datos de 2012. Una actualización directa con contexto latinoamericano:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🍔 Caso actualizado con foco en LatAm</div>
+          <h4>McDonald's en México: investigación cultural para el McBurrito y el McCafé</h4>
+          <p>McDonald's México (operado por Arcos Dorados, la mayor franquicia independiente de McDonald's en el mundo con presencia en 20 países de LatAm) realizó investigación de mercado para adaptar el menú a preferencias locales. El McCafé en México se posicionó de forma diferente que en EE.UU. — no como alternativa a Starbucks, sino como opción de precio accesible para el desayuno, un insight obtenido de grupos focales con consumidores de clase media.</p>
+          <p>La hamburguesa McBurrito y los McMolletes son ejemplos de adaptación de producto basada en investigación sobre hábitos alimenticios del desayuno mexicano. Estos no existen en el menú global.</p>
+          <p><strong>Fuente:</strong> Arcos Dorados Holdings (2023). <em>Annual Report.</em> arcosdorados.com — Fuente primaria con estrategia de adaptación cultural documentada.</p>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Ética actualizada: los temas que el libro no podía anticipar</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro presenta la ética en investigación de mercado con el marco clásico de 4 participantes (investigador, cliente, encuestado, público). Este marco sigue siendo válido, pero en 2024 hay tres temas éticos nuevos que deben añadirse:</p>
+
+        <div class="update-card" style="border-left:4px solid var(--accent); margin-top:16px; box-shadow:none;">
+          <h3 style="font-size:1rem; margin-bottom:10px;">① Privacidad de datos y GDPR / Leyes locales</h3>
+          <p style="font-size:14px;">Desde 2018 (GDPR en Europa) y con la <strong>Ley Federal de Protección de Datos Personales en México (LFPDPPP)</strong>, la recopilación de datos para investigación de mercado tiene restricciones legales específicas. Los encuestados tienen derecho a saber cómo se usarán sus datos, a revocar su consentimiento y a solicitar su eliminación. Esto afecta directamente el Paso 4 del proceso.</p>
+          <div class="ref-box" style="margin-top:12px;">
+            <div class="ref-item"><strong>IFAI / INAI México.</strong> <em>Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</em> inai.org.mx — Legislación vigente, lectura básica para cualquier investigador de mercados en México.</div>
+          </div>
+        </div>
+
+        <div class="update-card" style="border-left:4px solid var(--gold); margin-top:12px; box-shadow:none;">
+          <h3 style="font-size:1rem; margin-bottom:10px;">② Sesgo algorítmico en investigación</h3>
+          <p style="font-size:14px;">Cuando la investigación se realiza con herramientas de IA o algoritmos (análisis de sentimientos, clasificación automática de respuestas), existe riesgo de que el modelo reproduzca sesgos históricos. Por ejemplo, un modelo entrenado con datos en inglés puede analizar incorrectamente el sarcasmo en español mexicano o andino.</p>
+          <div class="ref-box" style="margin-top:12px;">
+            <div class="ref-item"><strong>O'Neil, C. (2016).</strong> <em>Weapons of Math Destruction.</em> Crown. — Explica cómo los algoritmos pueden reproducir sesgos con consecuencias en decisiones de negocio.</div>
+          </div>
+        </div>
+
+        <div class="update-card" style="border-left:4px solid var(--accent2); margin-top:12px; box-shadow:none;">
+          <h3 style="font-size:1rem; margin-bottom:10px;">③ Investigación encubierta y "dark patterns"</h3>
+          <p style="font-size:14px;">Algunas empresas recopilan datos para investigación sin informar a los usuarios (investigación encubierta). Los "dark patterns" en interfaces digitales (diseños que engañan al usuario para que acepte compartir más datos) son hoy uno de los temas éticos más debatidos en la industria.</p>
+          <div class="ref-box" style="margin-top:12px;">
+            <div class="ref-item"><strong>Brignull, H. (2023).</strong> <em>Deceptive Design: Exposing the Tricks Tech Companies Use to Control You.</em> Packt Publishing. — Introducción accesible a los dark patterns con casos reales.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lectura de síntesis recomendada para el curso completo</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Para complementar Malhotra (2016) a lo largo del curso completo, estos recursos ofrecen perspectivas actualizadas sin reemplazar el libro base:</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Bibliografía complementaria para el curso</div>
+          <div class="ref-item"><strong>Hair, J.F. et al. (2021).</strong> <em>Multivariate Data Analysis</em>, 8ª ed. Cengage. — Metodología estadística actualizada, complementa capítulos 5–12 de Malhotra.</div>
+          <div class="ref-item"><strong>Malhotra, N. (2019).</strong> <em>Marketing Research: An Applied Orientation</em>, 7ª ed. Pearson. — Versión más reciente del mismo libro, actualiza casos y herramientas digitales.</div>
+          <div class="ref-item"><strong>Zaltman, G. (2003).</strong> <em>How Customers Think.</em> HBS Press. — Aunque más antiguo, es la referencia clásica sobre investigación cualitativa profunda y neurociencia del consumidor, no superada metodológicamente.</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report.</em> esomar.org — Informe anual gratuito (parcialmente). El más citado en la industria para datos actuales del sector.</div>
+          <div class="ref-item"><strong>Journal of Marketing Research</strong> (AMA) — La revista académica de referencia del área. Accesible vía JSTOR o suscripción institucional. Relevante para citas en trabajos finales.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('social-media')">← Social Media</button>
+        <button class="nav-btn primary" onclick="showSection('definicion')">↑ Volver al inicio</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(id)) {
+        item.classList.add('active');
+      }
+    });
+    document.querySelector('main').scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
