@@ -500,8 +500,9 @@
   <aside>
     <div class="nav-title">Secciones del Capítulo</div>
 
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
     <div class="nav-section-label">Fundamentos</div>
-    <a class="nav-item active" onclick="showSection('definicion')">1. Definición</a>
+    <a class="nav-item" onclick="showSection('definicion')">1. Definición</a>
     <a class="nav-item" onclick="showSection('clasificacion')">2. Clasificación</a>
     <a class="nav-item" onclick="showSection('proceso')">3. Proceso (6 pasos)</a>
 
@@ -524,10 +525,36 @@
 
   <main>
 
+
     <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN: DIAPOSITIVAS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe
+          src="capitulo_1_slides.html"
+          style="width:100%; height:100%; border:none; display:block;"
+          allowfullscreen
+          title="Diapositivas Capítulo 1">
+        </iframe>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('definicion')">Siguiente: Definición →</button>
+      </div>
+    </div>
+
+        <!-- ═══════════════════════════════════════════ -->
     <!-- SECCIÓN 1: DEFINICIÓN -->
     <!-- ═══════════════════════════════════════════ -->
-    <div id="definicion" class="section active">
+    <div id="definicion" class="section">
       <div class="section-header">
         <div class="section-number">Sección 01</div>
         <h2>Definición de Investigación de Mercado</h2>
@@ -1258,5 +1285,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
+
+
 </body>
 </html>
