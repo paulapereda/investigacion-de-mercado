@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercados — Paula Pereda Suárez</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ───────────────────────────────────── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 40px 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    max-width: 760px;
+    margin-bottom: 20px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #d4a0a0;
+  }
+  .header-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+    margin-top: 12px;
+  }
+  .header-bg {
+    position: absolute;
+    top: 0; right: 0;
+    width: 420px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%);
+    pointer-events: none;
+  }
+  .header-rule {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%);
+  }
+
+  /* ── MAIN CONTENT ─────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 40px 80px;
+    flex: 1;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CHAPTER GRID ─────────────────────────────── */
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .chapter-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 28px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent2) 100%);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+  .chapter-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(26,26,26,0.1);
+    border-color: rgba(192,57,43,0.3);
+  }
+  .chapter-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .card-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card-arrow {
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s ease;
+  }
+  .chapter-card:hover .card-arrow {
+    gap: 14px;
+  }
+  .card-arrow::after {
+    content: '→';
+    font-size: 14px;
+  }
+
+  /* ── FOOTER ───────────────────────────────────── */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    text-align: center;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .footer-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Universidad de Montevideo · Curso</div>
+    <h1>¡Bienvenidos/as a<br><em>Investigación</em><br>de Mercado!</h1>
+    <p class="header-subtitle">Paula Pereda Suárez &nbsp;·&nbsp; Universidad de Montevideo</p>
+  </div>
+</header>
+<div class="header-rule"></div>
+
+<main>
+  <div class="section-label">Contenidos del curso</div>
+
+  <div class="chapters-grid">
+
+    <a href="intro_curso.html" class="chapter-card">
+      <div class="card-number">Introducción al curso</div>
+      <div class="card-title">Bienvenida, programa y metodología</div>
+      <div class="card-desc">Horarios, objetivos, estructura del curso y descripción del proyecto de investigación semestral.</div>
+      <div class="card-arrow">Ver introducción</div>
+    </a>
+
+    <a href="capitulo_1.html" class="chapter-card">
+      <div class="card-number">Capítulo 01</div>
+      <div class="card-title">Introducción a la Investigación de Mercado</div>
+      <div class="card-desc">Definición, alcance y rol de la investigación de mercado en la toma de decisiones estratégicas.</div>
+      <div class="card-arrow">Ver capítulo</div>
+    </a>
+
+    <!-- Próximos capítulos — descomentar cuando estén listos -->
+    <!--
+    <a href="cap2.html" class="chapter-card">
+      <div class="card-number">Capítulo 02</div>
+      <div class="card-title">Diseño de la Investigación</div>
+      <div class="card-desc">Tipos de diseño, fuentes de datos y proceso metodológico.</div>
+      <div class="card-arrow">Ver capítulo</div>
+    </a>
+    -->
+
+  </div>
+</main>
+
+<div class="footer-rule"></div>
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Paula Pereda Suárez</span>
+    <span class="footer-text">Universidad de Montevideo</span>
+    <span class="footer-text">Investigación de Mercado</span>
+  </div>
+</footer>
+
+</body>
+</html>
