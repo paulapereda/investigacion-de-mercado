@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  /* HEADER */
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  /* LAYOUT */
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  /* SIDEBAR */
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* MAIN */
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  /* SECTION */
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  /* CONCEPT BOX — para texto del libro */
+  .concept-box {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--ink);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 28px;
+  }
+  .concept-box-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.6;
+  }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+
+  /* DEF TERM */
+  .def-term {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* OLD BOX */
+  .old-box { background: #f5f0eb; border: 1px solid var(--border); border-left: 4px solid #b0a898; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .old-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #9a9088; text-transform: uppercase; margin-bottom: 8px; }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  /* UPDATE CARD */
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+
+  /* CASE HIGHLIGHT */
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  /* REF BOX */
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  /* LATAM BOX */
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+
+  /* TOOL BOX */
+  .tool-box { background: var(--tool-bg); border: 1px solid var(--tool-border); border-left: 4px solid var(--tool-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--tool-border); text-transform: uppercase; margin-bottom: 10px; }
+  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  /* CALLOUT */
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  /* COMPARE TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .compare-table th { background: var(--ink); color: var(--paper); padding: 10px 16px; text-align: left; font-weight: 500; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+  .compare-table tr:hover td { background: #f0ece4; }
+
+  /* DIVIDER */
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  /* FOOTER NAV */
+  .footer-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); transition: all 0.2s; text-decoration: none; }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 2</div>
+    <h1>Definición del problema<br>y <em>desarrollo<br>del enfoque</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <div class="nav-section-label">Fundamentos</div>
+    <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+    <a class="nav-item" onclick="showSection('proceso')">El proceso de definición</a>
+    <a class="nav-item" onclick="showSection('tareas')">Tareas implicadas</a>
+    <div class="nav-section-label">Contexto y Problema</div>
+    <a class="nav-item" onclick="showSection('contexto')">Contexto ambiental</a>
+    <a class="nav-item" onclick="showSection('pda-pim')">PDA vs. PIM</a>
+    <a class="nav-item" onclick="showSection('definicion')">Definición del PIM</a>
+    <div class="nav-section-label">Enfoque</div>
+    <a class="nav-item" onclick="showSection('enfoque')">Componentes del enfoque</a>
+    <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
+    <a class="nav-item" onclick="showSection('social-media')">Social media y datos</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética actualizada</a>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: DIAPOSITIVAS -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe
+          src="capitulo_2_slides.html"
+          style="width:100%; height:100%; border:none; display:block;"
+          allowfullscreen
+          title="Diapositivas Capítulo 2">
+        </iframe>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('apertura')">Siguiente: Caso de apertura →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: APERTURA -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="apertura" class="section">
+      <div class="section-header">
+        <div class="section-number">Apertura</div>
+        <h2>Caso de apertura: el problema detrás del síntoma</h2>
+        <p class="section-intro">El capítulo abre con Harley-Davidson (2012–2013). Los datos son viejos, pero la lógica del caso es impecable. Se reemplaza por un caso más cercano a estudiantes actuales que ilustra exactamente el mismo proceso.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Concepto central — Malhotra 2016</div>
+        <p>El caso de apertura del libro ilustra el proceso completo que recorre este capítulo: una empresa enfrenta un síntoma (caída en ventas), realiza una <strong>auditoría del problema</strong> para ir más allá del síntoma hacia las causas subyacentes, define un <strong>problema de decisión administrativa</strong> (¿debería invertir?) y lo traduce en un <strong>problema de investigación de mercados</strong> (¿los clientes serán leales a largo plazo?).</p>
+        <p>Los hallazgos —7 segmentos de clientes con distintos perfiles pero el mismo deseo de independencia y libertad— llevaron a una decisión de inversión. La investigación no tomó la decisión: redujo la incertidumbre para quienes debían tomarla.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Caso original — Malhotra 2016</div>
+        <p>Harley-Davidson (2012–2013): larga lista de espera para comprar una Harley, directivos renuentes a invertir en nuevas instalaciones. La investigación incluyó focus groups, datos secundarios y análisis de social media. Problema de investigación: ¿los clientes seguirán siendo leales a largo plazo?</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Duolingo y la retención de usuarios</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Duolingo es el caso más completo disponible hoy para ilustrar la secuencia completa del capítulo: síntoma → auditoría → PDA → PIM → investigación cualitativa → cuantitativa → decisión.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📱 Caso en clase</div>
+          <h4>Duolingo: del búho agresivo al sistema de rachas</h4>
+          <p><strong style="color:#d4a0a0;">Síntoma:</strong> alta tasa de abandono de usuarios después del día 7 de uso de la app. El 80% de los usuarios nuevos no volvía después de la primera semana.</p>
+          <p><strong style="color:#d4a0a0;">PDA:</strong> ¿debería Duolingo rediseñar la app para retener usuarios?</p>
+          <p><strong style="color:#d4a0a0;">PIM:</strong> ¿qué factores predicen el abandono temprano y qué intervenciones lo reducen significativamente?</p>
+          <p><strong style="color:#d4a0a0;">Investigación cualitativa:</strong> entrevistas con usuarios que habían abandonado revelaron que el problema no era el contenido ni la dificultad. Era la presión de las notificaciones y la ausencia de un mecanismo de compromiso visible.</p>
+          <p><strong style="color:#d4a0a0;">Investigación cuantitativa:</strong> A/B testing masivo con distintos esquemas de notificación y de gamificación. El sistema de "racha" (streak) resultó ser el mayor predictor individual de retención a 30 días.</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> Duolingo pasó de 500M a más de 600M de usuarios registrados entre 2022 y 2024. El diseño del sistema de rachas se convirtió en el núcleo de su producto.</p>
+          <p><em>Pregunta para clase: ¿En qué se parecen el PIM de Duolingo y el de Harley-Davidson? ¿Qué tienen en común las preguntas de investigación aunque los sectores sean completamente distintos?</em></p>
+        </div>
+
+        <p>Los componentes específicos del PIM de Duolingo son paralelos a los de Harley:</p>
+        <table class="compare-table" style="margin-top:12px;">
+          <tr><th>Componente</th><th>Harley-Davidson (libro)</th><th>Duolingo (actualizado)</th></tr>
+          <tr><td>1</td><td>¿Quiénes son los clientes? (demográfico y psicográfico)</td><td>¿Qué perfil tiene el usuario que abandona vs. el que se queda?</td></tr>
+          <tr><td>2</td><td>¿Existen segmentos de compradores diferenciados?</td><td>¿Es posible segmentar usuarios según su motivación de aprendizaje?</td></tr>
+          <tr><td>3</td><td>¿Cómo se sienten los clientes hacia su Harley?</td><td>¿Cómo perciben los usuarios las notificaciones y la gamificación?</td></tr>
+          <tr><td>4</td><td>¿Los clientes son leales? ¿Cuál es el grado de lealtad?</td><td>¿Qué nivel de "apego a la racha" predice la retención a 30 días?</td></tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Von Ahn, L. (2023).</strong> Entrevista en Lex Fridman Podcast #373. — El CEO de Duolingo explica el proceso de investigación detrás del sistema de rachas. Accesible en YouTube.</div>
+          <div class="ref-item"><strong>Lim, S. et al. (2023).</strong> "Gamification and language learning retention." <em>Computers & Education</em>, 194. DOI: 10.1016/j.compedu.2022.104698</div>
+          <div class="ref-item"><strong>Duolingo Inc. (2024).</strong> <em>Annual Report / Shareholder Letter.</em> ir.duolingo.com — fuente primaria con datos de DAU/MAU y retención.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('proceso')">Siguiente: El proceso →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: PROCESO -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="proceso" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>El proceso de definición del problema</h2>
+        <p class="section-intro">La estructura del proceso —Figura 2.2 en el libro— sigue siendo el marco más claro disponible para entender cómo se pasa de un síntoma a un problema de investigación bien definido.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Figura 2.2 — Malhotra 2016 (vigente)</div>
+        <p>El proceso parte de cuatro <strong>tareas implicadas</strong> que operan en paralelo: debates con quienes toman las decisiones, entrevistas con expertos, análisis de datos secundarios, e investigación cualitativa. Estas tareas permiten comprender el <strong>contexto ambiental del problema</strong>.</p>
+        <p>Una vez comprendido el contexto, el investigador puede formular el <strong>problema de decisión administrativa</strong> (¿qué debe hacer la gerencia?) y traducirlo en el <strong>problema de investigación de mercados</strong> (¿qué información se necesita?). Sobre ese problema se desarrolla el <strong>enfoque</strong>: marco analítico, preguntas de investigación, hipótesis e información requerida.</p>
+        <p><strong>La clave del proceso:</strong> el investigador y el tomador de decisiones deben llegar a una definición escrita y acordada del problema antes de avanzar. Sin ese acuerdo, todo el proyecto puede estar mal orientado desde el inicio.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Por qué este paso es el más importante:</strong> Un problema bien definido es un problema parcialmente resuelto. La mayor fuente de fracaso en proyectos de investigación no es la metodología ni el análisis — es haber respondido la pregunta equivocada con precisión impecable.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo que cambió: el investigador ahora tiene más datos antes de empezar</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>En 2016, las cuatro tareas implicadas se realizaban casi siempre de forma secuencial y con recursos externos. Hoy, antes de la primera reunión con el tomador de decisiones, un investigador puede obtener señales del problema a partir de datos internos de la empresa (CRM, analítica de producto, datos de e-commerce) y de fuentes digitales abiertas.</p>
+        <p>Esto no reemplaza las cuatro tareas — las complementa y acelera. El contexto ambiental puede esbozarse en horas, no en semanas. Lo que sí cambia es la calidad de las conversaciones iniciales: el investigador llega con hipótesis provisorias en lugar de preguntas abiertas.</p>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Herramientas para la fase inicial del proceso</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Google Trends</strong><span>Escala y evolución temporal del problema</span></div>
+            <div class="tool-item"><strong>Brandwatch / Sprout</strong><span>Contexto del problema en conversaciones digitales</span></div>
+            <div class="tool-item"><strong>Mixpanel / Amplitude</strong><span>Datos de comportamiento internos de producto</span></div>
+            <div class="tool-item"><strong>Statista</strong><span>Datos secundarios de industria para contextualizar</span></div>
+            <div class="tool-item"><strong>LinkedIn / ResearchGate</strong><span>Identificación de expertos del sector</span></div>
+          </div>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Davenport, T. & Bean, R. (2022).</strong> "What's your data strategy?" <em>Harvard Business Review</em>, mayo–jun. hbr.org — Argumenta que el primer paso de cualquier proyecto de investigación hoy es mapear los datos que ya existen internamente.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('apertura')">← Apertura</button>
+        <button class="nav-btn primary" onclick="showSection('tareas')">Siguiente: Tareas →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: TAREAS -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="tareas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Tareas implicadas en la definición del problema</h2>
+        <p class="section-intro">Las cuatro tareas del libro siguen siendo válidas. Lo que cambió es cómo se ejecutan y qué herramientas se usan en cada una.</p>
+      </div>
+
+      <!-- Auditoría del problema -->
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Debates con quienes toman las decisiones — Malhotra 2016</div>
+        <p><span class="def-term">Auditoría del problema</span> Examen exhaustivo de una situación de marketing para entender su origen y naturaleza. Implica conversaciones sobre antecedentes, cursos de acción alternativos e información requerida.</p>
+        <p>El punto central: quienes toman las decisiones tienden a enfocarse en <strong>síntomas</strong> (caída de ventas, pérdida de participación de mercado) porque su desempeño se evalúa en esos términos. La investigación que agrega valor va más allá de los síntomas hacia las <strong>causas subyacentes</strong>. Una definición del problema basada en síntomas es casi siempre engañosa.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Bimbo y el pan artesanal en México</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El libro ilustra la auditoría del problema con ejemplos de fabricantes de gaseosas y herramientas de maquinaria. El caso de Bimbo ilustra el mismo concepto con una empresa que los estudiantes latinoamericanos conocen directamente.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🍞 Caso en clase — Auditoría del problema</div>
+          <h4>Grupo Bimbo: el síntoma era el precio, el problema era la identidad</h4>
+          <p>Entre 2019 y 2023, Grupo Bimbo detectó caída en ventas de su pan de caja tradicional en el segmento de consumidores mexicanos de clase media-alta urbana.</p>
+          <p><strong style="color:#d4a0a0;">Síntoma:</strong> caída de ventas en la categoría de pan de caja en NSE A/B.</p>
+          <p><strong style="color:#d4a0a0;">Hipótesis inicial del equipo de marketing:</strong> el problema es el precio — el pan artesanal de panadería local cuesta similar y se percibe como superior.</p>
+          <p><strong style="color:#d4a0a0;">Lo que reveló la auditoría del problema:</strong> el problema no era el precio ni la distribución (que era impecable). Era un cambio en el <em>significado</em> del producto: el consumidor comenzó a asociar el pan de caja con "ultraprocesado" y el pan artesanal con "saludable y auténtico". La causa subyacente era de posicionamiento y percepción, no de precio.</p>
+          <p><strong style="color:#d4a0a0;">PIM correcto:</strong> ¿Cómo percibe el consumidor de NSE A/B el pan de caja frente al artesanal en términos de salud, autenticidad y valor? ¿Qué atributos debería comunicar o desarrollar Bimbo para recuperar relevancia en ese segmento?</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> lanzamiento de línea Bimbo Orgánico y expansión de Bimbo Artesano, ambos orientados a reposicionar la categoría.</p>
+          <p><em>Pregunta para clase: Si el equipo de Bimbo hubiera definido el problema como "determinar cómo bajar el precio del pan de caja", ¿qué tipo de error estarían cometiendo según la Figura 2.5 de Malhotra? ¿Cómo reformularían el PIM correctamente?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Grupo Bimbo (2023).</strong> <em>Reporte Anual.</em> grupobimbo.com — fuente primaria con datos de categorías y estrategia.</div>
+          <div class="ref-item"><strong>Gómez, M. & Torres, A. (2022).</strong> "Tendencias de consumo de alimentos en México post-pandemia." <em>Estudios Sociales</em>, 32(60). CIAD — acceso abierto.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Entrevistas con expertos -->
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Entrevistas con expertos — Malhotra 2016</div>
+        <p>Las entrevistas con expertos son especialmente útiles en investigación para productos técnicos o nuevos, y cuando hay poca información de otras fuentes. El objetivo no es llegar a una solución concluyente sino ayudar a definir el problema. Se realizan como entrevistas no estructuradas, con una lista de temas pero sin cuestionario formal.</p>
+        <p>El libro sugiere usar <em>grupos de noticias de Google</em> para identificar expertos — recurso hoy prácticamente obsoleto.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Cómo se identifican expertos hoy</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>La lógica de las entrevistas con expertos es completamente válida. Lo que cambió es la forma de identificarlos y acceder a ellos.</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Fuentes actuales para identificar expertos</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>LinkedIn Sales Navigator</strong><span>Búsqueda por industria, rol y nivel de experiencia</span></div>
+            <div class="tool-item"><strong>ResearchGate / Google Scholar</strong><span>Expertos académicos por tema y número de citas</span></div>
+            <div class="tool-item"><strong>Podcasts especializados</strong><span>Hablemos de Marcas, Marketing Salvaje (LatAm)</span></div>
+            <div class="tool-item"><strong>Perfiles públicos de X / Substack</strong><span>Profesionales que escriben sobre su industria</span></div>
+            <div class="tool-item"><strong>Comunidades de Reddit</strong><span>r/marketing, r/datascience — expertos activos en foros</span></div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Datos secundarios -->
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Análisis de datos secundarios — Malhotra 2016</div>
+        <p><span class="def-term">Datos secundarios</span> Datos recabados para un propósito diferente al problema que se está tratando. Son una fuente económica y rápida de información antecedente.</p>
+        <p><span class="def-term">Datos primarios</span> Datos originados por iniciativa del investigador con la finalidad específica de tratar el problema de investigación.</p>
+        <p>El análisis de datos secundarios <strong>siempre antecede</strong> a la recopilación de datos primarios. Pueden revelar información valiosa y conducir a la identificación de cursos de acción novedosos. El libro referencia principalmente la Oficina del Censo de EE.UU. como fuente.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Fuentes de datos secundarios relevantes para América Latina</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>El principio sigue siendo el mismo: antes de diseñar cualquier instrumento primario, el investigador debe agotar las fuentes secundarias disponibles. En el contexto latinoamericano, las fuentes más relevantes son distintas a las que menciona el libro.</p>
+        <table class="compare-table">
+          <tr><th>Fuente</th><th>País / Región</th><th>Qué ofrece</th></tr>
+          <tr><td><strong>INEGI</strong> (ENIGH, ENOE, ENDUTIH)</td><td>México</td><td>Consumo de hogares, empleo, uso de tecnología. Gratuito.</td></tr>
+          <tr><td><strong>INDEC</strong></td><td>Argentina</td><td>Encuesta de gasto de hogares, precios, demografía</td></tr>
+          <tr><td><strong>DANE</strong></td><td>Colombia</td><td>Encuesta de calidad de vida, consumo, demografía</td></tr>
+          <tr><td><strong>CEPAL Estadísticas</strong></td><td>LatAm</td><td>Comparativos regionales, economía digital, pobreza</td></tr>
+          <tr><td><strong>AMVO</strong></td><td>México</td><td>E-commerce y comercio digital. Estudio anual gratuito.</td></tr>
+          <tr><td><strong>IAB México / IAB LatAm</strong></td><td>México / Región</td><td>Hábitos digitales, publicidad, redes sociales</td></tr>
+          <tr><td><strong>Kantar Worldpanel LatAm</strong></td><td>Regional</td><td>Comportamiento de compra masivo, paneles de hogares</td></tr>
+          <tr><td><strong>Statista</strong></td><td>Global</td><td>Síntesis rápida, acceso institucional</td></tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Doria, P. & Leal, C. (2022).</strong> "Data ecosystems in Latin America: challenges for market researchers." <em>Latin American Business Review</em>, 23(2), 115–138.</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Investigación cualitativa -->
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Investigación cualitativa — Malhotra 2016</div>
+        <p><span class="def-term">Investigación cualitativa</span> Metodología exploratoria, no estructurada, basada en pequeñas muestras, cuyo propósito es brindar conocimientos y facilitar la comprensión del entorno de un problema.</p>
+        <p>Las técnicas más difundidas incluyen focus groups (entrevistas grupales), asociación de palabras y entrevistas en profundidad. Su función en esta etapa no es concluir sino <strong>comprender los aspectos subyacentes</strong> que ningún dato cuantitativo puede revelar directamente. El libro usa el caso de Amtrak (2010) para ilustrarlo.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Rappi y la "fatiga de conveniencia"</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El caso de Amtrak ilustra bien el valor de los focus groups. El caso de Rappi hace lo mismo con una empresa latinoamericana que los estudiantes conocen como usuarios.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🛵 Caso en clase — Investigación cualitativa</div>
+          <h4>Rappi: el insight que ningún dato cuantitativo podía revelar</h4>
+          <p>En 2021, Rappi detectó que su segmento de mayor valor —usuarios frecuentes con ticket alto— empezaba a reducir pedidos. Los datos cuantitativos mostraban el patrón pero no explicaban la causa. El equipo podría haber asumido que era competencia o precio, y habría estado equivocado.</p>
+          <p>Investigación cualitativa con focus groups y entrevistas en profundidad en Bogotá, Ciudad de México y São Paulo reveló algo que ninguna métrica podía capturar: los usuarios de mayor valor experimentaban <strong>"fatiga de conveniencia"</strong> — una combinación de culpa por el costo percibido (no solo económico sino emocional) y una sensación de pérdida de autonomía en su alimentación.</p>
+          <p>Ese insight cuali redefinió completamente el PIM — el problema no era de precio ni de oferta, sino de <em>significado</em> del servicio — y derivó en iniciativas de bienestar y personalización dentro de la app que no habrían surgido de análisis cuantitativos solos.</p>
+          <p><em>Pregunta para clase: ¿Qué técnica cualitativa específica recomendarían para estudiar la "fatiga de conveniencia" en usuarios de Rappi en Uruguay? ¿Focus groups, entrevistas en profundidad, etnografía digital? ¿Por qué?</em></p>
+        </div>
+
+        <div class="update-card-header" style="margin-top:20px; margin-bottom:8px;">
+          <h3>Técnicas de investigación cualitativa actualizadas</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>El libro describe focus groups presenciales, asociación de palabras y entrevistas en profundidad. Todas siguen vigentes. A estas se suman técnicas que no existían o eran marginales en 2016:</p>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Técnicas y herramientas cualitativas 2024</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Entrevistas remotas</strong><span>Zoom + Otter.ai o Dovetail para transcripción y análisis</span></div>
+            <div class="tool-item"><strong>Etnografía digital</strong><span>Observación de comunidades en Reddit, TikTok, WhatsApp</span></div>
+            <div class="tool-item"><strong>Focus groups asincrónicos</strong><span>Discuss.io / QualBoard: 5–7 días, participantes responden a su tiempo</span></div>
+            <div class="tool-item"><strong>ZMET</strong><span>Técnica de Zaltman: imágenes para elicitar metáforas inconscientes</span></div>
+            <div class="tool-item"><strong>NVivo / Atlas.ti</strong><span>Análisis sistemático de datos cualitativos</span></div>
+            <div class="tool-item"><strong>Yabble / Dovetail</strong><span>Síntesis automática de datos cualitativos con IA</span></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Limitación crítica para clase:</strong> La IA puede sintetizar y categorizar respuestas cualitativas con eficiencia notable, pero no puede reemplazar la interpretación contextual. Un modelo puede identificar que el 40% de los entrevistados mencionó "culpa" — pero solo un investigador con conocimiento del contexto cultural puede entender qué significa esa "culpa" en un consumidor mexicano vs. uno colombiano.
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Zaltman, G. (2003).</strong> <em>How Customers Think.</em> HBS Press. — Referencia canónica de investigación cualitativa profunda y técnica ZMET. No superada metodológicamente.</div>
+          <div class="ref-item"><strong>Salinas, G. (2023).</strong> "Qualitative research in digital environments: methodological adaptations." <em>International Journal of Market Research</em>, 65(1), 34–51.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('proceso')">← El proceso</button>
+        <button class="nav-btn primary" onclick="showSection('contexto')">Siguiente: Contexto ambiental →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: CONTEXTO AMBIENTAL -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="contexto" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>Contexto ambiental del problema</h2>
+        <p class="section-intro">La Figura 2.4 del libro describe 7 factores que enmarcan cualquier problema de investigación. El marco sigue siendo vigente. Se añade un octavo factor que el libro no podía anticipar.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Figura 2.4 — Malhotra 2016 (vigente)</div>
+        <p>Para entender los antecedentes de un problema de investigación, el investigador debe analizar los factores que conforman el <strong>contexto ambiental del problema</strong>. El acrónimo PROBLEM resume los 7 factores:</p>
+        <p>
+          <strong>P</strong>ast information &amp; forecasts (información histórica y pronósticos) ·
+          <strong>R</strong>esources &amp; constraints (recursos y limitaciones) ·
+          <strong>O</strong>bjectives (objetivos del tomador de decisiones) ·
+          <strong>B</strong>uyer behavior (comportamiento del comprador) ·
+          <strong>L</strong>egal environment (ambiente legal) ·
+          <strong>E</strong>conomic environment (ambiente económico) ·
+          <strong>M</strong>arketing &amp; technological skills (habilidades tecnológicas y de marketing)
+        </p>
+        <p>Cada factor puede modificar el alcance, el diseño y las preguntas de una investigación. El comportamiento del comprador, en particular, es el factor que más ha cambiado desde 2016 — razón por la que los casos del libro requieren actualización.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Un octavo factor: datos y tecnología disponibles</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>En 2024, el tipo y volumen de datos que una empresa puede obtener de sus propios sistemas redefinió el alcance posible de cualquier investigación. Antes de definir el problema, el investigador debe mapear qué datos internos ya existen — CRM, analítica de producto, registros de e-commerce, historial de atención al cliente.</p>
+        <p>Esto puede revelar que el problema ya está parcialmente respondido, que está mal planteado, o que la investigación primaria puede ser mucho más pequeña y focalizada de lo que parecía inicialmente.</p>
+
+        <table class="compare-table">
+          <tr><th>Factor original (libro)</th><th>Actualización 2024</th></tr>
+          <tr><td>Habilidades tecnológicas y de marketing</td><td>Incluye ahora: capacidad de análisis de datos internos, acceso a herramientas de BI, stack tecnológico del equipo de investigación</td></tr>
+          <tr><td>Análisis de datos secundarios (tarea)</td><td>Los datos de comportamiento interno (app, CRM, e-commerce) son hoy "datos secundarios internos" — a menudo más valiosos que los externos</td></tr>
+          <tr><td>Comportamiento del comprador</td><td>Se puede estudiar de forma continua y en tiempo real, no solo mediante encuestas periódicas</td></tr>
+        </table>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Davenport, T. & Harris, J. (2017).</strong> <em>Competing on Analytics: The New Science of Winning</em>, 2ª ed. HBS Press. — El argumento más completo sobre por qué los datos internos son hoy el punto de partida de cualquier investigación.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Para discutir en clase:</strong> Una startup de e-commerce en México tiene datos de comportamiento de 200,000 usuarios en su app, pero su CEO quiere contratar una consultora para hacer un estudio de mercado. Usando el acrónimo PROBLEM, ¿qué factores del contexto ambiental analizarían primero antes de decidir si el estudio externo es necesario?
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto ambiental en América Latina</div>
+        <p>El factor <strong>ambiente legal</strong> es especialmente relevante en la región: México (LFPDPPP), Brasil (LGPD) y Argentina (Ley 25.326) tienen marcos de protección de datos que afectan directamente el diseño de investigación, el trabajo de campo y el consentimiento informado.</p>
+        <p>El factor <strong>recursos y limitaciones</strong> tiene una dimensión regional particular: el 37% de los hogares rurales en América Latina carece de acceso a internet (CEPAL, 2023), lo que limita el alcance de cualquier investigación exclusivamente digital y requiere combinar métodos.</p>
+        <p>El factor <strong>comportamiento del comprador</strong> en LatAm incluye el sesgo de aquiescencia documentado en la literatura: la tendencia a responder de forma socialmente deseable o positiva, que afecta el diseño de escalas e instrumentos. No es un problema de honestidad — es un patrón cultural que debe anticiparse metodológicamente.</p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('tareas')">← Tareas</button>
+        <button class="nav-btn primary" onclick="showSection('pda-pim')">Siguiente: PDA vs. PIM →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: PDA vs. PIM -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="pda-pim" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Problema de decisión administrativa vs. Problema de investigación de mercados</h2>
+        <p class="section-intro">Esta distinción es uno de los aportes más prácticos del capítulo. Sigue siendo completamente vigente. Los casos de la Tabla 2.3 del libro se actualizan con ejemplos de empresas que los estudiantes conocen.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Tabla 2.2 — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">PDA</span> Pregunta qué debe hacer la persona que decide. Orientado a la acción. Se enfoca en los síntomas.</p>
+        <p><span class="def-term">PIM</span> Pregunta qué información se necesita y cómo puede obtenerse. Orientado a la información. Se enfoca en las causas subyacentes.</p>
+        <p>La investigación brinda la información necesaria para tomar una buena decisión. El PIM se encuentra estrechamente relacionado con el PDA, pero si el investigador se enfoca en el PIM correcto, sus hallazgos ayudarán a resolver el PDA. No son lo mismo y no deben confundirse.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Tabla 2.3 actualizada: casos contemporáneos</h3>
+          <div class="tags"><span class="tag tag-caso">casos reales</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Los cuatro casos de la Tabla 2.3 del libro son anteriores a 2014. La tabla siguiente los reemplaza con casos que conectan con la realidad actual de los estudiantes.</p>
+
+        <table class="compare-table">
+          <tr><th>Empresa</th><th>Problema de decisión administrativa (PDA)</th><th>Problema de investigación de mercados (PIM)</th></tr>
+          <tr>
+            <td><strong>Netflix</strong></td>
+            <td>¿Debe mantener el precio diferenciado por país?</td>
+            <td>Determinar la elasticidad-precio por segmento y región, y el impacto de distintos niveles de precio sobre la tasa de cancelación</td>
+          </tr>
+          <tr>
+            <td><strong>Mercado Libre</strong></td>
+            <td>¿Debe expandir Mercado Pago a usuarios no bancarizados en zonas rurales de México, Colombia y Brasil?</td>
+            <td>Determinar las barreras de adopción de servicios financieros digitales en segmentos no bancarizados de la región</td>
+          </tr>
+          <tr>
+            <td><strong>PYME mexicana</strong></td>
+            <td>¿Debe lanzar su tienda en TikTok Shop?</td>
+            <td>Determinar qué categorías de producto tienen mayor conversión en TikTok Shop y qué perfil de comprador es más receptivo al social commerce en México</td>
+          </tr>
+          <tr>
+            <td><strong>Harley-Davidson (libro)</strong></td>
+            <td>¿Debería invertir para producir más motocicletas?</td>
+            <td>Determinar si los clientes serían compradores leales a largo plazo</td>
+          </tr>
+        </table>
+
+        <div class="callout">
+          <strong>Para discutir en clase:</strong> En el caso de la PYME mexicana y TikTok Shop, ¿qué pasaría si el equipo de marketing definiera el PIM como "determinar si debemos abrir una tienda en TikTok"? ¿Es eso un PIM o un PDA disfrazado? ¿Cómo reformularían el PIM correctamente?
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('contexto')">← Contexto ambiental</button>
+        <button class="nav-btn primary" onclick="showSection('definicion')">Siguiente: Definición del PIM →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: DEFINICIÓN DEL PIM -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="definicion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>Definición del problema de investigación de mercados</h2>
+        <p class="section-intro">Los dos errores clásicos — definición demasiado amplia o demasiado estrecha — siguen siendo los errores más comunes en la práctica. Los conceptos del libro se ilustran con casos digitales.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Figura 2.5 y 2.6 — Malhotra 2016 (vigente)</div>
+        <p>Los dos errores más comunes al definir el PIM:</p>
+        <p><strong>Demasiado amplio:</strong> no ofrece directrices claras para los pasos siguientes. Ejemplo: "mejorar la imagen de la compañía" — ¿pero cómo se investiga eso? ¿Qué diseño de investigación corresponde?</p>
+        <p><strong>Demasiado estrecho:</strong> impide considerar cursos de acción innovadores y puede perder componentes importantes del problema. Ejemplo: "modificar los precios en respuesta a un competidor" — ignora que el problema podría ser de percepción de valor, no de precio.</p>
+        <p>La solución es plantear el PIM en <strong>términos generales</strong> (salvaguarda contra la estrechez) e identificar sus <strong>componentes específicos</strong> (salvaguarda contra la amplitud). Los componentes específicos brindan las directrices concretas para el diseño de investigación.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Los mismos errores en contextos digitales</h3>
+          <div class="tags"><span class="tag tag-caso">casos reales</span></div>
+        </div>
+        <p>Los errores de definición del problema son universales y se reproducen exactamente igual en empresas digitales.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">⚠️ Errores actualizados</div>
+          <h4>Los mismos errores, nuevos contextos</h4>
+          <p><strong style="color:#d4a0a0;">Demasiado amplio (digital):</strong> "Determinar por qué los usuarios de la app no están satisfechos." No ofrece ninguna directriz metodológica. ¿Qué se mide? ¿A quién se encuesta? ¿Con qué instrumento?</p>
+          <p><strong style="color:#d4a0a0;">Demasiado estrecho (digital):</strong> "¿Debería cambiarse el color del botón de compra de verde a azul?" Responde una pregunta micro ignorando que el problema real podría ser la fricción en todo el proceso de pago, la falta de opciones de envío, o la ausencia de prueba social en la página de producto.</p>
+          <p><strong style="color:#d4a0a0;">Bien definido:</strong> "Determinar qué factores del proceso de compra en la app generan abandono en el paso de confirmación de pago, e identificar qué intervenciones de diseño o comunicación tienen mayor impacto en la tasa de conversión." — Tiene planteamiento general + componentes específicos implícitos.</p>
+        </div>
+
+        <div class="update-card-header" style="margin-top:20px; margin-bottom:8px;">
+          <h3>Caso para discutir: Blockbuster vs. Netflix (2004–2008)</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>Blockbuster definió su PIM como "¿cómo competir en precio con Netflix?" — una definición demasiado estrecha que presuponía que el precio era la causa del problema.</p>
+        <p>El PIM correcto era: "¿Qué valora el consumidor en la experiencia de acceso a contenido audiovisual y cómo está cambiando esa valoración?" — un planteamiento general que habría abierto componentes específicos sobre conveniencia, catálogo, fricciones del modelo de alquiler físico, y disposición a pagar por suscripción.</p>
+        <p>Una definición correcta del problema no garantiza el éxito, pero una definición incorrecta casi garantiza el fracaso de la investigación.</p>
+        <p><em>Pregunta para clase: Piensen en una empresa uruguaya o latinoamericana que conozcan que haya perdido relevancia en su mercado. ¿Cuál creen que fue su error en la definición del problema? ¿Lo definieron demasiado amplio, demasiado estrecho, o directamente investigaron el síntoma en lugar de la causa?</em></p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('pda-pim')">← PDA vs. PIM</button>
+        <button class="nav-btn primary" onclick="showSection('enfoque')">Siguiente: Componentes del enfoque →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: ENFOQUE -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="enfoque" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Componentes del enfoque del problema</h2>
+        <p class="section-intro">Los tres componentes del enfoque — marco de referencia y modelos analíticos, preguntas de investigación e hipótesis, y especificación de la información requerida — siguen siendo el estándar de la disciplina.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Componentes del enfoque — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Marco de referencia analítico</span> Planteamiento teórico aplicado al problema de investigación de mercados. La investigación debe basarse en evidencia objetiva y sustentarse en una teoría.</p>
+        <p><span class="def-term">Modelo analítico</span> Especificación explícita de un conjunto de variables y sus interrelaciones, diseñado para representar algún sistema o proceso real. Los <strong>modelos gráficos</strong> son especialmente útiles para conceptualizar el enfoque: aíslan variables y sugieren la dirección de las relaciones.</p>
+        <p><span class="def-term">Preguntas de investigación (PI)</span> Planteamientos refinados de los componentes específicos del problema. Cada componente puede dar lugar a varias PI.</p>
+        <p><span class="def-term">Hipótesis (H)</span> Afirmación o proposición aún no comprobada acerca de un factor o fenómeno. Reflejan las expectativas del investigador y son testables empíricamente. Las hipótesis no son preguntas — son afirmaciones sobre relaciones propuestas.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Modelo sustituto: Customer Decision Journey (McKinsey)</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>El libro usa el "modelo de compra de automóvil nuevo" de BMW (2013) para ilustrar los modelos gráficos. El Customer Decision Journey de McKinsey es hoy el marco gráfico más usado en investigación de comportamiento del consumidor, y los estudiantes lo reconocen como consumidores digitales.</p>
+        <p>A diferencia del embudo clásico (lineal, de arriba hacia abajo), el CDJ propone un proceso <strong>circular con cuatro fases</strong>: consideración inicial → evaluación activa → momento de compra → post-compra (loyalty loop). La fase de evaluación activa es donde más ha cambiado el comportamiento en la era digital: los consumidores agregan y eliminan marcas del conjunto de consideración durante el proceso, en lugar de solo reducirlo.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🔄 Modelo gráfico actualizado</div>
+          <h4>Customer Decision Journey — McKinsey (actualizado 2022)</h4>
+          <p><strong style="color:#d4a0a0;">Consideración inicial:</strong> el consumidor activa un conjunto reducido de marcas que conoce. La investigación aquí pregunta: ¿qué marcas están en el top-of-mind del segmento objetivo?</p>
+          <p><strong style="color:#d4a0a0;">Evaluación activa:</strong> búsqueda activa de información. A diferencia del embudo clásico, aquí el conjunto puede crecer (nuevas marcas entran) o reducirse. Es el momento donde social media, reseñas y recomendaciones tienen mayor impacto.</p>
+          <p><strong style="color:#d4a0a0;">Momento de compra:</strong> decisión final. Influida por factores en el punto de venta o en la experiencia digital de compra.</p>
+          <p><strong style="color:#d4a0a0;">Post-compra (loyalty loop):</strong> la experiencia post-compra determina si el consumidor entra directamente al siguiente ciclo sin volver a la evaluación activa. Este loop es el activo más valioso de una marca.</p>
+          <p><em>Pregunta para clase: ¿En qué fase del CDJ se ubican los problemas de Duolingo (retención), Bimbo (reposicionamiento) y Netflix (password sharing) que vimos en este capítulo?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Court, D. et al. (2009, actualizado 2022).</strong> "The consumer decision journey." <em>McKinsey Quarterly.</em> mckinsey.com — acceso libre. El modelo más citado en la práctica de investigación de mercados.</div>
+          <div class="ref-item"><strong>Lemon, K. & Verhoef, P. (2016).</strong> "Understanding customer experience throughout the customer journey." <em>Journal of Marketing</em>, 80(6), 69–96. — La referencia académica canónica del CDJ.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Preguntas de investigación e hipótesis: ejemplo actualizado</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>Usando el caso de Duolingo del inicio del capítulo, se puede demostrar cómo los componentes específicos del PIM se refinan en PI e hipótesis:</p>
+
+        <table class="compare-table">
+          <tr><th>Componente del PIM</th><th>Pregunta de investigación (PI)</th><th>Hipótesis (H)</th></tr>
+          <tr>
+            <td>¿Qué perfil tiene el usuario que abandona?</td>
+            <td>PI1: ¿Existen diferencias demográficas y conductuales significativas entre usuarios que abandonan en el día 7 y los que persisten?</td>
+            <td>H1: Los usuarios que abandonan tienen menor frecuencia de uso en los días 1–3 que los que persisten.</td>
+          </tr>
+          <tr>
+            <td>¿Es posible segmentar por motivación?</td>
+            <td>PI2: ¿Qué tipos de motivación de aprendizaje pueden identificarse entre los usuarios activos?</td>
+            <td>H2: Existen al menos 3 segmentos con motivaciones distintas (obligación, curiosidad, socialización).</td>
+          </tr>
+          <tr>
+            <td>¿Cómo perciben las notificaciones?</td>
+            <td>PI3: ¿Cómo evalúan los usuarios las notificaciones push en términos de frecuencia, tono y momento?</td>
+            <td>H3: Los usuarios que abandonan perciben las notificaciones como presión negativa, no como motivación.</td>
+          </tr>
+          <tr>
+            <td>¿Qué predice la retención a 30 días?</td>
+            <td>PI4: ¿Qué comportamientos en los primeros 7 días predicen la retención al día 30?</td>
+            <td>H4: Mantener una racha de 5 días consecutivos en la primera semana es el mayor predictor de retención a 30 días.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('definicion')">← Definición del PIM</button>
+        <button class="nav-btn primary" onclick="showSection('internacional')">Siguiente: Internacional →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: INTERNACIONAL -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Investigación de mercados internacional y LatAm</h2>
+        <p class="section-intro">El libro usa el caso del iPhone de Apple en India (2011). Apple hoy es una de las marcas más fuertes en India. El principio conceptual sigue siendo válido — se actualiza el caso y se añade perspectiva latinoamericana.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Investigación Internacional — Malhotra 2016 (vigente)</div>
+        <p>La investigación de mercados internacionales implica trabajar dentro de ambientes desconocidos. La falta de familiaridad con los factores ambientales del país puede incrementar la dificultad para definir el problema adecuadamente. Muchas campañas de marketing internacional fracasan porque no se realiza una auditoría del problema antes de ingresar al mercado extranjero.</p>
+        <p>Al elaborar modelos, PI e hipótesis, hay que recordar que las diferencias en los factores ambientales —especialmente del ambiente sociocultural— pueden derivar en percepciones, actitudes, preferencias y conductas diferentes. Lo que funciona como variable explicativa en un mercado puede no serlo en otro.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Starbucks en Italia</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Starbucks esperó décadas para entrar a Italia — cuna del espresso — precisamente porque sabía que el contexto ambiental era radicalmente distinto. Cuando finalmente lo hizo en 2018, realizó investigación exhaustiva para no cometer el mismo error que el libro documenta con Apple en India.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">☕ Caso en clase — Contexto ambiental internacional</div>
+          <h4>Starbucks en Italia: definir bien el problema es la mitad del trabajo</h4>
+          <p>Italia tiene 149,000 bares de café independientes. Un espresso cuesta 0.90€ y es un ritual social. Starbucks llega con bebidas de $7, nombres en inglés y formato para llevar.</p>
+          <p><strong style="color:#d4a0a0;">PDA incorrecto:</strong> "¿Tiene mercado Starbucks en Italia?" — definición demasiado binaria que habría llevado a una investigación mal orientada.</p>
+          <p><strong style="color:#d4a0a0;">PDA correcto:</strong> "¿Qué formato y posicionamiento debe adoptar Starbucks para ser relevante en el mercado italiano del café?"</p>
+          <p><strong style="color:#d4a0a0;">PIM:</strong> Determinar si existe un segmento de consumidores italianos con una relación con el café distinta a la tradicional (turistas, jóvenes urbanos influenciados por cultura americana, profesionales que buscan espacios de trabajo). Identificar sus características, tamaño y disposición a pagar.</p>
+          <p>La investigación confirmó que ese segmento existe y tiene escala suficiente. Starbucks abrió su primera tienda en Milán en 2018 y al 2024 opera 30 locales en Italia — menos que en cualquier otro país europeo, pero rentables y correctamente posicionados.</p>
+          <p><em>Pregunta para clase: ¿Qué factores del contexto ambiental (PROBLEM) fueron más críticos para que Starbucks definiera bien su problema en Italia? ¿Cuál habría sido el error si hubieran usado el mismo PIM que para Estados Unidos?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>De Mooij, M. (2021).</strong> <em>Global Marketing and Advertising: Understanding Cultural Paradoxes</em>, 5ª ed. SAGE. — El libro estándar para investigación de mercados internacionales con enfoque cultural.</div>
+          <div class="ref-item"><strong>Muthukrishnan, A. et al. (2023).</strong> "Cross-cultural equivalence in survey research: Lessons from Latin America." <em>Journal of International Marketing</em>, 31(1), 44–62.</div>
+        </div>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Particularidades metodológicas en América Latina</div>
+        <p><strong>Sesgo de aquiescencia:</strong> existe evidencia de que en contextos latinoamericanos hay una mayor tendencia a responder positivamente o "de acuerdo", independientemente del contenido real de la pregunta. No es un problema de honestidad — es un patrón cultural. El diseño del instrumento debe anticiparlo: usar escalas forzadas, preguntas inversas, o técnicas proyectivas.</p>
+        <p><strong>Sesgo de deseabilidad social:</strong> especialmente pronunciado en temas de precio ("¿cuánto pagarías por esto?"), salud, y consumo de productos socialmente valorados o estigmatizados. El contexto latinoamericano amplifica este sesgo respecto a muestras norteamericanas o europeas.</p>
+        <p><strong>Equivalencia de constructos:</strong> un mismo constructo (ej. "confianza en la marca", "lealtad", "satisfacción") puede tener significados culturalmente distintos entre países de la región. Lo que mide una escala validada en México puede no estar midiendo lo mismo en Argentina o Brasil.</p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('enfoque')">← Componentes del enfoque</button>
+        <button class="nav-btn primary" onclick="showSection('social-media')">Siguiente: Social media →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: SOCIAL MEDIA -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="social-media" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 08</div>
+        <h2>Social media y datos digitales en la definición del problema</h2>
+        <p class="section-intro">El libro usa el caso de Dell (2005–2008) y su blog Direct2Dell. Dell IdeaStorm ya no existe. El principio conceptual es sólido — se actualiza con herramientas y casos de 2024.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Social media en la definición del problema — Malhotra 2016 (vigente)</div>
+        <p>Los social media pueden usarse como auxiliar en todas las tareas de definición del problema: para entender al tomador de decisiones, identificar expertos, obtener datos secundarios cualitativos y comprender el comportamiento del consumidor.</p>
+        <p>El análisis del contenido de social media puede brindar una idea sobre el <strong>alcance general del problema</strong> y ayudar a identificar sus <strong>componentes específicos</strong>. El caso de Dell ilustra cómo el análisis de blogs y redes permitió a la empresa identificar que el problema subyacente no era la calidad del hardware sino la respuesta ante las quejas.</p>
+        <p>Los social media también sirven para <strong>desarrollar el enfoque</strong>: informar a consumidores sobre el estudio, obtener retroalimentación sobre modelos analíticos, y verificar si las PI planteadas son congruentes con lo que los consumidores realmente piensan.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Dove y la campaña de filtros de belleza (2023)</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>El caso de Dell ilustra el uso de social media para identificar un problema ya existente. El caso de Dove ilustra algo más sofisticado: usar social listening para <em>anticipar</em> un problema antes de que se manifieste en las métricas de negocio.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">💄 Caso en clase — Social listening como herramienta de definición</div>
+          <h4>Dove: de la escucha pasiva al insight accionable</h4>
+          <p>En 2022, el equipo de investigación de Unilever/Dove monitoreaba conversaciones en TikTok, Instagram y Reddit sobre estándares de belleza usando Brandwatch. Detectaron un aumento del 65% en conversaciones negativas sobre "beauty filters" entre mujeres de 13–24 años.</p>
+          <p><strong style="color:#d4a0a0;">Lo que hizo el social listening:</strong> identificó el problema (impacto de los filtros en autoimagen) y ayudó a definir los componentes específicos del PIM: ¿qué tipo de filtros generan mayor impacto negativo? ¿En qué plataformas es mayor el efecto? ¿El problema es la existencia de los filtros o su uso en publicidad de marcas de belleza?</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> campaña "The Real Cost of Beauty Filters" (2023) y el compromiso de Dove de no usar filtros de belleza en ninguna publicidad digital. La campaña fue reconocida como una de las más efectivas de 2023 en términos de engagement orgánico.</p>
+          <p><em>Punto de discusión: el social listening identificó el problema, pero no podría haber validado la solución. Para eso Dove necesitó investigación cualitativa (entrevistas con adolescentes) y cuantitativa (encuestas de actitud). ¿Cuál fue el rol de cada tipo de investigación en este caso?</em></p>
+        </div>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Herramientas de social listening actualizadas</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Brandwatch</strong><span>Estándar industrial. Análisis de sentimientos y tendencias a escala</span></div>
+            <div class="tool-item"><strong>Sprout Social</strong><span>Más accesible para PYMEs. Monitoreo y análisis de menciones</span></div>
+            <div class="tool-item"><strong>TikTok Creative Center</strong><span>Datos gratuitos de hashtags trending y audiencias por país</span></div>
+            <div class="tool-item"><strong>Reddit Keyword Monitor</strong><span>Conversaciones orgánicas no mediadas por algoritmos de marca</span></div>
+            <div class="tool-item"><strong>Google Alerts</strong><span>Monitoreo básico gratuito. Punto de partida para proyectos estudiantiles</span></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Limitación crítica para clase:</strong> el social listening captura lo que la gente <em>dice</em> públicamente, no necesariamente lo que <em>piensa</em> o <em>hace</em>. Tiene sesgo hacia usuarios jóvenes, urbanos y con acceso digital. En América Latina, esto es especialmente importante: TikTok México tiene 57M usuarios activos (IAB México, 2024), pero representan principalmente al consumidor urbano de 15–29 años. Una investigación basada solo en social listening sobrerepresenta ese segmento y subestima a todo el resto.
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('internacional')">← Internacional</button>
+        <button class="nav-btn primary" onclick="showSection('etica')">Siguiente: Ética →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SECCIÓN: ÉTICA -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 09</div>
+        <h2>Ética en la investigación de mercados</h2>
+        <p class="section-intro">El libro plantea el dilema clásico entre los intereses del cliente y del investigador. Ese dilema sigue siendo vigente. Se añaden tres temas éticos que no existían en 2016 y que son especialmente relevantes hoy.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Ética en la definición del problema — Malhotra 2016 (vigente)</div>
+        <p>Los problemas éticos surgen cuando el proceso de definición del problema está comprometido por motivos personales del cliente o del investigador. Dos obligaciones fundamentales:</p>
+        <p><strong>Del cliente:</strong> ser honesto y revelar al investigador toda la información pertinente para una definición adecuada del problema. No usar la investigación para justificar decisiones ya tomadas.</p>
+        <p><strong>Del investigador:</strong> definir el problema de acuerdo con lo que más convenga al cliente, no en función de los intereses de la empresa de investigación. Esto puede implicar proponer un proyecto más pequeño y menos rentable que el originalmente solicitado.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>① Personas sintéticas y datos cualitativos generados por IA</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Desde 2022, algunas empresas están usando modelos de lenguaje (LLMs) para simular respuestas de focus groups y encuestas en lugar de reclutar participantes reales — los llamados <em>synthetic respondents</em>. Esto plantea preguntas éticas nuevas que el libro no podía anticipar.</p>
+        <p>El consenso académico actual es que los synthetic respondents son útiles para <strong>pilotar instrumentos</strong> (verificar que las preguntas sean comprensibles, probar el flujo de una encuesta) pero no para reemplazar datos reales en la investigación. Un modelo de lenguaje entrenado principalmente en inglés y en textos digitales no representa a un consumidor de clase media en Guadalajara o en Montevideo.</p>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Argyle, L. et al. (2023).</strong> "Out of One, Many: Using Language Models to Simulate Human Samples." <em>Political Analysis</em>, 31(3), 337–351. — El primer artículo académico riguroso sobre las posibilidades y límites de los synthetic respondents.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>② Consentimiento informado en investigación digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Cuando una empresa analiza reseñas, posts públicos o comentarios en redes sociales para su investigación, ¿tiene obligación de informar a los autores? En muchos casos bajo el GDPR europeo, la respuesta es sí. En América Latina, los marcos legales equivalentes establecen obligaciones similares.</p>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Marco legal en América Latina</div>
+          <p><strong>México:</strong> Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) y regulación del INAI. Los encuestados tienen derecho a saber cómo se usarán sus datos, a revocar su consentimiento y a solicitar su eliminación. Afecta directamente el diseño del Paso 4 del proceso.</p>
+          <p><strong>Brasil:</strong> Lei Geral de Proteção de Dados (LGPD, 2020) — equivalente brasileño del GDPR europeo.</p>
+          <p><strong>Argentina:</strong> Ley 25.326 de Protección de Datos Personales, actualmente en proceso de actualización hacia estándares GDPR.</p>
+          <p>Un investigador profesional en la región necesita conocer el marco legal aplicable antes de diseñar cualquier instrumento de recopilación de datos.</p>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>③ HARKing: hipotizar después de conocer los resultados</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Un cliente puede definir un problema de forma que garantice que la investigación confirme una decisión ya tomada. En el mundo académico esto se conoce como <strong>HARKing</strong> (Hypothesizing After Results are Known): presentar hipótesis post-hoc como si hubieran sido formuladas antes de recopilar los datos.</p>
+        <p>En investigación de mercados comercial, el equivalente es cuando el tomador de decisiones ya tiene una respuesta y usa la investigación para "documentarla". El investigador tiene la obligación ética de señalar cuándo el encargo se configura de esta forma, aunque hacerlo pueda costarle el proyecto.</p>
+        <p>Esto se conecta directamente con el dilema del libro sobre el fabricante de productos electrónicos que solicitó un estudio de segmentación cuando el verdadero problema era la distribución — solo que en este caso la deshonestidad es más sutil.</p>
+        <p><em>Pregunta para clase: Un cliente les encarga un estudio de satisfacción y a mitad del proyecto les dice "necesito que los resultados muestren que los clientes están satisfechos para presentarlos al directorio". ¿Qué obligaciones éticas tiene el investigador? ¿Qué harían ustedes?</em></p>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Kerr, N.L. (1998).</strong> "HARKing: Hypothesizing after the results are known." <em>Personality and Social Psychology Review</em>, 2(3), 196–217. — Clásico que conecta la ética de investigación con la crisis de replicabilidad en ciencias sociales. Muy citado y accesible.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('social-media')">← Social media</button>
+        <button class="nav-btn primary" onclick="showSection('apertura')">↑ Volver al inicio</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(item => {
+      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(id)) {
+        item.classList.add('active');
+      }
+    });
+    document.querySelector('main').scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 2 — Slides de referencia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+
+.reveal-viewport { background: var(--ink); }
+.reveal .slides   { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  background: transparent; color: rgba(255,255,255,0.25);
+  bottom: 14px; right: 18px;
+}
+
+.slide {
+  width: 100%; height: 100vh;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── PORTADA ─────────────────────────── */
+.s-cover {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 56px 72px;
+}
+.s-cover::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold));
+}
+.cover-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.4rem);
+  font-weight: 900; line-height: 1.0; margin-bottom: 28px;
+}
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip {
+  font-size: 12px; color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 5px 14px;
+  display: inline-block; letter-spacing: 0.5px;
+}
+
+/* ── SECCIÓN OSCURA ─────────────────── */
+.s-section {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 60px 72px;
+}
+.s-section::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+.sec-num {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  letter-spacing: 3px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700; line-height: 1.1; color: var(--paper);
+}
+
+/* ── CONTENIDO CLARO ────────────────── */
+.s-light {
+  background: var(--paper); padding: 48px 72px;
+  justify-content: flex-start;
+}
+.s-light::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── CONTENIDO OSCURO ───────────────── */
+.s-dark {
+  background: #1e1e1e; padding: 48px 72px;
+  justify-content: flex-start;
+}
+.s-dark::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── EYEBROW + TÍTULO ───────────────── */
+.eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 22px;
+}
+.slide-h-white { color: white; }
+
+/* ── DEFINICIÓN — caja de término ───── */
+.def-block {
+  background: var(--ink);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+}
+.def-term-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent); margin-bottom: 7px;
+}
+.def-text {
+  font-size: 14px; color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+}
+.def-text strong { color: #d4a0a0; }
+
+/* ── BULLETS ────────────────────────── */
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li {
+  font-size: clamp(13px, 1.7vw, 15px);
+  line-height: 1.65; color: #333;
+  padding: 7px 0 7px 22px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--accent); font-weight: 700;
+}
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+/* ── DOS COLUMNAS ───────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box {
+  background: white; border: 1px solid var(--border);
+  border-radius: 8px; padding: 16px 18px;
+}
+.col-box-dark {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 16px 18px;
+}
+.col-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 2px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 7px;
+}
+.col-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem; font-weight: 700;
+  margin-bottom: 7px; color: var(--ink);
+}
+.col-title-w { color: white; }
+.col-body { font-size: 13px; color: #444; line-height: 1.6; }
+.col-body-w { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* ── TABLA ──────────────────────────── */
+.ref-table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12.5px; margin-top: 12px;
+}
+.ref-table th {
+  background: var(--ink); color: var(--paper);
+  padding: 8px 14px; text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+}
+.ref-table td {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top; line-height: 1.5;
+}
+.ref-table tr:nth-child(even) td { background: #faf8f5; }
+
+.ref-table-dark th { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table-dark td { padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); vertical-align: top; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 12.5px; }
+.ref-table-dark tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+
+/* ── PAUSA ──────────────────────────── */
+.pause-box {
+  background: #fffbec;
+  border-left: 5px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px; margin-top: 16px;
+}
+.pause-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 2px; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.pause-q { font-size: 13.5px; font-style: italic; color: #4a3a00; line-height: 1.6; }
+
+/* ── LATAM ──────────────────────────── */
+.latam-box {
+  background: var(--greenbg);
+  border-left: 5px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px; margin-top: 14px;
+}
+.latam-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 2px; color: var(--green);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.latam-text { font-size: 13px; color: #1a3a1a; line-height: 1.6; }
+
+/* ── TOOLS GRID ─────────────────────── */
+.tool-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 10px; margin-top: 14px;
+}
+.tool-item {
+  background: white; border: 1px solid #c0d4e8;
+  border-radius: 6px; padding: 10px 13px;
+}
+.tool-name { font-weight: 600; font-size: 12.5px; color: var(--blue); margin-bottom: 2px; }
+.tool-desc { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
+/* ── ACRÓNIMO PROBLEM ───────────────── */
+.problem-grid {
+  display: grid; grid-template-columns: 28px 1fr;
+  gap: 0; margin-top: 10px;
+}
+.p-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 900;
+  color: var(--accent); padding: 5px 0; line-height: 1;
+}
+.p-text {
+  font-size: 13px; color: #333;
+  padding: 5px 0 5px 10px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.4;
+}
+
+/* ── CIERRE ─────────────────────────── */
+.s-close {
+  background: var(--ink); padding: 60px 72px;
+  justify-content: center;
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 2</div>
+  <div class="cover-title">Definición del<br>problema y<br><em>desarrollo<br>del enfoque</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 1 — EL PROCESO
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">01</div>
+  <div class="sec-title">El proceso de<br>definición del problema</div>
+</div>
+</section>
+
+<!-- Proceso: estructura -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figura 2.2 — Malhotra</div>
+  <div class="slide-h">Del síntoma al problema de investigación</div>
+  <ul class="bullets">
+    <li><strong>Cuatro tareas en paralelo:</strong> debates con quienes deciden · entrevistas con expertos · datos secundarios · investigación cualitativa</li>
+    <li>Las tareas revelan el <strong>contexto ambiental del problema</strong></li>
+    <li>Con ese contexto: <strong>PDA</strong> → <strong>PIM</strong> → <strong>Enfoque</strong></li>
+    <li>Requisito: acuerdo escrito entre cliente e investigador <em>antes</em> de avanzar</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿En qué se parecen el PIM de Duolingo y el de Harley-Davidson? ¿Qué tienen en común aunque los sectores sean completamente distintos?</div>
+  </div>
+</div>
+</section>
+
+<!-- Auditoría del problema -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tareas · Debates con quienes deciden</div>
+  <div class="slide-h">La auditoría del problema</div>
+  <div class="def-block">
+    <div class="def-term-label">Auditoría del problema</div>
+    <div class="def-text">Examen exhaustivo de una situación de marketing para entender su <strong>origen y naturaleza</strong>. Implica conversaciones sobre antecedentes, cursos de acción alternativos e información requerida.</div>
+  </div>
+  <ul class="bullets" style="margin-top:14px;">
+    <li>Quienes deciden se enfocan en <strong>síntomas</strong> — la investigación va hacia las <strong>causas subyacentes</strong></li>
+    <li>Síntomas: caída de ventas, pérdida de participación de mercado</li>
+    <li>Causas: mayor promoción de la competencia, distribución inadecuada, cambio en percepción del producto</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Caso — Bimbo</div>
+    <div class="pause-q">El síntoma era caída de ventas del pan de caja. La hipótesis inicial era el precio. ¿Qué reveló la auditoría? ¿Qué tipo de error habría sido investigar solo el precio?</div>
+  </div>
+</div>
+</section>
+
+<!-- Datos secundarios vs. primarios -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tareas · Datos</div>
+  <div class="slide-h">Datos secundarios y primarios</div>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-label">Datos secundarios</div>
+      <div class="col-title">Recabados para otro propósito</div>
+      <div class="col-body">Fuente económica y rápida de antecedentes. <strong>Siempre se analizan antes</strong> que los primarios. Ej: INEGI, AMVO, IAB México, Kantar Worldpanel.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Datos primarios</div>
+      <div class="col-title">Originados por el investigador</div>
+      <div class="col-body">Diseñados específicamente para el problema de investigación. Encuestas, entrevistas, observación, experimentos. Solo se recopilan después de agotar los secundarios.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Fuentes clave en América Latina</div>
+    <div class="latam-text">INEGI (México) · INDEC (Argentina) · DANE (Colombia) · CEPAL · AMVO · IAB México · Kantar Worldpanel LatAm</div>
+  </div>
+</div>
+</section>
+
+<!-- Investigación cualitativa -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tareas · Investigación cualitativa</div>
+  <div class="slide-h">Investigación cualitativa</div>
+  <div class="def-block">
+    <div class="def-term-label">Investigación cualitativa</div>
+    <div class="def-text">Metodología <strong>exploratoria y no estructurada</strong>, basada en pequeñas muestras, cuyo propósito es brindar conocimientos y facilitar la comprensión del entorno de un problema.</div>
+  </div>
+  <div class="tool-grid" style="margin-top:14px;">
+    <div class="tool-item">
+      <div class="tool-name">Focus groups</div>
+      <div class="tool-desc">Entrevistas grupales. Hoy: presenciales y asincrónicos (Discuss.io)</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Entrevistas en profundidad</div>
+      <div class="tool-desc">Exploran pensamiento individual. Remoto vía Zoom + Otter.ai</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Etnografía digital</div>
+      <div class="tool-desc">Observación en Reddit, TikTok, grupos de WhatsApp</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">ZMET</div>
+      <div class="tool-desc">Imágenes para elicitar metáforas inconscientes (Zaltman, 2003)</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Asociación de palabras</div>
+      <div class="tool-desc">Primera respuesta al escuchar palabras estímulo</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">NVivo / Dovetail</div>
+      <div class="tool-desc">Análisis sistemático y síntesis con IA de datos cualitativos</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 2 — CONTEXTO AMBIENTAL
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">02</div>
+  <div class="sec-title">Contexto ambiental<br>del problema</div>
+</div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figura 2.4 — Malhotra</div>
+  <div class="slide-h">Los 7 factores — acrónimo PROBLEM</div>
+  <div class="problem-grid">
+    <div class="p-letter">P</div><div class="p-text"><strong>Past information & forecasts</strong> — Información histórica y pronósticos de la industria y la empresa</div>
+    <div class="p-letter">R</div><div class="p-text"><strong>Resources & constraints</strong> — Presupuesto, tiempo, habilidades disponibles</div>
+    <div class="p-letter">O</div><div class="p-text"><strong>Objectives</strong> — Metas de la organización y del tomador de decisiones</div>
+    <div class="p-letter">B</div><div class="p-text"><strong>Buyer behavior</strong> — Comportamiento, demografía, hábitos del comprador</div>
+    <div class="p-letter">L</div><div class="p-text"><strong>Legal environment</strong> — Regulación, leyes, restricciones sectoriales</div>
+    <div class="p-letter">E</div><div class="p-text"><strong>Economic environment</strong> — Poder adquisitivo, crédito, condiciones generales</div>
+    <div class="p-letter">M</div><div class="p-text"><strong>Marketing & technological skills</strong> — Capacidades internas de la empresa + <strong style="color:var(--accent);">datos internos disponibles</strong> (nuevo)</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 3 — PDA vs. PIM
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">03</div>
+  <div class="sec-title">PDA vs. PIM</div>
+</div>
+</section>
+
+<!-- Definiciones PDA y PIM -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tabla 2.2 — Malhotra</div>
+  <div class="slide-h">Problema de decisión administrativa vs. Problema de investigación de mercados</div>
+  <div class="def-block">
+    <div class="def-term-label">PDA — Problema de decisión administrativa</div>
+    <div class="def-text">Pregunta <strong>qué debe hacer</strong> la persona que decide. Orientado a la acción. Se enfoca en los síntomas.</div>
+  </div>
+  <div class="def-block">
+    <div class="def-term-label">PIM — Problema de investigación de mercados</div>
+    <div class="def-text">Pregunta <strong>qué información se necesita</strong> y cómo puede obtenerse. Orientado a la información. Se enfoca en las causas subyacentes.</div>
+  </div>
+</div>
+</section>
+
+<!-- Tabla PDA → PIM actualizada -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Tabla 2.3 actualizada</div>
+  <div class="slide-h slide-h-white">Del PDA al PIM — casos actuales</div>
+  <table class="ref-table ref-table-dark">
+    <tr><th>Empresa</th><th>PDA</th><th>PIM</th></tr>
+    <tr>
+      <td><strong style="color:#d4a0a0;">Netflix</strong></td>
+      <td>¿Mantener precio diferenciado por país?</td>
+      <td>Determinar elasticidad-precio por segmento y su impacto en cancelaciones</td>
+    </tr>
+    <tr>
+      <td><strong style="color:#d4a0a0;">Mercado Libre</strong></td>
+      <td>¿Expandir Mercado Pago a zonas rurales?</td>
+      <td>Determinar barreras de adopción de servicios financieros digitales en segmentos no bancarizados</td>
+    </tr>
+    <tr>
+      <td><strong style="color:#d4a0a0;">PYME mexicana</strong></td>
+      <td>¿Abrir tienda en TikTok Shop?</td>
+      <td>Determinar qué categorías tienen mayor conversión y qué perfil de comprador es más receptivo al social commerce</td>
+    </tr>
+  </table>
+  <div class="pause-box" style="margin-top:16px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿"¿Debemos abrir en TikTok?" es un PIM o un PDA disfrazado? ¿Cómo reformularían el PIM correctamente?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 4 — DEFINICIÓN DEL PIM
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">04</div>
+  <div class="sec-title">Definición del PIM:<br>errores comunes</div>
+</div>
+</section>
+
+<!-- Errores -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figura 2.5 — Malhotra</div>
+  <div class="slide-h">Dos errores al definir el PIM</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Error 1 · Demasiado amplio</div>
+      <div class="col-title">No ofrece directrices</div>
+      <div class="col-body">Ej: "Mejorar la imagen de la empresa" o "Determinar por qué los usuarios no están satisfechos". ¿Qué se mide? ¿Con qué instrumento?</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Error 2 · Demasiado estrecho</div>
+      <div class="col-title">Pierde componentes clave</div>
+      <div class="col-body">Ej: "¿Cambiar el color del botón de compra?" Ignora fricción en todo el proceso, opciones de envío, falta de prueba social.</div>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:16px; background:#1e2e1e;">
+    <div class="def-term-label" style="color:#6db86d;">Solución — Figura 2.6</div>
+    <div class="def-text"><strong>Planteamiento general</strong> (salvaguarda contra estrechez) + <strong>componentes específicos</strong> (salvaguarda contra amplitud). Los componentes brindan directrices concretas para el diseño de investigación.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 5 — COMPONENTES DEL ENFOQUE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">05</div>
+  <div class="sec-title">Componentes<br>del enfoque</div>
+</div>
+</section>
+
+<!-- Definiciones del enfoque -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Componentes del enfoque — Malhotra</div>
+  <div class="slide-h">Marco analítico · PI · Hipótesis</div>
+  <div class="def-block">
+    <div class="def-term-label">Marco de referencia analítico</div>
+    <div class="def-text">Planteamiento teórico aplicado al PIM. La investigación debe basarse en <strong>evidencia objetiva</strong> y sustentarse en una teoría.</div>
+  </div>
+  <div class="def-block">
+    <div class="def-term-label">Preguntas de investigación (PI)</div>
+    <div class="def-text">Planteamientos <strong>refinados de los componentes específicos</strong> del problema. Cada componente puede originar varias PI.</div>
+  </div>
+  <div class="def-block">
+    <div class="def-term-label">Hipótesis (H)</div>
+    <div class="def-text">Afirmación <strong>aún no comprobada</strong> sobre un factor o fenómeno. No son preguntas — son afirmaciones sobre relaciones propuestas, testables empíricamente.</div>
+  </div>
+</div>
+</section>
+
+<!-- Modelo analítico -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Modelo analítico</div>
+  <div class="slide-h">Del modelo gráfico al Customer Decision Journey</div>
+  <div class="def-block">
+    <div class="def-term-label">Modelo analítico</div>
+    <div class="def-text">Especificación de variables y sus interrelaciones para representar un sistema real. Los <strong>modelos gráficos</strong> aíslan variables y sugieren la dirección de las relaciones.</div>
+  </div>
+  <ul class="bullets" style="margin-top:14px;">
+    <li>Libro usa: modelo de compra de automóvil BMW (2013) — lineal, de arriba hacia abajo</li>
+    <li><strong>Hoy:</strong> Customer Decision Journey McKinsey (2009, act. 2022) — proceso <strong>circular</strong> con loyalty loop</li>
+    <li>Las 4 fases: Consideración inicial → Evaluación activa → Compra → Post-compra</li>
+    <li>Clave: en la evaluación activa el conjunto de marcas puede <em>crecer</em>, no solo reducirse</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿En qué fase del CDJ se ubican los problemas de Duolingo (retención), Bimbo (reposicionamiento) y Netflix (password sharing)?</div>
+  </div>
+</div>
+</section>
+
+<!-- PI e hipótesis — ejemplo Duolingo -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ejemplo — Duolingo</div>
+  <div class="slide-h slide-h-white">De componente del PIM a PI e hipótesis</div>
+  <table class="ref-table ref-table-dark">
+    <tr><th>Componente del PIM</th><th>Pregunta de investigación (PI)</th><th>Hipótesis (H)</th></tr>
+    <tr>
+      <td>¿Qué perfil tiene el usuario que abandona?</td>
+      <td>¿Existen diferencias conductuales entre quienes abandonan en día 7 y quienes persisten?</td>
+      <td>H1: Los usuarios que abandonan tienen menor frecuencia en días 1–3</td>
+    </tr>
+    <tr>
+      <td>¿Cómo perciben las notificaciones?</td>
+      <td>¿Cómo evalúan los usuarios las notificaciones en frecuencia, tono y momento?</td>
+      <td>H2: Usuarios que abandonan perciben las notificaciones como presión negativa</td>
+    </tr>
+    <tr>
+      <td>¿Qué predice retención a 30 días?</td>
+      <td>¿Qué comportamientos en la primera semana predicen retención al día 30?</td>
+      <td>H3: Racha de 5 días consecutivos en semana 1 es el mayor predictor de retención</td>
+    </tr>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SEC 6 — INTERNACIONAL Y ÉTICA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">06</div>
+  <div class="sec-title">Internacional,<br>Social media y Ética</div>
+</div>
+</section>
+
+<!-- Internacional -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Investigación Internacional · Caso</div>
+  <div class="slide-h slide-h-white">Starbucks en Italia: definir bien el problema</div>
+  <ul class="bullets bullets-white">
+    <li>Italia: 149,000 bares independientes · espresso a €0.90 · ritual social</li>
+    <li><strong style="color:white;">PDA incorrecto:</strong> "¿Tiene mercado Starbucks en Italia?" → respuesta binaria, mal planteada</li>
+    <li><strong style="color:white;">PDA correcto:</strong> "¿Qué formato debe adoptar Starbucks para ser relevante en Italia?"</li>
+    <li><strong style="color:white;">PIM:</strong> ¿Existe un segmento con relación distinta al café? (turistas, jóvenes urbanos, profesionales)</li>
+  </ul>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Particularidades metodológicas LatAm</div>
+    <div class="latam-text"><strong>Sesgo de aquiescencia</strong> — tendencia a responder positivamente independientemente del contenido · <strong>Sesgo de deseabilidad social</strong> — especialmente en precio y hábitos · <strong>Equivalencia de constructos</strong> — "confianza" o "lealtad" pueden significar cosas distintas entre países</div>
+  </div>
+</div>
+</section>
+
+<!-- Social media -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Social media · Caso Dove 2023</div>
+  <div class="slide-h">Social listening para definir el problema</div>
+  <ul class="bullets">
+    <li>Dove/Brandwatch detectó +65% en conversaciones negativas sobre beauty filters en TikTok entre mujeres 13–24</li>
+    <li>El social listening identificó el <strong>problema y sus componentes</strong>: ¿qué filtros? ¿en qué plataformas? ¿en publicidad de marcas?</li>
+    <li>La solución requirió investigación cualitativa + cuantitativa — el social listening solo no alcanzaba</li>
+  </ul>
+  <div class="def-block" style="margin-top:14px; background:#2a1a1a;">
+    <div class="def-term-label" style="color:#e88;">Limitación crítica</div>
+    <div class="def-text">Captura lo que se <strong>dice</strong> públicamente, no lo que se <strong>piensa</strong> o <strong>hace</strong>. Sesgo hacia usuarios jóvenes y urbanos. En LatAm sobrerepresenta al consumidor de 15–29 años con acceso digital.</div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Cuál fue el rol de cada tipo de investigación en el caso Dove? ¿Qué parte del proceso no podría haber resuelto el social listening solo?</div>
+  </div>
+</div>
+</section>
+
+<!-- Ética -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética · Tres temas nuevos</div>
+  <div class="slide-h">Ética en la definición del problema — actualización</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">① Synthetic respondents</div>
+      <div class="col-body">Usar LLMs para simular respuestas en lugar de encuestar personas reales. Válido para <strong>pilotar instrumentos</strong>. No válido como sustituto de datos primarios reales.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">② Consentimiento en investigación digital</div>
+      <div class="col-body">Analizar posts y reseñas públicas puede requerir informar a los autores. <strong>LFPDPPP</strong> (México) · <strong>LGPD</strong> (Brasil) · Ley 25.326 (Argentina).</div>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:14px;">
+    <div class="def-term-label">③ HARKing</div>
+    <div class="def-text"><strong>Hypothesizing After Results are Known.</strong> Presentar hipótesis post-hoc como si hubieran sido formuladas antes. En investigación comercial: usar la investigación para "documentar" una decisión ya tomada.</div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Un cliente pide que los resultados "muestren satisfacción" para presentar al directorio. ¿Qué obligaciones éticas tiene el investigador?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Para recordar</div>
+  <div class="sec-title" style="font-size:2.2rem; margin-bottom:32px; color:var(--paper);">Un problema bien definido<br>es un problema<br><em style="color:#d4a0a0;">parcialmente resuelto.</em></div>
+  <ul class="bullets bullets-white" style="max-width:580px;">
+    <li>La mayor fuente de fracaso no es la metodología — es haber respondido la pregunta equivocada</li>
+    <li>PDA ≠ PIM: uno pregunta qué hacer, el otro qué saber</li>
+    <li>Ni demasiado amplio ni demasiado estrecho: planteamiento general + componentes específicos</li>
+  </ul>
+  <div style="margin-top:36px;">
+    <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+  </div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
