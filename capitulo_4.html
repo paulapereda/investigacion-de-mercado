@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  .concept-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--ink); border-radius: 8px; padding: 22px 26px; margin-bottom: 28px; }
+  .concept-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--ink); text-transform: uppercase; margin-bottom: 10px; opacity: 0.6; }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+  .concept-box ul { padding-left: 1.3em; margin-top: 8px; }
+  .concept-box ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .def-term { display: inline-block; background: var(--ink); color: white; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+  .old-box { background: #f5f0eb; border: 1px solid var(--border); border-left: 4px solid #b0a898; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .old-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #9a9088; text-transform: uppercase; margin-bottom: 8px; }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+  .update-card ul { padding-left: 1.3em; margin-bottom: 14px; }
+  .update-card ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+  .latam-box ul { padding-left: 1.3em; }
+  .latam-box ul li { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 4px; }
+
+  .tool-box { background: var(--tool-bg); border: 1px solid var(--tool-border); border-left: 4px solid var(--tool-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--tool-border); text-transform: uppercase; margin-bottom: 10px; }
+  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .compare-table th { background: var(--ink); color: var(--paper); padding: 10px 16px; text-align: left; font-weight: 500; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+  .compare-table tr:hover td { background: #f0ece4; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .footer-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); transition: all 0.2s; text-decoration: none; }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 4</div>
+    <h1>Investigación<br><em>cualitativa</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <div class="nav-section-label">Fundamentos</div>
+    <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+    <a class="nav-item" onclick="showSection('cualitativa-vs-cuantitativa')">Cuali vs. cuanti</a>
+    <a class="nav-item" onclick="showSection('clasificacion')">Clasificación de procedimientos</a>
+    <div class="nav-section-label">Técnicas directas</div>
+    <a class="nav-item" onclick="showSection('focus-groups')">Focus groups</a>
+    <a class="nav-item" onclick="showSection('focus-online')">Focus groups en línea</a>
+    <a class="nav-item" onclick="showSection('entrevistas')">Entrevistas en profundidad</a>
+    <div class="nav-section-label">Técnicas indirectas y otras</div>
+    <a class="nav-item" onclick="showSection('proyectivas')">Técnicas proyectivas</a>
+    <a class="nav-item" onclick="showSection('etnografia')">Etnografía y netnografía</a>
+    <a class="nav-item" onclick="showSection('mystery-shopping')">Mystery shopping</a>
+    <div class="nav-section-label">Contexto y Ética</div>
+    <a class="nav-item" onclick="showSection('social-media')">Social media e IA</a>
+    <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética actualizada</a>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- DIAPOSITIVAS -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe src="capitulo_4_slides.html" style="width:100%; height:100%; border:none; display:block;" allowfullscreen title="Diapositivas Capítulo 4"></iframe>
+      </div>
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('apertura')">Siguiente: Caso de apertura →</button>
+      </div>
+    </div>
+
+    <!-- APERTURA -->
+    <div id="apertura" class="section">
+      <div class="section-header">
+        <div class="section-number">Apertura</div>
+        <h2>Caso de apertura: cuando los números no alcanzan</h2>
+        <p class="section-intro">El capítulo abre con Nabisco y el 100 Calorie Snack Pack (2006). El caso ilustra perfectamente por qué la investigación cualitativa precede a la cuantitativa. Se complementa con un caso latinoamericano más cercano a los estudiantes.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Caso de apertura — Malhotra 2016 (vigente en su lógica)</div>
+        <p>Nabisco enfrentaba un problema: los consumidores querían bocadillos con menos calorías, pero los lanzamientos previos habían fracasado. Los datos cuantitativos mostraban el síntoma — baja en ventas de bocadillos, aumento de la preocupación por la salud — pero no explicaban <em>por qué</em> los consumidores fallaban en sus intentos de comer con moderación ni <em>qué</em> formato los ayudaría.</p>
+        <p>Nabisco realizó focus groups con madres de familia para entender sus motivaciones y comportamiento de compra en relación con los bocadillos. Los hallazgos revelaron que las madres apreciaban los bocadillos en porciones controladas y que la <strong>conveniencia</strong> era un factor crítico: saber exactamente cuántas calorías estaban consumiendo sin tener que medir ni calcular.</p>
+        <p>Con esa comprensión cualitativa, Nabisco diseñó investigación cuantitativa de validación y luego lanzó el 100 Calorie Snack Pack — una línea de bolsas individuales de exactamente 100 calorías. El resultado fue un éxito de ventas multimillonario.</p>
+        <p><strong>La lección metodológica:</strong> los datos cuantitativos dijeron <em>qué</em> estaba pasando; la investigación cualitativa reveló el <em>por qué</em> y orientó la solución.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Dato desactualizado — Malhotra 2016</div>
+        <p>El libro menciona que los focus groups en EE.UU. costaban entre $6,000 y $8,000 por sesión (circa 2012–2015). Hoy los focus groups presenciales en mercados como México, Argentina o Colombia oscilan entre $2,500 y $5,000 USD por sesión; los focus groups en línea (plataformas como Discuss.io o UserZoom) cuestan entre $1,500 y $3,500. La caída de precios impulsada por las plataformas digitales democratizó el acceso a la investigación cualitativa para empresas medianas y PyMEs de la región.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Rappi y el hallazgo de "la fatiga de conveniencia"</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Rappi (Colombia/LATAM) detectó en 2022 una caída en la frecuencia de uso entre sus usuarios más antiguos. Los datos cuantitativos — sesiones por semana, ticket promedio, tasa de reactivación — mostraban el patrón pero no lo explicaban.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — La cualitativa que precede a la cuantitativa</div>
+          <h4>Rappi: del síntoma a la "fatiga de conveniencia"</h4>
+          <p><strong style="color:#d4a0a0;">Síntoma cuantitativo:</strong> usuarios activos de más de 12 meses reducían su frecuencia de pedidos un 30% en promedio entre el mes 13 y el mes 18.</p>
+          <p><strong style="color:#d4a0a0;">Lo que la encuesta no podía revelar:</strong> una encuesta de satisfacción mostró niveles altos en todas las dimensiones (velocidad, precio, variedad). Nada explicaba el abandono gradual.</p>
+          <p><strong style="color:#d4a0a0;">Lo que revelaron las entrevistas en profundidad:</strong> los usuarios "veteranos" describían una pérdida del placer de cocinar y una sensación de que pedir delivery "siempre" los hacía sentir que habían "cedido". Aparecía un concepto nuevo: <em>la fatiga de conveniencia</em> — el malestar de depender completamente de un servicio para algo tan básico como la alimentación.</p>
+          <p><strong style="color:#d4a0a0;">La respuesta de negocio:</strong> con ese insight cualitativo, Rappi desarrolló la categoría de "kits de cocina" (ingredientes semi-preparados para cocinar en 20 minutos) — un híbrido que atendía la necesidad de conveniencia sin eliminar la experiencia de cocinar.</p>
+          <p><em>Pregunta para clase: ¿En qué momento del proceso fue indispensable la investigación cualitativa? ¿Podría haberse llegado al mismo insight solo con encuestas de satisfacción?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Rappi (2023).</strong> <em>Investor Relations Update.</em> rappi.com — La compañía publica métricas de uso y expansión de categorías.</div>
+          <div class="ref-item"><strong>Woodside, A.G. (2016).</strong> "Finding the soul of qualitative research." <em>Journal of Business Research</em>, 69(11). — Argumenta por qué el insight cualitativo es irreemplazable en investigación de consumo.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('cualitativa-vs-cuantitativa')">Siguiente: Cuali vs. cuanti →</button>
+      </div>
+    </div>
+
+    <!-- CUALI VS CUANTI -->
+    <div id="cualitativa-vs-cuantitativa" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>Investigación cualitativa vs. cuantitativa</h2>
+        <p class="section-intro">La Tabla 4.1 de Malhotra sigue siendo el marco comparativo más claro disponible. Las diferencias conceptuales son vigentes; lo que cambió es cuándo y cómo se combina cada enfoque en el contexto digital.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Tabla 4.1 — Malhotra 2016 (vigente)</div>
+        <p><strong>Investigación cualitativa:</strong> objetivo de lograr un entendimiento cualitativo de las razones y motivaciones subyacentes. Muestra pequeña y no representativa. Recopilación no estructurada. Análisis no estadístico. Resultado: comprensión inicial.</p>
+        <p><strong>Investigación cuantitativa:</strong> objetivo de cuantificar los datos y generalizar los resultados. Muestra grande y representativa. Recopilación estructurada. Análisis estadístico. Resultado: recomendar un curso de acción final.</p>
+        <p><strong>Principio metodológico clave (vigente):</strong> los estudios cualitativos y cuantitativos deben considerarse complementarios, no competidores. La cualitativa sienta las bases para la cuantitativa; la cuantitativa valida y generaliza lo que la cualitativa descubre. Un error frecuente es tratar los hallazgos cualitativos como concluyentes.</p>
+        <p><strong>Excepción documentada en el libro:</strong> si un proyecto se repite y el contexto ambiental no cambió, puede omitirse la fase cualitativa. Si la encuesta mensual de satisfacción ya está calibrada y el mercado no cambió, hacerla precedida de focus groups sería desperdicio.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo que cambió: la frontera cuali/cuanti se desdibujó</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>En 2016, la distinción era más clara: las herramientas cualitativas producían texto e interpretación; las cuantitativas producían números y estadística. Hoy el análisis de texto a escala (NLP, sentiment analysis, topic modeling) permite obtener insights cualitativos de millones de reseñas, comentarios y transcripciones de llamadas — procesados estadísticamente.</p>
+        <p>Esto no elimina la investigación cualitativa tradicional. Sí cambia su rol: la cualitativa profunda (entrevistas en profundidad, etnografía) se vuelve más valiosa para explorar <em>el significado</em> que los modelos de IA identifican pero no pueden interpretar culturalmente. Un modelo puede detectar que el 40% de las reseñas de un restaurante en Buenos Aires mencionan "ambiente"; no puede explicar qué significa "ambiente" para un porteño en comparación con un montevideano.</p>
+
+        <div class="callout">
+          <strong>Distinción clave para la práctica:</strong> el análisis de texto con IA es <em>procesamiento a escala de datos cualitativos</em>, no investigación cualitativa. Sin embargo, es una herramienta de exploración poderosa que puede orientar dónde focalizar la investigación cualitativa profunda.
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Braun, V. & Clarke, V. (2022).</strong> <em>Thematic Analysis: A Practical Guide.</em> SAGE. — El manual de referencia para análisis cualitativo riguroso. Relevante para proyectos del curso que incluyan entrevistas.</div>
+          <div class="ref-item"><strong>Creswell, J.W. & Creswell, J.D. (2023).</strong> <em>Research Design: Qualitative, Quantitative, and Mixed Methods Approaches</em>, 6ª ed. SAGE. — Estándar académico para justificar el diseño metodológico en investigación mixta.</div>
+          <div class="ref-item"><strong>Landers, R.N. & Behrend, T.S. (2022).</strong> "Auditing the AI auditors." <em>American Psychologist</em>, 78(4). — Sobre los límites de los modelos de NLP para capturar matices culturales y lingüísticos.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('apertura')">← Caso de apertura</button>
+        <button class="nav-btn primary" onclick="showSection('clasificacion')">Siguiente: Clasificación →</button>
+      </div>
+    </div>
+
+    <!-- CLASIFICACIÓN -->
+    <div id="clasificacion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Clasificación de procedimientos cualitativos</h2>
+        <p class="section-intro">La Figura 4.3 del libro clasifica los procedimientos cualitativos en directos (objetivo no encubierto) e indirectos (objetivo encubierto). Esta distinción sigue siendo el organizador conceptual del capítulo.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Figura 4.3 — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Enfoque directo</span> El objetivo del proyecto es evidente para los participantes o se les informa. Las preguntas reflejan directamente el propósito del estudio. Técnicas principales: <strong>focus groups</strong> y <strong>entrevistas en profundidad</strong>.</p>
+        <p><span class="def-term">Enfoque indirecto</span> El verdadero propósito del proyecto se oculta a los participantes. Se pide a los individuos que interpreten el comportamiento de <em>otros</em>, proyectando de manera indirecta sus propias motivaciones. Técnicas principales: <strong>técnicas proyectivas</strong> (asociación de palabras, frases incompletas, respuesta ante imágenes, prueba de caricaturas, juego de roles, tercera persona).</p>
+        <p><strong>Cuándo usar cada enfoque:</strong> el enfoque directo funciona cuando el tema no es especialmente sensible y los participantes pueden articular sus motivaciones conscientemente. El enfoque indirecto es necesario cuando el tema involucra normas sociales rígidas, motivaciones inconscientes, o cuando una pregunta directa produciría respuestas socialmente deseables en lugar de honestas.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Técnicas que el libro no considera: investigación cualitativa digital</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Desde 2016 se consolidaron tres categorías de investigación cualitativa que el libro apenas menciona o no conocía:</p>
+        <ul>
+          <li><strong>Diarios digitales (digital diaries):</strong> los participantes registran su comportamiento, emociones y contexto en tiempo real mediante fotos, videos y texto enviados por WhatsApp, Telegram o apps específicas. Capturan el comportamiento <em>in situ</em> que las entrevistas retrospectivas pierden. Herramientas: dscout, Indeemo, Recollective.</li>
+          <li><strong>Comunidades de investigación en línea (MROCs):</strong> grupos privados de 50 a 500 participantes que interactúan durante semanas o meses. Permiten observar evolución de opiniones, probar conceptos iterativamente y realizar moderación asíncrona. Herramientas: Recollective, Toluna Qualboard, Discuss.io.</li>
+          <li><strong>Entrevistas por video remoto:</strong> plataformas como Zoom, Teams o User Interviews permiten entrevistas en profundidad con grabación, transcripción automática y anotaciones en tiempo real. Reducen costos de desplazamiento y expanden la cobertura geográfica significativamente.</li>
+        </ul>
+
+        <div class="tool-box">
+          <div class="tool-label">🛠 Plataformas de investigación cualitativa digital (2024)</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Discuss.io</strong><span>Video focus groups y entrevistas remotas. Transcripción automática con IA.</span></div>
+            <div class="tool-item"><strong>Recollective / dscout</strong><span>Diarios digitales y comunidades de investigación online (MROCs).</span></div>
+            <div class="tool-item"><strong>UserZoom / Maze</strong><span>Investigación cualitativa de UX — entrevistas y pruebas de usabilidad remotas.</span></div>
+            <div class="tool-item"><strong>Dovetail</strong><span>Repositorio centralizado de insights cualitativos. Análisis con IA sobre transcripciones.</span></div>
+            <div class="tool-item"><strong>Otter.ai / Grain</strong><span>Transcripción automática de entrevistas. Integración con video llamadas.</span></div>
+            <div class="tool-item"><strong>NVivo / ATLAS.ti</strong><span>Software de análisis cualitativo. Codificación temática y análisis de discurso.</span></div>
+          </div>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Lobe, B., Morgan, D. & Hoffman, K.A. (2020).</strong> "Qualitative Data Collection in an Era of Social Distancing." <em>International Journal of Qualitative Methods</em>, 19. — Revisión comprensiva de métodos cualitativos remotos y sus implicaciones metodológicas.</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report 2023.</em> esomar.org — Reporta que el 67% de los proyectos cualitativos globales en 2023 incluyeron algún componente remoto o digital.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('cualitativa-vs-cuantitativa')">← Cuali vs. cuanti</button>
+        <button class="nav-btn primary" onclick="showSection('focus-groups')">Siguiente: Focus groups →</button>
+      </div>
+    </div>
+
+    <!-- FOCUS GROUPS -->
+    <div id="focus-groups" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>Entrevistas con focus groups</h2>
+        <p class="section-intro">Los focus groups son el procedimiento de investigación cualitativa más importante y usado. El marco conceptual de Malhotra es sólido y vigente; los casos, costos y tecnologías se actualizan.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Definición y características — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Focus group</span> Grupo pequeño de individuos a quienes un moderador entrevista de forma no estructurada y natural. El objetivo principal es obtener información al escuchar las opiniones del grupo sobre temas de interés para el investigador. El valor reside en los hallazgos inesperados de un debate grupal que fluye libremente.</p>
+        <p><strong>Características clave (Tabla 4.2):</strong></p>
+        <ul>
+          <li><strong>Tamaño:</strong> 8 a 12 participantes. Menos de 8 genera poca dinámica; más de 12 fragmenta el debate.</li>
+          <li><strong>Composición:</strong> homogéneo en características demográficas, psicográficas y de uso del producto. Si hay múltiples segmentos, se requieren grupos separados.</li>
+          <li><strong>Entorno:</strong> atmósfera relajada e informal. Los participantes no deben haber participado en focus groups recientemente (evitar "encuestados profesionales").</li>
+          <li><strong>Duración:</strong> 1 a 3 horas. Lo más común: 90 minutos.</li>
+          <li><strong>Registro:</strong> siempre se graba (audio y/o video).</li>
+          <li><strong>Moderador:</strong> habilidades interpersonales, de observación y comunicación. Papel fundamental en el éxito.</li>
+        </ul>
+        <p><strong>Número de sesiones recomendado:</strong> al menos dos grupos. El estándar para proyectos grandes es 6 a 15 sesiones, hasta que el moderador pueda anticipar las respuestas (saturación teórica).</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Procedimiento — Malhotra 2016 (Figura 4.4, vigente)</div>
+        <p>El proceso incluye: (1) especificar los objetivos de la investigación cualitativa; (2) establecer los objetivos del focus group; (3) redactar un cuestionario de selección; (4) desarrollar una guía para el moderador; (5) realizar la entrevista con el focus group; (6) elaborar el informe del focus group.</p>
+        <p><strong>La guía del moderador</strong> es crítica: especifica los temas, su secuencia y el tiempo asignado a cada uno. Reduce problemas de confiabilidad al garantizar que distintos moderadores cubran las mismas áreas de contenido. En el informe no se reportan frecuencias ni porcentajes; se usan expresiones como "la mayoría de los participantes" o "los participantes no coincidieron".</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Dove — escuchando la conversación sobre la belleza real</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro ilustra focus groups con Universal Music Group (2004–2005) y datos de iPods. Un caso más reciente que ilustra el mismo proceso y cómo los hallazgos cualitativos pueden transformar una marca:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🧴 Caso en clase — Focus groups que cambiaron una industria</div>
+          <h4>Dove: de los focus groups a la "Campaña por la Belleza Real"</h4>
+          <p><strong style="color:#d4a0a0;">Contexto:</strong> en 2003, Dove (Unilever) encargó a StrategyOne una investigación cualitativa global sobre cómo las mujeres percibían la belleza y si se sentían representadas por la publicidad de productos de cuidado personal.</p>
+          <p><strong style="color:#d4a0a0;">Metodología:</strong> focus groups en 10 países (incluyendo Brasil, Argentina y México) con mujeres de 18 a 64 años. El criterio de segmentación fue deliberadamente amplio para capturar diversidad.</p>
+          <p><strong style="color:#d4a0a0;">Hallazgo central:</strong> solo el 2% de las mujeres entrevistadas se describían a sí mismas como "bellas". La mayoría asociaba "belleza" con delgadez y juventud, y sentía que los medios y la publicidad reforzaban un ideal inalcanzable que las excluía.</p>
+          <p><strong style="color:#d4a0a0;">Del focus group a la campaña:</strong> los hallazgos cualitativos orientaron el "Dove Real Beauty Report" (cuantitativo, 3,200 mujeres en 10 países) que validó los patrones. La Campaña por la Belleza Real (2004) usó mujeres reales — no modelos — en su publicidad, generando un impacto de medios estimado en $3 mil millones.</p>
+          <p><em>Pregunta para clase: ¿Por qué fue indispensable empezar con focus groups y no directamente con la encuesta a 3,200 mujeres? ¿Qué no habría podido capturar la encuesta sin la fase cualitativa previa?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Etcoff, N. et al. (2004).</strong> <em>The Real Truth About Beauty: A Global Report.</em> StrategyOne / Dove. — El reporte original basado en la investigación cualitativa y cuantitativa que originó la campaña.</div>
+          <div class="ref-item"><strong>Millard, J. (2009).</strong> "Performing Beauty: Dove's 'Real Beauty' Campaign." <em>Symbolic Interaction</em>, 32(2), 146–168. — Análisis académico de los hallazgos cualitativos y su impacto en la comunicación de marca.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Ventajas y desventajas — con perspectiva actualizada</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p><strong>Ventajas (vigentes):</strong> inmediatez y riqueza de comentarios de consumidores reales; la interacción grupal produce rango más amplio de ideas que entrevistas individuales; efecto "bola de nieve" donde los comentarios de uno generan reacciones inesperadas en otros; las respuestas son espontáneas.</p>
+        <p><strong>Desventajas (vigentes y ampliadas):</strong></p>
+        <ul>
+          <li>Los hallazgos tienden a percibirse como concluyentes cuando son exploratorios — riesgo de sobre-generalizar.</li>
+          <li>Difícil de moderar: la calidad depende de las habilidades del moderador y escasean los buenos moderadores.</li>
+          <li>Sesgo de conformidad ("groupthink"): los participantes tienden a coincidir con la opinión dominante del grupo, especialmente en culturas con alta distancia al poder — fenómeno más marcado en LATAM que en EE.UU. o Europa.</li>
+          <li>La naturaleza no estructurada dificulta la codificación, el análisis y la interpretación.</li>
+          <li>Nuevo riesgo: en focus groups en línea (texto), la pérdida del lenguaje corporal y la entonación elimina información no verbal significativa.</li>
+        </ul>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Particularidades en LATAM</div>
+          <p>La investigación cualitativa en LATAM enfrenta desafíos específicos que el libro no aborda. El <strong>sesgo de aquiescencia</strong> (tendencia a responder positivamente) es más pronunciado en culturas latinoamericanas de alta distancia al poder — los participantes evitan contradecir al moderador o a los participantes percibidos como de mayor estatus. El <strong>sesgo de deseabilidad social</strong> es especialmente relevante en temas de alimentación, salud y economía del hogar.</p>
+          <p>Las diferencias culturales intra-regionales también son significativas: un focus group sobre consumo de alcohol en Uruguay (mercado permisivo) produce dinámicas muy distintas que en mercados más conservadores como Colombia o México. La homogeneidad del grupo debe considerar dimensiones culturales locales, no solo demográficas globales.</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Morgan, D.L. (2019).</strong> <em>Basic and Advanced Focus Groups.</em> SAGE. — La actualización más completa de la metodología de focus groups, incluyendo formatos en línea y asíncronos.</div>
+          <div class="ref-item"><strong>Marín, G. & Marín, B.V. (1991).</strong> <em>Research with Hispanic Populations.</em> SAGE. — Referencia fundacional sobre sesgos metodológicos específicos en investigación cualitativa en poblaciones latinoamericanas, incluyendo aquiescencia y deseabilidad social.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('clasificacion')">← Clasificación</button>
+        <button class="nav-btn primary" onclick="showSection('focus-online')">Siguiente: Focus groups en línea →</button>
+      </div>
+    </div>
+
+    <!-- FOCUS GROUPS EN LÍNEA -->
+    <div id="focus-online" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Focus groups en línea</h2>
+        <p class="section-intro">Los focus groups en línea evolucionaron radicalmente desde 2016. Las ventajas y desventajas del libro siguen vigentes pero son insuficientes para describir el ecosistema actual de investigación cualitativa digital.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Focus groups en línea — Malhotra 2016 (parcialmente vigente)</div>
+        <p>Los focus groups en línea ofrecen ventajas sobre los tradicionales: acceso a participantes geográficamente dispersos; menor costo (entre un quinto y la mitad del costo tradicional); mayor velocidad; mayor apertura de los participantes que en presencial; transcripción inmediata.</p>
+        <p><strong>Limitaciones del libro:</strong> los participantes solo necesitan computadora; no se puede observar lenguaje corporal; no se puede verificar fácilmente la identidad; no se pueden probar estímulos físicos (texturas, aromas); menor involucramiento del cliente.</p>
+        <p>El libro también menciona los <strong>focus groups de tableros de anuncios</strong> (bulletin board focus groups): debates asíncronos durante días o semanas que permiten a los participantes reflexionar antes de responder — superando la limitación del pensamiento en tiempo real de los focus groups síncronos.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo que cambió radicalmente desde 2016: el ecosistema digital de investigación cualitativa</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro describe focus groups en línea basados en chat de texto (2012–2015). Hoy el estándar son los <strong>video focus groups</strong> con capacidades que transformaron el formato:</p>
+        <ul>
+          <li><strong>Video HD en tiempo real:</strong> Zoom, Teams o plataformas especializadas (Discuss.io) permiten ver expresiones faciales y lenguaje corporal — eliminando la principal limitación del texto. Las cámaras capturan el entorno doméstico del participante, que provee información adicional sobre estilo de vida.</li>
+          <li><strong>Transcripción automática con IA:</strong> Otter.ai, Grain o las funciones integradas de Zoom producen transcripciones en tiempo real con identificación de hablantes — eliminando horas de trabajo post-sesión.</li>
+          <li><strong>Análisis de sentimiento en tiempo real:</strong> algunas plataformas (Symanto, Qualtrics iQ) analizan el tono emocional de las respuestas durante la sesión.</li>
+          <li><strong>Estímulos digitales enriquecidos:</strong> es posible compartir pantalla, mostrar prototipos interactivos, reaccionar con emojis o hacer votaciones en tiempo real.</li>
+          <li><strong>Grabación con múltiples ángulos:</strong> el cliente puede observar en vivo desde cualquier lugar del mundo, con comentarios internos sin interrumpir la sesión.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>Nuevo paradigma: el focus group como un continuo.</strong> Hoy una investigación cualitativa puede comenzar con un MROC de dos semanas (asíncrono, 30 participantes), seguirse de un video focus group síncrono (6 participantes, 90 minutos) y cerrarse con diarios digitales individuales de una semana. La combinación captura profundidad, espontaneidad y evolución temporal que ningún formato individual puede lograr solo.
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Lobe, B., Morgan, D. & Hoffman, K.A. (2020).</strong> "Qualitative Data Collection in an Era of Social Distancing." <em>International Journal of Qualitative Methods</em>, 19. — Revisión metodológica de video focus groups post-pandemia.</div>
+          <div class="ref-item"><strong>Abrams, K.M., Wang, Z., Song, Y.J. & Galindo-Gonzalez, S. (2015).</strong> "Data Richness Trade-offs Between Face-to-Face, Online Audiovisual, and Online Text-Only Focus Groups." <em>Social Science Computer Review</em>, 33(1), 80–96. — Comparación empírica de la riqueza de datos según el formato.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('focus-groups')">← Focus groups</button>
+        <button class="nav-btn primary" onclick="showSection('entrevistas')">Siguiente: Entrevistas en profundidad →</button>
+      </div>
+    </div>
+
+    <!-- ENTREVISTAS EN PROFUNDIDAD -->
+    <div id="entrevistas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>Entrevistas en profundidad</h2>
+        <p class="section-intro">Las entrevistas en profundidad son la herramienta cualitativa más poderosa para temas sensibles, experiencias complejas o cuando se necesita indagar sin la presión social del grupo. Su metodología en el libro sigue siendo vigente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Definición y técnica — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Entrevista en profundidad</span> Entrevista no estructurada, directa y personal en la que un entrevistador altamente capacitado interroga a una sola persona para indagar sus motivaciones, creencias, actitudes y sentimientos subyacentes.</p>
+        <p><strong>Duración:</strong> 30 minutos a más de una hora. <strong>Formato:</strong> empieza con una pregunta general y la dirección la determinan las respuestas del participante. La <em>indagación</em> es el elemento técnico central — preguntas como "¿por qué dice eso?", "¿podría decirme más?", "¿qué cambió?".</p>
+        <p><strong>El entrevistador debe:</strong> (1) evitar la apariencia de superioridad; (2) lograr que el participante se sienta cómodo; (3) mantenerse desapegado pero agradable; (4) plantear preguntas de manera informativa; (5) no aceptar respuestas de "sí" o "no"; (6) sondear activamente.</p>
+        <p><strong>Cuándo son preferibles a los focus groups:</strong> temas que requieren sondeo detallado (compra de automóvil, inversiones); temas delicados o con normas sociales rígidas (salud sexual, finanzas personales); experiencias sensoriales complejas (perfumes, vinos); entrevistas a profesionales o competidores.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Caso desactualizado — Malhotra 2016</div>
+        <p>El libro ilustra entrevistas en profundidad con Elizabeth Arden y Britney Spears (2004–2014). La campaña de Elizabeth Arden con Britney Spears fue exitosa en su momento pero la asociación de marca con la cantante se volvió problemática años después. Reemplazado por casos más actuales y metodológicamente más relevantes.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Nubank — entrevistas para diseñar un banco sin sucursales</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Nubank (Brasil) diseñó su propuesta de valor completa a partir de investigación cualitativa. Antes de lanzar su tarjeta de crédito sin anuales en 2013, realizó entrevistas en profundidad con consumidores brasileños sobre su relación con los bancos tradicionales.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">💳 Caso en clase — Entrevistas en profundidad</div>
+          <h4>Nubank: el insight que cambió los servicios financieros en LATAM</h4>
+          <p><strong style="color:#d4a0a0;">Por qué entrevistas y no focus groups:</strong> la relación personal con el dinero y los bancos es un tema altamente sensible en Brasil — los participantes no hablan con franqueza sobre deudas, vergüenzas financieras o estafas bancarias en un grupo. La entrevista individual con un entrevistador que genera confianza fue la única forma de acceder a la experiencia real.</p>
+          <p><strong style="color:#d4a0a0;">Hallazgo central:</strong> los participantes no describían solo frustración con las tarifas o las filas. Describían una experiencia de <em>humillación sistemática</em>: sentirse tratados como sospechosos en los cajeros automáticos, no entender los extractos, sentirse intimidados para no preguntar sobre cobros incorrectos.</p>
+          <p><strong style="color:#d4a0a0;">Insight que las encuestas de satisfacción no capturaban:</strong> los clientes no odiaban las tarifas en abstracto — odiaban la <em>asimetría de poder</em> que percibían en su relación con los bancos. Una tarjeta de crédito sin tarifas que se pudiera gestionar completamente desde el celular — sin tener que ir a una sucursal ni hablar con un ejecutivo — atacaba esa asimetría directamente.</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> Nubank tiene hoy más de 90 millones de clientes en Brasil, México y Colombia, y es el banco digital más grande del mundo por número de clientes fuera de Asia.</p>
+          <p><em>Pregunta para clase: ¿Cómo habría diseñado el cuestionario de selección para las entrevistas de Nubank? ¿Qué perfil de participante habría excluido y por qué?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Nubank (2024).</strong> <em>Annual Report.</em> ir.nu — Fuente primaria con datos de clientes, productos y expansión regional.</div>
+          <div class="ref-item"><strong>Dias, T. (2023).</strong> <em>Quebrando o Banco: A história do Nubank.</em> Portfolio-Penguin. — Relata el proceso de investigación con consumidores que fundó la propuesta de valor de Nubank. Lectura accesible y metodológicamente relevante.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Entrevistas en profundidad en la era digital: lo que cambió</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro describe entrevistas presenciales de 30 minutos a más de una hora. Hoy las entrevistas en profundidad operan con herramientas que transformaron la logística pero no la metodología central:</p>
+        <ul>
+          <li><strong>Reclutamiento digital:</strong> User Interviews, Respondent.io, o redes profesionales como LinkedIn permiten encontrar y agendar participantes con perfiles muy específicos en días. El reclutamiento presencial que tardaba semanas hoy toma 48 horas.</li>
+          <li><strong>Transcripción y análisis asistido por IA:</strong> Otter.ai y Grain transcriben automáticamente. Dovetail y Atlas.ti permiten codificar y buscar patrones en decenas de entrevistas simultáneamente. La IA identifica patrones; el investigador interpreta el significado cultural.</li>
+          <li><strong>Entrevistas asincrónias por video:</strong> herramientas como Voxpopme o dscout permiten que los participantes respondan preguntas grabando videos cortos desde su celular en el momento que les resulta conveniente — combinando la espontaneidad del in-situ con la profundidad de las preguntas abiertas.</li>
+        </ul>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Kvale, S. & Brinkmann, S. (2015).</strong> <em>InterViews: Learning the Craft of Qualitative Research Interviewing</em>, 3ª ed. SAGE. — El manual de referencia sobre técnica de entrevista en profundidad. Cubre indagación, rapport y análisis.</div>
+          <div class="ref-item"><strong>Guest, G., Namey, E. & Taylor, J. (2017).</strong> "Comparing Focus Groups and Individual Interviews." <em>Qualitative Health Research</em>, 27(6). — Estudio empírico comparativo que muestra cuándo cada técnica produce mayor riqueza de datos.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('focus-online')">← Focus groups en línea</button>
+        <button class="nav-btn primary" onclick="showSection('proyectivas')">Siguiente: Técnicas proyectivas →</button>
+      </div>
+    </div>
+
+    <!-- TÉCNICAS PROYECTIVAS -->
+    <div id="proyectivas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Técnicas proyectivas</h2>
+        <p class="section-intro">Las técnicas proyectivas son el enfoque indirecto de la investigación cualitativa — se usan cuando la pregunta directa produce respuestas socialmente deseables en lugar de honestas. El marco conceptual del libro sigue siendo válido.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Técnicas proyectivas — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Técnica proyectiva</span> Forma de interrogatorio no estructurada e indirecta que anima a los participantes a proyectar sus motivaciones, creencias, actitudes o sentimientos subyacentes. Se pide a los individuos que interpreten el comportamiento de <em>otros</em>, proyectando indirectamente los propios.</p>
+        <p><strong>Cuándo son necesarias:</strong> cuando el tema involucra normas sociales rígidas (consumo de alcohol, sexualidad, dinero), cuando las motivaciones son inconscientes, o cuando una pregunta directa produce respuestas defensivas o socialmente deseables.</p>
+        <p>Las cinco técnicas principales:</p>
+        <ul>
+          <li><strong>Asociación de palabras:</strong> lista de palabras presentadas una a la vez — el participante responde con la primera palabra que le viene a la mente. Se registra la respuesta y el tiempo (más de 3 segundos indica duda o razonamiento).</li>
+          <li><strong>Frases incompletas:</strong> frases sin concluir que el participante completa. Proveen más información que la asociación de palabras pero revelan más el propósito del estudio.</li>
+          <li><strong>Respuesta ante imágenes (TAT):</strong> se muestra una imagen y se pide que el participante cuente una historia. Útil para evaluar actitudes hacia situaciones de consumo.</li>
+          <li><strong>Prueba de caricaturas:</strong> personajes en situaciones específicas — el participante completa lo que un personaje diría. Más sencilla de analizar que las respuestas ante imágenes.</li>
+          <li><strong>Técnica de la tercera persona:</strong> "¿Cree que su vecino tiene miedo de viajar en avión?" — reduce la presión social por dar respuestas aceptables. Clásico estudio con aerolínea donde preguntar en segunda persona no reveló el miedo al avión, pero en tercera persona sí.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Técnicas proyectivas digitales y ZMET</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Las técnicas proyectivas evolucionaron con el contexto digital. Algunas formas contemporáneas que el libro no menciona:</p>
+        <ul>
+          <li><strong>Collages digitales:</strong> los participantes arman tableros visuales en Pinterest, Canva o Miro con imágenes que "representan" una marca, emoción o experiencia de consumo. Es una versión digital de las técnicas de respuesta ante imágenes que además captura las elecciones de búsqueda.</li>
+          <li><strong>Proyección en redes sociales:</strong> "¿Cómo sería la cuenta de Instagram de esta marca si fuera una persona?" — proyección de personalidad de marca a través de un perfil hipotético en redes sociales.</li>
+          <li><strong>ZMET (Zaltman Metaphor Elicitation Technique):</strong> desarrollada en Harvard por Gerald Zaltman, combina imágenes seleccionadas por los participantes, entrevistas en profundidad y análisis de metáforas para acceder al pensamiento inconsciente. Usada por Coca-Cola, Procter & Gamble y Nestlé. Es la técnica proyectiva con mayor validación empírica.</li>
+        </ul>
+
+        <div class="case-highlight">
+          <div class="case-label">🧠 ZMET — Técnica proyectiva avanzada</div>
+          <h4>Nestlé y el chocolate: lo que las personas no podían decir directamente</h4>
+          <p>Nestlé usó ZMET para entender la relación emocional de los consumidores con el chocolate. Se pidió a los participantes que trajeran imágenes que representaran cómo se sentían al comer chocolate. Nadie trajo imágenes de barras de chocolate — trajeron imágenes de vacaciones, familia, infancia, y momentos de soledad reconfortante.</p>
+          <p>El hallazgo: el chocolate no se consumía por el sabor sino como un mecanismo de regulación emocional — un "refugio seguro" privado. Ese insight transformó la comunicación de KitKat ("Have a break, have a KitKat") y de la línea Premium de Nestlé.</p>
+          <p><strong>La técnica reveló lo que una pregunta directa nunca habría podido:</strong> nadie dice "como chocolate cuando estoy emocionalmente agotado y necesito un momento solo para mí".</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Zaltman, G. (2003).</strong> <em>How Customers Think: Essential Insights into the Mind of the Market.</em> Harvard Business School Press. — El libro que describe ZMET y el papel del pensamiento inconsciente en las decisiones de consumo. Lectura fundamental para investigación cualitativa avanzada.</div>
+          <div class="ref-item"><strong>Coulter, R.A. & Zaltman, G. (1994).</strong> "Using the Zaltman Metaphor Elicitation Technique to Understand Brand Images." <em>Advances in Consumer Research</em>, 21. — El artículo académico que introduce ZMET con validación empírica.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('entrevistas')">← Entrevistas en profundidad</button>
+        <button class="nav-btn primary" onclick="showSection('etnografia')">Siguiente: Etnografía y netnografía →</button>
+      </div>
+    </div>
+
+    <!-- ETNOGRAFÍA -->
+    <div id="etnografia" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Etnografía y netnografía</h2>
+        <p class="section-intro">La etnografía es el método cualitativo que captura el comportamiento <em>real</em> en lugar del comportamiento <em>reportado</em>. Su ventaja central — observar en el contexto natural del consumidor — la hace irreemplazable para cierto tipo de insights.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Etnografía y netnografía — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Investigación etnográfica</span> Método cualitativo que observa a las personas en su entorno natural, no en un entorno de investigación formal. El objetivo es entender una cultura o fenómeno de interés. Los datos se reúnen mediante entrevistas en profundidad y <em>observación participante</em> — el investigador se sumerge dentro de la cultura.</p>
+        <p><span class="def-term">Netnografía</span> Aplica técnicas etnográficas a datos generados de manera natural en Internet y en comunidades en línea. Los datos no se ven afectados por la presencia del investigador — una ventaja metodológica clave.</p>
+        <p><strong>Ventaja sobre focus groups y entrevistas:</strong> capta la diferencia entre lo que las personas <em>dicen</em> que hacen y lo que <em>realmente</em> hacen. Los participantes articulan racionalizaciones en las entrevistas; la observación etnográfica captura el comportamiento real, que a menudo es diferente.</p>
+        <p>El libro ilustra etnografía con el caso de Kraft Singles y las madres de familia: los etnógrafos observaron a las madres preparar emparedados en sus hogares y descubrieron que les gustaba el sabor pero eran fáciles de convencer de cambiar de marca — insight que orientó la campaña publicitaria de Kraft.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso actualizado: Airbnb y la etnografía que salvó el negocio</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <div class="case-highlight">
+          <div class="case-label">🏠 Caso en clase — Etnografía con impacto de negocio</div>
+          <h4>Airbnb (2009): Paul Graham, las fotos y el insight etnográfico</h4>
+          <p>En 2009, Airbnb tenía baja tracción en Nueva York. Los fundadores — Joe Gebbia y Brian Chesky — no lograban entender por qué las reservas eran escasas a pesar de una oferta aparentemente amplia. Las métricas (cuantitativas) no explicaban el problema.</p>
+          <p>Paul Graham (Y Combinator) les sugirió que fueran a ver en persona — que visitaran los departamentos listados en Nueva York. Lo que encontraron fue la causa: las fotos de los anuncios eran de mala calidad, tomadas con teléfonos en condiciones de poca luz. Los potenciales huéspedes no podían visualizarse en los espacios.</p>
+          <p>La observación etnográfica reveló lo que ninguna encuesta habría capturado porque los propietarios no eran conscientes del problema — ellos veían sus propias fotos como "suficientemente buenas".</p>
+          <p><strong style="color:#d4a0a0;">La solución:</strong> Airbnb contrató fotógrafos profesionales para fotografiar los primeros 20 departamentos de Nueva York. Las reservas en esas propiedades aumentaron 2-3 veces. El programa se escaló globalmente.</p>
+          <p><em>Pregunta para clase: ¿Por qué fue necesaria la observación etnográfica? ¿Qué habría revelado (o no revelado) una encuesta de satisfacción a los propietarios?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Gallagher, L. (2017).</strong> <em>The Airbnb Story.</em> Houghton Mifflin Harcourt. — Relata en detalle el proceso de investigación etnográfica de los fundadores en Nueva York.</div>
+          <div class="ref-item"><strong>Kozinets, R.V. (2020).</strong> <em>Netnography: The Essential Guide to Qualitative Social Media Research</em>, 3ª ed. SAGE. — El manual de referencia sobre netnografía, escrito por su creador. Cubre comunidades en línea, redes sociales y análisis de discurso digital.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Netnografía actualizada: investigación en comunidades digitales</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>La netnografía evolucionó significativamente desde que Malhotra la introdujo. Hoy abarca:</p>
+        <ul>
+          <li><strong>Comunidades en Reddit, Discord y grupos de Facebook:</strong> conversaciones espontáneas sobre productos, marcas y experiencias que ocurren sin saber que son objeto de investigación.</li>
+          <li><strong>Reseñas de Google Maps, TripAdvisor y Mercado Libre:</strong> datos de netnografía estructurados que capturan la experiencia de uso real post-compra.</li>
+          <li><strong>TikTok y YouTube como fuente netnográfica:</strong> los comentarios bajo videos de "unboxing" o de crítica de productos son texto etnográfico natural sobre la experiencia del consumidor.</li>
+          <li><strong>Grupos de WhatsApp y Telegram:</strong> en LATAM, donde WhatsApp es la plataforma de comunicación dominante, los grupos temáticos (de padres, de aficionados a la cocina, de gamers) son contextos netnográficos de alta riqueza — aunque el acceso requiere consentimiento.</li>
+        </ul>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Netnografía en América Latina</div>
+          <p>LATAM presenta particularidades netnográficas relevantes para la investigación. WhatsApp es la plataforma de comunicación interpersonal dominante (penetración del 90%+ en Brasil, Argentina y México), lo que genera comunidades de conversación ricas y espontáneas. Sin embargo, la investigación en grupos privados de WhatsApp requiere consentimiento explícito de los miembros — una implicación ética que el libro no aborda.</p>
+          <p>Los foros regionales como Taringa (Argentina), los grupos de Facebook locales y las comunidades de Mercado Libre son fuentes netnográficas específicas de la región que capturan conversaciones de consumo que no existen en las plataformas globales.</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Kozinets, R.V. (2020).</strong> <em>Netnography: The Essential Guide to Qualitative Social Media Research</em>, 3ª ed. SAGE. — Manual de referencia actualizado para investigación netnográfica en redes sociales, comunidades en línea y plataformas digitales.</div>
+          <div class="ref-item"><strong>Mkono, M. & Markwell, K. (2014).</strong> "The Application of Netnography in Tourism Studies." <em>Annals of Tourism Research</em>, 48. — Ejemplo aplicado de netnografía en investigación de turismo con relevancia para servicios en LATAM.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('proyectivas')">← Técnicas proyectivas</button>
+        <button class="nav-btn primary" onclick="showSection('mystery-shopping')">Siguiente: Mystery shopping →</button>
+      </div>
+    </div>
+
+    <!-- MYSTERY SHOPPING -->
+    <div id="mystery-shopping" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 08</div>
+        <h2>Mystery shopping (compras misteriosas)</h2>
+        <p class="section-intro">Las compras misteriosas siguen siendo una herramienta ampliamente usada en sectores de retail, hostelería y servicios financieros. El concepto del libro es vigente; las herramientas y aplicaciones evolucionaron significativamente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Mystery shopping — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Compras misteriosas</span> Observadores capacitados se hacen pasar por consumidores y compran en las tiendas de la compañía o en las de los competidores, con la finalidad de reunir datos sobre las interacciones entre clientes y empleados y sobre otras variables de marketing: precios, exhibiciones, disposición del piso de venta, etc.</p>
+        <p>Los compradores misteriosos hacen preguntas a los empleados, toman notas mentales de las respuestas y observan las variables de interés. Los datos se registran en formularios estructurados inmediatamente después de la visita, o en plataformas digitales en tiempo real.</p>
+        <p><strong>Aplicaciones principales:</strong> auditoría de la experiencia del cliente; evaluación del cumplimiento de estándares de servicio; análisis de la competencia; capacitación y evaluación de empleados; cumplimiento regulatorio en sectores financieros y de salud.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Mystery shopping digital: el "shopper" como investigador de experiencia omnicanal</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El libro describe mystery shopping exclusivamente en tiendas físicas. Hoy el mystery shopping opera en todos los canales de contacto con el cliente:</p>
+        <ul>
+          <li><strong>Mystery shopping digital:</strong> evaluación de la experiencia en el sitio web, la app y el e-commerce — velocidad de carga, facilidad de navegación, proceso de checkout, comunicación post-compra.</li>
+          <li><strong>Mystery calling:</strong> llamadas anónimas a call centers para evaluar tiempos de espera, calidad de atención y resolución de problemas. Muy usado en telecomunicaciones y bancos en LATAM.</li>
+          <li><strong>Mystery chatting:</strong> evaluación de chatbots y agentes de WhatsApp o Messenger — tiempo de respuesta, claridad de la información, capacidad de resolución.</li>
+          <li><strong>Social media mystery shopping:</strong> evaluación de cómo las marcas responden a comentarios, preguntas y reclamos en redes sociales.</li>
+        </ul>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Mystery shopping en América Latina</div>
+          <p>En LATAM el mystery shopping tiene alta penetración en los sectores de retail (supermercados y tiendas departamentales), servicios financieros (evaluación de sucursales bancarias y asesores de inversión), telecomunicaciones, y cadenas de fast food. Empresas como Mercado Libre usan auditorías de mystery shopping para evaluar la experiencia en sus puntos de envío y lockers.</p>
+          <p>Proveedores de referencia con presencia en la región: GFK (ahora NielsenIQ), Shopper Experience, y plataformas digitales como Second to None. En Uruguay y Argentina, el INAC (Instituto Nacional de Alimentación) usa formas de mystery shopping regulatorio para auditar el cumplimiento de estándares en el canal gastronómico.</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Wilson, A.M. (2001).</strong> "Mystery Shopping: Using Deception to Measure Service Performance." <em>Psychology & Marketing</em>, 18(7). — El artículo académico de referencia sobre mystery shopping, incluyendo discusión de las implicaciones éticas del uso del engaño.</div>
+          <div class="ref-item"><strong>MSPA Americas (2024).</strong> mspa-americas.org — La asociación de proveedores de mystery shopping en el continente. Publica estándares metodológicos y éticos para la industria.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('etnografia')">← Etnografía y netnografía</button>
+        <button class="nav-btn primary" onclick="showSection('social-media')">Siguiente: Social media e IA →</button>
+      </div>
+    </div>
+
+    <!-- SOCIAL MEDIA E IA -->
+    <div id="social-media" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 09</div>
+        <h2>Social media, inteligencia artificial y investigación cualitativa</h2>
+        <p class="section-intro">El libro introduce el social media como fuente de investigación cualitativa con ejemplos de 2010–2013. El ecosistema actual es radicalmente más complejo y las implicaciones metodológicas para la investigación cualitativa son profundas.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Social media e investigación cualitativa — Malhotra 2016 (parcialmente vigente)</div>
+        <p>El libro describe tres aplicaciones del social media en investigación cualitativa: (1) comunidades en línea privadas como focus groups extendidos (caso JCPenney); (2) entrevistas en profundidad a través de social media (caso Burger King y el "Whopper Freakout"); (3) técnicas proyectivas en social media (caso GlaxoSmithKline con frases incompletas en Communispace).</p>
+        <p>La lógica conceptual sigue siendo válida: el social media puede replicar los tres tipos de investigación cualitativa. Lo que cambió es la escala, la sofisticación de las herramientas y la complejidad ética.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>IA en investigación cualitativa: tres aplicaciones concretas y sus límites</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>La inteligencia artificial transformó el procesamiento de datos cualitativos. Las tres aplicaciones más relevantes para investigación de mercados:</p>
+
+        <ul>
+          <li><strong>Análisis de sentimiento y topic modeling:</strong> modelos de NLP (Natural Language Processing) pueden analizar miles de reseñas, comentarios o transcripciones en minutos, identificando temas recurrentes y tonos emocionales. Herramientas: Brandwatch, Qualtrics iQ, MonkeyLearn. <em>Límite crítico:</em> identifican patrones pero no interpretan significado cultural — "ambiente" en una reseña porteña tiene connotaciones distintas a "ambiente" en una reseña monterregia.</li>
+          <li><strong>Transcripción y análisis de entrevistas:</strong> Otter.ai, Grain y Fireflies transcriben automáticamente con identificación de hablantes. Dovetail y Atlas.ti permiten codificación temática asistida por IA sobre docenas de entrevistas simultáneamente — lo que antes tomaba semanas ahora toma días.</li>
+          <li><strong>Síntesis de insights:</strong> modelos como Claude o GPT-4 pueden analizar transcripciones y proponer patrones temáticos como punto de partida para la codificación humana. El investigador valida y refina; la IA acelera la fase inicial del análisis.</li>
+        </ul>
+
+        <div class="callout">
+          <strong>El límite metodológico fundamental que los modelos de IA no superan:</strong> la investigación cualitativa busca el <em>significado</em> — por qué algo importa para esta persona en este contexto cultural específico. Los modelos de IA son potentes para identificar <em>qué</em> se dice; son deficientes para interpretar <em>por qué</em> se dice en términos de valores culturales, contexto histórico o experiencia vivida. El investigador cualitativo sigue siendo indispensable para la interpretación.
+        </div>
+
+        <div class="update-card" style="margin-top: 20px; background: #fafafa; box-shadow: none; border: 1px solid var(--border);">
+          <div class="update-card-header">
+            <h3>Caso: respondentes sintéticos — una tendencia con riesgos metodológicos</h3>
+            <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+          </div>
+          <p>Desde 2023, varias empresas comenzaron a explorar el uso de modelos de IA para simular respuestas de consumidores ("respondentes sintéticos") — generar focus groups o entrevistas hipotéticas con personajes de IA entrenados en datos de consumidores reales. Esta práctica presenta riesgos metodológicos serios:</p>
+          <ul>
+            <li>Los modelos reproducen los sesgos de sus datos de entrenamiento — sobrerrepresentan a usuarios de internet angloparlantes y jóvenes.</li>
+            <li>No pueden capturar insights emergentes — solo reproducen patrones conocidos en sus datos de entrenamiento. Lo que hace valiosa a la investigación cualitativa es precisamente la capacidad de revelar lo desconocido.</li>
+            <li>No existe validación empírica robusta de que las respuestas de IA se correlacionen con las respuestas reales de consumidores en mercados específicos.</li>
+          </ul>
+          <div class="ref-box">
+            <div class="ref-box-label">📚 Referencia</div>
+            <div class="ref-item"><strong>Argyle, L. et al. (2023).</strong> "Out of One, Many: Using Language Models to Simulate Human Samples." <em>Political Analysis</em>, 31(3). — El artículo más citado sobre el potencial y los límites de los respondentes sintéticos. Concluye que los modelos pueden simular respuestas en ciertos contextos pero fallan en poblaciones específicas y temas culturalmente complejos.</div>
+          </div>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias generales</div>
+          <div class="ref-item"><strong>Kozinets, R.V. (2022).</strong> "Immersive netnography: A novel method for service experience research in virtual reality arcade amusement." <em>Journal of Service Management</em>, 33(2). — Exploración de métodos cualitativos en entornos digitales inmersivos (metaverso).</div>
+          <div class="ref-item"><strong>Salmons, J. (2022).</strong> <em>Doing Qualitative Research Online</em>, 2ª ed. SAGE. — Manual actualizado de investigación cualitativa en entornos digitales.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('mystery-shopping')">← Mystery shopping</button>
+        <button class="nav-btn primary" onclick="showSection('internacional')">Siguiente: Internacional y LatAm →</button>
+      </div>
+    </div>
+
+    <!-- INTERNACIONAL Y LATAM -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 10</div>
+        <h2>Investigación cualitativa internacional y en América Latina</h2>
+        <p class="section-intro">El libro aborda la investigación internacional con ejemplos de Europa y Asia (VisitBritain, Japón, Medio Oriente). Se complementa con los desafíos específicos de la investigación cualitativa en América Latina.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Investigación cualitativa internacional — Malhotra 2016 (vigente)</div>
+        <p>En la investigación cualitativa internacional, el moderador o entrevistador no solo debe estar capacitado en metodología, sino también <strong>familiarizado con el idioma, la cultura y los patrones de interacción social</strong> del país.</p>
+        <p>Los hallazgos no solo provienen del contenido verbal sino de aspectos no verbales: entonación, inflexión, expresiones y ademanes. <strong>El tamaño del focus group varía por cultura:</strong> en Asia, siete participantes genera el mayor nivel de interacción. En países de Medio Oriente y Lejano Oriente, la gente no siempre habla sobre sentimientos en grupo — las entrevistas en profundidad son preferibles. En Japón, mostrar desacuerdo en público se considera poco cortés.</p>
+        <p>Las técnicas proyectivas requieren <strong>equivalencia de significado</strong> entre culturas — tanto para estímulos verbales (palabras, frases) como no verbales (imágenes, caricaturas). Una imagen que funciona como estímulo proyectivo en EE.UU. puede tener connotaciones completamente distintas en Brasil o Colombia.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Desafíos específicos de la investigación cualitativa en LATAM</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>América Latina presenta desafíos metodológicos propios que el libro no aborda porque sus ejemplos internacionales se centran en mercados desarrollados:</p>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Cuatro desafíos metodológicos de LATAM</div>
+          <p><strong>1. Sesgo de aquiescencia:</strong> la tendencia a responder positivamente ("sí", "de acuerdo") independientemente del contenido de la pregunta es más pronunciada en culturas latinoamericanas de alta distancia al poder. En un focus group, los participantes evitan contradecir al moderador o a los participantes percibidos como de mayor estatus. Solución: técnicas proyectivas, preguntas indirectas, grupos homogéneos en estatus socioeconómico.</p>
+          <p><strong>2. Sesgo de deseabilidad social:</strong> las respuestas sobre alimentación (consumo de comida rápida), finanzas personales (deudas) y salud (tabaquismo, alcohol) están fuertemente influidas por la percepción de qué es "la respuesta correcta". Particularmente marcado en grupos mixtos de género. Solución: técnica de la tercera persona, entrevistas individuales para temas sensibles.</p>
+          <p><strong>3. Heterogeneidad intra-regional:</strong> LATAM no es culturalmente homogéneo. Un focus group sobre "la familia" produce dinámicas muy distintas en Ciudad de México, Santiago de Chile, Buenos Aires y São Paulo. La generalización de hallazgos entre países requiere validación explícita.</p>
+          <p><strong>4. Informalidad del mercado:</strong> entre el 45% y el 70% de la economía en varios países es informal. La investigación cualitativa diseñada para consumidores formales (con tarjeta de crédito, acceso a internet, inscriptos en bases de datos) pierde sistemáticamente a segmentos clave del mercado real.</p>
+        </div>
+
+        <div class="case-highlight">
+          <div class="case-label">🌎 Caso LATAM — Investigación cualitativa cross-cultural</div>
+          <h4>LATAM Airlines y la experiencia de viaje en cinco países</h4>
+          <p>Antes de rediseñar su programa de fidelidad, LATAM Airlines realizó focus groups en Brasil, Chile, Colombia, Perú y Argentina para entender qué significaba "un viaje perfecto" para los pasajeros de cada mercado. Los hallazgos no podían haberse obtenido con encuestas estandarizadas.</p>
+          <p><strong style="color:#d4a0a0;">Diferencia metodológica clave:</strong> en Chile y Argentina los grupos discutían con apertura los problemas y hacían críticas directas al servicio. En Perú y Colombia, los moderadores debían usar significativamente más técnicas proyectivas e indirectas para acceder a las mismas críticas. Los brasileños preferían el humor para expresar insatisfacción. Un moderador que no conociera estas diferencias habría interpretado el silencio de los peruanos como satisfacción.</p>
+          <p><strong style="color:#d4a0a0;">Implicación para el diseño:</strong> LATAM requirió moderadores locales certificados en cada país — no moderadores internacionales que "hablaran español". La cadena de decisión para elegir al moderador es una parte crítica del diseño de la investigación.</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Marín, G. & Marín, B.V. (1991).</strong> <em>Research with Hispanic Populations.</em> SAGE. — La referencia fundacional sobre metodología de investigación con poblaciones latinoamericanas, incluyendo sesgos específicos y estrategias de mitigación.</div>
+          <div class="ref-item"><strong>de la Garza, R. (2004).</strong> "Latino Politics." <em>Annual Review of Political Science</em>. — Documenta las diferencias intra-regionales en actitudes y comportamiento que hacen necesario el enfoque cultural diferenciado.</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report.</em> esomar.org — América Latina representó el 4% del gasto global en investigación de mercados en 2023, con Brasil como el mayor mercado de la región.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('social-media')">← Social media e IA</button>
+        <button class="nav-btn primary" onclick="showSection('etica')">Siguiente: Ética →</button>
+      </div>
+    </div>
+
+    <!-- ÉTICA -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 11</div>
+        <h2>Ética en la investigación cualitativa</h2>
+        <p class="section-intro">La investigación cualitativa involucra relaciones personales con participantes que comparten experiencias, opiniones y emociones. Las implicaciones éticas son más complejas que en la investigación cuantitativa y se volvieron más urgentes en el entorno digital.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Ética en investigación cualitativa — Malhotra 2016 (marco vigente)</div>
+        <p>El libro establece el marco ético general de cuatro participantes: investigador, cliente, participante y sociedad. En investigación cualitativa, las responsabilidades específicas incluyen:</p>
+        <ul>
+          <li><strong>Hacia los participantes:</strong> informar sobre la naturaleza y propósito de la investigación (salvo en técnicas de enfoque indirecto, donde el encubrimiento está metodológicamente justificado); garantizar confidencialidad; no coaccionar la participación; respetar el derecho a retirarse.</li>
+          <li><strong>Hacia el cliente:</strong> reportar los hallazgos honestamente, incluyendo los que contradicen las hipótesis previas del cliente; no presentar hallazgos cualitativos como concluyentes cuando son exploratorios.</li>
+          <li><strong>El dilema del encubrimiento en técnicas proyectivas:</strong> las técnicas proyectivas e indirectas implican que los participantes no conocen el verdadero propósito. Malhotra reconoce este dilema pero considera el encubrimiento metodológicamente justificado cuando el propósito directo produciría respuestas inválidas.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Cinco temas éticos nuevos en investigación cualitativa digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+
+        <p><strong>① Consentimiento en netnografía:</strong> ¿es legítimo usar comentarios públicos en redes sociales como datos de investigación sin informar a los autores? El debate académico no está resuelto. La posición más conservadora (y que ESOMAR recomienda) es informar a los autores cuando los comentarios son claramente identificables como de una persona real, especialmente si el tema es sensible.</p>
+        <p><strong>② Uso de grabaciones de video sin consentimiento explícito:</strong> las entrevistas en video quedan grabadas. ¿A quiénes puede compartirse esa grabación? ¿Puede usarse para entrenar modelos de IA? En la práctica, los formularios de consentimiento rara vez son específicos sobre estos usos secundarios.</p>
+        <p><strong>③ Respondentes sintéticos:</strong> usar IA para "simular" respuestas de consumidores sin transparencia ante el cliente es una práctica emergente con implicaciones éticas directas — el cliente cree estar pagando por investigación real.</p>
+        <p><strong>④ Privacidad en diarios digitales y MROCs:</strong> los participantes en diarios digitales comparten fotos de su hogar, rutinas e información familiar. ¿Cómo se protege esa información? ¿Quién tiene acceso? Los marcos legales de privacidad (LGPD en Brasil, Ley 18.331 en Uruguay, LFPDPPP en México) aplican directamente a estos datos.</p>
+        <p><strong>⑤ Mystery shopping y derechos laborales:</strong> el mystery shopping evalúa el desempeño individual de empleados. Si ese desempeño resulta en consecuencias laborales negativas (despidos, sanciones), surge una tensión ética sobre el uso de la observación encubierta como instrumento de evaluación de personas.</p>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>ICC/ESOMAR International Code on Market, Opinion and Social Research and Data Analytics.</em> esomar.org — El código de ética de referencia de la industria. Acceso gratuito. Incluye secciones específicas sobre investigación cualitativa, uso de datos de redes sociales y respondentes sintéticos.</div>
+          <div class="ref-item"><strong>British Psychological Society (2021).</strong> <em>Ethics Guidelines for Internet-mediated Research.</em> bps.org.uk — El marco más completo sobre ética en investigación digital, incluyendo consentimiento en netnografía y uso de datos generados espontáneamente en línea.</div>
+          <div class="ref-item"><strong>Williams, M.L., Burnap, P. & Sloan, L. (2017).</strong> "Towards an ethical framework for publishing Twitter data in social research." <em>Sociology</em>, 51(6), 1149–1168. — El marco más citado sobre ética en el uso de datos de redes sociales para investigación.</div>
+          <div class="ref-item"><strong>AGESIC Uruguay (2022).</strong> <em>Ley 18.331 de Protección de Datos Personales.</em> agesic.gub.uy — La ley uruguaya es el estándar más avanzado de LATAM en protección de datos personales en investigación, alineado con el GDPR europeo.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('internacional')">← Internacional y LatAm</button>
+        <button class="nav-btn primary" onclick="showSection('diapositivas')">↑ Volver al inicio</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(item => {
+      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+        item.classList.add('active');
+      }
+    });
+    document.querySelector('main').scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
