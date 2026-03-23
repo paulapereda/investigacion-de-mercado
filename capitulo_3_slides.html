@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 3 — Diseño de investigación, datos secundarios y sindicados</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides   { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+/* PORTADA */
+.s-cover { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold)); }
+.cover-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 900; line-height: 1.0; margin-bottom: 28px; }
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip { font-size: 12px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; display: inline-block; letter-spacing: 0.5px; }
+
+/* SECCIÓN OSCURA */
+.s-section { background: var(--ink); color: var(--paper); justify-content: center; padding: 60px 72px; }
+.s-section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.sec-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--paper); }
+.sec-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-top: 14px; font-style: italic; }
+
+/* CLARO */
+.s-light { background: var(--paper); padding: 48px 72px; justify-content: flex-start; }
+.s-light::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+/* OSCURO CONTENIDO */
+.s-dark { background: #1e1e1e; padding: 48px 72px; justify-content: flex-start; }
+.s-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+/* EYEBROW + TÍTULO */
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 22px; }
+.slide-h-white { color: white; }
+
+/* BULLETS */
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.65; color: #333; padding: 7px 0 7px 22px; border-bottom: 1px solid var(--border); position: relative; }
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+/* DEFINICIÓN */
+.def-block { background: var(--ink); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+.def-term-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 7px; }
+.def-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.65; }
+.def-text strong { color: #d4a0a0; }
+
+/* DOS COLUMNAS */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+.col-box-dark { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 16px 18px; }
+.col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 7px; }
+.col-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 7px; color: var(--ink); }
+.col-title-w { color: white; }
+.col-body { font-size: 13px; color: #444; line-height: 1.6; }
+.col-body-w { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* TABLAS */
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 12px; }
+.ref-table th { background: var(--ink); color: var(--paper); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.ref-table tr:nth-child(even) td { background: #faf8f5; }
+.ref-table-dark th { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table-dark td { padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 12.5px; }
+.ref-table-dark tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+
+/* PAUSA */
+.pause-box { background: #fffbec; border-left: 5px solid var(--gold); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 16px; }
+.pause-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+.pause-q { font-size: 13.5px; font-style: italic; color: #4a3a00; line-height: 1.6; }
+
+/* LATAM */
+.latam-box { background: var(--greenbg); border-left: 5px solid var(--green); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 14px; }
+.latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+.latam-text { font-size: 13px; color: #1a3a1a; line-height: 1.6; }
+
+/* CALLOUT */
+.callout { border-left: 4px solid var(--gold); background: #fffbec; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 14px; font-size: 14px; color: #4a3a00; line-height: 1.7; }
+
+/* TOOLS */
+.tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
+.tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 13px; }
+.tool-name { font-weight: 600; font-size: 12.5px; color: var(--blue); margin-bottom: 2px; }
+.tool-desc { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
+/* SEOANC */
+.seoanc-grid { display: grid; grid-template-columns: 32px 1fr 1fr; gap: 0; margin-top: 8px; }
+.s-letter { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--accent); padding: 6px 0; line-height: 1; }
+.s-classic { font-size: 11.5px; color: #333; padding: 6px 8px; border-bottom: 1px solid var(--border); line-height: 1.35; }
+.s-digital { font-size: 11.5px; color: var(--blue); padding: 6px 8px; border-bottom: 1px solid var(--border); line-height: 1.35; background: #f0f4f8; }
+
+/* CIERRE */
+.s-close { background: var(--ink); padding: 60px 72px; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 3</div>
+  <div class="cover-title">Diseño de la<br>investigación,<br><em>datos secundarios<br>y sindicados</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     APERTURA min 0–8
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Apertura · minutos 0–8</div>
+  <div class="slide-h">La pregunta que organiza el capítulo</div>
+  <ul class="bullets">
+    <li>El capítulo anterior respondió cómo <strong>definir el problema</strong> y formular el PIM correctamente</li>
+    <li>Este capítulo responde lo que sigue: <strong>¿cómo se investiga ese problema?</strong> ¿Por dónde se empieza?</li>
+    <li>La tentación siempre es hacer una encuesta. El capítulo dice: <strong>esperá. Primero mirá lo que ya existe.</strong></li>
+  </ul>
+  <div class="def-block" style="margin-top:18px;">
+    <div class="def-term-label">Regla de oro — Malhotra 2016</div>
+    <div class="def-text">"Primero se deben examinar los datos secundarios. El proyecto buscará datos primarios solamente cuando se agoten las fuentes secundarias o cuando produzcan resultados marginales."</div>
+  </div>
+  <div class="callout">
+    <strong>Hilo conductor de la clase:</strong> antes de salir a preguntar algo, hay que mirar lo que ya existe. Este principio, que parece simple, es el que más frecuentemente se viola y más recursos desperdicia cuando se ignora.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CASO APERTURA — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Caso de apertura · minutos 8–28</div>
+  <div class="sec-title">Datos secundarios<br>como base<br>del diseño</div>
+  <div class="sec-sub">Starbucks VIA · Mercado Libre — la misma secuencia metodológica</div>
+</div>
+</section>
+
+<!-- Starbucks VIA: hallazgos -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso · Starbucks VIA 2009</div>
+  <div class="slide-h slide-h-white">Lo que los datos secundarios revelaron antes de una sola encuesta</div>
+  <div style="display:flex;gap:32px;margin-bottom:18px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">$17B</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">mercado café instantáneo 2009<br>(hoy $35B · Euromonitor 2024)</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">81%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">ventas de café en UK<br>eran café instantáneo</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">$100M</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">ingresos VIA<br>en primeros 10 meses</div>
+    </div>
+  </div>
+  <ul class="bullets bullets-white">
+    <li>Mercado enorme, dominado por Nescafé y Sanka: <strong style="color:white;">espacio vacío para entrante premium</strong></li>
+    <li>Datos sindicados Nielsen: McDonald's y Dunkin Donuts quitaban participación — urgencia de nuevas fuentes de ingreso</li>
+    <li><strong style="color:white;">Ninguno de estos hallazgos requirió una encuesta propia</strong> — todos provenían de informes de industria y auditorías de retail</li>
+    <li>Solo después diseñaron estudios primarios para validar si los consumidores aceptarían una versión instantánea</li>
+  </ul>
+</div>
+</section>
+
+<!-- La secuencia correcta -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Starbucks VIA — La secuencia metodológica</div>
+  <div class="slide-h">Secundarios primero — primarios después</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:4px;">
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid #bbb;border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:82px;">Paso 1</div>
+      <div style="font-size:13.5px;color:#333;"><strong>Datos secundarios internos:</strong> registros de ventas, márgenes por canal, presencia en mercados clave</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:82px;">Paso 2</div>
+      <div style="font-size:13.5px;color:#333;"><strong>Datos secundarios externos y sindicados:</strong> informes de industria, auditorías Nielsen, datos de comercio internacional</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:82px;">Paso 3</div>
+      <div style="font-size:13.5px;color:#333;"><strong>Hipótesis del secundario:</strong> mercado enorme, espacio vacío para premium, posibilidad de extensión de marca</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:#edf4fc;border:1px solid #a0bfd8;border-left:4px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:82px;">Paso 4</div>
+      <div style="font-size:13.5px;color:#1a3a5c;"><strong>Recién entonces:</strong> investigación primaria para validar si los consumidores aceptarían una versión instantánea de Starbucks</div>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Qué diferencia hay entre buscar datos de mercado en Google y hacer investigación de mercados? ¿Dónde está el límite metodológico?</div>
+  </div>
+</div>
+</section>
+
+<!-- LATAM: Mercado Libre -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Mercado Libre — Mercado Crédito</div>
+  <div class="slide-h slide-h-white">La misma secuencia en América Latina</div>
+  <div style="display:flex;gap:32px;margin-bottom:16px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">55%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">adultos en LATAM<br>sin cuenta bancaria<br>(Banco Mundial, 2021)</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">70%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">conexiones móviles<br>son prepago<br>(GSMA, 2023)</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:#d4a0a0;line-height:1;">5M+</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">clientes de<br>Mercado Crédito hoy</div>
+    </div>
+  </div>
+  <ul class="bullets bullets-white">
+    <li><strong style="color:white;">Datos internos:</strong> historial de 50M compradores activos, carritos abandonados por falta de financiamiento</li>
+    <li><strong style="color:white;">Datos secundarios externos:</strong> bancarización (BM), prepago móvil (GSMA), tasas de interés del crédito formal 70–150% anual</li>
+    <li>Con esos datos, Mercado Libre dimensionó el mercado antes de diseñar una encuesta</li>
+    <li><strong style="color:white;">La secuencia es siempre la misma:</strong> secundarios para enmarcar → primarios para validar</li>
+  </ul>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN — DISEÑO DE INVESTIGACIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 01 · minutos 28–48</div>
+  <div class="sec-title">Diseño de<br>investigación<br>y tipos básicos</div>
+  <div class="sec-sub">El plan antes del plan · Exploratoria · Descriptiva · Causal</div>
+</div>
+</section>
+
+<!-- Definición y 8 componentes -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Concepto vigente</div>
+  <div class="slide-h">Diseño de investigación: el plan que define todo lo que sigue</div>
+  <div class="def-block">
+    <div class="def-term-label">Diseño de investigación — Malhotra</div>
+    <div class="def-text">Marco de referencia o plan de acción para realizar el proyecto. Especifica los <strong>procedimientos</strong> para obtener la información requerida. Es <strong>iterativo</strong> — acepta retroalimentación de fases posteriores.</div>
+  </div>
+  <ul class="bullets" style="margin-top:14px;">
+    <li>El diseño es un <strong>plan</strong> — se construye antes de ejecutar, no durante</li>
+    <li>Incluye <strong>ocho componentes</strong> en orden — el primero <em>siempre</em> es el análisis de datos secundarios</li>
+    <li>Cada componente informa al siguiente: secundarios → cualitativa → cuantitativa → experimental → análisis</li>
+    <li><strong>Lo nuevo desde 2016:</strong> investigación continua (dashboards, CRM, social listening en tiempo real) complementa al diseño formal para decisiones operativas — no lo reemplaza para decisiones estratégicas</li>
+  </ul>
+</div>
+</section>
+
+<!-- Tipos de diseño -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Figura 3.2 · Vigente</div>
+  <div class="slide-h">Tipos básicos — la clasificación que organiza el campo</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Investigación exploratoria</div>
+      <div class="col-body">
+        Objetivo: <strong>facilitar la comprensión</strong><br>
+        Información: vagamente definida<br>
+        Proceso: flexible, no estructurado<br>
+        Muestra: pequeña, no representativa<br>
+        Análisis: cualitativo<br>
+        Resultado: <strong>hipótesis</strong> para la siguiente etapa<br>
+        Métodos: datos secundarios, cualitativa
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="col-box" style="border-top:3px solid var(--blue);">
+        <div class="col-label" style="color:var(--blue);">Concluyente descriptiva</div>
+        <div class="col-body">
+          <strong>Transversal:</strong> una sola medición en un momento dado<br>
+          <strong>Longitudinal:</strong> misma muestra repetida en el tiempo · Paneles<br>
+          Muestra grande, representativa · Análisis cuantitativo
+        </div>
+      </div>
+      <div class="col-box" style="border-top:3px solid var(--accent);">
+        <div class="col-label" style="color:var(--accent);">Concluyente causal</div>
+        <div class="col-body">
+          Establece relaciones de <strong>causa y efecto</strong><br>
+          Requiere diseño experimental con asignación aleatoria<br>
+          La descriptiva muestra correlación — solo la causal afirma causalidad
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Spotify: exploratoria → concluyente -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Spotify — exploratoria → concluyente</div>
+  <div class="slide-h slide-h-white">¿Por qué en LATAM la conversión a premium era tan baja? — Hipótesis: el precio</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:90px;padding-top:2px;">Exploratoria<br>secundarios</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">BM (bancarización), GSMA (70% conexiones prepago), GWI (hábitos digitales) → hipótesis: el problema es la modalidad de pago, no el precio</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:90px;padding-top:2px;">Exploratoria<br>cualitativa</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Focus groups en Brasil, Argentina y Colombia → sin tarjeta de crédito o no quieren usarla para suscripción mensual</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:90px;padding-top:2px;">Concluyente<br>descriptiva</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Encuesta en 5 países: <strong style="color:white;">43%</strong> de no-premium cita falta de método de pago conveniente como barrera principal — no el precio</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(44,95,138,0.2);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:90px;padding-top:2px;">Decisión</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Pagos en efectivo (Oxxo), PagoFácil, tarjetas de regalo físicas — sin modificar el precio. LATAM hoy es la región de mayor crecimiento de suscriptores.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Rappi: A/B testing causal -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Caso · Rappi — Investigación causal y A/B testing</div>
+  <div class="slide-h">¿Por qué el A/B test es causal y no solo descriptivo?</div>
+  <div class="def-block">
+    <div class="def-term-label">Pregunta causal de Rappi</div>
+    <div class="def-text">¿Una reducción en el costo de envío <strong>causa</strong> un aumento en la tasa de conversión? (Puede aumentar volumen pero reducir ticket promedio — el efecto neto no es obvio.)</div>
+  </div>
+  <ul class="bullets" style="margin-top:12px;">
+    <li><strong>Diseño experimental:</strong> usuarios asignados aleatoriamente → grupo tratamiento (envío reducido) vs. control (tarifa normal)</li>
+    <li>Todo lo demás idéntico: menú, tiempos de entrega, interfaz</li>
+    <li>La diferencia en conversión se debe <em>causalmente</em> al envío — la aleatorización garantiza equivalencia entre grupos</li>
+    <li>Una descriptiva podría mostrar que los días de envío gratis las conversiones son más altas — <strong>pero no descarta</strong> que coincidan con fines de semana, campañas, clima</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Qué cambiaría si Rappi mostrara el envío gratuito solo a sus usuarios más activos? ¿Por qué eso rompería la lógica causal del experimento?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN — PRIMARIOS VS SECUNDARIOS
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 02 · minutos 48–68</div>
+  <div class="sec-title">Datos primarios<br>vs. secundarios<br>y criterios SEOANC</div>
+  <div class="sec-sub">La distinción fundamental · Seis criterios para evaluar cualquier fuente</div>
+</div>
+</section>
+
+<!-- Tabla comparativa -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Definiciones vigentes</div>
+  <div class="slide-h">Primarios vs. secundarios — cuándo usar cada uno</div>
+  <table class="ref-table" style="margin-top:4px;">
+    <tr><th>Dimensión</th><th>Datos Primarios</th><th>Datos Secundarios</th></tr>
+    <tr><td>Propósito</td><td>Para el problema en cuestión</td><td>Para otros problemas anteriores</td></tr>
+    <tr><td>Proceso</td><td>Complejo — 6 pasos</td><td>Rápido, relativamente sencillo</td></tr>
+    <tr><td>Costo</td><td>Alto (encuesta: miles de USD)</td><td>Bajo o gratuito</td></tr>
+    <tr><td>Tiempo</td><td>Semanas o meses</td><td>Días u horas</td></tr>
+    <tr><td>Relevancia</td><td>Máxima — diseñada para el problema</td><td>Variable — puede no ajustarse</td></tr>
+    <tr><td>Control de calidad</td><td>Total — el investigador controla</td><td>Limitado — decisiones de terceros</td></tr>
+  </table>
+  <div class="callout">
+    <strong>La frontera se difumina hoy:</strong> Google Analytics es de tus propios usuarios pero con metodología de Google. El CRM registra solo a quienes interactuaron. La pregunta correcta: <strong>¿qué sesgos introduce la metodología de recolección, independientemente de quién generó los datos?</strong>
+  </div>
+</div>
+</section>
+
+<!-- SEOANC: los 6 criterios -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Marco SEOANC · Vigente con riesgos nuevos</div>
+  <div class="slide-h">Seis criterios para no usar datos mal</div>
+  <div class="seoanc-grid">
+    <div class="s-letter">S</div>
+    <div class="s-classic"><strong>Especificaciones</strong> — metodología, muestra, tasa de respuesta. Revisar siempre la fuente original, no resúmenes.</div>
+    <div class="s-digital">Riesgo nuevo: paneles con "professional respondents" que aprenden qué respuestas se esperan</div>
+    <div class="s-letter">E</div>
+    <div class="s-classic"><strong>Error</strong> — exactitud. Comparar múltiples fuentes independientes.</div>
+    <div class="s-digital">Riesgo nuevo: métricas de plataformas no auditadas externamente (Meta reporta sobre sí misma)</div>
+    <div class="s-letter">O</div>
+    <div class="s-classic"><strong>Objetivo</strong> — ¿por qué se recopilaron? El propósito original sesga los resultados.</div>
+    <div class="s-digital">Riesgo nuevo: estudios de empresas tech sobre el valor de sus propias plataformas</div>
+    <div class="s-letter">A</div>
+    <div class="s-classic"><strong>Actualidad</strong> — ¿cuándo se recopilaron? Desfase recolección–publicación.</div>
+    <div class="s-digital">Riesgo nuevo: APIs que cambian metodología sin aviso</div>
+    <div class="s-letter">N</div>
+    <div class="s-classic"><strong>Naturaleza</strong> — variables, unidades, categorías. ¿Compatibles con el problema actual?</div>
+    <div class="s-digital">Riesgo nuevo: "usuario activo" = definición diferente en Netflix, Spotify y Twitter</div>
+    <div class="s-letter">C</div>
+    <div class="s-classic"><strong>Confiabilidad</strong> — reputación, metodología pública, auditoría externa.</div>
+    <div class="s-digital">Riesgo nuevo: estudios generados por IA sin revisión metodológica independiente</div>
+  </div>
+</div>
+</section>
+
+<!-- SEOANC en acción -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">SEOANC aplicado · Caso en clase</div>
+  <div class="slide-h slide-h-white">Un dato real — ¿lo usarían?</div>
+  <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:20px 24px;margin-bottom:16px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Dato encontrado</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:white;line-height:1.2;">"El 78% de los consumidores uruguayos prefieren marcas sustentables"</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:8px;">— Consultora de marketing, informe sin metodología publicada, 2023</div>
+  </div>
+  <ul class="bullets bullets-white">
+    <li><strong style="color:white;">S:</strong> ¿Cuántos encuestados? ¿Cómo los reclutaron? ¿Online, telefónico, presencial?</li>
+    <li><strong style="color:white;">E:</strong> ¿Hay otra fuente que confirme o contradiga este número?</li>
+    <li><strong style="color:white;">O:</strong> ¿Quién encargó el informe? ¿La consultora vende servicios de sostenibilidad?</li>
+    <li><strong style="color:white;">N:</strong> ¿Cómo definieron "prefieren" — declaración de intención o comportamiento de compra real?</li>
+  </ul>
+  <div class="pause-box" style="margin-top:12px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Citarían este dato en un informe de investigación? ¿Con qué advertencias? ¿Cuál es el criterio SEOANC más crítico en este caso específico?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN — FUENTES
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 03 · minutos 68–80</div>
+  <div class="sec-title">Clasificación<br>y fuentes de datos<br>secundarios</div>
+  <div class="sec-sub">Internos: del CRM al Data Lake · Externos: LATAM primero</div>
+</div>
+</section>
+
+<!-- Datos internos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Datos internos · Actualizado</div>
+  <div class="slide-h">Del CRM al Data Lake: la infraestructura de datos internos evolucionó</div>
+  <div class="def-block">
+    <div class="def-term-label">Datos internos — Malhotra</div>
+    <div class="def-text">Generados dentro de la organización. Incluyen bases de datos de clientes, <strong>almacenes de datos</strong> (data warehouse), <strong>minería de datos</strong> y sistemas <strong>CRM/ARC</strong>. Se analizan siempre antes de buscar fuentes externas.</div>
+  </div>
+  <div class="tool-grid" style="margin-top:10px;">
+    <div class="tool-item">
+      <div class="tool-name">CRM</div>
+      <div class="tool-desc">Salesforce, HubSpot, Vtex (LATAM) — gestión de contactos y ventas. Primera capa.</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">CDP</div>
+      <div class="tool-desc">Customer Data Platform — unifica múltiples canales en un perfil único del cliente</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Data Warehouse</div>
+      <div class="tool-desc">BigQuery, Snowflake, Redshift — análisis estructurado a escala</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Data Lake</div>
+      <div class="tool-desc">AWS S3, Azure — datos crudos (structured + unstructured) a escala masiva</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Minería de datos</div>
+      <div class="tool-desc">Modelos ML: churn, propensión de compra, personalización en tiempo real</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Ejemplo LATAM</div>
+      <div class="tool-desc">Grupo Bimbo: 50,000+ rutas diarias en 32 países integradas en Data Warehouse</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Fuentes externas LATAM -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Datos externos — Fuentes LATAM imprescindibles</div>
+  <div class="slide-h">Las fuentes que van a usar en el proyecto del curso</div>
+  <div class="two-col">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">🌎 Institutos nacionales de estadística</div>
+      <table class="ref-table" style="margin-top:0;">
+        <tr><th>País</th><th>Instituto</th></tr>
+        <tr><td>Uruguay</td><td><strong>INE</strong> — ine.gub.uy · ECH anual, microdatos libres</td></tr>
+        <tr><td>Argentina</td><td><strong>INDEC</strong> — indec.gob.ar</td></tr>
+        <tr><td>Brasil</td><td><strong>IBGE</strong> — ibge.gov.br</td></tr>
+        <tr><td>México</td><td><strong>INEGI</strong> — inegi.org.mx</td></tr>
+        <tr><td>Colombia</td><td><strong>DANE</strong> — dane.gov.co</td></tr>
+        <tr><td>Chile</td><td><strong>INE</strong> — ine.cl</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:2px;margin-bottom:10px;">Fuentes regionales e internacionales</div>
+      <ul class="bullets">
+        <li><strong>CEPAL</strong> — Panorama Social, 33 países, gratuito</li>
+        <li><strong>Banco Mundial</strong> — data.worldbank.org, 1,400+ indicadores</li>
+        <li><strong>Latinobarómetro</strong> — valores y opinión pública, 18 países</li>
+        <li><strong>LAPOP</strong> — Barómetro de las Américas, 30+ países</li>
+        <li><strong>Euromonitor Passport</strong> — industria y consumidor por país</li>
+        <li><strong>GWI</strong> — datos digitales y comportamiento, 50 países</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Su cliente quiere evaluar si hay mercado para una línea de ropa premium en Uruguay. ¿Cuáles son las tres primeras fuentes secundarias que consultarían y por qué?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN — DATOS SINDICADOS
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 04 · minutos 80–105</div>
+  <div class="sec-title">Datos sindicados:<br>naturaleza,<br>clasificación y tipos</div>
+  <div class="sec-sub">Encuestas · Paneles de compras · Medios · Escaneo electrónico</div>
+</div>
+</section>
+
+<!-- Definición y lógica sindicada -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Concepto vigente</div>
+  <div class="slide-h">¿Qué son los datos sindicados?</div>
+  <div class="def-block">
+    <div class="def-term-label">Fuentes sindicadas — Malhotra</div>
+    <div class="def-text">Compañías que recaban y venden datos para <strong>varios clientes simultáneamente</strong>, incluyendo competidores directos. El objetivo que guía la recopilación es común. Se adquieren por suscripción. El costo individual es bajo porque se distribuye entre muchos clientes.</div>
+  </div>
+  <ul class="bullets" style="margin-top:14px;">
+    <li><strong>Lógica económica:</strong> Nielsen mide el mercado del café. Nestlé, JDE y Lavazza pagan la misma suscripción — incluso siendo competidores directos</li>
+    <li>Cuando escuchan "según Nielsen, la participación de X cayó al Y%" — esos son datos sindicados</li>
+    <li><strong>Consolidación desde 2016:</strong> NielsenIQ + GfK (2023) · IRI + NPD = Circana (2022) · Kantar: proveedor dominante de panel de hogares en LATAM</li>
+    <li>Se clasifican en: <strong>hogares/consumidores</strong> (encuestas, paneles de compras y medios, escaneo) e <strong>instituciones</strong> (auditorías de retail y mayoristas, servicios industriales)</li>
+  </ul>
+</div>
+</section>
+
+<!-- Encuestas sindicadas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 · Tipos de encuestas sindicadas</div>
+  <div class="slide-h">Tres tipos — y los proveedores con cobertura LATAM</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+    <div style="padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Encuestas periódicas</div>
+      <div style="font-size:13px;color:#333;">Mismas variables, intervalos regulares, nueva muestra cada vez. Permiten estudiar tendencias sin mantener un panel estable.</div>
+    </div>
+    <div style="padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Paneles ómnibus</div>
+      <div style="font-size:13px;color:#333;">Grupo estable de panelistas; distintos clientes insertan preguntas en distintos momentos. No miden las mismas variables repetidamente — diferencia clave con paneles longitudinales.</div>
+    </div>
+    <div style="padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Psicográficas y AIO</div>
+      <div style="font-size:13px;color:#333;">Miden Actividades, Intereses y Opiniones para segmentar por valores. VALS es el referente global.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Proveedores con cobertura LATAM</div>
+    <div class="latam-text"><strong>GWI</strong> — 700K+ panelistas, 50 países, trimestral · <strong>Kantar/TNS Omnibus</strong> — AR, BR, CL, CO, MX, mensual · <strong>Offerwise</strong> — 18 países LATAM · <strong>Latinobarómetro</strong> — 18 países, gratuito · <strong>LAPOP</strong> — 30+ países, base de datos abierta</div>
+  </div>
+</div>
+</section>
+
+<!-- Paneles de compras -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Malhotra 2016 · Paneles de compras — Kantar Worldpanel LATAM</div>
+  <div class="slide-h slide-h-white">Penetración de hogar: lo que los datos de ventas no muestran</div>
+  <div class="def-block" style="margin-bottom:14px;">
+    <div class="def-term-label">Paneles de compras — Malhotra</div>
+    <div class="def-text">Participantes registran sus compras <strong>en el momento en que ocurren</strong> — elimina el sesgo de memoria. Vincula compras con características del consumidor. Permite estudiar lealtad, cambio de marca, elasticidad de precio.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="padding:14px;background:rgba(255,255,255,0.06);border-radius:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Brand Footprint LATAM 2023 · Kantar</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">① Coca-Cola · ② Palmolive · ③ Colgate<br><br><strong style="color:white;">Uruguay:</strong> CONAPROLE tiene mayor penetración en el hogar en la categoría láctea, por encima de marcas multinacionales.</div>
+    </div>
+    <div style="padding:14px;background:rgba(255,255,255,0.06);border-radius:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Penetración de hogar — la clave estratégica</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">% de hogares que compraron la marca al menos una vez en el año.<br><br>Define si la estrategia de crecimiento debe ser de <strong style="color:white;">penetración</strong> (nuevos compradores) o de <strong style="color:white;">intensificación</strong> (frecuencia/ticket).</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:12px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Una marca de helados tiene 70% de penetración en hogares uruguayos pero el volumen de ventas no crece. ¿Qué estrategia de crecimiento indican esos datos?</div>
+  </div>
+</div>
+</section>
+
+<!-- Paneles de medios + Escaneo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 · Medios y escaneo electrónico — Actualizado</div>
+  <div class="slide-h">Del UPC al omnicanal: escaneo electrónico en LATAM</div>
+  <div class="def-block">
+    <div class="def-term-label">Tipos de datos de escaneo — Malhotra</div>
+    <div class="def-text">
+      <strong>Seguimiento de volumen:</strong> ventas por marca/precio a nivel tienda · no vincula al comprador individual<br>
+      <strong>Paneles de escaneo:</strong> compra vinculada al comprador por tarjeta ID · datos longitudinales a nivel individual<br>
+      <strong>Paneles + TV por cable:</strong> exposición controlada a anuncios distintos por hogar · experimentos cuasi-naturales de eficacia publicitaria
+    </div>
+  </div>
+  <ul class="bullets" style="margin-top:12px;">
+    <li><strong>NielsenIQ Discover (LATAM, 2023):</strong> integra cajas registradoras + auditorías en tienda + e-commerce (Mercado Libre, Amazon, Falabella) + programas de fidelidad</li>
+    <li>Seguimiento semanal de participación de mercado por formato de tienda y región — imposible con auditorías físicas de 2016</li>
+    <li><strong>Evolución en LATAM:</strong> tarjeta Tienda Inglesa (Uruguay), CMR Falabella, Disco — generan los mismos datos que paneles de escaneo con mayor cobertura</li>
+    <li><strong>Limitación vigente:</strong> no captura canales informales — crítico en países con alta economía informal</li>
+  </ul>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SECCIÓN — SOCIAL MEDIA Y ÉTICA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 05 · minutos 105–118</div>
+  <div class="sec-title">Social media,<br>contexto LATAM<br>y ética</div>
+  <div class="sec-sub">Herramienta de exploración, no de medición · Tres compromisos concretos</div>
+</div>
+</section>
+
+<!-- Social media: límites -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 · Social media como fuente secundaria — ampliado</div>
+  <div class="slide-h">Fuente de hipótesis, no de prevalencias</div>
+  <ul class="bullets">
+    <li><strong>Usos válidos:</strong> exploración de temas emergentes, análisis de percepción de marca, detección de tendencias antes de diseñar encuestas</li>
+    <li><strong>Advertencia metodológica crítica:</strong> los datos de social media <em>no</em> son una muestra representativa — son de quienes eligieron expresarse públicamente</li>
+    <li><strong>Sesgo por plataforma:</strong> Twitter/X → urbanos con opiniones fuertes · Instagram → mujeres jóvenes · TikTok → menores de 25 · Google Maps → experiencias extremas</li>
+    <li>En LATAM: penetración de internet varía del 91% (Uruguay) al 45% (Nicaragua) — los datos digitales sobre-representan a la población conectada</li>
+  </ul>
+  <div class="tool-grid">
+    <div class="tool-item">
+      <div class="tool-name">Brandwatch / Sprinklr</div>
+      <div class="tool-desc">Social listening a escala — monitoreo de menciones y sentimiento en redes, foros y noticias</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Google Trends</div>
+      <div class="tool-desc">Interés de búsqueda en el tiempo por región y categoría — completamente gratuito</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">SimilarWeb</div>
+      <div class="tool-desc">Benchmarking de tráfico digital — estimaciones de visitas de cualquier sitio</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Pilsen Uruguay -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">🌎 Caso Uruguay · Pilsen — social media en exploración</div>
+  <div class="slide-h slide-h-white">El rol correcto de los datos digitales en el proceso de investigación</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:80px;padding-top:2px;">Fuentes<br>analizadas</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Menciones en Twitter/X e Instagram (social listening) · Google Trends "cerveza uruguaya" vs. "cerveza artesanal" 2019–2022 · Reseñas Google Maps de bares y almacenes</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:80px;padding-top:2px;">Hallazgo</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">El atributo "precio accesible" desplazó a "identidad uruguaya" como razón de mención principal</div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:rgba(45,122,58,0.2);border-left:4px solid var(--green);border-radius:0 6px 6px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;min-width:80px;padding-top:2px;">Rol correcto</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Los datos digitales no podían decir si esto era representativo de todos los consumidores — pero sí orientaron el diseño de la encuesta que lo validaría. <strong style="color:white;">Fuente de hipótesis, no de conclusiones.</strong></div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:12px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Qué criterios SEOANC aplicarían para evaluar las reseñas de Google Maps de una cadena de restaurantes? ¿Cuál es el sesgo más importante?</div>
+  </div>
+</div>
+</section>
+
+<!-- Desafíos LATAM -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Contexto latinoamericano — Lo que los datos no capturan bien</div>
+  <div class="slide-h">Cuatro características de LATAM que el investigador debe conocer</div>
+  <table class="ref-table" style="margin-top:4px;">
+    <tr><th>Característica</th><th>Implicación para los datos secundarios</th></tr>
+    <tr>
+      <td><strong>Economía informal</strong><br><span style="font-size:11px;color:var(--muted);">45–70% fuerza laboral · OIT, 2023</span></td>
+      <td>Censos y registros tributarios subestiman el mercado real. Crítico en consumo masivo y servicios.</td>
+    </tr>
+    <tr>
+      <td><strong>Heterogeneidad intra-regional</strong><br><span style="font-size:11px;color:var(--muted);">PIB per cápita Chile 4x Bolivia</span></td>
+      <td>Los datos "de la región" promedian realidades incomparables. Siempre desagregar por país.</td>
+    </tr>
+    <tr>
+      <td><strong>Brecha digital</strong><br><span style="font-size:11px;color:var(--muted);">91% Uruguay → 45% Nicaragua · ITU 2023</span></td>
+      <td>Datos digitales sobre-representan a la población urbana y conectada.</td>
+    </tr>
+    <tr>
+      <td><strong>Marcos legales de privacidad</strong><br><span style="font-size:11px;color:var(--muted);">LGPD · LFPDPPP · Ley 25.326 · Ley 18.331</span></td>
+      <td>Uruguay: único país LATAM con adecuación UE (estándares equivalentes al GDPR).</td>
+    </tr>
+  </table>
+</div>
+</section>
+
+<!-- Ética -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética · Malhotra 2016 + tres temas nuevos</div>
+  <div class="slide-h">Tres compromisos éticos concretos</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:4px;">
+    <div style="padding:11px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:#333;">
+      <strong>① Reportar limitaciones honestamente</strong> — si el dato tiene restricciones metodológicas, eso va en el informe aunque el cliente prefiera una conclusión más limpia. <span style="color:var(--muted);">(Malhotra — vigente)</span>
+    </div>
+    <div style="padding:11px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:#333;">
+      <strong>② Respetar los términos de uso de datos sindicados</strong> — los contratos prohíben compartir datos brutos con terceros no suscriptores. Consecuencias legales reales. <span style="color:var(--muted);">(Malhotra — vigente)</span>
+    </div>
+    <div style="padding:11px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:#333;">
+      <strong>③ Sesgos algorítmicos</strong> — las herramientas de IA tienen sesgos propios. Un modelo entrenado en inglés analiza mal el sarcasmo en español rioplatense. El investigador es responsable de los sesgos de sus herramientas. <span style="color:var(--muted);">(Nuevo desde 2016)</span>
+    </div>
+    <div style="padding:11px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 6px 6px 0;font-size:13px;color:#333;">
+      <strong>④ Scraping de redes sociales</strong> — técnicamente posible, éticamente complejo. La mayoría de plataformas lo prohíben. LGPD/LFPDPPP/Ley 25.326/Ley 18.331 requieren base legal para procesar datos identificables. <span style="color:var(--muted);">(Nuevo desde 2016)</span>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Su empresa suscribe a Kantar Worldpanel. Un colega de otra empresa pide los datos de penetración de Uruguay porque no pueden pagar la suscripción. ¿Qué hacen?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Cierre · minutos 118–120</div>
+  <div class="sec-title" style="font-size:2.0rem;margin-bottom:24px;color:var(--paper);">La secuencia que<br>resume el capítulo</div>
+  <ul class="bullets bullets-white" style="max-width:640px;margin-bottom:24px;">
+    <li><strong style="color:white;">① Definir el tipo de diseño</strong> — ¿exploratoria, descriptiva o causal? Determina todo lo que sigue</li>
+    <li><strong style="color:white;">② Datos secundarios internos primero</strong> — lo que la organización ya sabe sobre el problema</li>
+    <li><strong style="color:white;">③ Datos secundarios externos</strong> — gubernamentales, comerciales, sindicados, digitales</li>
+    <li><strong style="color:white;">④ Evaluar cada fuente con SEOANC</strong> — antes de usarla, no después</li>
+    <li><strong style="color:white;">⑤ Solo si los secundarios no alcanzan</strong> — diseñar la recolección de datos primarios</li>
+  </ul>
+  <div class="cover-chip">Próxima clase: Capítulo 4 — Investigación cualitativa</div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
