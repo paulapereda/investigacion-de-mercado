@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  .concept-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--ink); border-radius: 8px; padding: 22px 26px; margin-bottom: 28px; }
+  .concept-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--ink); text-transform: uppercase; margin-bottom: 10px; opacity: 0.6; }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+  .concept-box ul { padding-left: 1.3em; margin-top: 8px; }
+  .concept-box ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .def-term { display: inline-block; background: var(--ink); color: white; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+  .old-box { background: #f5f0eb; border: 1px solid var(--border); border-left: 4px solid #b0a898; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .old-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #9a9088; text-transform: uppercase; margin-bottom: 8px; }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+  .update-card ul { padding-left: 1.3em; margin-bottom: 14px; }
+  .update-card ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+  .latam-box ul { padding-left: 1.3em; }
+  .latam-box ul li { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 4px; }
+
+  .tool-box { background: var(--tool-bg); border: 1px solid var(--tool-border); border-left: 4px solid var(--tool-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--tool-border); text-transform: uppercase; margin-bottom: 10px; }
+  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .compare-table th { background: var(--ink); color: var(--paper); padding: 10px 16px; text-align: left; font-weight: 500; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+  .compare-table tr:hover td { background: #f0ece4; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .footer-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); transition: all 0.2s; text-decoration: none; }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 3</div>
+    <h1>Diseño de la investigación,<br><em>datos secundarios<br>y sindicados</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <div class="nav-section-label">Diseño</div>
+    <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+    <a class="nav-item" onclick="showSection('diseno')">Diseño de investigación</a>
+    <a class="nav-item" onclick="showSection('tipos')">Tipos de diseño</a>
+    <div class="nav-section-label">Datos Secundarios</div>
+    <a class="nav-item" onclick="showSection('primarios-secundarios')">Primarios vs. secundarios</a>
+    <a class="nav-item" onclick="showSection('criterios')">Criterios de evaluación</a>
+    <a class="nav-item" onclick="showSection('clasificacion')">Clasificación de fuentes</a>
+    <div class="nav-section-label">Datos Sindicados</div>
+    <a class="nav-item" onclick="showSection('sindicados')">Naturaleza y clasificación</a>
+    <a class="nav-item" onclick="showSection('encuestas-sindicadas')">Encuestas sindicadas</a>
+    <a class="nav-item" onclick="showSection('paneles')">Paneles</a>
+    <a class="nav-item" onclick="showSection('escaneo')">Escaneo electrónico</a>
+    <a class="nav-item" onclick="showSection('auditorias')">Auditorías e institucionales</a>
+    <div class="nav-section-label">Contexto y Ética</div>
+    <a class="nav-item" onclick="showSection('social-media')">Social media y datos digitales</a>
+    <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética actualizada</a>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- DIAPOSITIVAS -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe src="capitulo_3_slides.html" style="width:100%; height:100%; border:none; display:block;" allowfullscreen title="Diapositivas Capítulo 3"></iframe>
+      </div>
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('apertura')">Siguiente: Caso de apertura →</button>
+      </div>
+    </div>
+
+    <!-- APERTURA -->
+    <div id="apertura" class="section">
+      <div class="section-header">
+        <div class="section-number">Apertura</div>
+        <h2>Caso de apertura: los datos secundarios en acción</h2>
+        <p class="section-intro">El capítulo abre con Starbucks VIA (2009). El caso ilustra perfectamente cómo los datos secundarios guían el diseño de investigación antes de recurrir a datos primarios. Se complementa con un caso latinoamericano más reciente que sigue la misma lógica.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Caso de apertura — Malhotra 2016 (vigente en su lógica)</div>
+        <p>En 2009, Starbucks lanzó su café instantáneo VIA. Antes de entrar a un mercado completamente nuevo, realizó una extensa investigación de datos secundarios —internos, externos y sindicados— que reveló:</p>
+        <ul>
+          <li>Starbucks perdía participación ante McDonald's (McCafé) y Dunkin' Donuts en varios mercados.</li>
+          <li>El mercado global del café instantáneo valía $17.000 millones, dominado por Nescafé y Sanka, pero con espacio para un entrante premium.</li>
+          <li>El café instantáneo representaba el 81% de las ventas de café en Reino Unido y el 63% en Japón.</li>
+          <li>Los consumidores querían un café de alta calidad a menor costo.</li>
+        </ul>
+        <p><strong>La lección metodológica:</strong> ninguno de estos hallazgos requirió encuestas propias. Todos provenían de datos secundarios evaluados críticamente. Solo después de esta fase se diseñaron los estudios primarios de validación. El resultado: $100 millones en ventas globales en los primeros 10 meses.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Dato desactualizado — Malhotra 2016</div>
+        <p>El libro menciona que el mercado global del café instantáneo valía $17.000 millones en 2009. Hoy ese mercado superó los $35.000 millones (Euromonitor, 2024) — más del doble. Además, Sanka era de Kraft Foods; tras la escisión de Kraft Heinz en 2015, Sanka quedó bajo Kraft Heinz, no Kraft Foods Inc. como indica el libro.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Mercado Libre y la expansión a servicios financieros</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Mercado Libre siguió la misma secuencia metodológica de Starbucks VIA: antes de lanzar Mercado Pago como servicio de crédito al consumo, analizó datos secundarios para responder una pregunta estratégica: ¿existe un mercado desatendido suficientemente grande?</p>
+
+        <div class="case-highlight">
+          <div class="case-label">💳 Caso en clase — Datos secundarios como base del diseño</div>
+          <h4>Mercado Libre: del e-commerce a los servicios financieros</h4>
+          <p><strong style="color:#d4a0a0;">Pregunta de decisión administrativa:</strong> ¿debería Mercado Libre entrar al negocio de crédito al consumo en América Latina?</p>
+          <p><strong style="color:#d4a0a0;">Datos secundarios internos:</strong> historial de transacciones de 50+ millones de compradores activos; tasas de abandono de carrito por falta de financiamiento; segmentación por ticket promedio y frecuencia.</p>
+          <p><strong style="color:#d4a0a0;">Datos secundarios externos:</strong> Banco Mundial (2021) — el 55% de los adultos en América Latina no tenía cuenta bancaria formal; GSMA — penetración de smartphones superaba el 70%; datos de bancos centrales sobre tasas de interés del crédito formal (70–150% anual en varios países).</p>
+          <p><strong style="color:#d4a0a0;">Datos sindicados:</strong> Euromonitor y Americas Market Intelligence sobre el tamaño del mercado de crédito informal y el crecimiento del segmento "bancarizado digital" en la región.</p>
+          <p><strong style="color:#d4a0a0;">Conclusión:</strong> existía un segmento masivo con historial transaccional verificable pero sin acceso a crédito formal. Los datos secundarios definieron el problema con suficiente precisión para diseñar la investigación primaria de validación. Hoy Mercado Crédito tiene más de 5 millones de clientes en LATAM.</p>
+          <p><em>Pregunta para clase: ¿Qué criterios de evaluación de datos secundarios (SEOANC) aplicaría Mercado Libre a cada una de estas fuentes? ¿Cuál presenta mayor riesgo de sesgo?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Mercado Libre Inc. (2024).</strong> <em>Annual Report 2023.</em> investor.mercadolibre.com — Fuente primaria con datos de usuarios activos, volumen de créditos y cobertura geográfica.</div>
+          <div class="ref-item"><strong>Banco Mundial (2021).</strong> <em>Global Findex Database 2021: Financial Inclusion, Digital Payments, and Resilience in the Age of COVID-19.</em> worldbank.org/en/publication/globalfindex — La fuente de referencia sobre bancarización en LATAM.</div>
+          <div class="ref-item"><strong>GSMA Intelligence (2023).</strong> <em>The Mobile Economy: Latin America 2023.</em> gsma.com — Datos de penetración de smartphones y conectividad por país de la región.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('diseno')">Siguiente: Diseño de investigación →</button>
+      </div>
+    </div>
+
+    <!-- DISEÑO -->
+    <div id="diseno" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>Definición y componentes del diseño de investigación</h2>
+        <p class="section-intro">El marco conceptual del diseño de investigación de Malhotra sigue siendo la estructura más clara para organizar el proceso. Lo que cambió es la disponibilidad, velocidad y diversidad de datos secundarios disponibles en la etapa inicial.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Definición — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Diseño de investigación</span> Marco de referencia o plan de acción para realizar el proyecto de investigación de mercados. Especifica los procedimientos para obtener la información requerida para estructurar y/o resolver los problemas de investigación.</p>
+        <p>El diseño se basa en los pasos 1 (definición del problema) y 2 (desarrollo del enfoque). Es <strong>iterativo</strong>: acepta retroalimentación de fases posteriores hacia los pasos previos. Un buen diseño garantiza que la información reunida sea relevante y útil para la gerencia. Comúnmente incluye ocho componentes:</p>
+        <ul>
+          <li>Análisis de datos secundarios y sindicados (primer componente — siempre)</li>
+          <li>Investigación cualitativa</li>
+          <li>Investigación basada en encuestas y observaciones</li>
+          <li>Investigación experimental</li>
+          <li>Procedimientos de medición y escalamiento</li>
+          <li>Diseño del cuestionario o formulario de observación</li>
+          <li>Proceso de muestreo y determinación del tamaño de la muestra</li>
+          <li>Plan preliminar para el análisis de los datos</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Principio clave:</strong> El análisis de datos secundarios siempre es el primer componente del diseño. Es el paso más barato y rápido, y frecuentemente subestimado. Ningún diseño debería avanzar a etapas más costosas sin agotar primero las fuentes secundarias disponibles.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo que cambió: el diseño de investigación en la era de los datos continuos</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>En 2016, los ocho componentes del diseño se ejecutaban de forma relativamente secuencial, con semanas o meses entre cada etapa. Hoy, muchas empresas operan en un modelo de <strong>investigación continua</strong> donde los datos secundarios (analítica digital, CRM, social listening) se actualizan en tiempo real y alimentan decisiones sin esperar un diseño formal completo.</p>
+        <p>Esto no reemplaza el diseño estructurado: sigue siendo necesario para preguntas estratégicas y decisiones de alta inversión. Pero para decisiones operativas (ajustar un precio, modificar una campaña), los datos continuos permiten ciclos mucho más cortos. El diseño del investigador debe anticipar qué preguntas requieren cada tipo de proceso.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Davenport, T. & Spanyi, A. (2019).</strong> "Making the most of your company's data." <em>MIT Sloan Management Review</em>, 60(3). — Argumenta que las empresas que integran datos operativos con investigación formal toman mejores decisiones que las que separan ambos procesos.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('apertura')">← Caso de apertura</button>
+        <button class="nav-btn primary" onclick="showSection('tipos')">Siguiente: Tipos de diseño →</button>
+      </div>
+    </div>
+
+    <!-- TIPOS DE DISEÑO -->
+    <div id="tipos" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Tipos básicos de diseño de investigación</h2>
+        <p class="section-intro">La clasificación exploratoria / concluyente (descriptiva y causal) es una de las contribuciones más duraderas de la metodología. Sigue siendo el marco organizador por excelencia del campo. Los casos se actualizan completamente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Clasificación — Malhotra 2016 (vigente)</div>
+        <p>Hay dos tipos de diseño: <strong>exploratorio</strong> y <strong>concluyente</strong>. Los concluyentes se subdividen en <strong>descriptivos</strong> (transversales y longitudinales) y <strong>causales</strong>.</p>
+        <p><span class="def-term">Investigación exploratoria</span> Objetivo: brindar información y facilitar la comprensión del problema. Información definida vagamente. Proceso flexible y no estructurado. Muestra pequeña y poco representativa. Análisis cualitativo. Hallazgos tentativos. Métodos principales: datos secundarios e investigación cualitativa.</p>
+        <p><span class="def-term">Investigación concluyente descriptiva</span> Describe características o funciones de grupos relevantes. Es el diseño más usado en investigación de mercados. Se clasifica en <strong>transversal</strong> (una sola medición sobre una muestra) y <strong>longitudinal</strong> (misma muestra medida repetidamente en el tiempo mediante paneles).</p>
+        <p><span class="def-term">Investigación concluyente causal</span> Obtiene evidencia de relaciones de causa y efecto. Requiere diseño planeado y estructurado. Su método principal es la experimentación. La descriptiva puede mostrar asociación entre variables (X e Y varían juntas); solo la causal puede afirmar que X es causa de Y.</p>
+        <p><strong>Recomendación metodológica:</strong> la mayoría de los proyectos inician con exploratoria y continúan con concluyente. La exploratoria evita diseñar preguntas equivocadas en la fase concluyente.</p>
+      </div>
+
+      <table class="compare-table">
+        <tr><th>Dimensión</th><th>Exploratoria</th><th>Concluyente</th></tr>
+        <tr><td>Objetivo</td><td>Facilitar la comprensión del problema</td><td>Someter a prueba hipótesis, examinar relaciones</td></tr>
+        <tr><td>Información</td><td>Definida vagamente</td><td>Definida con claridad</td></tr>
+        <tr><td>Proceso</td><td>Flexible, no estructurado</td><td>Formal y estructurado</td></tr>
+        <tr><td>Muestra</td><td>Pequeña, no representativa</td><td>Grande, representativa</td></tr>
+        <tr><td>Análisis</td><td>Cualitativo</td><td>Cuantitativo</td></tr>
+        <tr><td>Hallazgos</td><td>Tentativos</td><td>Concluyentes</td></tr>
+        <tr><td>Resultado</td><td>Seguida de más investigación</td><td>Usada directamente en decisiones</td></tr>
+      </table>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto — Exploratoria: Spotify y el modelo freemium en LATAM</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El libro ilustra la secuencia exploratoria → concluyente con P&G y compradores latinos en EE.UU. (datos de 2010–2012). Un caso más reciente con mayor relevancia para estudiantes de la región:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🎵 Caso en clase — Investigación exploratoria → concluyente</div>
+          <h4>Spotify: ¿por qué los usuarios de LATAM no convertían a premium?</h4>
+          <p><strong style="color:#d4a0a0;">Fase exploratoria (datos secundarios):</strong> Banco Mundial sobre ingreso per cápita y gasto en entretenimiento; GSMA sobre prepago vs. postpago móvil en la región (el 70% de conexiones en LATAM son prepago, lo que complica el pago recurrente mensual); encuestas sindicadas de GWI sobre hábitos de consumo digital.</p>
+          <p><strong style="color:#d4a0a0;">Fase exploratoria (cualitativa):</strong> focus groups en Brasil, Argentina y Colombia revelaron que el problema no era el precio en sí, sino la <em>modalidad de pago</em> — muchos usuarios no tenían tarjeta de crédito o no querían usarla para suscripciones.</p>
+          <p><strong style="color:#d4a0a0;">Fase concluyente (descriptiva):</strong> encuestas representativas en cinco países confirmaron que el 43% de los no-premium en LATAM citaba la ausencia de método de pago conveniente como barrera principal, no el precio.</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> Spotify lanzó pagos en efectivo a través de Oxxo (México), redes de cobro como PagoFácil (Argentina) y tarjetas de regalo físicas — sin modificar el precio. Hoy LATAM es la región con mayor crecimiento de suscriptores de Spotify.</p>
+          <p><em>Pregunta para clase: ¿En qué punto del proceso el equipo de Spotify pasó de investigación exploratoria a concluyente? ¿Qué criterio usarías para identificar ese momento metodológicamente?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Spotify AB (2024).</strong> <em>Shareholder Letter Q4 2023.</em> investors.spotify.com — Datos de usuarios activos mensuales y suscriptores premium por región, incluyendo LATAM.</div>
+          <div class="ref-item"><strong>GWI (2023).</strong> <em>Music Streaming Report.</em> gwi.com — Panel global de consumo de medios con desglose por región. Fuente sindicada de referencia para el sector.</div>
+          <div class="ref-item"><strong>GSMA Intelligence (2023).</strong> <em>The Mobile Economy: Latin America 2023.</em> gsma.com — Datos de prepago vs. postpago por país de la región.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto — Causal: A/B testing en Rappi</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Investigación causal</div>
+          <h4>Rappi: ¿el costo de delivery causa un cambio en la tasa de conversión?</h4>
+          <p><strong style="color:#d4a0a0;">Pregunta causal:</strong> ¿una reducción en el costo de envío aumenta la tasa de conversión de pedidos? No es obvio: puede aumentar el volumen pero reducir el ticket promedio e impactar negativamente la rentabilidad.</p>
+          <p><strong style="color:#d4a0a0;">Diseño causal (A/B test):</strong> Rappi segmenta aleatoriamente usuarios activos en grupos de control y tratamiento. El grupo de tratamiento ve la oferta de envío reducido; el control, la tarifa normal. Todas las demás variables (menú, tiempo de entrega, interfaz) se mantienen constantes. La aleatorización garantiza que cualquier diferencia en conversión se debe <em>causalmente</em> a la variable de envío.</p>
+          <p><strong style="color:#d4a0a0;">Límite metodológico:</strong> el A/B testing digital solo puede probar causalidad en variables manipulables en la plataforma. No puede probar causalidad en decisiones de largo plazo (lealtad de marca) ni en contextos fuera de la app.</p>
+          <p><em>Pregunta para clase: ¿Por qué el A/B test de Rappi es investigación causal y no meramente descriptiva? ¿Qué ocurriría si los grupos no se asignaran aleatoriamente?</em></p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kohavi, R., Tang, D., & Xu, Y. (2020).</strong> <em>Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing.</em> Cambridge University Press. — El manual de referencia de la industria para diseño experimental digital.</div>
+          <div class="ref-item"><strong>Gupta, S. et al. (2019).</strong> "Top challenges from the first practical online controlled experiments summit." <em>ACM SIGKDD Explorations Newsletter</em>, 21(1), 20–35. — Resume problemas metodológicos que enfrentan Google, Microsoft y Netflix en A/B testing a escala.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('diseno')">← Diseño de investigación</button>
+        <button class="nav-btn primary" onclick="showSection('primarios-secundarios')">Siguiente: Primarios vs. secundarios →</button>
+      </div>
+    </div>
+
+    <!-- PRIMARIOS VS SECUNDARIOS -->
+    <div id="primarios-secundarios" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>Datos primarios vs. datos secundarios</h2>
+        <p class="section-intro">La distinción fundamental entre primarios y secundarios sigue siendo el eje organizador de la metodología. Las definiciones son vigentes; lo que cambió es la abundancia y diversidad de fuentes secundarias disponibles.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Definiciones y regla de oro — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Datos primarios</span> Datos originados por el investigador con el propósito específico de abordar el problema de investigación. Implican los seis pasos completos del proceso de investigación. Son costosos y llevan tiempo.</p>
+        <p><span class="def-term">Datos secundarios</span> Datos reunidos con anterioridad para propósitos diferentes al problema en cuestión. Se pueden localizar con rapidez y a bajo costo.</p>
+        <p><strong>Regla de oro:</strong> "Primero se deben examinar los datos secundarios. El proyecto buscará datos primarios solamente cuando se agoten las fuentes secundarias o cuando produzcan resultados marginales."</p>
+      </div>
+
+      <table class="compare-table">
+        <tr><th>Dimensión</th><th>Datos Primarios</th><th>Datos Secundarios</th></tr>
+        <tr><td>Propósito de recopilación</td><td>Para el problema en cuestión</td><td>Para otros problemas anteriores</td></tr>
+        <tr><td>Proceso de recopilación</td><td>Muy complejo (6 pasos)</td><td>Rápido y relativamente sencillo</td></tr>
+        <tr><td>Costo</td><td>Alto</td><td>Relativamente bajo o gratuito</td></tr>
+        <tr><td>Tiempo</td><td>Semanas o meses</td><td>Días u horas</td></tr>
+        <tr><td>Relevancia al problema</td><td>Máxima (diseñada para él)</td><td>Variable (puede no ajustarse)</td></tr>
+        <tr><td>Control de calidad</td><td>Total (investigador controla)</td><td>Limitado (decisiones de terceros)</td></tr>
+      </table>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Lo que cambió: la frontera entre primarios y secundarios se difumina</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>En 2016, la distinción era clara: una encuesta propia era primaria; un informe de Euromonitor era secundaria. Hoy existen categorías intermedias que complican la clasificación:</p>
+        <ul>
+          <li><strong>Datos de plataforma:</strong> Google Analytics, Meta Insights o Shopify generan datos de nuestros propios usuarios, pero con metodología que no controlamos totalmente. ¿Son primarios o secundarios?</li>
+          <li><strong>Datos de CRM:</strong> técnicamente internos y generados por la empresa, pero con sesgo de autoselección (registran solo a quienes interactuaron, no al mercado total).</li>
+          <li><strong>Datos sintéticos:</strong> generados por modelos de IA entrenados en datos reales. Crecen en uso para proteger privacidad, pero con sesgos no siempre visibles.</li>
+        </ul>
+        <p>La pregunta relevante no es solo ¿primario o secundario?, sino <strong>¿qué sesgos introduce la metodología de recolección, independientemente de quién generó los datos?</strong></p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Mela, C.F., & Moorman, C. (2018).</strong> "Why big data isn't enough." <em>MIT Sloan Management Review</em>, 59(3). — Argumenta que los datos generados por plataformas digitales no reemplazan la investigación primaria diseñada para responder preguntas causales.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('tipos')">← Tipos de diseño</button>
+        <button class="nav-btn primary" onclick="showSection('criterios')">Siguiente: Criterios de evaluación →</button>
+      </div>
+    </div>
+
+    <!-- CRITERIOS -->
+    <div id="criterios" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Criterios para evaluar datos secundarios</h2>
+        <p class="section-intro">El marco SEOANC de Malhotra es metodológicamente sólido y sigue siendo la referencia estándar. Lo que cambió son los riesgos específicos que cada criterio enfrenta en el entorno digital.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Criterios de evaluación — Malhotra 2016 (vigente)</div>
+        <p>Antes de usar cualquier fuente secundaria, el investigador debe evaluarla en seis dimensiones:</p>
+        <ul>
+          <li><strong>Especificaciones:</strong> metodología de recolección — tamaño y naturaleza de la muestra, tasa de respuesta, diseño del cuestionario, trabajo de campo y análisis. Revisar siempre la fuente original, no resúmenes de terceros.</li>
+          <li><strong>Error:</strong> exactitud de los datos. Localizar múltiples fuentes independientes y compararlas. Si coinciden, la confianza aumenta; si difieren, se requiere verificación adicional.</li>
+          <li><strong>Actualidad:</strong> ¿cuándo se recopilaron? Los censos y estudios tienen desfases entre recolección y publicación. En mercados dinámicos, datos de hace 2 años pueden ser obsoletos.</li>
+          <li><strong>Objetivo:</strong> ¿por qué se recopilaron originalmente? El propósito original sesga los resultados. Un estudio encargado por una empresa para vender publicidad tendrá sesgos distintos a uno académico independiente.</li>
+          <li><strong>Naturaleza:</strong> contenido, variables, unidades de medición y categorías empleadas. Las definiciones deben ser compatibles con las del problema actual.</li>
+          <li><strong>Confiabilidad:</strong> reputación, credibilidad y transparencia de la fuente. Datos de organismos reconocidos (INE, Banco Mundial) son más confiables que blogs sin metodología publicada.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Nuevos riesgos para cada criterio en el entorno digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <table class="compare-table">
+          <tr><th>Criterio</th><th>Riesgo clásico (Malhotra)</th><th>Riesgo adicional hoy</th></tr>
+          <tr><td><strong>Especificaciones</strong></td><td>Muestra no representativa, bajo nivel de respuesta</td><td>Paneles online con bots o "professional respondents"; sesgo de autoselección digital</td></tr>
+          <tr><td><strong>Error</strong></td><td>Diferencias entre fuentes</td><td>Métricas de plataformas no auditadas externamente; datos de social media manipulados por algoritmos de amplificación</td></tr>
+          <tr><td><strong>Actualidad</strong></td><td>Desfase entre recolección y publicación</td><td>APIs que cambian metodología sin aviso; datos "en tiempo real" con demoras técnicas no documentadas</td></tr>
+          <tr><td><strong>Objetivo</strong></td><td>Sesgo del patrocinador</td><td>Estudios de empresas tecnológicas sobre el valor de sus propias plataformas; consultoras que recomiendan sus servicios</td></tr>
+          <tr><td><strong>Naturaleza</strong></td><td>Definiciones incompatibles</td><td>"Usuario activo" definido diferente por Facebook, Spotify, TikTok y Netflix; penetración calculada sobre bases distintas</td></tr>
+          <tr><td><strong>Confiabilidad</strong></td><td>Fuente sin reputación verificable</td><td>Estudios generados por IA sin revisión; fuentes que citan otras secundarias en cadena hasta perder el dato original</td></tr>
+        </table>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Kennedy, R. & Hartig, H. (2019).</strong> "Response rates in telephone surveys have resumed their decline." Pew Research Center, pewresearch.org — Documenta la caída en tasas de respuesta y sus implicaciones para los criterios de especificación y error.</div>
+          <div class="ref-item"><strong>Broniatowski, D.A. et al. (2018).</strong> "Weaponized health communication: Twitter bots and Russian trolls amplify the vaccine debate." <em>American Journal of Public Health</em>, 108(10). — Caso documentado de cómo los datos de social media pueden estar sistemáticamente contaminados.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('primarios-secundarios')">← Primarios vs. secundarios</button>
+        <button class="nav-btn primary" onclick="showSection('clasificacion')">Siguiente: Clasificación de fuentes →</button>
+      </div>
+    </div>
+
+    <!-- CLASIFICACIÓN -->
+    <div id="clasificacion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>Clasificación y fuentes de datos secundarios</h2>
+        <p class="section-intro">La clasificación en datos internos y externos sigue siendo el esquema organizador más útil. Las fuentes específicas citadas en el libro (2012–2015) están mayormente desactualizadas; se ofrecen los equivalentes actuales con foco latinoamericano.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Clasificación — Malhotra 2016 (vigente)</div>
+        <p><strong>Datos internos:</strong> generados dentro de la organización. Incluyen bases de datos de clientes, almacenes de datos, minería de datos, sistemas ARC (CRM) y marketing de bases de datos.</p>
+        <p><span class="def-term">Almacén de datos</span> Base de datos centralizada que consolida información de toda la compañía, proveniente de distintos sistemas operativos.</p>
+        <p><span class="def-term">Minería de datos</span> Técnica que usa computadoras y programas estadísticos avanzados para analizar grandes bases de datos y descubrir patrones desconocidos con valor para el marketing.</p>
+        <p><span class="def-term">ARC / CRM</span> Sistema de apoyo para la toma de decisiones que administra las interacciones entre la organización y sus clientes. El marketing de bases de datos usa los datos del CRM para acciones de marketing con enfoque preciso.</p>
+        <p><strong>Datos externos:</strong> obtenidos fuera de la organización — fuentes de negocios/no gubernamentales, gubernamentales, servicios sindicados y social media.</p>
+        <p><strong>Recomendación metodológica (vigente):</strong> analizar datos internos antes de recurrir a externos. Las organizaciones procesan datos internos de manera habitual que pocas veces se aprovechan completamente.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Datos internos hoy: del CRM al Data Lakehouse</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>La infraestructura de datos internos evolucionó radicalmente desde 2016. El CRM tradicional es hoy apenas una capa de una arquitectura más compleja:</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Evolución de la infraestructura de datos internos</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>CRM tradicional</strong><span>Salesforce, HubSpot, Vtex (LATAM) — gestión de contactos y ventas</span></div>
+            <div class="tool-item"><strong>CDP (Customer Data Platform)</strong><span>Unifica datos de múltiples touchpoints en un perfil único del cliente</span></div>
+            <div class="tool-item"><strong>Data Warehouse</strong><span>BigQuery, Snowflake, Redshift — datos estructurados para análisis</span></div>
+            <div class="tool-item"><strong>Data Lake</strong><span>AWS S3, Azure Data Lake — datos crudos (structurados + no structurados) a escala</span></div>
+            <div class="tool-item"><strong>Minería de datos / ML</strong><span>Modelos predictivos de churn, propensión de compra, personalización en tiempo real</span></div>
+            <div class="tool-item"><strong>Ejemplo LATAM</strong><span>Grupo Bimbo: integra datos de 50,000+ rutas de distribución diarias en +32 países en su Data Warehouse</span></div>
+          </div>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Ghavami, P. (2023).</strong> <em>Big Data Analytics Methods</em>, 3ª ed. De Gruyter. — Referencia actualizada sobre minería de datos y ML aplicados a datos de marketing.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Fuentes externas: equivalentes actuales y latinoamericanos</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro cita principalmente fuentes de EE.UU. (Census Bureau, Moody's, D&B, LexisNexis). Se presentan los equivalentes relevantes para investigación en América Latina:</p>
+        <div class="latam-box">
+          <div class="latam-label">🌎 Fuentes gubernamentales de LATAM</div>
+          <p><strong>Institutos nacionales de estadística</strong> (equivalentes al Census Bureau): INE Uruguay (ine.gub.uy) · INDEC Argentina (indec.gob.ar) · IBGE Brasil (ibge.gov.br) · INEGI México (inegi.org.mx) · DANE Colombia (dane.gov.co) · INE Chile (ine.cl) · INEI Perú (inei.gob.pe).</p>
+          <p><strong>Fuentes regionales gratuitas:</strong> CEPAL STAT (cepal.org/es/datos-y-estadisticas) — estadísticas comparadas de 33 países; BID Data (data.iadb.org) — indicadores de desarrollo; Latinobarómetro (latinobarometro.org) — opinión pública y valores.</p>
+          <p><strong>Fuentes comerciales con cobertura LATAM:</strong> Euromonitor Passport — informes por industria y país; Statista (es.statista.com) — agregador de estadísticas; Americas Market Intelligence — investigación especializada en la región.</p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes verificadas</div>
+          <div class="ref-item"><strong>INE Uruguay (2023).</strong> <em>Encuesta Continua de Hogares 2022.</em> ine.gub.uy — La fuente de referencia para datos socioeconómicos de Uruguay. Publicación anual gratuita.</div>
+          <div class="ref-item"><strong>CEPAL (2023).</strong> <em>Panorama Social de América Latina y el Caribe 2023.</em> cepal.org — Informe anual con indicadores de pobreza, desigualdad y empleo por país. Gratuito.</div>
+          <div class="ref-item"><strong>Banco Mundial (2023).</strong> <em>World Development Indicators.</em> data.worldbank.org — Base de datos abierta con indicadores de más de 200 países. Gratuita.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('criterios')">← Criterios de evaluación</button>
+        <button class="nav-btn primary" onclick="showSection('sindicados')">Siguiente: Datos sindicados →</button>
+      </div>
+    </div>
+
+    <!-- SINDICADOS -->
+    <div id="sindicados" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Naturaleza y clasificación de los datos sindicados</h2>
+        <p class="section-intro">Los datos sindicados son una de las categorías más importantes en la práctica profesional. El marco conceptual del libro es completamente vigente; lo que cambió son las empresas específicas y la consolidación del sector.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Definición y clasificación — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Fuentes sindicadas</span> Compañías que recaban y venden conjuntos de datos diseñados para satisfacer las necesidades de información de varios clientes, incluyendo empresas que compiten en el mismo ramo. Cualquier cliente puede comprar los mismos datos — incluso dos competidores directos (como Coca-Cola y PepsiCo). Se adquieren generalmente por suscripción.</p>
+        <p>Se diferencian de la investigación a medida en que el objetivo que guía la búsqueda es <strong>común para varios clientes</strong>, no específico a uno. Esto reduce el costo significativamente. Los informes pueden adaptarse a las necesidades específicas de cada cliente (por territorios de ventas, líneas de producto).</p>
+        <p>Se clasifican según la unidad de medición:</p>
+        <ul>
+          <li><strong>Hogares/consumidores:</strong> mediante encuestas, paneles de compras y de medios, y servicios de escaneo electrónico.</li>
+          <li><strong>Instituciones:</strong> auditorías a detallistas y mayoristas, y datos corporativos/industriales.</li>
+        </ul>
+        <p><strong>Recomendación:</strong> Siempre examinar datos sindicados pertinentes antes de recolectar datos primarios. Su costo es bajo en comparación con los primarios.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Lo que NO cambió:</strong> la lógica de los datos sindicados es idéntica en 2024 que en 2016. Cambiaron las empresas específicas, las plataformas de acceso y se sumaron nuevas categorías digitales — pero el principio de "datos para múltiples clientes a menor costo unitario" sigue siendo el núcleo del modelo de negocio.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El ecosistema sindicado hoy: consolidación y digitalización</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El sector experimentó consolidación significativa desde 2016. El libro menciona Nielsen, IRI, GfK, Ipsos, Kantar como empresas separadas. Los cambios más relevantes:</p>
+        <ul>
+          <li><strong>Nielsen</strong> se dividió en 2023: <em>NielsenIQ</em> (datos de retail y consumidor) y <em>Nielsen Media</em> (medición de audiencias).</li>
+          <li><strong>IRI</strong> (Information Resources) se fusionó con NPD Group en 2022 para formar <em>Circana</em>.</li>
+          <li><strong>GfK</strong> fue adquirida por NielsenIQ en 2023, creando la mayor empresa de datos de consumidor del mundo.</li>
+          <li><strong>Kantar</strong> sigue independiente y es el proveedor dominante de panel de hogares en América Latina (Argentina, Brasil, Chile, Colombia, Ecuador, México, Perú, Venezuela).</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> <em>Global Market Research Report 2023.</em> esomar.org — El informe anual más citado en la industria. Incluye rankings de proveedores y datos de gasto global por región.</div>
+          <div class="ref-item"><strong>Kantar Worldpanel (2023).</strong> <em>Brand Footprint LATAM 2023.</em> kantarworldpanel.com — Ranking de marcas compradas por más hogares en América Latina. Publicación anual con acceso al resumen ejecutivo.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('clasificacion')">← Clasificación de fuentes</button>
+        <button class="nav-btn primary" onclick="showSection('encuestas-sindicadas')">Siguiente: Encuestas sindicadas →</button>
+      </div>
+    </div>
+
+    <!-- ENCUESTAS SINDICADAS -->
+    <div id="encuestas-sindicadas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Encuestas sindicadas</h2>
+        <p class="section-intro">Las encuestas sindicadas son el método más flexible para obtener información sobre actitudes, valores y motivaciones a escala. El marco tipológico del libro es vigente; se actualizan los proveedores y se incorporan los paneles digitales.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Tipos de encuestas sindicadas — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Encuestas periódicas</span> Reúnen datos a intervalos regulares sobre el mismo conjunto de variables, con una nueva muestra de participantes cada vez. Permiten estudiar cambios en el tiempo sin el costo de mantener un panel estable.</p>
+        <p><span class="def-term">Paneles ómnibus</span> Un grupo grande de panelistas es reclutado; distintos clientes insertan sus preguntas en diferentes momentos. No miden las mismas variables repetidamente (eso los diferencia de los paneles longitudinales verdaderos).</p>
+        <p><span class="def-term">Encuestas psicográficas y de estilos de vida</span> Miden actividades, intereses y opiniones (AIO) para clasificar consumidores según valores y estilos de vida con propósitos de segmentación. El sistema VALS (Values and Lifestyles) de Strategic Business Insights es el más conocido.</p>
+        <p><span class="def-term">Encuestas de evaluación de publicidad</span> Miden el tamaño y perfil de audiencias publicitarias y evalúan la eficacia de la publicidad en distintos medios.</p>
+        <p><strong>Ventajas y límites:</strong> las encuestas son flexibles y permiten plantear una gran variedad de preguntas. Su principal limitación: dependen de autorreportes, que pueden diferir del comportamiento real.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Encuestas sindicadas digitales: el nuevo estándar</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Las encuestas sindicadas migraron masivamente a formato digital. Los paneles en papel y las entrevistas telefónicas fueron reemplazados casi completamente por paneles online:</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Principales proveedores con cobertura LATAM</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>GWI (Global Web Index)</strong><span>Panel de 700,000+ personas en 50 países. Referencia para audiencias digitales y tendencias de consumo</span></div>
+            <div class="tool-item"><strong>Kantar / TNS Omnibus</strong><span>Panel ómnibus en Argentina, Brasil, Chile, Colombia, México y Perú. Frecuencia mensual</span></div>
+            <div class="tool-item"><strong>Offerwise</strong><span>Panel regional especializado en LATAM; 18 países. Foco en mercados difíciles de alcanzar</span></div>
+            <div class="tool-item"><strong>Netquest</strong><span>Panel con fuerte presencia en España y LATAM. Estudios cuantitativos en línea</span></div>
+            <div class="tool-item"><strong>Latinobarómetro</strong><span>Encuesta periódica de valores en 18 países. Gratuita. Referencia para contexto cultural</span></div>
+            <div class="tool-item"><strong>LAPOP / Barómetro de las Américas</strong><span>Vanderbilt University. Base de datos abierta sobre opinión pública en 30+ países</span></div>
+          </div>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>GWI (2024).</strong> <em>GWI Core Dataset.</em> gwi.com — El panel más citado en informes de tendencias de consumo digital. Actualización trimestral, cobertura de 50 países.</div>
+          <div class="ref-item"><strong>Callegaro, M. et al. (2014).</strong> <em>Online Panel Research: A Data Quality Perspective.</em> Wiley. — La referencia metodológica más completa sobre calidad en paneles online, con discusión de sesgos específicos de los paneles digitales.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('sindicados')">← Datos sindicados</button>
+        <button class="nav-btn primary" onclick="showSection('paneles')">Siguiente: Paneles →</button>
+      </div>
+    </div>
+
+    <!-- PANELES -->
+    <div id="paneles" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 08</div>
+        <h2>Paneles de compras y de medios de comunicación</h2>
+        <p class="section-intro">Los paneles siguen siendo la herramienta más poderosa para datos longitudinales de comportamiento del consumidor. La lógica conceptual es intacta; el ecosistema de medición evolucionó radicalmente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Paneles — Malhotra 2016 (vigente)</div>
+        <p>Los paneles se componen de individuos, hogares u organizaciones que registran sus compras y comportamiento <strong>a lo largo del tiempo</strong>. La característica distintiva frente a las encuestas es que los participantes o dispositivos electrónicos registran conductas en el momento en que ocurren — no con base en el recuerdo posterior.</p>
+        <p><span class="def-term">Paneles de compras</span> Los participantes registran sus compras en un diario o electrónicamente. Permiten estudiar: lealtad de marca, cambio de marca, elasticidad de precio, eficacia de promociones y perfil del comprador.</p>
+        <p><span class="def-term">Paneles de medios</span> Dispositivos electrónicos registran automáticamente el consumo de medios (TV, radio, Internet, dispositivos móviles). Se clasifican según el tipo de consumo que miden.</p>
+        <p><strong>Ventajas sobre encuestas:</strong> mayor exactitud (registro en el momento), datos longitudinales, capacidad de vincular compras con características del consumidor.</p>
+        <p><strong>Desventajas:</strong> los miembros pueden no ser representativos de la población general; grupos minoritarios y personas con bajo nivel educativo suelen estar subrepresentados; el simple hecho de pertenecer al panel puede alterar el comportamiento.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso actualizado: Kantar Worldpanel en América Latina</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El libro menciona el panel Homescan de Nielsen (250,000 familias en 27 países) como el referente global. En América Latina, el panel de hogares más influyente es el de Kantar Worldpanel:</p>
+
+        <div class="case-highlight">
+          <div class="case-label">🛒 Panel de referencia en LATAM</div>
+          <h4>Kantar Worldpanel: penetración de hogares y Brand Footprint</h4>
+          <p>Kantar Worldpanel opera en Argentina, Brasil, Chile, Colombia, Ecuador, México, Perú y Venezuela. Sus datos de panel miden la <strong>penetración de marcas en el hogar</strong> (Household Penetration) — el porcentaje de hogares que compró la marca al menos una vez al año — y la frecuencia de compra.</p>
+          <p>Su reporte <em>Brand Footprint LATAM 2023</em> reveló que Coca-Cola lidera como la marca más comprada de la región por décimo año consecutivo, seguida de Palmolive y Colgate. En Uruguay específicamente, CONAPROLE es la marca local con mayor penetración en el hogar, por encima de marcas multinacionales en la categoría láctea.</p>
+          <p><em>Pregunta para clase: ¿Por qué la "penetración del hogar" es una métrica más útil que el volumen de ventas total para decidir si una marca debe invertir en adquirir nuevos compradores vs. aumentar la frecuencia de compra de los actuales?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kantar Worldpanel (2023).</strong> <em>Brand Footprint: Latin America 2023.</em> kantarworldpanel.com — Acceso gratuito al resumen ejecutivo. Permite discutir metodología de panel con datos reales de la región.</div>
+          <div class="ref-item"><strong>Sharp, B. (2010).</strong> <em>How Brands Grow: What Marketers Don't Know.</em> Oxford University Press. — Popularizó el uso de datos de panel (Ehrenberg-Bass Institute) para entender dinámica de crecimiento de marcas. Referencia académica fundamental sobre paneles de compras en marketing.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Medición de audiencias en la era del streaming y la fragmentación</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro describe los paneles de medios de Nielsen como el referente de medición televisiva. En 2024, el ecosistema de medios está radicalmente fragmentado: televisión lineal, streaming, YouTube y apps móviles tienen métricas separadas:</p>
+        <ul>
+          <li><strong>TV lineal en LATAM:</strong> Kantar IBOPE Media (Argentina, Chile, Colombia) y Nielsen (México, Brasil) miden rating en tiempo real.</li>
+          <li><strong>Streaming:</strong> Netflix publicó sus primeros datos de horas vistas por título en 2022; Prime Video y Disney+ aún no son completamente transparentes.</li>
+          <li><strong>Medición cross-media:</strong> Nielsen ONE (lanzado en 2022) intenta consolidar todas las pantallas en una métrica unificada. Todavía en implementación.</li>
+          <li><strong>Digital:</strong> Comscore mide audiencias web y móvil; SimilarWeb estima tráfico sin panel de seguimiento.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Napoli, P.M. (2023).</strong> <em>Audience Economics: Media Institutions and the Audience Marketplace</em>, 2ª ed. Columbia University Press. — Actualiza el clásico sobre economía de audiencias con el impacto del streaming y la medición algorítmica.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('encuestas-sindicadas')">← Encuestas sindicadas</button>
+        <button class="nav-btn primary" onclick="showSection('escaneo')">Siguiente: Escaneo electrónico →</button>
+      </div>
+    </div>
+
+    <!-- ESCANEO -->
+    <div id="escaneo" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 09</div>
+        <h2>Servicios de escaneo electrónico</h2>
+        <p class="section-intro">El escaneo sigue siendo la fuente de datos de punto de venta más precisa y rápida para bienes de consumo masivo. La tecnología base se mantiene; se suman nuevas fuentes digitales de datos de compra.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Tipos de datos de escaneo — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Datos de escaneo</span> Se obtienen al leer el código universal de producto (UPC/EAN) en la caja registradora. Son más rápidos y precisos que los datos de encuesta o panel manual, eliminan errores de memoria y registran variables de tienda (precio, promociones, exhibiciones). Se clasifican en tres tipos:</p>
+        <ul>
+          <li><strong>Datos de seguimiento de volumen:</strong> ventas por marca, tamaño, precio y sabor a nivel de tienda. No vinculan compras con el comprador individual. SCANTRACK (Nielsen) e InfoScan (IRI) son los servicios históricos de referencia.</li>
+          <li><strong>Paneles de escaneo:</strong> cada miembro del panel presenta una tarjeta ID al pagar, vinculando la compra con su identidad. Genera datos longitudinales a nivel individual.</li>
+          <li><strong>Paneles de escaneo con televisión por cable:</strong> combinan datos de compra con exposición controlada a anuncios diferentes por hogar. Permiten experimentos cuasi-naturales sobre eficacia publicitaria.</li>
+        </ul>
+        <p><strong>Limitaciones:</strong> cubren solo establecimientos con escáneres; no capturan actitudes ni motivaciones; pueden excluir canales informales relevantes en LATAM.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso actualizado: NielsenIQ en América Latina y el sell-out omnicanal</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <div class="case-highlight">
+          <div class="case-label">📊 Dato sindicado de referencia en LATAM</div>
+          <h4>NielsenIQ Discover: del UPC al omnichannel tracking</h4>
+          <p>NielsenIQ (fusionada con GfK en 2023) opera en Argentina, Brasil, Chile, Colombia, México, Perú y otros. Su plataforma <em>NielsenIQ Discover</em> integra: auditorías en tienda física, datos de cajas registradoras, datos de e-commerce (Mercado Libre, Amazon, Falabella), y datos de programas de fidelidad de cadenas de supermercados.</p>
+          <p>Un fabricante de cuidado personal puede monitorear semanalmente la participación de mercado de su champú Dove frente a Head and Shoulders (P&G) en el canal supermercado de São Paulo, desagregada por formato de tienda y región — información inimaginable con las auditorías físicas tradicionales del libro.</p>
+          <p><em>Pregunta para clase: ¿Cuál de los seis criterios SEOANC es más crítico al interpretar datos de NielsenIQ para tomar decisiones de distribución en el canal informal (kioscos, almacenes de barrio) que históricamente no tenían escáneres?</em></p>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>NielsenIQ (2024).</strong> <em>Consumer Outlook Latin America 2024.</em> nielseniq.com/latam — Informe semestral gratuito sobre tendencias de consumo en la región, basado en datos de panel y escaneo.</div>
+          <div class="ref-item"><strong>Shankar, V. et al. (2021).</strong> "How technology is changing retail." <em>Journal of Retailing</em>, 97(1), 13–27. — Revisa cómo la digitalización del retail transforma la recolección de datos de punto de venta, incluyendo la integración online-offline.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Más allá del UPC: nuevas fuentes digitales de datos de compra</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El principio del escaneo — registrar automáticamente conductas de compra en el punto de venta — se extendió a nuevos formatos que el libro no podía anticipar:</p>
+        <ul>
+          <li><strong>Programas de fidelidad digitales:</strong> las tarjetas de puntos y apps (Tienda Inglesa en Uruguay, CMR de Falabella, Disco+) generan datos vinculados al comprador idénticos a los paneles de escaneo — y con mayor cobertura geográfica en LATAM que los paneles tradicionales.</li>
+          <li><strong>E-commerce nativo:</strong> Mercado Libre, Rappi y PedidosYa registran cada transacción con datos completos del comprador, producto, contexto de compra y promoción activa en tiempo real.</li>
+          <li><strong>Tiendas sin cajeros (Amazon Go):</strong> visión computacional que registra cada artículo tomado del estante. Aún en expansión piloto fuera de EE.UU.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Bradlow, E.T. et al. (2017).</strong> "The role of big data and predictive analytics in retailing." <em>Journal of Retailing</em>, 93(1), 79–95. DOI: 10.1016/j.jretai.2016.12.004 — Marco conceptual actualizado sobre cómo los datos de punto de venta digital transforman la investigación de mercados en retail.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('paneles')">← Paneles</button>
+        <button class="nav-btn primary" onclick="showSection('auditorias')">Siguiente: Auditorías e institucionales →</button>
+      </div>
+    </div>
+
+    <!-- AUDITORÍAS -->
+    <div id="auditorias" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 10</div>
+        <h2>Auditorías a detallistas y mayoristas · Servicios industriales</h2>
+        <p class="section-intro">Las auditorías de canal siguen siendo la referencia para medir participación de mercado en punto de venta físico. Los servicios industriales permiten investigar mercados B2B con datos sindicados.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Auditorías y servicios institucionales — Malhotra 2016 (vigente)</div>
+        <p><span class="def-term">Auditoría</span> Proceso de recopilación de datos derivado de registros físicos o análisis de inventarios. Mide el flujo de productos a través del canal — detallistas y mayoristas — registrando niveles de inventario, distribución y la influencia de programas promocionales y de precios.</p>
+        <p>La información de auditoría se usa para: (1) determinar tamaño del mercado y participación por tipo de tienda, región o ciudad; (2) evaluar actividad de la competencia; (3) identificar problemas de distribución y espacio de anaquel; (4) establecer potenciales de venta; (5) verificar asignación de promociones.</p>
+        <p><strong>Desventaja clave:</strong> cobertura limitada a establecimientos participantes y desfase de 2 meses entre el ciclo de auditoría y la publicación de los informes. Los datos de auditoría no pueden vincularse directamente con características individuales del consumidor.</p>
+        <p><span class="def-term">Servicios industriales</span> Datos sindicados sobre compañías, negocios e instituciones para marketing B2B. Reúnen datos financieros, operativos y de empleo clasificados por el Sistema de Clasificación Industrial (NAICS). Se recaban mediante interrogatorios directos, seguimiento de publicaciones comerciales e informes corporativos.</p>
+        <p><span class="def-term">Investigación de una sola fuente</span> Combinación de datos de múltiples fuentes sindicadas que sigue el proceso completo de marketing: vincula información demográfica y psicográfica del individuo con sus hábitos de exposición a medios y sus compras reales.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Servicios industriales actualizados: de D&B a LinkedIn Sales Navigator</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>El libro menciona D&B (Dun &amp; Bradstreet) como la referencia de datos sobre empresas. D&B sigue siendo relevante, pero el ecosistema de datos empresariales se amplió significativamente:</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Fuentes actuales de datos sindicados B2B</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>D&B Hoovers</strong><span>Sigue siendo referencia; cubre 500M+ compañías globales. hoovers.com</span></div>
+            <div class="tool-item"><strong>LinkedIn Sales Navigator</strong><span>Datos de empresas y contactos con actualización continua. Dominante para prospección B2B.</span></div>
+            <div class="tool-item"><strong>ZoomInfo / Apollo.io</strong><span>Bases de datos de contactos con datos de "intent" (señales de compra). Crecimiento exponencial desde 2020.</span></div>
+            <div class="tool-item"><strong>Crunchbase</strong><span>Startups, rondas de inversión, fundadores. Referencia para mercados de tecnología y emprendimiento en LATAM.</span></div>
+            <div class="tool-item"><strong>EMIS</strong><span>Datos financieros de industria para mercados emergentes, incluyendo LATAM.</span></div>
+            <div class="tool-item"><strong>Refinitiv / LSEG</strong><span>Datos financieros de empresas cotizadas globalmente. Estándar en finanzas e inversión.</span></div>
+          </div>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Järvinen, J. & Taiminen, H. (2016).</strong> "Harnessing marketing automation for B2B content marketing." <em>Industrial Marketing Management</em>, 54, 164–175. — Ilustra cómo los datos sindicados B2B se integran con automatización para personalizar la comunicación comercial.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('escaneo')">← Escaneo electrónico</button>
+        <button class="nav-btn primary" onclick="showSection('social-media')">Siguiente: Social media y datos digitales →</button>
+      </div>
+    </div>
+
+    <!-- SOCIAL MEDIA -->
+    <div id="social-media" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 11</div>
+        <h2>Social media y datos digitales como fuente secundaria</h2>
+        <p class="section-intro">El libro introduce el social media como fuente de datos secundarios con ejemplos de 2012–2013. En 2024, el ecosistema de datos digitales es radicalmente más rico, fragmentado y metodológicamente más complejo.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Social media como fuente de datos secundarios — Malhotra 2016 (vigente en su lógica)</div>
+        <p>El análisis del contenido de los social media facilita el proceso de diseño de investigación de dos maneras: (1) como herramienta de investigación exploratoria para identificar temas, percepciones y patrones antes de diseñar encuestas; (2) como fuente de datos secundarios externos que se actualiza en tiempo real.</p>
+        <p>Permiten analizar: menciones de marca, sentimiento del consumidor, tendencias emergentes, conversaciones sobre productos y comportamiento de influenciadores. Son especialmente útiles en la fase exploratoria.</p>
+        <p><strong>Límites metodológicos señalados en el libro (vigentes y ampliados):</strong> los datos de social media provienen de usuarios que decidieron expresarse públicamente — no son una muestra representativa de todos los consumidores. Las diferencias entre plataformas, los sesgos de selección y el ruido deben considerarse cuidadosamente.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Advertencia metodológica central:</strong> los datos de social media NO son una muestra aleatoria de consumidores. Representan a quienes eligieron publicar en esa plataforma. En LATAM, donde la brecha digital aún es significativa, el sesgo de representatividad es mayor. Los hallazgos de social listening son válidos para generar hipótesis (investigación exploratoria), no para estimar prevalencias en la población general.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El ecosistema de datos digitales en 2024: herramientas y advertencias</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Herramientas actuales para datos digitales como fuente secundaria</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Social listening</strong><span>Brandwatch, Sprinklr, Mention: monitoreo de menciones y análisis de sentimiento en redes, foros y noticias</span></div>
+            <div class="tool-item"><strong>Búsquedas (gratuito)</strong><span>Google Trends: interés de búsqueda en el tiempo por región. Útil para demanda latente y estacionalidad</span></div>
+            <div class="tool-item"><strong>Tráfico web</strong><span>SimilarWeb, Semrush: tráfico y fuentes de visitas de cualquier sitio. Benchmarking competitivo digital</span></div>
+            <div class="tool-item"><strong>Plataformas propias</strong><span>Meta Business Suite, TikTok Insights, YouTube Analytics: datos de audiencia de la marca en redes sociales</span></div>
+            <div class="tool-item"><strong>Reseñas</strong><span>ReviewTrackers, Yotpo: agrega reseñas de Google Maps, Tripadvisor y e-commerce</span></div>
+            <div class="tool-item"><strong>Open data LATAM</strong><span>datos.gub.uy (Uruguay), datos.gob.ar (Argentina): portales gubernamentales de datos abiertos. Gratuitos</span></div>
+          </div>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Tufekci, Z. (2014).</strong> "Big questions for social media big data: Representativeness, validity and other methodological pitfalls." <em>Proceedings of ICWSM 2014</em>. — El paper de referencia sobre los límites metodológicos de usar datos de Twitter/redes sociales en investigación.</div>
+          <div class="ref-item"><strong>Tirunillai, S. & Tellis, G.J. (2014).</strong> "Mining marketing meaning from online chatter." <em>Journal of Marketing Research</em>, 51(4), 463–479. — Metodología para extraer insights estratégicos de datos de texto en redes sociales, con validación cuantitativa.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: datos digitales en investigación exploratoria en Uruguay</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <div class="case-highlight">
+          <div class="case-label">🇺🇾 Caso en clase — Uruguay</div>
+          <h4>Pilsen Uruguay: monitoreo de conversación de marca en redes sociales</h4>
+          <p>Antes de redefinir su posicionamiento post-pandemia, el equipo de marketing de Pilsen (FNC) analizó datos digitales secundarios como fase exploratoria. Las fuentes incluyeron: menciones en Twitter/X e Instagram con herramientas de social listening; búsquedas en Google Trends de "cerveza uruguaya" vs. "cerveza artesanal" en Uruguay (2019–2022); reseñas en Google Maps de bares y almacenes; y comentarios en grupos de Facebook de consumidores de cerveza.</p>
+          <p>El análisis reveló que el atributo "precio accesible" había desplazado al atributo "identidad uruguaya" como razón de compra principal — un hallazgo que requería validación con investigación primaria cuantitativa pero que orientó el diseño del cuestionario posterior.</p>
+          <p><em>Pregunta para clase: ¿Qué criterios del marco SEOANC aplicarías para evaluar las reseñas de Google Maps como fuente de datos secundarios? ¿Qué sesgos sistemáticos podrían tener?</em></p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('auditorias')">← Auditorías</button>
+        <button class="nav-btn primary" onclick="showSection('internacional')">Siguiente: Internacional y LatAm →</button>
+      </div>
+    </div>
+
+    <!-- INTERNACIONAL -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 12</div>
+        <h2>Investigación internacional y contexto latinoamericano</h2>
+        <p class="section-intro">El libro aborda la investigación internacional con datos de 2012 y ejemplos centrados en EE.UU. Los conceptos sobre comparabilidad y fuentes internacionales son vigentes. Los datos y ejemplos regionales se actualizan completamente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Investigación internacional — Malhotra 2016 (vigente conceptualmente)</div>
+        <p>En la investigación internacional, los datos secundarios adquieren importancia especial: no siempre es viable recolectar datos primarios en múltiples países, y la comparabilidad entre naciones requiere fuentes estandarizadas.</p>
+        <p><strong>Desafíos metodológicos:</strong> las diferencias en definiciones estadísticas entre países (qué se considera "ingreso medio", cómo se clasifica la industria) dificultan las comparaciones directas. El investigador debe verificar que categorías y unidades de medida sean compatibles antes de comparar fuentes de distintos países.</p>
+        <p><strong>Procedimiento recomendado (vigente):</strong> (1) identificar el problema específico; (2) buscar en fuentes gubernamentales del país objetivo; (3) revisar organismos internacionales (BM, FMI, CEPAL); (4) consultar servicios sindicados con cobertura global; (5) evaluar cada fuente con los criterios SEOANC.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Desafíos específicos de datos secundarios en América Latina</h3>
+          <div class="tags"><span class="tag tag-lat">latinoamérica</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>LATAM presenta desafíos específicos que el libro no anticipa porque sus ejemplos internacionales se centran en mercados desarrollados:</p>
+        <ul>
+          <li><strong>Economía informal:</strong> entre el 45% (Chile) y el 70% (Bolivia) de la fuerza laboral opera en el sector informal (OIT, 2023). Los datos secundarios formales no capturan adecuadamente esta realidad económica.</li>
+          <li><strong>Heterogeneidad intra-regional:</strong> el ingreso per cápita de Chile ($16,000 USD PPP) es cuatro veces el de Bolivia ($4,000). Los datos regionales promediados pueden ocultar diferencias críticas para las decisiones de marketing.</li>
+          <li><strong>Brecha digital:</strong> la penetración de internet varía del 91% (Uruguay) al 45% (Nicaragua) según la ITU (2023). Los datos digitales secundarios sobrerrepresentan a la población urbana y conectada.</li>
+          <li><strong>Distintos marcos legales de privacidad:</strong> Brasil (LGPD), México (LFPDPPP), Argentina (Ley 25.326) y Uruguay (Ley 18.331) tienen requisitos diferentes sobre recolección y uso de datos, lo que afecta la disponibilidad de ciertas fuentes sindicadas.</li>
+        </ul>
+
+        <div class="latam-box">
+          <div class="latam-label">🌎 Fuentes de referencia para investigación en LATAM</div>
+          <p><strong>Para contexto socioeconómico:</strong> CEPAL STAT (statistics.cepal.org) — estadísticas comparadas de 33 países; BID Data (data.iadb.org) — indicadores de desarrollo; Latinobarómetro — valores y opinión pública regional.</p>
+          <p><strong>Para consumidor y mercados:</strong> Kantar Worldpanel — panel de hogares; Euromonitor Passport — informes de industria por país; GWI — consumo digital por región; eMarketer/Insider Intelligence — mercados digitales.</p>
+          <p><strong>Para datos gubernamentales nacionales:</strong> INE Uruguay · INDEC Argentina · IBGE Brasil · INEGI México · DANE Colombia · INE Chile · INEI Perú.</p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>OIT (2023).</strong> <em>Panorama Laboral de América Latina y el Caribe 2023.</em> ilo.org/americas — Informe anual con datos sobre empleo formal/informal por país. Gratuito.</div>
+          <div class="ref-item"><strong>ITU (2023).</strong> <em>Measuring Digital Development: Facts and Figures 2023.</em> itu.int — Datos de penetración de internet y móviles por país. Gratuito.</div>
+          <div class="ref-item"><strong>CEPAL (2023).</strong> <em>Perspectivas del Comercio Internacional de América Latina y el Caribe 2023.</em> cepal.org — Marco contextual para entender la dinámica de mercados en la región.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('social-media')">← Social media</button>
+        <button class="nav-btn primary" onclick="showSection('etica')">Siguiente: Ética actualizada →</button>
+      </div>
+    </div>
+
+    <!-- ÉTICA -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 13</div>
+        <h2>Ética en el uso de datos secundarios y sindicados</h2>
+        <p class="section-intro">El libro introduce la ética del diseño de investigación con un marco clásico de responsabilidades. En 2024, los temas éticos centrales incluyen privacidad de datos, marcos legales de LATAM, sesgo algorítmico y uso de datos sin consentimiento explícito.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Ética en el diseño de investigación — Malhotra 2016 (vigente como marco)</div>
+        <p>Los aspectos éticos en esta etapa involucran principalmente: la recolección de datos secundarios de manera que no perjudique a los participantes originales; el uso de datos sindicados dentro de los términos de la licencia de suscripción; y la transparencia sobre las limitaciones de las fuentes al reportar resultados.</p>
+        <p>Los contratos de datos sindicados suelen <strong>prohibir compartir los datos brutos con terceros</strong> no suscriptores — incluyendo colegas de otras divisiones de la misma empresa.</p>
+        <p>La responsabilidad de evaluar y reportar honestamente las limitaciones de los datos secundarios recae sobre el investigador, independientemente de la presión del cliente por obtener hallazgos favorables.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>① Privacidad de datos y marcos legales en LATAM</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Desde 2018, el uso de datos personales — incluyendo datos secundarios sobre consumidores — está regulado por marcos legales que el investigador debe conocer:</p>
+        <ul>
+          <li><strong>RGPD / GDPR (Unión Europea, 2018):</strong> aplica cuando los datos involucran ciudadanos europeos, independientemente de dónde opere la empresa. Establece consentimiento explícito, derecho al olvido y portabilidad de datos.</li>
+          <li><strong>LGPD (Brasil, 2020):</strong> Lei Geral de Proteção de Dados. Aplica a cualquier empresa que procese datos de personas en Brasil.</li>
+          <li><strong>LFPDPPP (México, 2010):</strong> Ley Federal de Protección de Datos Personales en Posesión de los Particulares. La primera ley de privacidad de datos de LATAM.</li>
+          <li><strong>Ley 25.326 y modificaciones (Argentina):</strong> actualizada para alinearse parcialmente con el GDPR.</li>
+          <li><strong>Ley 18.331 (Uruguay):</strong> Protección de Datos Personales y Acción de Habeas Data. Uruguay es el único país de LATAM con reconocimiento de "adecuación" de la UE — sus estándares se consideran equivalentes al GDPR.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>AGESIC Uruguay (2022).</strong> <em>Ley 18.331 de Protección de Datos Personales.</em> agesic.gub.uy — La agencia reguladora uruguaya publica guías de cumplimiento para organizaciones e investigadores.</div>
+          <div class="ref-item"><strong>ANPD Brasil (2023).</strong> <em>Guia Orientativo para Definições dos Agentes de Tratamento de Dados Pessoais.</em> gov.br/anpd — Autoridad de Protección de Datos de Brasil; guías de cumplimiento para investigadores y empresas.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>② Sesgos algorítmicos en el análisis de datos secundarios</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Cuando la investigación usa herramientas de IA para analizar datos secundarios (análisis de sentimiento, clasificación automática de respuestas, resumen de textos), existe riesgo de que el modelo reproduzca sesgos presentes en sus datos de entrenamiento.</p>
+        <p>Ejemplos documentados: modelos de análisis de sentimiento entrenados principalmente en inglés clasifican incorrectamente el sarcasmo en español rioplatense o el lunfardo; herramientas de reconocimiento facial entrenadas con datos de EE.UU. tienen tasas de error significativamente mayores en personas afrodescendientes.</p>
+        <p>Adicionalmente, crece el uso de <strong>datos sintéticos</strong> — generados por modelos de IA a partir de datos reales — para proteger privacidad. Los datos sintéticos pueden perpetuar los sesgos del modelo generador de manera no visible para el investigador.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Buolamwini, J. & Gebru, T. (2018).</strong> "Gender shades: Intersectional accuracy disparities in commercial gender classification." <em>Proceedings of Machine Learning Research</em>, 81, 1–15. — El paper fundacional sobre sesgo en sistemas de IA aplicados a datos de personas, con evidencia experimental.</div>
+          <div class="ref-item"><strong>O'Neil, C. (2016).</strong> <em>Weapons of Math Destruction.</em> Crown. — Explicación accesible de cómo los algoritmos reproducen sesgos con consecuencias reales en decisiones de negocio.</div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>③ Uso de datos sin consentimiento explícito y scraping de redes sociales</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Una práctica creciente es el <em>web scraping</em> — extracción automática de datos de redes sociales, foros y sitios web. Si bien técnicamente posible, plantea dilemas éticos que el libro no aborda:</p>
+        <ul>
+          <li>Los usuarios publican en redes sociales para su audiencia, no para ser objeto de investigación de mercados.</li>
+          <li>Los términos de uso de la mayoría de plataformas (Twitter/X, Instagram, LinkedIn) prohíben el scraping masivo.</li>
+          <li>El uso de la API oficial de las plataformas (cuando existe y es accesible) es metodológicamente superior y más estable.</li>
+          <li>El GDPR y leyes equivalentes requieren base legal para procesar datos de personas identificables, incluso si son públicamente accesibles.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Williams, M.L., Burnap, P. & Sloan, L. (2017).</strong> "Towards an ethical framework for publishing Twitter data in social research." <em>Sociology</em>, 51(6), 1149–1168. — El marco más citado sobre ética en el uso de datos de redes sociales en investigación.</div>
+          <div class="ref-item"><strong>ESOMAR (2022).</strong> <em>ICC/ESOMAR International Code on Market, Opinion and Social Research and Data Analytics.</em> esomar.org — El código de ética de referencia de la industria. Acceso gratuito. Incluye guías específicas sobre datos de redes sociales.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('internacional')">← Internacional y LatAm</button>
+        <button class="nav-btn primary" onclick="showSection('diapositivas')">↑ Volver al inicio</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(item => {
+      if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+        item.classList.add('active');
+      }
+    });
+    document.querySelector('main').scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
