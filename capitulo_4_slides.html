@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 4 — Investigación cualitativa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
+.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
+
+.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
+
+.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
+.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+
+.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h-white { color:white; }
+
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+.def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
+.def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
+.def-text strong { color:#d4a0a0; }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
+.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
+
+.ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table tr:nth-child(even) td { background:#faf8f5; }
+.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
+.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
+.ref-table-dark tr:nth-child(even) td { background:rgba(255,255,255,0.04); }
+
+.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+
+.latam-box { background:var(--greenbg); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:5px; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.55; }
+
+.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.6; }
+
+.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+
+.tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
+.tool-item { background:white; border:1px solid #c0d4e8; border-radius:6px; padding:9px 12px; }
+.tool-name { font-weight:600; font-size:12px; color:var(--blue); margin-bottom:2px; }
+.tool-desc { font-size:11px; color:var(--muted); line-height:1.35; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══ PORTADA ══ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 4</div>
+  <div class="cover-title">Investigación<br><em>cualitativa</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- ══ APERTURA min 0–10 ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Apertura · minutos 0–10</div>
+  <div class="slide-h">La pregunta que organiza el capítulo</div>
+  <ul class="bullets">
+    <li>El diseño de investigación nos dijo qué tipo de investigación hacer — hoy entramos en el primer instrumento de <strong>contacto real con personas</strong></li>
+    <li>¿Por qué no empezar directamente con una encuesta a 500 personas?</li>
+    <li>La respuesta: <strong>el por qué</strong>. Los cuantitativos dicen qué está pasando. La cualitativa revela por qué. Sin el por qué, la solución apunta en la dirección equivocada</li>
+  </ul>
+  <div class="callout">
+    <strong>Antes de arrancar:</strong> ¿alguien usa Rappi o PedidosYa habitualmente? ¿Alguien que lo usaba mucho lo usa menos ahora? El caso principal resonará mejor si los estudiantes se identifican con el usuario.
+  </div>
+</div>
+</section>
+
+<!-- ══ Nabisco (caso apertura del libro) ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso de apertura del libro · Nabisco — 100 Calorie Snack Pack</div>
+  <div class="slide-h slide-h-white">Primero cualitativa, después cuantitativa — siempre</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El problema:</strong> las madres querían bocadillos con menos calorías, pero los lanzamientos "saludables" fracasaban. Los datos de tendencias decían qué pasaba — no por qué.
+    </div>
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">Focus groups:</strong> las madres no fallaban por falta de fuerza de voluntad. Fallaban porque no sabían cuántas calorías eran "suficientes". El problema era <em>cognitivo</em>, no motivacional.
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.25);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">La solución:</strong> bolsas individuales de exactamente 100 calorías. El producto resolvía el problema cognitivo de medir — no reducía calorías. Encuesta cuantitativa posterior validó la aceptación del formato.
+    </div>
+  </div>
+  <div class="piz" style="background:rgba(255,255,255,0.04);border-left-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.5);">
+    ✏ Figura 4.2 en pizarrón: árbol de clasificación de datos (primarios/secundarios, cuali/cuanti) — ubica la investigación cualitativa dentro del diseño completo
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN: caso Rappi ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Caso de apertura · minutos 10–32</div>
+  <div class="sec-title">Rappi y la fatiga<br>de conveniencia</div>
+  <div class="sec-sub">Cuando los datos cuantitativos muestran el problema pero no lo explican</div>
+</div>
+</section>
+
+<!-- ══ Caso Rappi ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Rappi 2022</div>
+  <div class="slide-h slide-h-white">La encuesta de satisfacción no reveló nada — las entrevistas, todo</div>
+  <div style="display:flex;gap:28px;margin-bottom:14px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#d4a0a0;line-height:1;">–30%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;">frecuencia de pedidos<br>mes 13 → mes 18</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#d4a0a0;line-height:1;">✓ Alto</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;">satisfacción en todas<br>las dimensiones medidas</div>
+    </div>
+  </div>
+  <ul class="bullets bullets-white">
+    <li>Encuesta de satisfacción: niveles altos en velocidad, variedad y precio — <strong style="color:white;">nada explicaba el abandono</strong></li>
+    <li>Entrevistas en profundidad: pérdida del placer de cocinar, incomodidad de depender de una app para algo tan básico</li>
+    <li>"Siento que cedí" — emoción difusa sin nombre → <strong style="color:white;">fatiga de conveniencia</strong></li>
+    <li>Respuesta: <em>kits de cocina</em> — delivery de ingredientes semi-preparados. Ataca la causa, no el síntoma</li>
+  </ul>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿En qué momento fue indispensable la investigación cualitativa? ¿Podría haberse llegado al mismo insight solo con encuestas de satisfacción?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Tabla 4.1 cuali vs cuanti ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Tabla 4.1 · Vigente</div>
+  <div class="slide-h">Cualitativa vs. cuantitativa: complementarias, no competidoras</div>
+  <table class="ref-table" style="margin-top:4px;">
+    <tr><th>Dimensión</th><th>Investigación Cualitativa</th><th>Investigación Cuantitativa</th></tr>
+    <tr><td>Objetivo</td><td>Entender razones y motivaciones subyacentes</td><td>Cuantificar y generalizar a la población</td></tr>
+    <tr><td>Muestra</td><td>Pequeña, no representativa</td><td>Grande, representativa</td></tr>
+    <tr><td>Recopilación</td><td>No estructurada</td><td>Estructurada</td></tr>
+    <tr><td>Análisis</td><td>No estadístico</td><td>Estadístico</td></tr>
+    <tr><td>Resultado</td><td>Comprensión inicial — hipótesis</td><td>Recomendar un curso de acción final</td></tr>
+  </table>
+  <div class="callout" style="margin-top:10px;">
+    <strong>Error frecuente:</strong> tratar hallazgos cualitativos como concluyentes. 10 entrevistas revelan el por qué — no representan estadísticamente a ningún mercado.
+  </div>
+  <div class="piz">✏ Figura 4.3 en pizarrón: árbol directas (FG + entrevistas) / indirectas (técnicas proyectivas) — dejar visible durante toda la clase</div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Cuál es el error de decir: "en los focus groups todos dijeron que les gustaba el producto, así que sabemos que va a vender bien"?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN: Focus groups ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 01 · minutos 32–65</div>
+  <div class="sec-title">Focus groups:<br>la técnica más<br>usada del campo</div>
+  <div class="sec-sub">Características · El moderador · Procedimiento (Figura 4.4) · Caso Dove · LATAM</div>
+</div>
+</section>
+
+<!-- ══ Tabla 4.2 características ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Tabla 4.2 · Vigente</div>
+  <div class="slide-h">Focus group: características técnicas</div>
+  <div class="def-block">
+    <div class="def-term-label">Focus group — Malhotra</div>
+    <div class="def-text">Entrevista no estructurada y natural que un moderador realiza a un pequeño grupo. El valor reside en los hallazgos <strong>inesperados</strong> de un debate grupal que fluye libremente.</div>
+  </div>
+  <table class="ref-table">
+    <tr><th>Característica</th><th>Estándar del libro · Vigente</th></tr>
+    <tr><td>Tamaño</td><td>8 a 12 participantes · Menos de 8: poca dinámica · Más de 12: debate fragmentado</td></tr>
+    <tr><td>Composición</td><td>Homogéneo en demografía, psicografía y uso del producto · Segmentos distintos → grupos distintos · Sin "encuestados profesionales"</td></tr>
+    <tr><td>Duración y registro</td><td>90 min lo más común · Siempre grabado · Cliente observa en vivo</td></tr>
+    <tr><td>Informe</td><td>Sin frecuencias ni % · "La mayoría..." / "Los participantes no coincidieron en..."</td></tr>
+    <tr><td>Nº de sesiones</td><td>Mínimo 2 · Estándar en proyectos grandes: 6 a 15 · Hasta saturación teórica</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ══ El moderador ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — El rol del moderador · Vigente</div>
+  <div class="slide-h">El moderador: la pieza más crítica del focus group</div>
+  <ul class="bullets">
+    <li><strong>Establece relación cordial</strong> — los primeros 10 minutos determinan si la gente habla con apertura o da respuestas superficiales</li>
+    <li><strong>Fija reglas de interacción</strong> — no hay respuestas correctas ni incorrectas; todas las opiniones tienen valor</li>
+    <li><strong>No muestra reacciones</strong> ante las respuestas — ni positivas ni negativas. Asentir con entusiasmo inhibe respuestas contrarias; una mueca cierra la conversación</li>
+    <li><strong>Interroga y fomenta el debate</strong> en áreas importantes; trata de resumir el grado de acuerdo del grupo</li>
+    <li><strong>Analiza e informa</strong> — no solo reporta comentarios, busca respuestas consistentes, ideas nuevas y preocupaciones en el lenguaje corporal</li>
+  </ul>
+  <div class="callout">
+    El análisis del informe es trabajo <em>interpretativo</em>, no descriptivo. El moderador busca hipótesis que quizás fueron confirmadas — o no — por todos los participantes.
+  </div>
+</div>
+</section>
+
+<!-- ══ Procedimiento Figura 4.4 ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Figura 4.4 · Vigente</div>
+  <div class="slide-h">Procedimiento: seis pasos — el error habitual es empezar en el paso 5</div>
+  <div style="display:flex;flex-direction:column;gap:7px;margin-top:4px;">
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 13px;background:white;border:1px solid var(--border);border-left:4px solid #bbb;border-radius:0 5px 5px 0;font-size:13px;color:#333;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0;min-width:20px;">①</span>Especificar los <strong>objetivos de la investigación cualitativa</strong>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 13px;background:white;border:1px solid var(--border);border-left:4px solid #bbb;border-radius:0 5px 5px 0;font-size:13px;color:#333;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0;min-width:20px;">②</span>Establecer los <strong>objetivos específicos del focus group</strong>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 13px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 5px 5px 0;font-size:13px;color:#333;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);flex-shrink:0;min-width:20px;">③</span>Redactar el <strong>cuestionario de selección</strong> de participantes
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:12px;padding:8px 13px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 5px 5px 0;font-size:13px;color:#333;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);flex-shrink:0;min-width:20px;padding-top:2px;">④</span><span>Desarrollar la <strong>guía del moderador</strong> — temas, secuencia y tiempo. No es cuestionario: es mapa de la conversación. Garantiza que distintos moderadores cubran el mismo terreno.</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 13px;background:#edf4fc;border:1px solid #a0bfd8;border-left:4px solid var(--accent);border-radius:0 5px 5px 0;font-size:13px;color:#1a3a5c;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);flex-shrink:0;min-width:20px;">⑤⑥</span>Realizar la sesión → elaborar el informe
+    </div>
+  </div>
+  <div class="piz">✏ Figura 4.4 en pizarrón: diagrama de flujo vertical de los 6 pasos</div>
+</div>
+</section>
+
+<!-- ══ Caso Dove ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso · Dove — Campaña por la Belleza Real 2003</div>
+  <div class="slide-h slide-h-white">Focus groups que transformaron una industria</div>
+  <div style="display:flex;gap:28px;margin-bottom:12px;flex-wrap:wrap;">
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#d4a0a0;line-height:1;">10</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;">países · BR, AR, MX incluidos</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#d4a0a0;line-height:1;">2%</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;">de mujeres se describían<br>como "bellas"</div>
+    </div>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#d4a0a0;line-height:1;">$3B</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:3px;">impacto en medios<br>de la campaña</div>
+    </div>
+  </div>
+  <ul class="bullets bullets-white">
+    <li>FGs exploraron cómo las mujeres percibían la belleza — no la satisfacción con cremas hidratantes</li>
+    <li>Hallazgo: <strong style="color:white;">exclusión del ideal publicitario</strong> como experiencia universal — no habría emergido en ninguna encuesta de satisfacción</li>
+    <li>Los FGs orientaron la encuesta cuantitativa posterior (3,200 mujeres, 10 países) que validó los patrones a escala</li>
+  </ul>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Por qué fue indispensable empezar con focus groups y no directamente con la encuesta? ¿Qué no habría capturado la encuesta sin la fase cualitativa?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Ventajas/desventajas + LATAM ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ventajas, límites y sesgos en LATAM</div>
+  <div class="slide-h">Lo que el libro dice y lo que se agrega en 2024</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">Ventajas (vigentes)</div>
+      <div class="col-body">Inmediatez y riqueza · Efecto "bola de nieve" · Respuestas espontáneas · Rango más amplio de ideas que en entrevistas individuales</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Límites — especialmente en LATAM</div>
+      <div class="col-body"><strong>Sesgo de conformidad</strong> (groupthink) en culturas de alta distancia al poder · <strong>Sesgo de aquiescencia</strong>: evitar contradecir al moderador · <strong>Deseabilidad social</strong> fuerte en alimentación, finanzas y salud</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Desafío metodológico en LATAM</div>
+    <div class="latam-text">Un FG sobre alcohol en Uruguay produce dinámicas radicalmente distintas que en México o Colombia. La <strong>homogeneidad del grupo debe considerar dimensiones culturales locales</strong>, no solo demográficas globales. El moderador debe conocer el contexto del país — no alcanza con que hable español.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN: FG digitales + entrevistas ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 02 · minutos 65–85</div>
+  <div class="sec-title">Focus groups<br>digitales y entrevistas<br>en profundidad</div>
+  <div class="sec-sub">Del chat de 2012 al video HD con IA · Las 6 competencias del entrevistador · Caso Nubank</div>
+</div>
+</section>
+
+<!-- ══ FG en línea ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 · Focus groups en línea — Actualizado radicalmente</div>
+  <div class="slide-h">Del chat de texto al ecosistema digital de investigación cualitativa</div>
+  <ul class="bullets" style="margin-bottom:12px;">
+    <li>El libro (2016) describe chat de texto con emoticones del teclado — el estándar hoy son <strong>video focus groups</strong>: expresión facial visible, transcripción automática con IA, cliente observa desde cualquier lugar</li>
+    <li><strong>MROCs</strong> (Market Research Online Communities): grupos privados de 50–500 participantes que interactúan durante semanas — capturan evolución de opiniones en el tiempo</li>
+    <li><strong>Diarios digitales:</strong> participantes envían fotos, videos y texto por WhatsApp <em>en el momento</em> del comportamiento — elimina el sesgo de retrospección</li>
+  </ul>
+  <div class="tool-grid">
+    <div class="tool-item"><div class="tool-name">Discuss.io</div><div class="tool-desc">Video focus groups remotos. Transcripción con IA en tiempo real.</div></div>
+    <div class="tool-item"><div class="tool-name">Dovetail</div><div class="tool-desc">Repositorio de insights. Codificación temática asistida por IA.</div></div>
+    <div class="tool-item"><div class="tool-name">NVivo / ATLAS.ti</div><div class="tool-desc">Análisis cualitativo. Codificación temática y análisis de discurso.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Entrevistas en profundidad ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Entrevistas en profundidad · Vigente</div>
+  <div class="slide-h">Cuándo son preferibles a los focus groups</div>
+  <div class="def-block">
+    <div class="def-term-label">Entrevista en profundidad — Malhotra</div>
+    <div class="def-text">Entrevista no estructurada, directa y personal. La <strong>indagación</strong> es el elemento técnico central: "¿por qué dice eso?", "¿qué cambió?", "¿podría decirme más?" Nunca aceptar respuestas de sí/no.</div>
+  </div>
+  <ul class="bullets" style="margin-top:10px;">
+    <li><strong>Temas que requieren sondeo detallado:</strong> compra de auto, inversiones, decisiones de alto involucramiento</li>
+    <li><strong>Temas delicados o con normas sociales rígidas:</strong> finanzas personales, salud, relaciones familiares</li>
+    <li><strong>Experiencias sensoriales o complejas:</strong> perfumes, vinos, cuidado personal</li>
+    <li><strong>Profesionales o competidores:</strong> más fácil acceder individualmente que en grupo</li>
+  </ul>
+</div>
+</section>
+
+<!-- ══ Las 6 competencias del entrevistador ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Las 6 competencias del entrevistador · Vigente</div>
+  <div class="slide-h">Criterios para evaluar si alguien está capacitado para entrevistar en profundidad</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px;">
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">① Sin apariencia de superioridad</div>
+      <div style="font-size:12px;color:#333;">El participante debe sentir que su opinión vale igual que cualquier otra.</div>
+    </div>
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">② Lograr comodidad</div>
+      <div style="font-size:12px;color:#333;">Los primeros minutos son críticos — tensión inicial = respuestas superficiales.</div>
+    </div>
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">③ Desapego objetivo pero agradable</div>
+      <div style="font-size:12px;color:#333;">Mostrar sorpresa, aprobación o desacuerdo contamina el proceso.</div>
+    </div>
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">④ Preguntas abiertas e informativas</div>
+      <div style="font-size:12px;color:#333;">Que inviten a desarrollar — no a confirmar.</div>
+    </div>
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">⑤ No aceptar sí/no</div>
+      <div style="font-size:12px;color:#333;">Cada monosílabo es señal de que hay que sondear más profundo.</div>
+    </div>
+    <div style="padding:8px 12px;background:white;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">⑥ Sondeo sistemático</div>
+      <div style="font-size:12px;color:#333;">La indagación diferencia una buena entrevista de una conversación casual.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">
+    <strong>La clave:</strong> "¿Por qué dice eso?" · "¿Qué cambió?" · "¿Podría decirme más?" · "¿Cómo se sintió en ese momento?" — nunca dejar pasar una respuesta sin profundizar.
+  </div>
+</div>
+</section>
+
+<!-- ══ Caso Nubank ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Nubank — Brasil 2013</div>
+  <div class="slide-h slide-h-white">El insight que ninguna encuesta bancaria habría revelado</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">¿Por qué entrevistas y no focus groups?</strong> La relación con el dinero y los bancos es altamente sensible en Brasil — nadie habla con franqueza sobre deudas o vergüenzas financieras en grupo.
+    </div>
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">Hallazgo:</strong> los clientes no odiaban las tarifas en abstracto. Odiaban la <em>asimetría de poder</em> — sentirse tratados como sospechosos, intimidados para no preguntar sobre cobros incorrectos.
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.25);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">La solución atacó la causa:</strong> tarjeta 100% gestionable desde el celular, sin sucursales ni ejecutivos. Hoy: 90M+ clientes en BR, MX y Colombia.
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Cómo diseñarías el cuestionario de selección para las entrevistas de Nubank? ¿Qué perfil incluirías y cuál excluirías?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN: Técnicas proyectivas + etnografía ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 03 · minutos 85–110</div>
+  <div class="sec-title">Técnicas proyectivas,<br>etnografía y<br>mystery shopping</div>
+  <div class="sec-sub">Figura 4.3: el enfoque indirecto · ZMET · Observar en lugar de preguntar</div>
+</div>
+</section>
+
+<!-- ══ Clasificación directa/indirecta ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Figura 4.3 · Vigente</div>
+  <div class="slide-h">Directas vs. indirectas: la clasificación que organiza el capítulo</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Enfoque Directo — objetivo no encubierto</div>
+      <div class="col-body">
+        El propósito del estudio es evidente o se informa a los participantes.<br><br>
+        <strong>Técnicas:</strong> Focus groups · Entrevistas en profundidad<br><br>
+        <strong>Cuándo:</strong> el tema no es especialmente sensible y los participantes pueden articular sus motivaciones conscientemente
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Enfoque Indirecto — objetivo encubierto</div>
+      <div class="col-body">
+        El verdadero propósito se oculta. Se pide que interpreten el comportamiento de <em>otros</em> — proyectando indirectamente los propios.<br><br>
+        <strong>Técnicas:</strong> Técnicas proyectivas<br><br>
+        <strong>Cuándo:</strong> normas sociales rígidas, motivaciones inconscientes, o cuando la pregunta directa produce respuestas defensivas
+      </div>
+    </div>
+  </div>
+  <div class="piz">✏ Este árbol ya debería estar en el pizarrón desde la Tabla 4.1 — referenciarlo ahora</div>
+</div>
+</section>
+
+<!-- ══ Las 5 técnicas proyectivas ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Técnicas proyectivas · Vigente</div>
+  <div class="slide-h">Las cinco técnicas del libro</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;">
+    <div style="padding:9px 13px;background:white;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Asociación de palabras</div>
+      <div style="font-size:12px;color:#333;">Palabras una a una — primera respuesta. Más de 3 seg = racionalización.</div>
+    </div>
+    <div style="padding:9px 13px;background:white;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Frases incompletas</div>
+      <div style="font-size:12px;color:#333;">Más información que la asociación de palabras. Revela más el propósito del estudio.</div>
+    </div>
+    <div style="padding:9px 13px;background:white;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Respuesta ante imágenes / Caricaturas</div>
+      <div style="font-size:12px;color:#333;">Se muestra una imagen — el participante cuenta una historia. Las caricaturas son más sencillas de analizar.</div>
+    </div>
+    <div style="padding:9px 13px;background:white;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Técnica de la tercera persona</div>
+      <div style="font-size:12px;color:#333;">"¿Cree que <em>su vecino</em> tiene miedo de viajar en avión?" Reduce la presión social por dar respuestas aceptables.</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿En qué categorías de productos o servicios usarían técnicas proyectivas en lugar de focus groups directos? Piensen en tres situaciones concretas.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ ZMET + Nestlé ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Técnica avanzada · ZMET — Zaltman Metaphor Elicitation Technique</div>
+  <div class="slide-h slide-h-white">Nestlé y el chocolate: lo que nadie podía decir directamente</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+    <div style="padding:10px 14px;background:rgba(255,255,255,0.06);border-radius:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">¿Qué es ZMET?</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">Desarrollado en Harvard por Gerald Zaltman. Combina imágenes seleccionadas por los participantes + entrevistas en profundidad + análisis de metáforas. Accede al pensamiento inconsciente. Lo usan Coca-Cola, P&amp;G y Nestlé.</div>
+    </div>
+    <div style="padding:10px 14px;background:rgba(255,255,255,0.06);border-radius:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">El experimento de Nestlé</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">Pedido: traigan imágenes que representen cómo se sienten al comer chocolate. <strong style="color:white;">Nadie trajo imágenes de barras de chocolate.</strong> Trajeron fotos de vacaciones, familia, infancia, momentos de soledad reconfortante.</div>
+    </div>
+    <div style="padding:10px 14px;background:rgba(44,95,138,0.25);border-radius:8px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">El insight</div>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">El chocolate es un <em>mecanismo de regulación emocional</em> — un refugio seguro y privado. Transformó la comunicación de KitKat: "Have a break, have a KitKat". Nadie lo habría articulado directamente.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Etnografía + netnografía + mystery shopping ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 · Etnografía y netnografía — Actualizado</div>
+  <div class="slide-h">Observar en lugar de preguntar</div>
+  <div class="def-block">
+    <div class="def-term-label">Investigación etnográfica — Malhotra</div>
+    <div class="def-text">Observa en el <strong>entorno natural</strong>. Captura la diferencia entre lo que las personas <em>dicen</em> que hacen y lo que <em>realmente</em> hacen.</div>
+  </div>
+  <ul class="bullets" style="margin-top:10px;">
+    <li><strong>Caso Airbnb (2009):</strong> los fundadores visitaron los departamentos listados en NY — fotos de mala calidad que los propietarios no percibían como problema. Solo la observación etnográfica lo reveló. Reservas con fotos profesionales: +200–300%</li>
+    <li><strong>Netnografía:</strong> etnografía en comunidades digitales — reseñas de Google Maps, grupos de Facebook, Reddit, TikTok. Datos espontáneos no afectados por la presencia del investigador</li>
+    <li><strong>Mystery shopping:</strong> hoy incluye mystery calling (call centers), mystery chatting (bots de WhatsApp) y mystery shopping digital (e-commerce)</li>
+  </ul>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Netnografía en LATAM</div>
+    <div class="latam-text">WhatsApp (90%+ en BR, AR, MX) genera grupos temáticos de alta riqueza — pero investigar en grupos privados requiere consentimiento explícito (LGPD / Ley 18.331 / LFPDPPP).</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN: Social media, IA, LATAM y ética ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 04 · minutos 110–143</div>
+  <div class="sec-title">Social media, IA,<br>LATAM y ética</div>
+  <div class="sec-sub">Los tres casos del libro · Potencia y límites de la IA · Cuatro desafíos · Ética del libro + cinco nuevos</div>
+</div>
+</section>
+
+<!-- ══ Social media: tres casos del libro ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Social media e investigación cualitativa · Casos vigentes en su lógica</div>
+  <div class="slide-h">El libro: tres formas de hacer investigación cualitativa en social media</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+    <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>① JCPenney — Ambrielle Team (MROC como focus group extendido)</strong><br>
+      Comunidad privada de lencería: los miembros del equipo del producto moderaban conversaciones, probaban productos, iteraban. Resultado: cambios en bandas, tirantes y tallas. Ventas aumentaron. Lógica metodológica = MROC de hoy.
+    </div>
+    <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>② Burger King — Whopper Freakout (social media como disparador para profundizar)</strong><br>
+      Reacciones de clientes ante la posible discontinuación del Whopper → recuerdos de infancia. Entrevistas en profundidad posteriores con participantes seleccionados confirmaron el insight. Campaña basada en nostalgia. Hallazgo: el Whopper era objeto de nostalgia, no solo hamburguesa.
+    </div>
+    <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>③ GlaxoSmithKline — Alli (técnicas proyectivas en comunidades digitales)</strong><br>
+      Frases incompletas en línea: "Cuando hablas contigo mismo, te refieres a ti como ______". Fotos de lo que más les desagradaba de su obesidad. Insight: frustración por exclusión de actividades cotidianas, disposición a progreso lento. Alli vendió $155M en las primeras 6 semanas.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ IA: puede / no puede ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Inteligencia Artificial en investigación cualitativa</div>
+  <div class="slide-h">La IA identifica patrones — el investigador interpreta el significado</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">Lo que la IA sí puede hacer</div>
+      <div class="col-body">Análisis de sentimiento sobre miles de reseñas en minutos · Transcripción automática con identificación de hablantes · Topic modeling — identificar temas frecuentes · Codificación temática asistida como punto de partida</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Lo que la IA NO puede hacer</div>
+      <div class="col-body">Interpretar el <em>significado cultural</em> de los patrones · Capturar matices lingüísticos regionales (sarcasmo rioplatense) · Revelar insights emergentes que nadie anticipaba · Reemplazar la empatía del investigador en temas sensibles</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>Riesgo emergente — Respondentes sintéticos:</strong> usar IA para simular respuestas sin hacer investigación real. Los modelos reproducen sesgos del entrenamiento y no pueden revelar lo que nadie anticipaba — exactamente lo que hace valiosa a la cualitativa.
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Cuándo usarían análisis de sentimiento con IA sobre 50,000 reseñas vs. 10 entrevistas en profundidad? ¿Son alternativas o complementarias?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Desafíos LATAM ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Contexto latinoamericano — Cuatro desafíos que el libro no aborda</div>
+  <div class="slide-h slide-h-white">LATAM no es culturalmente homogéneo</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="padding:9px 13px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:12.5px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">① Sesgo de aquiescencia:</strong> tendencia a responder positivamente en culturas de alta distancia al poder. Solución: preguntas indirectas, grupos homogéneos en estatus.
+    </div>
+    <div style="padding:9px 13px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:12.5px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">② Sesgo de deseabilidad social:</strong> fuerte en alimentación, finanzas y salud. Solución: entrevistas individuales o técnicas proyectivas.
+    </div>
+    <div style="padding:9px 13px;background:rgba(255,255,255,0.06);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">③ Heterogeneidad intra-regional:</strong> un FG sobre "la familia" produce dinámicas muy distintas en CDMX, Santiago, Buenos Aires y São Paulo. La generalización entre países requiere validación explícita.
+    </div>
+    <div style="padding:9px 13px;background:rgba(255,255,255,0.06);border-left:4px solid var(--green);border-radius:0 6px 6px 0;font-size:12.5px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">④ Informalidad del mercado:</strong> 45–70% de la economía es informal en varios países. La investigación diseñada para consumidores formales pierde segmentos clave del mercado real.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Ética: los 4 temas del libro ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética · Malhotra 2016 — Cuatro temas vigentes</div>
+  <div class="slide-h">Lo que el libro establece — dilemas reales de la práctica</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:8px;">
+    <div style="padding:9px 14px;background:#f5f0eb;border:1px solid #d4cec5;border-left:4px solid #9a9088;border-radius:0 6px 6px 0;font-size:13px;color:#444;">
+      <strong>① Encubrimiento + debriefing obligatorio</strong> — Las técnicas indirectas ocultan el propósito del estudio. Al terminar es obligatorio informar a los participantes y darles la oportunidad de hacer preguntas o retirarse.
+    </div>
+    <div style="padding:9px 14px;background:#f5f0eb;border:1px solid #d4cec5;border-left:4px solid #9a9088;border-radius:0 6px 6px 0;font-size:13px;color:#444;">
+      <strong>② Consentimiento informado para grabaciones</strong> — Firma escrita que revele el propósito real y nombre a todas las personas que tendrán acceso. Los participantes pueden negarse — sus comentarios se editan fuera del material.
+    </div>
+    <div style="padding:9px 14px;background:#f5f0eb;border:1px solid #d4cec5;border-left:4px solid #9a9088;border-radius:0 6px 6px 0;font-size:13px;color:#444;">
+      <strong>③ Comodidad del participante</strong> — Si no desea responder sobre un tema específico, el entrevistador no puede presionar más. El respeto por el bienestar del participante impone límites al moderador.
+    </div>
+    <div style="padding:9px 14px;background:#f5f0eb;border:1px solid #d4cec5;border-left:4px solid #9a9088;border-radius:0 6px 6px 0;font-size:13px;color:#444;">
+      <strong>④ Mal uso de hallazgos</strong> — Usar que los consumidores subestiman riesgos de privacidad para diseñar interfaces más confusas es uso ilegítimo de resultados de investigación cualitativa.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ Ética: 5 temas nuevos ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética · Cinco temas que el libro no podía anticipar</div>
+  <div class="slide-h">Dilemas del entorno digital</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>⑤ Consentimiento en netnografía</strong> — ESOMAR recomienda informar a los autores cuando los comentarios son identificables y el tema es sensible.
+    </div>
+    <div style="padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>⑥ Usos secundarios de grabaciones</strong> — ¿Puede usarse la grabación de una entrevista para entrenar modelos de IA? Los formularios de consentimiento rara vez son específicos sobre esto.
+    </div>
+    <div style="padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>⑦ Respondentes sintéticos</strong> — Usar IA para simular respuestas de consumidores sin comunicarlo al cliente es engaño al cliente.
+    </div>
+    <div style="padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>⑧ Privacidad en diarios digitales</strong> — Los participantes comparten fotos de su hogar y rutinas. LGPD / Ley 18.331 / LFPDPPP aplican directamente.
+    </div>
+    <div style="padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--muted);border-radius:0 6px 6px 0;font-size:12.5px;color:#333;">
+      <strong>⑨ Mystery shopping y derechos laborales</strong> — Observación encubierta que resulta en consecuencias laborales negativas genera tensión ética sobre el uso del engaño para evaluar personas.
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:8px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Un cliente pide usar comentarios de redes sociales de clientes de la competencia. ¿Qué consideraciones éticas y legales tendrían en cuenta?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ CIERRE ══ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Cierre · minutos 143–150</div>
+  <div class="sec-title" style="font-size:2.0rem;margin-bottom:24px;color:var(--paper);">Tres ideas<br>para llevarse</div>
+  <ul class="bullets bullets-white" style="max-width:660px;margin-bottom:24px;">
+    <li><strong style="color:white;">① La cualitativa revela el por qué</strong> — Los cuantitativos muestran qué está pasando. La cualitativa explora las motivaciones y los significados que hacen que ese qué ocurra</li>
+    <li><strong style="color:white;">② La técnica debe seguir al problema</strong> — Focus group, entrevista, técnica proyectiva, diario digital: la elección depende del tema, del participante y del grado de sensibilidad del contenido</li>
+    <li><strong style="color:white;">③ Los hallazgos cualitativos son exploratorios</strong> — Orientan hipótesis para la investigación cuantitativa posterior. Nunca se usan para hacer estimaciones estadísticas sobre la población general</li>
+  </ul>
+  <div class="cover-chip">Próxima clase: Capítulo 5 — Investigación descriptiva y encuestas</div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
