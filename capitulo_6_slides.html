@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 6 — Experimentación e investigación causal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; height: 100%; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 720px; display: flex; flex-direction: column; position: relative; box-sizing: border-box; }
+
+.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
+.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
+
+.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
+
+.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
+.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+
+.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h-white { color:white; }
+
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+.def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
+.def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
+.def-text strong { color:#d4a0a0; }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:4px; }
+.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-box-dark { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 16px; }
+.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-label-blue { color:var(--blue); }
+.col-label-gold { color:var(--gold); }
+.col-label-green { color:var(--green); }
+.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
+.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
+
+.ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table tr:nth-child(even) td { background:#faf8f5; }
+.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
+.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
+
+.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:4px; }
+.pause-q { font-size:13px; color:#4a3a10; line-height:1.5; font-style:italic; }
+
+.latam-box { background:var(--greenbg); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:4px; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.5; }
+
+.notation-box { background:#f0f4f8; border:1px solid #c0d4e8; border-radius:8px; padding:12px 18px; margin:10px 0; font-family:'DM Mono',monospace; font-size:14px; color:var(--blue); letter-spacing:1px; }
+.notation-box-dark { background:rgba(44,95,138,0.2); border:1px solid rgba(44,95,138,0.4); border-radius:8px; padding:12px 18px; margin:10px 0; font-family:'DM Mono',monospace; font-size:14px; color:#8ab4d4; letter-spacing:1px; }
+
+.design-row { display:flex; align-items:flex-start; gap:14px; padding:10px 0; border-bottom:1px solid var(--border); }
+.design-row:last-child { border-bottom:none; }
+.design-badge { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 8px; border-radius:10px; white-space:nowrap; flex-shrink:0; margin-top:2px; }
+.badge-pre { background:#fdecea; color:#8b2218; border:1px solid #f5c6c2; }
+.badge-true { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+.badge-stat { background:#e8f0f8; color:#1a3a5c; border:1px solid #b8d0e8; }
+.design-text { font-size:12.5px; color:#333; line-height:1.5; }
+.design-text strong { color:var(--ink); }
+
+.pizarron { background:rgba(184,134,11,0.12); border:1px dashed var(--gold); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px; }
+.pizarron-icon { font-size:16px; }
+.pizarron-text { font-size:11.5px; color:#5a4000; font-style:italic; }
+
+.chip-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.chip { font-family:'DM Mono',monospace; font-size:10px; padding:3px 10px; border-radius:12px; border:1px solid; }
+.chip-red { background:#fdecea; color:#8b2218; border-color:#f5c6c2; }
+.chip-blue { background:#e8f0f8; color:#1a3a5c; border-color:#b8d0e8; }
+.chip-gold { background:#fff8e1; color:#5a4000; border-color:#ffe082; }
+.chip-green { background:#eef6ee; color:#1b5e20; border-color:#a5d6a7; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══ PORTADA ══ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 6</div>
+  <div class="cover-title">Experimentación e<br><em>investigación causal</em></div>
+  <div style="margin-bottom:28px;">
+    <div class="chip-row">
+      <span class="chip chip-red">Malhotra 2016 · Cap. 6</span>
+      <span class="chip chip-blue">pp. 154–179</span>
+      <span class="chip chip-gold">150 minutos</span>
+    </div>
+  </div>
+  <span class="cover-chip">Paula Pereda · Universidad de Montevideo</span>
+</div>
+</section>
+
+<!-- ══ AGENDA ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Hoja de ruta · 150 minutos</div>
+  <div class="slide-h">¿Qué vamos a aprender hoy?</div>
+  <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px;">
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">0–20 min</span>
+      <span style="font-size:13px;color:var(--ink);">Caso de apertura + concepto de causalidad</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">20–45 min</span>
+      <span style="font-size:13px;color:var(--ink);">Tres condiciones de causalidad + terminología experimental</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">45–75 min</span>
+      <span style="font-size:13px;color:var(--ink);">Validez interna y externa + variables extrañas</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">75–110 min</span>
+      <span style="font-size:13px;color:var(--ink);">Tipos de diseños experimentales — notación y lógica</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">110–135 min</span>
+      <span style="font-size:13px;color:var(--ink);">A/B testing digital + prueba de mercado</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">135–150 min</span>
+      <span style="font-size:13px;color:var(--ink);">LatAm, ética + cierre</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 1 — CAUSALIDAD ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 01 · minutos 0–20</div>
+  <div class="sec-title">¿Qué significa<br>que X <em>causa</em> Y?</div>
+  <div class="sec-sub">Causalidad: el sentido común vs. la ciencia</div>
+</div>
+</section>
+
+<!-- Caso apertura -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Caso de apertura · Rite Aid Drug Company</div>
+  <div class="slide-h">Compras en el punto de venta: ¿el audio vende?</div>
+  <div class="def-block">
+    <div class="def-term-label">Pregunta de decisión gerencial</div>
+    <div class="def-text">¿Los anuncios de radio dentro de la tienda <strong>causan</strong> un aumento en las compras de los productos anunciados?</div>
+  </div>
+  <ul class="bullets" style="margin-top:10px;">
+    <li>20 farmacias seleccionadas estadísticamente equivalentes (tamaño, ubicación, antigüedad, afluencia)</li>
+    <li>10 farmacias → grupo experimental (con radio); 10 → grupo de control (sin radio)</li>
+    <li>Resultado: ventas significativamente superiores en tiendas con anuncios — y el diseño permitía atribuirlo causalmente</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta inicial</div>
+    <div class="pause-q">¿Por qué no alcanzaba con comparar las ventas antes y después de instalar el radio en las tiendas? ¿Qué otras cosas podrían haber cambiado en ese período?</div>
+  </div>
+</div>
+</section>
+
+<!-- Causalidad cotidiana vs. científica -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Concepto central · Malhotra Cap. 6</div>
+  <div class="slide-h">Dos significados de "X causa Y"</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Sentido común</div>
+      <div class="col-body"><strong>Determinista:</strong> X es la única causa de Y. Siempre que ocurre X, ocurre Y. "La campaña causó el aumento de ventas" implica que sin ella no hubiera habido ningún aumento.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">Significado científico</div>
+      <div class="col-body"><strong>Probabilístico:</strong> X aumenta la probabilidad de Y. No es la única causa, y la relación no es perfecta. El investigador busca que X sea <em>una</em> causa de Y, controlando el resto.</div>
+    </div>
+  </div>
+  <div class="pizarron" style="margin-top:14px;">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Dibujar en pizarrón: diagrama de causa múltiple — "ventas" en el centro, con flechas desde "publicidad", "precio", "estacionalidad", "acciones del competidor". X causa Y pero no es la única causa.</span>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Para pensar</div>
+    <div class="pause-q">¿Cuándo el gerente de marketing dice "nuestra campaña de Instagram causó el pico de ventas de marzo" — está usando el significado cotidiano o el científico? ¿Qué necesitaría para poder decirlo científicamente?</div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Mercado Libre apertura -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LatAm · Mercado Libre</div>
+  <div class="slide-h slide-h-white">¿El envío gratis <em>causa</em> mayor conversión o solo la revela?</div>
+  <ul class="bullets bullets-white" style="margin-top:8px;">
+    <li><strong>Correlación observada:</strong> los productos con envío gratis tienen 3× más conversión — ¿el envío gratis la causa o los mejores vendedores lo ofrecen?</li>
+    <li><strong>Problema de confusión:</strong> los vendedores con envío gratis también tienen mejor reputación, mejores fotos y precios más competitivos</li>
+    <li><strong>La solución causal:</strong> A/B test — mismos productos, mismo vendedor, mismo precio. La única diferencia: el badge de "envío gratis" aparece o no según asignación aleatoria del usuario</li>
+    <li><strong>Resultado causal:</strong> el envío gratis tiene efecto incremental positivo — pero menor al de la correlación observada. La diferencia: el sesgo de selección inflaba el correlacional</li>
+  </ul>
+  <div class="latam-box">
+    <div class="latam-label">🌎 LatAm</div>
+    <div class="latam-text">Mercado Libre opera en 18 países de América Latina y corre más de 200 experimentos activos en simultáneo. El equipo de growth tiene una infraestructura experimental comparable a la de Amazon o eBay.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 2 — TRES CONDICIONES ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 02 · minutos 20–45</div>
+  <div class="sec-title">Las tres condiciones<br>de causalidad</div>
+  <div class="sec-sub">Ninguna sola es suficiente — las tres deben satisfacerse</div>
+</div>
+</section>
+
+<!-- Tres condiciones -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — p. 157</div>
+  <div class="slide-h">Condiciones necesarias para inferir causalidad</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px;">
+    <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:24px;color:var(--accent);font-weight:900;min-width:30px;">1</span>
+      <div>
+        <div style="font-weight:600;font-size:13.5px;margin-bottom:3px;">Variación concomitante</div>
+        <div style="font-size:12.5px;color:#555;line-height:1.5;">X e Y deben variar juntas según la hipótesis. Si no existe covariación, X no puede ser causa de Y — aunque coincidan en el tiempo.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:24px;color:var(--blue);font-weight:900;min-width:30px;">2</span>
+      <div>
+        <div style="font-weight:600;font-size:13.5px;margin-bottom:3px;">Orden temporal</div>
+        <div style="font-size:12.5px;color:#555;line-height:1.5;">X debe preceder o ser simultánea a Y. Una causa no puede ocurrir después de su efecto. En el diseño experimental: el tratamiento se aplica antes de medir la VD.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;padding:12px 16px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:24px;color:var(--gold);font-weight:900;min-width:30px;">3</span>
+      <div>
+        <div style="font-weight:600;font-size:13.5px;margin-bottom:3px;">Eliminación de factores alternativos</div>
+        <div style="font-size:12.5px;color:#555;line-height:1.5;">Deben descartarse explicaciones rivales. Esto es lo más difícil — y es precisamente lo que el diseño experimental busca garantizar con control y aleatorización.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Nubank -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LatAm · Nubank (Brasil)</div>
+  <div class="slide-h slide-h-white">¿El límite de crédito más alto <em>causa</em> mayor retención?</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+    <div style="padding:9px 14px;background:rgba(192,57,43,0.15);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;">Condición 1 — Variación concomitante</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);margin-top:3px;">Datos históricos: usuarios con límites mayores tienen retención superior. La covariación existe — pero puede ser espuria.</div>
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.2);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:#8ab4d4;text-transform:uppercase;letter-spacing:1px;">Condición 2 — Orden temporal</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);margin-top:3px;">Experimento: se asigna el límite mayor ANTES de medir retención a 12 meses. El tratamiento precede al efecto medido.</div>
+    </div>
+    <div style="padding:9px 14px;background:rgba(184,134,11,0.15);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">Condición 3 — Eliminación de alternativas</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);margin-top:3px;">Aleatorización garantiza equivalencia: mismo perfil crediticio, edad, ingresos. La diferencia en retención se atribuye causalmente al límite.</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿Qué condición quedaría comprometida si Nubank ofreciera el límite mayor solo a usuarios que ya hubieran hecho 3 compras? ¿Por qué?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 3 — TERMINOLOGÍA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 03 · minutos 35–50</div>
+  <div class="sec-title">El lenguaje del<br>experimento</div>
+  <div class="sec-sub">Variables, grupos, notación simbólica</div>
+</div>
+</section>
+
+<!-- Terminología -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — pp. 159–161</div>
+  <div class="slide-h">Conceptos fundamentales del diseño experimental</div>
+  <div class="two-col" style="margin-top:6px;">
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box"><div class="col-label">Variable independiente (VI)</div><div class="col-body">La que el investigador <strong>manipula</strong>. Precio, diseño, mensaje, canal. También llamada "tratamiento" o "factor".</div></div>
+      <div class="col-box"><div class="col-label col-label-blue">Variable dependiente (VD)</div><div class="col-body">La que se <strong>mide</strong> para detectar el efecto. Ventas, conversión, intención de compra, tiempo en sitio.</div></div>
+      <div class="col-box"><div class="col-label col-label-gold">Variables extrañas</div><div class="col-body">Todas las variables distintas a la VI que pueden afectar la VD. Son la amenaza principal a la validez interna.</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box"><div class="col-label">Unidades de prueba</div><div class="col-body">Individuos, grupos, tiendas o regiones sobre los que se aplica el tratamiento.</div></div>
+      <div class="col-box"><div class="col-label col-label-green">Grupo experimental</div><div class="col-body">Las unidades que <strong>reciben</strong> el tratamiento (X).</div></div>
+      <div class="col-box"><div class="col-label" style="color:var(--muted);">Grupo de control</div><div class="col-body">Las unidades que <strong>no reciben</strong> el tratamiento. Son el punto de comparación.</div></div>
+    </div>
+  </div>
+  <div class="pizarron" style="margin-top:10px;">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Dibujar en pizarrón: Figura 6.3 de Malhotra — el esquema de definición de símbolos del experimento. X = tratamiento, O = observación, R = asignación aleatoria. El tiempo avanza →</span>
+  </div>
+</div>
+</section>
+
+<!-- Notación simbólica -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Notación estándar — Malhotra 2016</div>
+  <div class="slide-h">Cómo leer el lenguaje de los diseños</div>
+  <div style="display:flex;gap:20px;margin:10px 0;align-items:flex-start;">
+    <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+      <div class="notation-box">X</div>
+      <div style="font-size:12.5px;color:#555;">Aplicación del tratamiento (VI). Puede haber X₁, X₂ para distintos niveles.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+      <div class="notation-box">O₁ · O₂</div>
+      <div style="font-size:12.5px;color:#555;">Observación/medición de la VD. O₁ = pretest (antes), O₂ = postest (después).</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+      <div class="notation-box">R</div>
+      <div style="font-size:12.5px;color:#555;">Asignación aleatoria de las unidades a los grupos. La R es la garantía de equivalencia.</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;">
+    <div class="def-block">
+      <div class="def-term-label">Ejemplo: diseño de solo postest con grupo de control</div>
+      <div class="def-text" style="font-family:'DM Mono',monospace;font-size:14px;line-height:1.8;">R: X → O₁ &nbsp;&nbsp;(grupo experimental)<br>R: — → O₁ &nbsp;&nbsp;(grupo de control)</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px;font-style:italic;">La R garantiza que los grupos son equivalentes antes del tratamiento — por eso no se necesita pretest. Este es el diseño estándar del A/B testing moderno.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 4 — VALIDEZ ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 04 · minutos 45–75</div>
+  <div class="sec-title">Validez interna<br>y externa</div>
+  <div class="sec-sub">La tensión central del diseño experimental</div>
+</div>
+</section>
+
+<!-- Validez: definiciones -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — p. 162, Figura 6.4</div>
+  <div class="slide-h">Dos dimensiones de validez en todo experimento</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border:2px solid var(--accent);">
+      <div class="col-label">Validez interna</div>
+      <div class="col-body" style="font-size:13px;line-height:1.6;"><strong>¿La VI realmente causó los cambios en la VD?</strong><br><br>Requisito mínimo básico. Sin validez interna, los resultados no dicen nada. La garantiza el control de variables extrañas + aleatorización.</div>
+    </div>
+    <div class="col-box" style="border:2px solid var(--blue);">
+      <div class="col-label col-label-blue">Validez externa</div>
+      <div class="col-body" style="font-size:13px;line-height:1.6;"><strong>¿Los resultados se generalizan al mundo real?</strong><br><br>A otras poblaciones, momentos, contextos. Los experimentos de laboratorio la sacrifican en favor del control interno.</div>
+    </div>
+  </div>
+  <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-top:12px;font-size:12.5px;color:#333;">
+    <strong>La tensión irreducible:</strong> cuanto más se controla el ambiente (↑ validez interna), menos se parece al mercado real (↓ validez externa). La solución de Malhotra: usar diseños de laboratorio en etapas exploratorias, diseños de campo para confirmar y generalizar.
+  </div>
+  <div class="pizarron">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Dibujar en pizarrón: Figura 6.4 de Malhotra — el diagrama bifurcado de validez interna (¿causó?) vs. validez externa (¿generaliza?).</span>
+  </div>
+</div>
+</section>
+
+<!-- Variables extrañas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — pp. 163+ · Variables de confusión</div>
+  <div class="slide-h">Fuentes de variables extrañas que amenazan la validez interna</div>
+  <table class="ref-table">
+    <tr><th>Variable extraña</th><th>Descripción breve</th><th>Ejemplo en LATAM</th></tr>
+    <tr><td><strong>Historia</strong></td><td>Evento externo ocurre durante el experimento</td><td>Estallido social chileno durante experimento de Falabella (2019)</td></tr>
+    <tr><td><strong>Maduración</strong></td><td>Cambio natural de las unidades con el tiempo</td><td>Consumidores aprenden a usar banca digital durante el experimento</td></tr>
+    <tr><td><strong>Administración de pruebas</strong></td><td>El pretest afecta el postest</td><td>Encuesta de satisfacción previa sensibiliza a los clientes sobre calidad de servicio</td></tr>
+    <tr><td><strong>Sesgo de selección</strong></td><td>Grupos no equivalentes antes del experimento</td><td>Asignar envío gratis solo a los mejores vendedores de Mercado Libre</td></tr>
+    <tr><td><strong>Mortalidad experimental</strong></td><td>Abandono diferencial entre grupos</td><td>Usuarios del grupo con nueva UI abandonan la app más; solo quedan los que se adaptan bien</td></tr>
+    <tr><td><strong>Regresión estadística</strong></td><td>Valores extremos regresan a la media</td><td>Seleccionar tiendas con ventas excepcionalmente bajas para el grupo experimental</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- Caso Falabella - historia -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso · Historia como variable extraña</div>
+  <div class="slide-h slide-h-white">Falabella Chile y el experimento interrumpido (octubre 2019)</div>
+  <ul class="bullets bullets-white" style="margin-top:8px;">
+    <li><strong>Diseño:</strong> nuevas pantallas interactivas en 20 tiendas (10 experimental, 10 control), para medir efecto en ventas de electrónica</li>
+    <li><strong>El problema:</strong> el 18 de octubre de 2019 comenzó el estallido social — tiendas experimentales en zonas de concentración de manifestaciones sufrieron cierres adicionales</li>
+    <li><strong>Resultado:</strong> cualquier diferencia entre grupos reflejaba la geografía del conflicto, no el efecto de las pantallas — validez interna destruida</li>
+    <li><strong>La variable extraña de historia:</strong> un evento externo afectó diferencialmente a los grupos, imposibilitando la atribución causal</li>
+  </ul>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta para el aula</div>
+    <div class="pause-q">¿Qué opciones tenía Falabella? ¿Cancelar, suspender y reiniciar, o intentar controlar estadísticamente el efecto del estallido? ¿Cuál recomendarías?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 5 — TIPOS DE DISEÑOS ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 05 · minutos 75–110</div>
+  <div class="sec-title">Tipos de diseños<br>experimentales</div>
+  <div class="sec-sub">Preexperimentales · Verdaderos · Estadísticos</div>
+</div>
+</section>
+
+<!-- Clasificación general -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — pp. 163–169</div>
+  <div class="slide-h">Tres familias de diseños — criterios clave</div>
+  <table class="ref-table" style="margin-top:8px;">
+    <tr><th>Criterio</th><th style="color:#f5c6c2;">Preexperimental</th><th style="color:#a5d6a7;">Experimental verdadero</th><th style="color:#b8d0e8;">Estadístico</th></tr>
+    <tr><td>Grupo de control</td><td>✗ No</td><td>✓ Sí</td><td>✓ Sí</td></tr>
+    <tr><td>Aleatorización (R)</td><td>✗ No</td><td>✓ Sí</td><td>✓ Sí</td></tr>
+    <tr><td>Validez interna</td><td>Baja</td><td>Alta</td><td>Alta</td></tr>
+    <tr><td>Variables independientes</td><td>1</td><td>1</td><td>2 o más</td></tr>
+    <tr><td>Detecta interacciones entre VI</td><td>✗ No</td><td>✗ No</td><td>✓ Sí</td></tr>
+    <tr><td>Uso típico</td><td>Exploración inicial</td><td>Investigación causal estándar</td><td>Optimización multivariable</td></tr>
+  </table>
+  <div class="pizarron" style="margin-top:8px;">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Dibujar en pizarrón: la escala de "poder causal" — de izquierda (bajo control, alta rapidez) a derecha (alto control, mayor costo y tiempo). Los preexperimentales a la izquierda, los estadísticos a la derecha.</span>
+  </div>
+</div>
+</section>
+
+<!-- Diseños preexperimentales -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Diseños preexperimentales — Malhotra pp. 164–165</div>
+  <div class="slide-h">Tres diseños sin aleatorización ni grupo de control</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+    <div class="design-row">
+      <span class="design-badge badge-pre">E1</span>
+      <div class="design-text"><strong>Estudio de caso único:</strong> X → O₁<br>Se aplica tratamiento y se mide. Sin pretest ni control. No permite ninguna inferencia causal.</div>
+    </div>
+    <div class="design-row">
+      <span class="design-badge badge-pre">E2</span>
+      <div class="design-text"><strong>Pretest-postest con un grupo:</strong> O₁ → X → O₂<br>La diferencia O₂−O₁ se atribuye a X, pero historia, maduración y efecto del pretest no están controlados.</div>
+    </div>
+    <div class="design-row">
+      <span class="design-badge badge-pre">E3</span>
+      <div class="design-text"><strong>Diseño del grupo estático:</strong> X → O₁ (experimental) / — → O₁ (control) — sin R<br>Hay control pero sin aleatorización. Sesgo de selección es la amenaza principal.</div>
+    </div>
+  </div>
+  <div class="notation-box" style="margin-top:10px;">R ausente → grupos no equivalentes → sesgo de selección → inferencia causal inválida</div>
+</div>
+</section>
+
+<!-- Diseños verdaderos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Diseños experimentales verdaderos — Malhotra pp. 166–167</div>
+  <div class="slide-h">Dos diseños con aleatorización — el estándar de oro</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:6px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span class="design-badge badge-true">EV1 — Pretest-postest con grupo de control</span>
+      </div>
+      <div class="notation-box" style="margin:4px 0;">R: O₁ → X → O₂ &nbsp;(experimental)<br>R: O₁ → — → O₂ &nbsp;(control)</div>
+      <div style="font-size:12.5px;color:#444;margin-top:6px;">Ventajas: controla historia, maduración, sesgo de selección. Limitación: interacción pretest-tratamiento (los premuestreados pueden reaccionar diferente).</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:14px 18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span class="design-badge badge-true">EV2 — Solo postest con grupo de control ★</span>
+      </div>
+      <div class="notation-box" style="margin:4px 0;">R: X → O₁ &nbsp;(experimental)<br>R: — → O₁ &nbsp;(control)</div>
+      <div style="font-size:12.5px;color:#444;margin-top:6px;">El más limpio. La R garantiza equivalencia previa — no hace falta pretest. Elimina el efecto de reactividad. <strong>Es el diseño estándar del A/B testing moderno.</strong></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Diseño factorial -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Diseño estadístico — Malhotra pp. 168–169</div>
+  <div class="slide-h">Diseño factorial: medir dos VI y su interacción</div>
+  <div class="def-block" style="margin-bottom:10px;">
+    <div class="def-term-label">Interacción</div>
+    <div class="def-text">Ocurre cuando el efecto de una VI <strong>depende del nivel</strong> de otra VI. Solo un diseño factorial puede detectarla.</div>
+  </div>
+  <div style="margin:8px 0;font-size:13px;color:#333;"><strong>Ejemplo — iFood (Brasil):</strong> factorial 2×2 para notificaciones push</div>
+  <table class="ref-table">
+    <tr><th></th><th>Mediodía</th><th>7pm</th></tr>
+    <tr><td><strong>Oferta de descuento</strong></td><td>✓ Alta conversión</td><td>Conversión media</td></tr>
+    <tr><td><strong>Recordatorio de carrito</strong></td><td>Conversión baja</td><td>✓ Alta conversión</td></tr>
+  </table>
+  <div style="font-size:12.5px;color:#444;margin-top:8px;line-height:1.5;">La <strong>interacción</strong> es clave: el descuento funciona mejor a mediodía; el recordatorio funciona mejor a las 7pm. Un experimento con un solo factor hubiera perdido este insight — y posiblemente hubiera llegado a la conclusión equivocada.</div>
+  <div class="pizarron">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Dibujar en pizarrón: la tabla factorial 2×2 — Factor A (filas) × Factor B (columnas). Marcar las 4 celdas y mostrar cómo los efectos de A dependen del nivel de B.</span>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 6 — A/B TESTING Y PRUEBA DE MERCADO ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 06 · minutos 110–135</div>
+  <div class="sec-title">A/B testing digital<br>y prueba de mercado</div>
+  <div class="sec-sub">El experimento como herramienta de decisión empresarial</div>
+</div>
+</section>
+
+<!-- A/B testing -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Experimentación en la web — Malhotra p. 169 (actualizado)</div>
+  <div class="slide-h">A/B testing: el diseño de solo postest en la era digital</div>
+  <div class="two-col" style="margin-top:6px;">
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box">
+        <div class="col-label">¿Por qué es un experimento verdadero?</div>
+        <div class="col-body">Aleatorización automática → grupos equivalentes. Solo difiere la versión del elemento probado. Medición comportamental real (clics, compras), no auto-reporte.</div>
+      </div>
+      <div class="col-box">
+        <div class="col-label col-label-blue">Ventajas sobre el experimento clásico</div>
+        <div class="col-body">Escala masiva de unidades de prueba. Bajo costo marginal. Velocidad: resultados en días, no meses. Múltiples experimentos simultáneos.</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box" style="border-left:4px solid var(--accent);">
+        <div class="col-label" style="color:var(--accent);">Limitaciones que Malhotra no anticipó</div>
+        <div class="col-body">Peeking problem · Sesgo de novedad · Spillover entre grupos · p-hacking con muchos tests simultáneos · Validez externa limitada (solo usuarios de la app)</div>
+      </div>
+      <div class="latam-box" style="margin:0;">
+        <div class="latam-label">🌎 Escala LatAm</div>
+        <div class="latam-text">Mercado Libre: 200+ experimentos activos. Rappi y Nubank tienen equipos dedicados a experimentación. La infraestructura experimental es hoy una ventaja competitiva real.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Prueba de mercado -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — pp. 171–175</div>
+  <div class="slide-h">Prueba de mercado: el experimento de campo a escala real</div>
+  <div class="def-block" style="margin-bottom:10px;">
+    <div class="def-term-label">Definición</div>
+    <div class="def-text">Experimento controlado en <strong>mercados de prueba limitados</strong> que replica el programa nacional de marketing planeado. Reduce el riesgo antes de una decisión irreversible de lanzamiento.</div>
+  </div>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-label">Objetivo 1</div>
+      <div class="col-body">Determinar la aceptación real del producto en condiciones reales de mercado — ¿los consumidores lo compran cuando tienen que pagarlo ellos?</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label col-label-blue">Objetivo 2</div>
+      <div class="col-body">Probar niveles alternativos de la mezcla de marketing — ¿qué precio, distribución, campaña funciona mejor en el mercado de prueba?</div>
+    </div>
+  </div>
+  <div class="old-box" style="margin-top:10px;background:#f5f0eb;border:1px solid #d4cec5;border-left:4px solid #b0a898;border-radius:8px;padding:10px 16px;">
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:#9a9088;text-transform:uppercase;margin-bottom:4px;">📖 Caso desactualizado — Malhotra</div>
+    <div style="font-size:12.5px;color:#6b6056;">McDonald's Mac Snack Wrap: exitoso en la prueba de mercado, pero discontinuado globalmente después de 2016. El éxito en la prueba no garantiza el éxito a largo plazo — limitación del método.</div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Pix -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LatAm · Banco Central do Brasil — Pix (2020)</div>
+  <div class="slide-h slide-h-white">Del piloto al sistema de pagos más usado de LATAM</div>
+  <ul class="bullets bullets-white" style="margin-top:6px;">
+    <li><strong>Piloto restringido (ago–sep 2020):</strong> instituciones seleccionadas + usuarios en regiones específicas — una prueba de mercado real antes del lanzamiento masivo</li>
+    <li><strong>VI manipuladas:</strong> límites de transferencia, horarios de disponibilidad, número de instituciones participantes, requisitos de onboarding</li>
+    <li><strong>VD medidas:</strong> tasa de adopción, volumen, incidencias de fraude, tiempo de procesamiento, satisfacción</li>
+    <li><strong>Lo que reveló el piloto:</strong> el onboarding era demasiado complejo para usuarios mayores y zonas rurales con baja conectividad → simplificación antes del lanzamiento</li>
+    <li><strong>Post-lanzamiento:</strong> 4,000 millones de transacciones mensuales en 2023 — el sistema de pago más adoptado en la historia de Brasil</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Para pensar</div>
+    <div class="pause-q">¿Qué problema de validez interna tiene un piloto geográfico restringido? ¿Cómo podría afectar la generalización al lanzamiento nacional?</div>
+  </div>
+</div>
+</section>
+
+<!-- Lab vs campo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — pp. 163 y 171 (actualizado)</div>
+  <div class="slide-h">Laboratorio vs. campo: la elección estratégica</div>
+  <table class="ref-table" style="margin-top:8px;">
+    <tr><th>Dimensión</th><th>Laboratorio</th><th>Campo</th><th>Digital (A/B test)</th></tr>
+    <tr><td>Control variables extrañas</td><td>Alto</td><td>Bajo</td><td>Alto (aleatorización)</td></tr>
+    <tr><td>Validez interna</td><td>Alta</td><td>Media</td><td>Alta</td></tr>
+    <tr><td>Validez externa</td><td>Baja</td><td>Alta</td><td>Media (solo usuarios digitales)</td></tr>
+    <tr><td>Costo</td><td>Medio</td><td>Alto</td><td>Bajo</td></tr>
+    <tr><td>Reactividad del participante</td><td>Alta</td><td>Baja</td><td>Muy baja (comportamiento real)</td></tr>
+    <tr><td>Velocidad</td><td>Días</td><td>Meses</td><td>Días</td></tr>
+  </table>
+  <div style="font-size:12px;color:var(--muted);margin-top:8px;font-style:italic;">Innovación 2024: entornos de compra virtual (Kantar, Nielsen) combinan el control del laboratorio con el realismo perceptual del campo — especialmente valiosos para LATAM donde los experimentos de campo son logísticamente complejos.</div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 7 — LATAM Y ÉTICA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 07 · minutos 135–150</div>
+  <div class="sec-title">LatAm, ética<br>y cierre</div>
+  <div class="sec-sub">Desafíos regionales + dilemas éticos en experimentación</div>
+</div>
+</section>
+
+<!-- Desafíos LatAm -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">🌎 Contexto LatAm — Experimentación en la región</div>
+  <div class="slide-h">Por qué experimentar en LATAM es más difícil</div>
+  <ul class="bullets" style="margin-top:8px;">
+    <li><strong>Alta heterogeneidad intra-país:</strong> São Paulo ≠ Nordeste de Brasil; Buenos Aires ≠ interior de Argentina. Los mercados de prueba tienen baja representatividad nacional.</li>
+    <li><strong>Volatilidad macro:</strong> inflación, devaluaciones y crisis pueden ocurrir durante el experimento, actuando como variables de historia que destruyen la validez interna.</li>
+    <li><strong>Fragmentación regulatoria:</strong> LGPD (Brasil), Ley 25.326 (Argentina), LFPDPPP (México), Ley 18.331 (Uruguay) — distintos marcos para el uso de datos en experimentos.</li>
+    <li><strong>Baja penetración digital:</strong> los A/B tests solo capturan a usuarios digitales — más urbanos, jóvenes y de mayores ingresos. El mercado total es más diverso.</li>
+    <li><strong>Informalidad económica:</strong> los canales informales (ferias, mercados de pulgas) no son capturables con diseños experimentales estándar.</li>
+  </ul>
+</div>
+</section>
+
+<!-- Ética -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — p. 176 + actualización (Facebook 2014)</div>
+  <div class="slide-h">Dilemas éticos en la investigación causal</div>
+  <div class="two-col" style="margin-top:6px;">
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box" style="border-left:4px solid var(--ink);">
+        <div class="col-label">Ocultamiento del propósito</div>
+        <div class="col-body">Revelar el objetivo destruiría la validez. Malhotra: debe hacerse de forma ética, sin violar derechos. Solución: <strong>debriefing</strong> posterior al experimento.</div>
+      </div>
+      <div class="col-box" style="border-left:4px solid var(--blue);">
+        <div class="col-label col-label-blue">Artefactos de demanda</div>
+        <div class="col-body">Los participantes modifican su conducta si identifican el propósito. Son amenaza metodológica <em>y</em> ética: el "experimento" ya no mide el comportamiento real.</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div class="col-box" style="border-left:4px solid var(--accent);">
+        <div class="col-label" style="color:var(--accent);">Caso Facebook (2014) — límite ético</div>
+        <div class="col-body">700,000 usuarios con feeds de noticias manipulados para estudiar contagio emocional — sin consentimiento informado real. Legalmente permitido por ToS; éticamente cuestionado por la comunidad académica y la opinión pública.</div>
+      </div>
+      <div class="latam-box" style="margin:0;">
+        <div class="latam-label">🌎 Marco regulatorio LatAm</div>
+        <div class="latam-text">LGPD (Brasil, 2020) + Ley 25.326 (Argentina) + LFPDPPP (México) + Ley 18.331 (Uruguay): consentimiento informado obligatorio para experimentos con datos personales.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Cierre -->
+<section>
+<div class="slide s-close">
+  <div style="color:var(--paper); max-width:600px;">
+    <div class="cover-eyebrow">Síntesis del capítulo 6</div>
+    <div class="cover-title" style="font-size:2.6rem;">La causalidad<br><em>se diseña</em></div>
+    <ul style="list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:8px;">
+      <li style="font-size:14px;color:rgba(255,255,255,0.7);padding-left:18px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span> La correlación describe; el experimento explica</li>
+      <li style="font-size:14px;color:rgba(255,255,255,0.7);padding-left:18px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span> Tres condiciones necesarias: covariación, orden temporal, eliminación de alternativas</li>
+      <li style="font-size:14px;color:rgba(255,255,255,0.7);padding-left:18px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span> Validez interna (¿causó?) vs. validez externa (¿generaliza?) — tensión irreducible</li>
+      <li style="font-size:14px;color:rgba(255,255,255,0.7);padding-left:18px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span> El A/B testing digital es el diseño de solo postest con grupo de control — escalado</li>
+      <li style="font-size:14px;color:rgba(255,255,255,0.7);padding-left:18px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">—</span> En LATAM: volatilidad macro, regulación fragmentada y baja penetración digital elevan el costo metodológico</li>
+    </ul>
+    <div class="chip-row">
+      <span class="chip chip-red">Capítulo 6 · Malhotra 2016</span>
+      <span class="chip chip-gold">Universidad de Montevideo</span>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+});
+</script>
+</body>
+</html>

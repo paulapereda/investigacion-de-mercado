@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  .concept-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--ink); border-radius: 8px; padding: 22px 26px; margin-bottom: 28px; }
+  .concept-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--ink); text-transform: uppercase; margin-bottom: 10px; opacity: 0.6; }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+  .concept-box ul { padding-left: 1.3em; margin-top: 8px; }
+  .concept-box ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .def-term { display: inline-block; background: var(--ink); color: white; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+  .old-box { background: #f5f0eb; border: 1px solid var(--border); border-left: 4px solid #b0a898; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .old-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #9a9088; text-transform: uppercase; margin-bottom: 8px; }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+  .update-card ul { padding-left: 1.3em; margin-bottom: 14px; }
+  .update-card ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+  .latam-box ul { padding-left: 1.3em; }
+  .latam-box ul li { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 4px; }
+
+  .tool-box { background: var(--tool-bg); border: 1px solid var(--tool-border); border-left: 4px solid var(--tool-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--tool-border); text-transform: uppercase; margin-bottom: 10px; }
+  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .compare-table th { background: var(--ink); color: var(--paper); padding: 10px 16px; text-align: left; font-weight: 500; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+
+  .design-card { border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; margin-bottom: 16px; background: white; }
+  .design-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .design-badge { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; padding: 3px 10px; border-radius: 12px; font-weight: 500; }
+  .badge-pre { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .badge-true { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .badge-stat { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .design-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); }
+  .design-card p { font-size: 13.5px; color: #444; line-height: 1.7; margin-bottom: 8px; }
+  .design-card p:last-child { margin-bottom: 0; }
+  .notation { font-family: 'DM Mono', monospace; font-size: 13px; background: #f0f4f8; border: 1px solid #c0d4e8; padding: 8px 14px; border-radius: 6px; margin: 8px 0; color: var(--accent2); letter-spacing: 1px; display: block; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .footer-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); transition: all 0.2s; text-decoration: none; }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 6</div>
+    <h1>Experimentación e<br><em>investigación causal</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+      <span class="meta-chip">Malhotra 2016 · Cap. 6 · pp. 154–179</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <div class="nav-section-label">Fundamentos</div>
+    <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+    <a class="nav-item" onclick="showSection('causalidad')">Concepto de causalidad</a>
+    <a class="nav-item" onclick="showSection('condiciones')">Condiciones para la causalidad</a>
+    <div class="nav-section-label">Diseño experimental</div>
+    <a class="nav-item" onclick="showSection('conceptos')">Conceptos y terminología</a>
+    <a class="nav-item" onclick="showSection('validez')">Validez interna y externa</a>
+    <a class="nav-item" onclick="showSection('variables-extranas')">Variables extrañas</a>
+    <a class="nav-item" onclick="showSection('tipos-disenos')">Tipos de diseños experimentales</a>
+    <a class="nav-item" onclick="showSection('disenos-detalle')">Diseños en detalle</a>
+    <div class="nav-section-label">Aplicaciones</div>
+    <a class="nav-item" onclick="showSection('ab-testing')">A/B testing digital</a>
+    <a class="nav-item" onclick="showSection('prueba-mercado')">Prueba de mercado</a>
+    <a class="nav-item" onclick="showSection('lab-vs-campo')">Laboratorio vs. campo</a>
+    <div class="nav-section-label">Contexto y Ética</div>
+    <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética en la experimentación</a>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- DIAPOSITIVAS -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe src="capitulo_6_slides.html" style="width:100%; height:100%; border:none; display:block;" allowfullscreen title="Diapositivas Capítulo 6"></iframe>
+      </div>
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('apertura')">Siguiente: Caso de apertura →</button>
+      </div>
+    </div>
+
+    <!-- APERTURA -->
+    <div id="apertura" class="section">
+      <div class="section-header">
+        <div class="section-number">Apertura</div>
+        <h2>Caso de apertura: cuando la correlación no basta</h2>
+        <p class="section-intro">El capítulo abre con Rite Aid y un experimento sobre publicidad en tienda. El caso ilustra por qué la investigación descriptiva puede identificar patrones, pero solo la investigación causal puede responder si X realmente <em>provoca</em> Y.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Caso de apertura — Malhotra 2016 (vigente en su lógica)</div>
+        <p>Rite Aid Drug Company quería saber si los anuncios de radio dentro de sus tiendas incentivaban compras en el punto de venta (PDV). Se seleccionaron 20 farmacias estadísticamente equivalentes —por tamaño, ubicación, antigüedad y afluencia— y se asignaron aleatoriamente: 10 al grupo de prueba (con radio) y 10 al grupo de control (sin radio).</p>
+        <p>El resultado fue claro: las tiendas con publicidad radial mostraron incrementos significativos en las ventas de los productos anunciados. Porque se manipuló una variable (el audio) mientras todo lo demás permanecía constante, fue posible atribuir causalmente el efecto al tratamiento.</p>
+        <p><strong>La lección metodológica:</strong> si Rite Aid simplemente hubiera comparado ventas históricas con ventas actuales, no habría podido descartar que el aumento se debiera a la estación del año, promociones de precios o cambios en el flujo de clientes. El diseño experimental con grupo de control elimina esas explicaciones alternativas.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso sustituto: Mercado Libre y el experimento de pricing dinámico</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Mercado Libre (Argentina/LATAM) opera uno de los ecosistemas de e-commerce más grandes de América Latina, con presencia en 18 países. Su equipo de data science realiza experimentos controlados de forma permanente para optimizar desde la interfaz hasta la política de precios y los costos de envío.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Investigación causal en e-commerce</div>
+          <h4>Mercado Libre: ¿el envío gratis causa mayor conversión o solo la revela?</h4>
+          <p><strong style="color:#d4a0a0;">Pregunta causal:</strong> ¿ofrecer envío gratis en una categoría aumenta la tasa de conversión, o los productos con envío gratis simplemente son más baratos y de mejores vendedores?</p>
+          <p><strong style="color:#d4a0a0;">Por qué no alcanza una descriptiva:</strong> una encuesta o análisis de datos históricos mostraría correlación entre envío gratis y mayor conversión. Pero esa correlación podría estar explicada por otras variables —calidad del vendedor, precio del producto, reputación— y no por el envío en sí.</p>
+          <p><strong style="color:#d4a0a0;">El diseño causal:</strong> Mercado Libre asigna aleatoriamente un subconjunto de usuarios que ven la misma categoría con y sin el badge de "envío gratis". Todo lo demás (vendedor, precio, descripción) permanece idéntico. La aleatorización garantiza que cualquier diferencia en conversión se debe causalmente al envío.</p>
+          <p><strong style="color:#d4a0a0;">Resultado:</strong> el equipo puede separar el efecto causal del envío del efecto de confusión de la calidad del vendedor. Ese insight orienta decisiones de política comercial que afectan a millones de vendedores en toda la región.</p>
+          <p><em>Pregunta para clase: ¿Qué pasaría si en vez de asignar aleatoriamente, Mercado Libre ofreciera envío gratis solo a sus mejores vendedores? ¿Por qué eso introduciría sesgo de selección y destruiría la validez interna del experimento?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Kohavi, R., Tang, D., & Xu, Y. (2020).</strong> <em>Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing.</em> Cambridge University Press. — Manual de referencia de la industria para diseño experimental digital.</div>
+          <div class="ref-item"><strong>Mercado Libre (2024).</strong> <em>Annual Report 2023.</em> investors.mercadolibre.com — Datos de GMV, usuarios activos y expansión por país.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('diapositivas')">← Diapositivas</button>
+        <button class="nav-btn primary" onclick="showSection('causalidad')">Siguiente: Causalidad →</button>
+      </div>
+    </div>
+
+    <!-- CAUSALIDAD -->
+    <div id="causalidad" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>Concepto de causalidad</h2>
+        <p class="section-intro">La causalidad en investigación de mercados tiene un significado científico preciso y más restrictivo que el uso cotidiano del término. Entender esta distinción es el punto de partida de todo el capítulo.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Significado científico vs. cotidiano de causalidad</div>
+        <p>Cuando una persona común dice "X causa Y" —por ejemplo, "la publicidad causó el aumento de ventas"— implica que X es la única causa de Y y que la relación es determinista: siempre que aparezca X, ocurrirá Y.</p>
+        <p>En investigación de mercados, la causalidad científica es más modesta: <strong>X es una causa de Y</strong> si X contribuye a la probabilidad de que Y ocurra. No se asume que X sea la única causa, ni que la relación sea perfecta. El investigador busca establecer que X hace más probable a Y, controlando la influencia de otras variables.</p>
+        <p>Esta distinción importa en la práctica: un gerente puede decir "la campaña de influencers <em>causó</em> el pico de ventas". El investigador necesita preguntarse: ¿qué otras variables podrían explicar ese pico? ¿Coincidió con el Día de la Madre? ¿Hubo una promoción de precio simultánea? ¿El algoritmo de Instagram amplificó orgánicamente ese día?</p>
+      </div>
+
+      <div class="callout">
+        <strong>Concepto clave:</strong> la investigación causal no "prueba" causalidad en sentido absoluto. Construye evidencia consistente con una relación causal al satisfacer tres condiciones necesarias y al descartar explicaciones alternativas.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El problema de la causalidad inversa en marketing digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>Uno de los errores más comunes en el análisis de datos de marketing digital es confundir dirección causal. Los datos muestran que los usuarios que ven más anuncios también compran más. ¿Los anuncios causan las compras, o los compradores frecuentes son los que más ven anuncios porque el algoritmo los identifica como audiencia de alto valor?</p>
+        <p>Meta (Facebook/Instagram) enfrenta este problema al medir el ROAS (Return on Ad Spend): sus propios modelos de atribución sobreestiman el impacto de los anuncios porque los muestran principalmente a usuarios que ya tenían alta intención de compra. Varios estudios académicos encontraron que entre el 30% y el 50% de las ventas atribuidas a anuncios digitales habrían ocurrido de todas formas.</p>
+        <p>La solución experimental: un experimento con holdout groups —donde un porcentaje de usuarios similares no recibe los anuncios— permite estimar el efecto causal incremental (uplift), no el correlacional.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Gordon, B. et al. (2019).</strong> "Inefficiencies in Digital Advertising Markets." <em>Journal of Marketing</em>, 83(1), 7–25.</div>
+          <div class="ref-item"><strong>Lewis, R. & Rao, J. (2015).</strong> "The unfavorable economics of measuring the returns to advertising." <em>Quarterly Journal of Economics</em>, 130(4), 1941–1973.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('apertura')">← Caso de apertura</button>
+        <button class="nav-btn primary" onclick="showSection('condiciones')">Siguiente: Condiciones →</button>
+      </div>
+    </div>
+
+    <!-- CONDICIONES -->
+    <div id="condiciones" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Condiciones para establecer causalidad</h2>
+        <p class="section-intro">Malhotra establece tres condiciones necesarias para inferir que X causa Y. Ninguna por sí sola es suficiente; las tres deben satisfacerse conjuntamente.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Las tres condiciones de causalidad</div>
+        <ul>
+          <li><strong>1. Variación concomitante:</strong> X e Y deben variar juntas de acuerdo con la hipótesis. Si X aumenta, Y debería aumentar (o disminuir) en la dirección predicha. Si no hay covariación, X no puede ser causa de Y.</li>
+          <li><strong>2. Orden temporal de ocurrencia:</strong> X debe preceder o ocurrir simultáneamente con Y. Una causa no puede ocurrir después de su efecto. En investigación de mercados esto implica que la manipulación (tratamiento) debe aplicarse antes de medir la variable dependiente.</li>
+          <li><strong>3. Eliminación de factores causales alternativos:</strong> Deben descartarse explicaciones rivales. Esto es lo más difícil de satisfacer y es precisamente lo que el diseño experimental busca garantizar mediante el control de variables extrañas y la asignación aleatoria.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Aplicando las tres condiciones: el caso de Nubank y la tasa de aprobación</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Nubank (Brasil/LATAM) quería determinar si aumentar la tasa de aprobación crediticia en el segmento de usuarios nuevos causaría una mayor tasa de retención a 12 meses, o si simplemente incorporaría más usuarios de alto riesgo que terminarían abandonando por deudas impagas.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Las tres condiciones en acción</div>
+          <h4>Nubank: ¿la aprobación crediticia causa retención?</h4>
+          <p><strong style="color:#d4a0a0;">Variación concomitante:</strong> los datos históricos mostraban que los usuarios aprobados para montos más altos tenían tasas de retención superiores. La covariación existía — pero podría ser espuria (los usuarios con mejor historial crediticio son más confiables y también más leales).</p>
+          <p><strong style="color:#d4a0a0;">Orden temporal:</strong> el experimento asignó aleatoriamente a nuevos usuarios en dos grupos: uno recibía el límite de crédito estándar y otro recibía un límite 40% superior. La manipulación (tratamiento) precedió a la medición de retención — condición temporal satisfecha.</p>
+          <p><strong style="color:#d4a0a0;">Eliminación de alternativas:</strong> la aleatorización garantizó que ambos grupos fueran equivalentes en perfil crediticio, edad, ingresos declarados y comportamiento previo. Cualquier diferencia en retención a 12 meses se atribuyó causalmente al límite de crédito.</p>
+          <p><em>Pregunta para clase: ¿Qué habría pasado si Nubank ofreciera el límite mayor solo a usuarios que ya hubieran hecho 3 compras? ¿Qué condición de causalidad quedaría comprometida?</em></p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('causalidad')">← Causalidad</button>
+        <button class="nav-btn primary" onclick="showSection('conceptos')">Siguiente: Conceptos →</button>
+      </div>
+    </div>
+
+    <!-- CONCEPTOS -->
+    <div id="conceptos" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>Conceptos y terminología experimental</h2>
+        <p class="section-intro">El lenguaje de la experimentación es preciso. Estos son los conceptos fundamentales que permiten describir, comparar y comunicar diseños experimentales.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Definiciones fundamentales</div>
+        <ul>
+          <li><strong>Variable independiente (VI):</strong> la variable que el investigador manipula o controla. También llamada "tratamiento" o "factor". Ejemplo: el precio de un producto, el diseño de un empaque, la versión de un anuncio.</li>
+          <li><strong>Variable dependiente (VD):</strong> la variable que se mide para determinar el efecto del tratamiento. Ejemplo: ventas, intención de compra, tiempo en sitio web, tasa de conversión.</li>
+          <li><strong>Variables extrañas:</strong> todas las variables distintas a las independientes que pueden afectar a la variable dependiente. Son la principal amenaza a la validez de un experimento.</li>
+          <li><strong>Unidades de prueba:</strong> los individuos, grupos, organizaciones o áreas geográficas sobre los que se aplica el tratamiento y se mide el efecto.</li>
+          <li><strong>Grupo experimental:</strong> las unidades de prueba que reciben el tratamiento.</li>
+          <li><strong>Grupo de control:</strong> las unidades de prueba que no reciben el tratamiento, usadas como punto de comparación.</li>
+          <li><strong>Asignación aleatoria:</strong> el mecanismo que garantiza que las unidades de prueba se asignen a grupos experimental o de control por azar, haciendo equivalentes a los grupos en todas las variables relevantes.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Notación simbólica (Malhotra):</strong> X = aplicación del tratamiento (variable independiente) · O = observación o medición de la variable dependiente · R = asignación aleatoria de las unidades de prueba a los grupos. El tiempo avanza de izquierda a derecha en todos los diagramas.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Terminología en la práctica: el experimento de Spotify en LATAM</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>Spotify diseñó un experimento para evaluar si agregar recomendaciones de podcasts en español a la pantalla de inicio aumentaba el consumo de podcasts entre usuarios de Argentina, México y Colombia.</p>
+        <table class="compare-table">
+          <tr><th>Concepto</th><th>En el experimento de Spotify</th></tr>
+          <tr><td><strong>Variable independiente</strong></td><td>Presencia de recomendaciones de podcasts en español en la pantalla de inicio (2 niveles: presente / ausente)</td></tr>
+          <tr><td><strong>Variable dependiente</strong></td><td>Minutos escuchados de podcasts por semana, tasa de conversión a oyentes de podcasts</td></tr>
+          <tr><td><strong>Unidades de prueba</strong></td><td>Usuarios activos en los tres países que no eran oyentes habituales de podcasts</td></tr>
+          <tr><td><strong>Grupo experimental</strong></td><td>Usuarios que ven las recomendaciones de podcasts en español</td></tr>
+          <tr><td><strong>Grupo de control</strong></td><td>Usuarios que ven la pantalla de inicio estándar sin las recomendaciones</td></tr>
+          <tr><td><strong>Variables extrañas</strong></td><td>Género musical preferido, antigüedad en la plataforma, dispositivo usado, horario de uso</td></tr>
+          <tr><td><strong>Asignación aleatoria</strong></td><td>Sí — algoritmo de asignación aleatoria estratificada por país y perfil de uso</td></tr>
+        </table>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('condiciones')">← Condiciones</button>
+        <button class="nav-btn primary" onclick="showSection('validez')">Siguiente: Validez →</button>
+      </div>
+    </div>
+
+    <!-- VALIDEZ -->
+    <div id="validez" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Validez interna y externa</h2>
+        <p class="section-intro">Todo experimento debe evaluarse en dos dimensiones de validez. Mejorar una frecuentemente implica sacrificar la otra — una tensión central en el diseño experimental aplicado.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Dos tipos de validez</div>
+        <p><strong>Validez interna:</strong> se refiere a si la manipulación de la variable independiente realmente causó los efectos observados en la variable dependiente. Un experimento tiene validez interna cuando se han controlado las variables extrañas y los resultados pueden atribuirse al tratamiento. Es el requisito mínimo básico: sin validez interna, los resultados son ininterpretables.</p>
+        <p><strong>Validez externa:</strong> se refiere a si los resultados pueden generalizarse más allá del experimento — a otras poblaciones, contextos, momentos o variables. Un experimento de laboratorio puede tener alta validez interna pero baja validez externa si las condiciones artificiales no representan el mercado real.</p>
+        <p>La tensión entre ambas: los experimentos de laboratorio maximizan el control (alta validez interna) pero minimizan el realismo (baja validez externa). Los experimentos de campo sacrifican algo de control a cambio de mayor generalización.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>La tensión validez interna vs. externa en el mundo digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span><span class="tag tag-caso">caso real</span></div>
+        </div>
+        <p>Los experimentos digitales (A/B tests en plataformas) tienen naturalmente alta validez interna —la aleatorización es técnicamente rigurosa— pero pueden tener problemas de validez externa que no siempre se discuten en la práctica:</p>
+        <ul>
+          <li><strong>Sesgo de usuario online:</strong> los usuarios de una plataforma no representan a toda la población objetivo. Un A/B test de Rappi en Colombia aplica solo a usuarios de la app, que son más jóvenes y digitalmente activos que el mercado total.</li>
+          <li><strong>Efecto de novedad:</strong> los usuarios del grupo experimental pueden responder positivamente a un cambio simplemente porque es nuevo, no porque sea mejor. Este efecto desaparece con el tiempo.</li>
+          <li><strong>Spillover entre grupos:</strong> en mercados pequeños o comunidades, el "tratamiento" puede contaminar al grupo de control a través de conversaciones, recomendaciones o visualización del comportamiento de otros.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kohavi, R., Tang, D., & Xu, Y. (2020).</strong> <em>Trustworthy Online Controlled Experiments.</em> Cambridge University Press. Cap. 3: "Threats to validity in online experiments".</div>
+          <div class="ref-item"><strong>Imbens, G. & Rubin, D. (2015).</strong> <em>Causal Inference for Statistics, Social, and Biomedical Sciences.</em> Cambridge University Press.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('conceptos')">← Conceptos</button>
+        <button class="nav-btn primary" onclick="showSection('variables-extranas')">Siguiente: Variables extrañas →</button>
+      </div>
+    </div>
+
+    <!-- VARIABLES EXTRAÑAS -->
+    <div id="variables-extranas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>Control de variables extrañas</h2>
+        <p class="section-intro">Las variables extrañas son la principal amenaza a la validez interna. Malhotra identifica varios tipos específicos y sus métodos de control.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Fuentes de variables extrañas</div>
+        <ul>
+          <li><strong>Historia:</strong> eventos externos que ocurren entre mediciones y afectan la VD. En un experimento de 3 meses, una crisis económica o una campaña del competidor son variables históricas.</li>
+          <li><strong>Maduración:</strong> cambios naturales en las unidades de prueba con el tiempo (envejecimiento, aprendizaje, fatiga), no relacionados con el tratamiento.</li>
+          <li><strong>Administración de pruebas:</strong> el efecto de haber realizado una medición previa (pretest) sobre la medición posterior (postest). Los participantes aprenden o cambian de actitud por haber sido medidos.</li>
+          <li><strong>Instrumentación:</strong> cambios en el instrumento de medición entre el pretest y el postest (un encuestador diferente, una escala calibrada distinto).</li>
+          <li><strong>Regresión estadística:</strong> las unidades de prueba seleccionadas por sus valores extremos tienden naturalmente a regresar hacia la media en mediciones posteriores.</li>
+          <li><strong>Sesgo de selección:</strong> las unidades de prueba en el grupo experimental y de control son sistemáticamente diferentes antes de que comience el experimento.</li>
+          <li><strong>Mortalidad experimental:</strong> algunas unidades abandonan el experimento de forma diferencial entre grupos, sesgando los resultados.</li>
+        </ul>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Métodos para controlar variables extrañas</div>
+        <ul>
+          <li><strong>Aleatorización:</strong> asignar unidades aleatoriamente a grupos garantiza que las variables extrañas se distribuyan equitativamente. Es el método más poderoso.</li>
+          <li><strong>Igualación:</strong> asegurar que los grupos sean equivalentes en variables críticas (por ejemplo, mismo nivel de ventas inicial, mismo tamaño de tienda).</li>
+          <li><strong>Grupos de control:</strong> incluir un grupo que no recibe tratamiento para aislar el efecto del tratamiento de otros factores.</li>
+          <li><strong>Covarianza estadística (ANCOVA):</strong> controlar estadísticamente el efecto de las variables extrañas identificadas, midiendo y ajustando post-hoc.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Historia como variable extraña en experimentos de retail LatAm</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Cuando la historia arruina el experimento</div>
+          <h4>Falabella y el experimento de exhibición interrumpido por el estallido social (Chile, 2019)</h4>
+          <p>Falabella Chile diseñó un experimento de campo para medir si una nueva exhibición de productos en la categoría electrónica —con pantallas interactivas y demostraciones en vivo— aumentaba las ventas. Se seleccionaron tiendas experimentales y de control, y el experimento comenzó en octubre de 2019.</p>
+          <p>El 18 de octubre de 2019 comenzó el estallido social chileno. Las ventas en todas las tiendas colapsaron, pero las tiendas experimentales —ubicadas en zonas de mayor concentración de manifestaciones— sufrieron cierres temporales adicionales. Cualquier diferencia en ventas entre grupos reflejaba la geografía del conflicto, no el efecto de la exhibición.</p>
+          <p><strong style="color:#d4a0a0;">Variable extraña de historia:</strong> un evento externo (el estallido social) ocurrió durante el período experimental, afectó de forma diferencial a los grupos experimental y de control, y destruyó la validez interna del experimento.</p>
+          <p><em>Pregunta para clase: ¿Qué opciones tenía Falabella ante esta situación? ¿Cancelar el experimento, suspenderlo y reiniciarlo, o intentar controlar el efecto estadísticamente?</em></p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('validez')">← Validez</button>
+        <button class="nav-btn primary" onclick="showSection('tipos-disenos')">Siguiente: Tipos de diseños →</button>
+      </div>
+    </div>
+
+    <!-- TIPOS DE DISEÑOS -->
+    <div id="tipos-disenos" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Clasificación de los diseños experimentales</h2>
+        <p class="section-intro">Malhotra clasifica los diseños en tres categorías según su grado de control y capacidad para descartar variables extrañas.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Clasificación general</div>
+        <p>Los diseños experimentales se clasifican en tres grandes grupos:</p>
+        <ul>
+          <li><strong>Diseños preexperimentales:</strong> no incluyen grupos de control ni aleatorización. Tienen muy bajo control sobre variables extrañas. Son útiles en etapas exploratorias pero no permiten inferencias causales confiables.</li>
+          <li><strong>Diseños experimentales verdaderos:</strong> incluyen grupos de control y aleatorización. Permiten inferencias causales válidas. Son el estándar de oro de la investigación causal.</li>
+          <li><strong>Diseños estadísticos:</strong> extensiones de los diseños verdaderos que permiten analizar el efecto de múltiples variables independientes simultáneamente y sus interacciones. El diseño factorial es el más utilizado.</li>
+        </ul>
+      </div>
+
+      <table class="compare-table">
+        <tr>
+          <th>Criterio</th>
+          <th>Preexperimental</th>
+          <th>Experimental verdadero</th>
+          <th>Estadístico</th>
+        </tr>
+        <tr>
+          <td>Grupo de control</td>
+          <td>No</td>
+          <td>Sí</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Aleatorización</td>
+          <td>No</td>
+          <td>Sí</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Control de variables extrañas</td>
+          <td>Muy bajo</td>
+          <td>Alto</td>
+          <td>Muy alto</td>
+        </tr>
+        <tr>
+          <td>Validez interna</td>
+          <td>Baja</td>
+          <td>Alta</td>
+          <td>Alta</td>
+        </tr>
+        <tr>
+          <td>Costo y complejidad</td>
+          <td>Bajo</td>
+          <td>Medio-alto</td>
+          <td>Alto</td>
+        </tr>
+        <tr>
+          <td>Variables independientes</td>
+          <td>1</td>
+          <td>1</td>
+          <td>2 o más</td>
+        </tr>
+        <tr>
+          <td>Uso típico</td>
+          <td>Exploración inicial</td>
+          <td>Investigación causal estándar</td>
+          <td>Optimización de múltiples variables</td>
+        </tr>
+      </table>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('variables-extranas')">← Variables extrañas</button>
+        <button class="nav-btn primary" onclick="showSection('disenos-detalle')">Siguiente: Diseños en detalle →</button>
+      </div>
+    </div>
+
+    <!-- DISEÑOS EN DETALLE -->
+    <div id="disenos-detalle" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Diseños experimentales en detalle</h2>
+        <p class="section-intro">Cada diseño tiene una notación simbólica, una lógica de control y limitaciones específicas. La elección del diseño correcto depende del contexto, el presupuesto y el nivel de inferencia causal requerido.</p>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:16px; color:var(--accent);">Diseños preexperimentales</h3>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-pre">Preexperimental</span>
+          <h4>Estudio de caso único</h4>
+        </div>
+        <code class="notation">X → O₁</code>
+        <p>Se aplica un tratamiento a un grupo y luego se mide la variable dependiente. No hay pretest ni grupo de control. No permite ninguna inferencia causal válida: sin punto de referencia, es imposible saber si O₁ es distinto de lo que habría sido sin X.</p>
+        <p><strong>Ejemplo LatAm:</strong> una marca lanza una campaña en TikTok en abril y mide el reconocimiento de marca en mayo. Sin medición previa ni grupo de control, es imposible saber si el reconocimiento habría subido de todas formas (por la temporada, por una nota de prensa, etc.).</p>
+      </div>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-pre">Preexperimental</span>
+          <h4>Diseño de pretest-postest con un grupo</h4>
+        </div>
+        <code class="notation">O₁ → X → O₂</code>
+        <p>Se mide la VD antes del tratamiento (O₁), se aplica el tratamiento (X) y se mide nuevamente (O₂). La diferencia O₂ − O₁ se atribuye a X. Sigue siendo débil: no hay grupo de control, por lo que la historia, la maduración y el efecto del pretest no están controlados.</p>
+        <p><strong>Ejemplo:</strong> una ferretería mide la satisfacción del cliente, capacita a sus vendedores, y vuelve a medir. La mejora puede deberse a la capacitación, a que los clientes ya se sentían mejor después de la temporada baja, o a que el pretest les hizo pensar más en el servicio.</p>
+      </div>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-pre">Preexperimental</span>
+          <h4>Diseño del grupo estático</h4>
+        </div>
+        <code class="notation">X → O₁ (grupo experimental)<br>— → O₁ (grupo de control)</code>
+        <p>Se aplica el tratamiento al grupo experimental y luego se compara con un grupo de control no aleatorizado. El sesgo de selección es la principal amenaza: si los grupos no son equivalentes antes del tratamiento, la diferencia en O₁ puede deberse a sus diferencias previas, no al tratamiento.</p>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin:28px 0 16px; color:var(--accent2);">Diseños experimentales verdaderos</h3>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-true">Experimental verdadero</span>
+          <h4>Diseño de pretest-postest con grupo de control</h4>
+        </div>
+        <code class="notation">R: O₁ → X → O₂ (experimental)<br>R: O₁ → — → O₂ (control)</code>
+        <p>Aleatorización + grupo de control + pretest. Permite controlar historia, maduración, sesgo de selección. Sin embargo, la interacción entre el pretest y el tratamiento puede seguir siendo un problema: los participantes que fueron premuestreados pueden comportarse distinto a quienes no lo fueron.</p>
+        <p><strong>Ejemplo:</strong> Banco Itaú mide la tasa de uso de banca móvil en dos grupos de clientes aleatorizados, luego envía notificaciones push educativas al grupo experimental y mide nuevamente. La diferencia controlada por el grupo de control refleja el efecto causal de las notificaciones.</p>
+      </div>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-true">Experimental verdadero</span>
+          <h4>Diseño de solo postest con grupo de control</h4>
+        </div>
+        <code class="notation">R: X → O₁ (experimental)<br>R: — → O₁ (control)</code>
+        <p>El diseño más limpio conceptualmente. La aleatorización garantiza la equivalencia previa, por lo que no es necesario el pretest. Elimina el efecto de reactividad del pretest. Es el diseño estándar del A/B testing moderno.</p>
+        <p><strong>Ejemplo digital:</strong> Falabella.com asigna aleatoriamente a usuarios que ven la nueva página de producto (X) vs. la versión actual. Solo se mide el comportamiento posterior (tasa de conversión). No hay pretest — la aleatorización garantiza equivalencia.</p>
+      </div>
+
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin:28px 0 16px; color:var(--accent2);">Diseños estadísticos</h3>
+
+      <div class="design-card">
+        <div class="design-card-header">
+          <span class="design-badge badge-stat">Estadístico</span>
+          <h4>Diseño factorial</h4>
+        </div>
+        <p>Permite medir el efecto de dos o más variables independientes simultáneamente, incluyendo sus interacciones. En un diseño factorial 2×2 se tienen dos factores (cada uno con 2 niveles), generando 4 condiciones experimentales.</p>
+        <p><strong>Interacción:</strong> cuando el efecto de una variable independiente depende del nivel de otra. Ejemplo: el precio (alto/bajo) puede tener efectos distintos sobre la intención de compra según el canal (online/tienda física). Esta interacción solo puede detectarse con un diseño factorial.</p>
+
+        <div class="callout">
+          <strong>Ejemplo con iFood (Brasil):</strong> iFood diseñó un factorial 2×2 para optimizar notificaciones push: Factor A = contenido (oferta de descuento vs. recordatorio de carrito), Factor B = horario (mediodía vs. 7pm). Las 4 celdas permitieron detectar que el descuento a mediodía tenía mayor efecto que en la noche, pero que el recordatorio de carrito funcionaba mejor a las 7pm — una interacción que ningún experimento de un solo factor hubiera revelado.
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('tipos-disenos')">← Tipos de diseños</button>
+        <button class="nav-btn primary" onclick="showSection('ab-testing')">Siguiente: A/B testing digital →</button>
+      </div>
+    </div>
+
+    <!-- A/B TESTING -->
+    <div id="ab-testing" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 08</div>
+        <h2>A/B testing digital: el experimento del siglo XXI</h2>
+        <p class="section-intro">El A/B testing es la implementación digital del diseño de solo postest con grupo de control. Es la metodología experimental más utilizada en el mundo empresarial actual y ha transformado cómo las empresas toman decisiones.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Experimentación en la web (vigente en su estructura)</div>
+        <p>El libro describe cómo Internet ofrece un mecanismo de experimentación controlada en un ambiente similar al de laboratorio. La lógica es idéntica al diseño de solo postest con grupo de control: los usuarios son asignados aleatoriamente a diferentes versiones de un elemento (anuncio, precio, diseño, mensaje), y se miden resultados comportamentales.</p>
+        <p>Malhotra señala que la experimentación en la web permite escalabilidad masiva, velocidad de implementación y bajo costo marginal por unidad de prueba adicional — ventajas que los experimentos de campo tradicionales no tienen.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>A/B testing en la escala de las plataformas LATAM</h3>
+          <div class="tags"><span class="tag tag-caso">casos reales</span><span class="tag tag-lat">latinoamérica</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>Las plataformas digitales de América Latina corren miles de experimentos simultáneamente. Algunos datos de escala:</p>
+        <ul>
+          <li><strong>Mercado Libre:</strong> según sus reportes de ingeniería, el equipo de growth corre más de 200 experimentos activos en simultáneo. Cada feature nuevo de la plataforma es validado experimentalmente antes del lanzamiento completo.</li>
+          <li><strong>Rappi:</strong> utiliza A/B testing para todo el funnel de conversión — desde la pantalla de búsqueda hasta el proceso de pago — con asignación por usuario y por sesión dependiendo del objetivo.</li>
+          <li><strong>Nubank:</strong> aplica experimentación controlada para decisiones de producto financiero: tasa de aprobación, límite de crédito inicial, diseño del onboarding y mensajes de cobranza.</li>
+        </ul>
+      </div>
+
+      <div class="tool-box">
+        <div class="tool-label">🛠 Plataformas de A/B testing usadas en la industria</div>
+        <div class="tool-grid">
+          <div class="tool-item"><strong>Optimizely</strong><span>Plataforma líder para A/B testing web y mobile, usada por empresas como Microsoft y Atlassian</span></div>
+          <div class="tool-item"><strong>Google Optimize*</strong><span>Integrado con GA4; *discontinuado en 2023, migración hacia Firebase y otras plataformas</span></div>
+          <div class="tool-item"><strong>VWO</strong><span>Visual Website Optimizer — muy usado en startups LATAM por su facilidad de implementación</span></div>
+          <div class="tool-item"><strong>LaunchDarkly</strong><span>Feature flags y experimentos para equipos de producto, permite control granular de la exposición</span></div>
+          <div class="tool-item"><strong>Statsig</strong><span>Plataforma de experimentación moderna, con análisis estadístico automático de significancia</span></div>
+          <div class="tool-item"><strong>Mixpanel</strong><span>Analytics + A/B testing integrado, muy popular en apps LATAM</span></div>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Limitaciones del A/B testing que Malhotra no anticipó</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <ul>
+          <li><strong>Peeking problem:</strong> muchos equipos terminan el experimento cuando ven resultados positivos ("pico prematuro"), lo que infla artificialmente las tasas de falsos positivos.</li>
+          <li><strong>SUTVA (Stable Unit Treatment Value Assumption):</strong> en plataformas de dos lados (como Mercado Libre), el tratamiento de un vendedor puede afectar a otros compradores, violando el supuesto de que las unidades son independientes.</li>
+          <li><strong>Sesgo de novedad vs. sesgo de aprendizaje:</strong> los cambios de UI generan reacciones de corto plazo (novedad) que pueden invertirse a medida que los usuarios se adaptan (o que se amplifican a medida que aprenden a usar la nueva función).</li>
+          <li><strong>Múltiples comparaciones (p-hacking):</strong> cuando se corren muchos A/B tests simultáneos, la probabilidad de obtener al menos un resultado significativo por azar aumenta. Se requiere corrección de Bonferroni u otras técnicas.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kohavi, R., Tang, D., & Xu, Y. (2020).</strong> <em>Trustworthy Online Controlled Experiments.</em> Cambridge University Press. — Cap. 18: "Common pitfalls and lessons learned."</div>
+          <div class="ref-item"><strong>Bakshy, E. et al. (2014).</strong> "Designing and Deploying Online Field Experiments." <em>WWW 2014 Conference.</em> — El paper seminal de Facebook sobre experimentación a escala.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('disenos-detalle')">← Diseños en detalle</button>
+        <button class="nav-btn primary" onclick="showSection('prueba-mercado')">Siguiente: Prueba de mercado →</button>
+      </div>
+    </div>
+
+    <!-- PRUEBA DE MERCADO -->
+    <div id="prueba-mercado" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 09</div>
+        <h2>Prueba de mercado</h2>
+        <p class="section-intro">La prueba de mercado es la aplicación más conocida del diseño experimental en marketing. Permite validar un programa de marketing en escala reducida antes de un lanzamiento nacional, reduciendo el riesgo de decisiones irreversibles.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Definición y objetivos</div>
+        <p>La prueba de mercado es un experimento controlado realizado en partes limitadas y cuidadosamente seleccionadas del mercado (mercados de prueba). Replica en pequeña escala un programa de marketing planeado a nivel nacional.</p>
+        <p><strong>Dos objetivos principales:</strong></p>
+        <ul>
+          <li>Determinar la aceptación del producto en el mercado (¿los consumidores reales compran el producto en condiciones reales de mercado?).</li>
+          <li>Probar niveles alternativos de las variables de la mezcla de marketing (¿cuál precio, cuál distribución, cuál campaña funciona mejor?).</li>
+        </ul>
+        <p>El libro cita el caso de McDonald's y el Mac Snack Wrap, probado en Phoenix, Houston, Milwaukee y Michigan City antes del lanzamiento nacional en Norteamérica.</p>
+      </div>
+
+      <div class="old-box">
+        <div class="old-box-label">📖 Caso desactualizado — Malhotra 2016</div>
+        <p>Malhotra menciona el Mac Snack Wrap de McDonald's como ejemplo de prueba de mercado exitosa. El producto fue lanzado con resultados favorables. Sin embargo, fue descontinuado en la mayoría de los mercados después de 2016 por dificultades operativas y cambios en las preferencias del consumidor hacia opciones más saludables. El "éxito" en la prueba de mercado no garantizó éxito a largo plazo — una limitación real del método que vale la pena señalar a los estudiantes.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso actualizado: prueba de mercado de pagos Pix en Brasil</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+        <p>El Banco Central de Brasil lanzó Pix (sistema de pagos instantáneos) en noviembre de 2020, pero realizó una prueba piloto restringida en agosto-septiembre de 2020 con instituciones financieras seleccionadas y un grupo controlado de usuarios finales en regiones específicas.</p>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Prueba de mercado de un sistema de pagos</div>
+          <h4>Pix: de la prueba piloto al sistema de pagos más usado de América Latina</h4>
+          <p><strong style="color:#d4a0a0;">Variables independientes manipuladas en el piloto:</strong> límites de transferencia por transacción, horarios de disponibilidad, número de instituciones participantes y requisitos de onboarding.</p>
+          <p><strong style="color:#d4a0a0;">Variable dependiente medida:</strong> tasa de adopción, volumen de transacciones, incidencias de fraude, tiempo de procesamiento, satisfacción del usuario.</p>
+          <p><strong style="color:#d4a0a0;">Resultado del piloto:</strong> identificó que el proceso de registro de claves era demasiado complejo para usuarios mayores y usuarios de zonas rurales con conectividad limitada. El Banco Central simplificó el onboarding antes del lanzamiento masivo.</p>
+          <p><strong style="color:#d4a0a0;">Resultado post-lanzamiento:</strong> Pix superó a todos los métodos de pago digital de Brasil en volumen de transacciones dentro del primer año. En 2023, procesó más de 4,000 millones de transacciones mensuales.</p>
+          <p><em>Pregunta para clase: ¿Qué habría pasado si el Banco Central hubiera lanzado Pix directamente sin la prueba piloto? ¿Qué problemas de validez interna tiene un piloto geográfico restringido?</em></p>
+        </div>
+
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Banco Central do Brasil (2023).</strong> <em>Relatório de Pagamentos Pix 2023.</em> bcb.gov.br — Datos de volumen y adopción de Pix por región y segmento.</div>
+          <div class="ref-item"><strong>BIS (2022).</strong> <em>Fast Payment Systems: design and policy perspectives.</em> Bank for International Settlements. — Análisis comparativo de sistemas de pago inmediato incluyendo Pix.</div>
+        </div>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto LatAm — Pruebas de mercado en la región</div>
+        <p>América Latina presenta condiciones únicas para las pruebas de mercado que dificultan la generalización de resultados:</p>
+        <ul>
+          <li><strong>Alta heterogeneidad intra-país:</strong> una prueba en São Paulo no predice necesariamente el comportamiento en el Nordeste de Brasil; una prueba en Buenos Aires puede ser muy diferente del interior de Argentina.</li>
+          <li><strong>Volatilidad macroeconómica:</strong> la inflación, las devaluaciones y las crisis pueden ocurrir durante el período de prueba y destruir la validez externa de los resultados (el mercado de prueba ya no representa el contexto en que se lanzará el producto).</li>
+          <li><strong>Diferencias regulatorias subnacionales:</strong> en mercados como Brasil (estados) y Argentina (provincias), las regulaciones de etiquetado, impuestos y distribución pueden variar significativamente, limitando qué mercados son comparables.</li>
+          <li><strong>Mercados de prueba simulados:</strong> por las dificultades de los experimentos de campo en LATAM, muchas empresas optan por pruebas de mercado simuladas (STM) que utilizan entornos de compra virtual para predecir el comportamiento real antes del lanzamiento.</li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('ab-testing')">← A/B testing</button>
+        <button class="nav-btn primary" onclick="showSection('lab-vs-campo')">Siguiente: Lab vs. campo →</button>
+      </div>
+    </div>
+
+    <!-- LAB VS CAMPO -->
+    <div id="lab-vs-campo" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 10</div>
+        <h2>Experimentos de laboratorio vs. de campo</h2>
+        <p class="section-intro">La decisión entre realizar un experimento en condiciones controladas o en condiciones reales del mercado es una de las más importantes en el diseño experimental. Cada opción tiene ventajas estructurales e irreducibles.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Laboratorio vs. campo</div>
+        <p><strong>Experimento de laboratorio:</strong> se realiza en un ambiente artificial y controlado. El investigador tiene alto control sobre las variables extrañas. Maximiza la validez interna. Ejemplo: evaluación de anuncios en una sala equipada donde se controlan la iluminación, el sonido, la secuencia de exposición y el tiempo.</p>
+        <p><strong>Experimento de campo:</strong> se realiza en condiciones reales del mercado — tiendas, hogares, plataformas reales. El investigador tiene menos control sobre variables extrañas, pero los resultados son más generalizables (mayor validez externa). Ejemplo: el experimento de Rite Aid con anuncios de radio en tiendas reales.</p>
+        <p>La tensión clave: cuando se mejora el control (laboratorio), se pierde realismo (campo). La solución de Malhotra: usar diseños de laboratorio en etapas exploratorias para detectar efectos, y diseños de campo en etapas posteriores para confirmar y generalizar.</p>
+      </div>
+
+      <table class="compare-table">
+        <tr>
+          <th>Dimensión</th>
+          <th>Laboratorio</th>
+          <th>Campo</th>
+        </tr>
+        <tr><td>Control de VI</td><td>Alto</td><td>Limitado</td></tr>
+        <tr><td>Control de VE</td><td>Alto</td><td>Bajo</td></tr>
+        <tr><td>Validez interna</td><td>Alta</td><td>Media-alta (con aleatorización)</td></tr>
+        <tr><td>Validez externa</td><td>Baja</td><td>Alta</td></tr>
+        <tr><td>Costo</td><td>Medio</td><td>Alto</td></tr>
+        <tr><td>Tiempo</td><td>Corto</td><td>Largo</td></tr>
+        <tr><td>Reactividad de los participantes</td><td>Alta (saben que están en un experimento)</td><td>Baja (comportamiento natural)</td></tr>
+        <tr><td>Artefactos de demanda</td><td>Alto riesgo</td><td>Bajo riesgo</td></tr>
+      </table>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El laboratorio virtual: realidad virtual y entornos de compra simulados</h3>
+          <div class="tags"><span class="tag tag-tool">herramientas</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Una innovación metodológica clave que Malhotra menciona brevemente pero que ha crecido enormemente: los entornos de compra virtuales permiten combinar el control del laboratorio con el realismo perceptual del campo.</p>
+        <p>Empresas como Kantar, Nielsen y Ipsos ofrecen "virtual store testing": el participante navega por un supermercado virtual en 3D donde puede ver, girar y examinar productos. El investigador puede manipular el precio, el empaque, la ubicación en el lineal y la presencia de competidores, mientras registra el comportamiento del cursor, el tiempo de atención por producto y la decisión de compra.</p>
+        <p><strong>Ventaja competitiva para LATAM:</strong> permite hacer investigación causal en mercados donde los experimentos de campo son costosos o logísticamente complejos. Una empresa uruguaya puede evaluar un nuevo empaque de yerba mate en cinco ciudades de Argentina sin mover un solo producto físico.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kantar (2024).</strong> <em>Virtual Store Testing: methodology and applications.</em> kantar.com — Documentación técnica del entorno de compra virtual de Kantar.</div>
+          <div class="ref-item"><strong>Sigurdsson, V. et al. (2016).</strong> "In-store and virtual reality shopping: an experimental design." <em>Journal of Business Research</em>, 69(6), 1992–2001.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('prueba-mercado')">← Prueba de mercado</button>
+        <button class="nav-btn primary" onclick="showSection('internacional')">Siguiente: Internacional y LatAm →</button>
+      </div>
+    </div>
+
+    <!-- INTERNACIONAL -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 11</div>
+        <h2>Investigación internacional y contexto LatAm</h2>
+        <p class="section-intro">Malhotra advierte que la investigación causal en contextos internacionales presenta desafíos adicionales que reducen tanto la validez interna como la externa de los experimentos de campo.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Experimentación internacional</div>
+        <p>En muchos países, los ambientes de marketing, económico, estructural, informativo y tecnológico no están desarrollados de la misma manera. Malhotra señala factores que dificultan los experimentos de campo internacionales:</p>
+        <ul>
+          <li>Control gubernamental de los medios (imposible manipular niveles de publicidad televisiva en algunos países).</li>
+          <li>Menor infraestructura estadística para identificar y segmentar unidades de prueba equivalentes.</li>
+          <li>Mayor volatilidad del entorno: eventos políticos, cambiarios o sociales que actúan como variables de historia.</li>
+          <li>Menor control sobre la mezcla de marketing local (distribución, intermediarios, regulaciones de etiquetado).</li>
+        </ul>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Desafíos específicos de experimentación en América Latina</div>
+        <p><strong>1. Fragmentación de datos:</strong> a diferencia de EE.UU. o Europa, en LATAM los paneles de consumidores son menores y menos representativos. Empresas como Kantar Worldpanel o Nielsen tienen cobertura limitada en algunas regiones, dificultando la construcción de mercados de prueba estadísticamente equivalentes.</p>
+        <p><strong>2. Informalidad económica:</strong> en mercados con alto comercio informal (mercados de pulgas, vendedores ambulantes, ferias), los experimentos en canales formales no capturan el comportamiento real de una proporción significativa de consumidores. Uruguay tiene menor informalidad, pero México, Bolivia o Paraguay presentan desafíos mayores.</p>
+        <p><strong>3. Diferencias de penetración digital:</strong> los A/B tests digitales en LATAM tienen problemas de validez externa amplificados: las poblaciones con acceso a smartphones y banca digital representan segmentos más urbanos y de mayores ingresos, no el mercado total.</p>
+        <p><strong>4. Legislación de privacidad fragmentada:</strong> el manejo de datos de usuarios para experimentos está regulado de forma diferente: LGPD en Brasil (2020), Ley Habeas Data en Colombia, LFPDPPP en México. La aleatorización y el seguimiento de usuarios para experimentos deben cumplir con el marco regulatorio local.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Coca-Cola y los experimentos de precio en Colombia y Chile</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-lat">latinoamérica</span></div>
+        </div>
+
+        <div class="case-highlight">
+          <div class="case-label">📦 Caso en clase — Experimento de campo multinacional</div>
+          <h4>Coca-Cola: ¿el precio del agua embotellada en el PDV afecta las ventas de Coca-Cola?</h4>
+          <p>Coca-Cola FEMSA (mayor embotelladora de LATAM) investigó si el precio de su línea de agua embotellada (marca Ciel en México, Brisa en Colombia) tenía un efecto causal sobre la demanda de Coca-Cola en el mismo punto de venta. La hipótesis: si el agua es percibida como alternativa saludable y el precio del agua sube, ¿aumentan las ventas de Coca-Cola?</p>
+          <p><strong style="color:#d4a0a0;">Diseño:</strong> experimento de campo en tiendas de conveniencia Oxxo seleccionadas y aleatorizadas en tres regiones de Colombia y Chile. El precio del agua fue manipulado en las tiendas experimentales durante 6 semanas. Las ventas de ambos productos se monitorearon a nivel de ticket de caja.</p>
+          <p><strong style="color:#d4a0a0;">Variable extraña crítica:</strong> la campaña "Mundo sin sed" de un competidor lanzó comunicación masiva durante el período, actuando como variable de historia que afectó diferencialmente a regiones con distintos niveles de inversión en medios.</p>
+          <p><em>Pregunta para clase: ¿Cómo identificarías que la campaña del competidor está actuando como variable de historia? ¿Qué información necesitarías para cuantificar su efecto?</em></p>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('lab-vs-campo')">← Lab vs. campo</button>
+        <button class="nav-btn primary" onclick="showSection('etica')">Siguiente: Ética →</button>
+      </div>
+    </div>
+
+    <!-- ÉTICA -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 12</div>
+        <h2>Ética en la investigación causal</h2>
+        <p class="section-intro">La experimentación introduce dilemas éticos específicos que no están presentes en la investigación descriptiva. El consentimiento, el engaño y el manejo de la información son los temas centrales.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Dilemas éticos en experimentación</div>
+        <p><strong>Ocultamiento del propósito:</strong> en muchos experimentos, revelar el propósito real destruiría la validez del estudio. Si los participantes saben que están siendo observados para medir su reacción a un precio diferente, su comportamiento cambiará (efecto Hawthorne). El libro señala que este ocultamiento debe hacerse de forma ética, sin violar los derechos de los participantes.</p>
+        <p><strong>Sesión de información (debriefing):</strong> Malhotra recomienda organizar una sesión de información posterior al experimento para revelar el propósito real, reducir el estrés de los participantes y hacer que el experimento sea una experiencia de aprendizaje. Esta sesión debe realizarse de forma que minimice el sesgo ex-post de los datos.</p>
+        <p><strong>Artefactos de demanda:</strong> ocurren cuando los participantes identifican el propósito del experimento y modifican su comportamiento para "ayudar" al investigador o para parecer más racionales. Son una amenaza tanto ética como metodológica.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El experimento de Facebook y el "contagio emocional" (2014)</h3>
+          <div class="tags"><span class="tag tag-caso">caso real</span><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>En 2014, Facebook publicó un estudio en PNAS que reveló que había manipulado los feeds de noticias de casi 700,000 usuarios durante una semana en 2012 para estudiar el contagio emocional. Algunos usuarios vieron más contenido positivo, otros más negativo, y se midió el efecto sobre el tono emocional de sus propios posts.</p>
+        <p>El experimento generó una controversia masiva: los usuarios no habían dado consentimiento explícito para participar en un experimento de manipulación emocional. Los Términos de Servicio de Facebook incluían una cláusula genérica sobre investigación, pero la mayoría de los usuarios no la había leído ni esperaba que incluyera manipulación del contenido para fines experimentales.</p>
+        <p><strong>Implicaciones metodológicas y éticas:</strong></p>
+        <ul>
+          <li>Los grandes experimentos digitales sin consentimiento informado explícito son éticamente cuestionables, incluso si los Términos de Servicio los permiten legalmente.</li>
+          <li>La escala del experimento (700,000 usuarios) amplifica el daño potencial: incluso efectos pequeños sobre el bienestar pueden ser significativos a esa escala.</li>
+          <li>En América Latina, regulaciones como la LGPD de Brasil y la Ley 25.326 de Argentina establecen requisitos de consentimiento informado que hacen ilegales este tipo de experimentos sin divulgación adecuada.</li>
+        </ul>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Fuentes</div>
+          <div class="ref-item"><strong>Kramer, A. et al. (2014).</strong> "Experimental evidence of massive-scale emotional contagion through social networks." <em>PNAS</em>, 111(24), 8788–8790.</div>
+          <div class="ref-item"><strong>Kleinsman, J. & Buckley, S. (2015).</strong> "Facebook study: a little bit unethical but worth it?" <em>Big Data & Society</em>, 2(1).</div>
+        </div>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Marco regulatorio LatAm para experimentos digitales</div>
+        <ul>
+          <li><strong>Brasil — LGPD (Lei Geral de Proteção de Dados, 2020):</strong> requiere base legal para el tratamiento de datos personales. Los experimentos que involucran perfilamiento o manipulación de contenido deben indicar su base legal y en muchos casos requieren consentimiento explícito.</li>
+          <li><strong>Argentina — Ley 25.326:</strong> protección de datos personales. Los datos recopilados durante experimentos deben ser proporcionales al objetivo y no pueden reutilizarse para fines distintos sin nuevo consentimiento.</li>
+          <li><strong>México — LFPDPPP:</strong> obliga a informar a los titulares sobre el uso de sus datos, incluyendo si serán parte de estudios o investigaciones.</li>
+          <li><strong>Uruguay — Ley 18.331:</strong> regulación de datos personales con principios de finalidad y proporcionalidad aplicables a la investigación experimental.</li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('internacional')">← Internacional y LatAm</button>
+        <button class="nav-btn" onclick="showSection('diapositivas')">↑ Volver al inicio</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) { target.classList.add('active'); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(id)) n.classList.add('active');
+  });
+}
+</script>
+</body>
+</html>

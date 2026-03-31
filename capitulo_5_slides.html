@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 5 — Encuestas y observación</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; height: 100%; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 720px; display: flex; flex-direction: column; position: relative; box-sizing: border-box; }
+
+.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
+.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
+
+.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
+
+.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
+.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+
+.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h-white { color:white; }
+
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+.def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
+.def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
+.def-text strong { color:#d4a0a0; }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
+.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
+.col-body ul { padding-left:1.2em; margin-top:4px; }
+.col-body ul li { font-size:12px; color:#444; line-height:1.5; margin-bottom:3px; }
+
+.ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:11.5px; }
+.ref-table tr:nth-child(even) td { background:#faf8f5; }
+.best { color:#2d7a3a; font-weight:600; }
+.worst { color:var(--accent); font-weight:600; }
+
+.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+
+.latam-box { background:var(--greenbg); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:5px; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.55; }
+
+.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.6; }
+
+.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+.piz-dark { margin-top:9px; padding:7px 13px; background:rgba(255,255,255,0.05); border-left:3px solid rgba(255,255,255,0.25); border-radius:0 5px 5px 0; font-size:11.5px; color:rgba(255,255,255,0.5); font-style:italic; }
+
+.tag-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.tag { font-size:10px; padding:3px 8px; border-radius:10px; font-weight:500; }
+.tag-c { background:#fdecea; color:#8b2218; border:1px solid #f5c6c2; }
+.tag-b { background:#e8f0f8; color:#1a3a5c; border:1px solid #b8d0e8; }
+.tag-g { background:var(--greenbg); color:var(--green); border:1px solid #a5d6a7; }
+
+.method-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
+.method-card { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:10px 12px; }
+.method-name { font-weight:600; font-size:12px; color:white; margin-bottom:4px; }
+.method-desc { font-size:11px; color:rgba(255,255,255,0.6); line-height:1.4; }
+
+.step-row { display:flex; align-items:flex-start; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+.step-row:last-child { border-bottom:none; }
+.step-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); width:24px; flex-shrink:0; padding-top:1px; }
+.step-body { font-size:13px; color:rgba(255,255,255,0.8); line-height:1.5; }
+.step-body strong { color:white; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══ PORTADA ══ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 5</div>
+  <div class="cover-title">Encuestas y<br><em>observación</em></div>
+  <div style="font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:28px;max-width:480px;line-height:1.6;">Cómo recopilar datos primarios cuantitativos: cuándo preguntar, cuándo observar, y cómo elegir el canal correcto</div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- ══ APERTURA — min 0–10 ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Apertura · minutos 0–10</div>
+  <div class="slide-h">La pregunta que organiza el capítulo</div>
+  <ul class="bullets">
+    <li>Ya sabemos <strong>qué información necesitamos</strong> (Caps. 1–2) y que haremos investigación cuantitativa (Cap. 3). ¿Cómo la recopilamos?</li>
+    <li>Dos grandes caminos: <strong>preguntar</strong> (encuesta) u <strong>observar</strong> (observación). No son intercambiables — acceden a información distinta.</li>
+    <li>La encuesta dice lo que el consumidor <em>cree o siente</em>. La observación registra lo que <em>realmente hace</em>.</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta de apertura</div>
+    <div class="pause-q">¿Alguna vez respondieron una encuesta que les pareció que no capturaba lo que realmente querían decir? ¿Por qué creen que pasa eso?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ CASO APERTURA DOVE ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso de apertura · Dove — Real Beauty Sketches (2013)</div>
+  <div class="slide-h slide-h-white">Cuando preguntar directamente no alcanza</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El problema:</strong> Unilever quería entender por qué las mujeres sub-perciben su propia belleza. Una encuesta directa ("¿Te considerás bella?") producía respuestas socialmente deseables, no auténticas.
+    </div>
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">La solución metodológica:</strong> entrevistas en profundidad + observación de la diferencia entre la descripción propia y la descripción de un extraño → cuantificación de la brecha en 13 países.
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.25);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El resultado:</strong> el video más visto de la historia hasta 2013 — 163 millones de views en 30 días. La investigación no solo informó el mensaje: <em>fue</em> el mensaje.
+    </div>
+  </div>
+  <div class="piz-dark">✏ Figura 5.1 en pizarrón: árbol de decisión ¿encuesta u observación? — ubicar la combinación que usó Dove</div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 1 ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque I · minutos 10–50</div>
+  <div class="sec-title">Encuestas:<br>tipos y canales</div>
+  <div class="sec-sub">Del teléfono al móvil — cómo elegir el modo de aplicación</div>
+</div>
+</section>
+
+<!-- ══ CLASIFICACIÓN DE ENCUESTAS ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Encuestas — Clasificación por canal</div>
+  <div class="slide-h">METHODS: los cinco canales de Malhotra</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:13px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px;">Canal</div>
+      <ul class="bullets" style="font-size:12.5px;">
+        <li><strong>M</strong>ail panels — panel por correo</li>
+        <li><strong>E</strong>lectronic — encuestas web/email</li>
+        <li><strong>T</strong>elephone — telefónica (CATI/ETAC)</li>
+        <li><strong>H</strong>ome — personal en el hogar</li>
+        <li><strong>O</strong>n-site mall — en centro comercial</li>
+        <li><strong>D</strong>irect-mail — correo directo</li>
+        <li><strong>S</strong>oftware CATI/CAPI — asistida por computadora</li>
+      </ul>
+    </div>
+    <div>
+      <div style="background:#1e1e1e;border-radius:8px;padding:13px 15px;margin-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:6px;">Encuesta ómnibus</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.8);line-height:1.5;">Varias organizaciones comparten un mismo cuestionario aplicado a una muestra representativa. Reduce costos — cada contratante paga solo su módulo de preguntas.</div>
+      </div>
+      <div class="latam-box" style="margin-top:0;">
+        <div class="latam-label">🌎 LATAM</div>
+        <div class="latam-text">Ipsos, Kantar, Equipos Consultores (UY) y Datum (PE) ofrecen servicios ómnibus. Opción viable para pymes con presupuesto acotado.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ ENCUESTAS DIGITALES/MÓVILES ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Actualización 2024 — encuestas web y móviles</div>
+  <div class="slide-h">El canal digital es hoy el estándar — y el móvil superó al escritorio</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box">
+      <div class="col-label">Ventajas del canal digital</div>
+      <div class="col-body">
+        <ul>
+          <li>Costo muy bajo por respuesta</li>
+          <li>Velocidad: datos en horas</li>
+          <li>Ramificación condicional automatizada</li>
+          <li>Cuotas de muestra en tiempo real</li>
+          <li>Integración con paneles online</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Limitaciones del canal digital</div>
+      <div class="col-body">
+        <ul>
+          <li>Brecha digital excluye poblaciones</li>
+          <li>Sesgo de autoselección severo</li>
+          <li>Tasas de respuesta variables (10–40%)</li>
+          <li>Riesgo de respondentes no calificados</li>
+          <li>Diseño debe adaptarse a pantalla chica</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>Pew Research Center (2019):</strong> las tasas de respuesta telefónica cayeron del 36% en 1997 al 6% en 2018. El diseño de la encuesta hoy debe compensar la baja respuesta con muestras más grandes o incentivos.
+  </div>
+</div>
+</section>
+
+<!-- ══ FACTORES DE SELECCIÓN INTRO ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque I (cont.) · minutos 35–50</div>
+  <div class="sec-title">Seis criterios<br>para elegir el canal</div>
+  <div class="sec-sub">La elección no es preferencia — es una decisión estructurada</div>
+</div>
+</section>
+
+<!-- ══ TABLA COMPARATIVA ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Criterios de selección — Malhotra 2016 + actualización</div>
+  <div class="slide-h">Ningún método domina en todos los criterios</div>
+  <table class="ref-table" style="margin-top:8px;font-size:11.5px;">
+    <thead>
+      <tr>
+        <th>Criterio</th>
+        <th>Telefónica</th>
+        <th>Personal hogar</th>
+        <th>Mall intercept</th>
+        <th>Correo</th>
+        <th>Web / Móvil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Flexibilidad</strong></td><td>Media</td><td class="best">Alta</td><td>Media-alta</td><td class="worst">Baja</td><td>Media</td></tr>
+      <tr><td><strong>Volumen datos</strong></td><td>Medio</td><td class="best">Alto</td><td>Medio</td><td class="worst">Bajo</td><td>Medio-alto</td></tr>
+      <tr><td><strong>Control muestra</strong></td><td>Medio</td><td class="best">Alto</td><td>Medio</td><td class="worst">Bajo</td><td>Variable</td></tr>
+      <tr><td><strong>Tasa respuesta</strong></td><td>Baja</td><td class="best">Alta</td><td>Media</td><td class="worst">Muy baja</td><td>Variable</td></tr>
+      <tr><td><strong>Velocidad</strong></td><td>Media</td><td class="worst">Baja</td><td>Media</td><td class="worst">Muy baja</td><td class="best">Muy alta</td></tr>
+      <tr><td><strong>Costo</strong></td><td>Medio</td><td class="worst">Alto</td><td>Medio</td><td class="best">Bajo</td><td class="best">Muy bajo</td></tr>
+    </tbody>
+  </table>
+  <div class="piz">✏ Dibujar árbol de decisión Figura 5.1 — árbol de selección del método según prioridad del investigador</div>
+</div>
+</section>
+
+<!-- ══ LATAM / RESTRICCIONES PRÁCTICAS ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Contexto LATAM — restricciones prácticas regionales</div>
+  <div class="slide-h slide-h-white">Malhotra lista restricciones prácticas para estudiantes — en LATAM son aún más reales</div>
+  <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px;">
+    <div class="step-row">
+      <div class="step-num">01</div>
+      <div class="step-body"><strong>Inseguridad urbana:</strong> las encuestas puerta a puerta son inviables en varios barrios de Buenos Aires, Lima, Bogotá o Ciudad de México</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">02</div>
+      <div class="step-body"><strong>WhatsApp reemplaza al teléfono fijo:</strong> encuestas por mensaje de voz o formularios por app son metodológicamente similares a la encuesta web, con mayor apertura</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">03</div>
+      <div class="step-body"><strong>Brecha digital:</strong> Uruguay 89% de acceso, pero Bolivia 47%, Nicaragua 45% — la representatividad de encuestas web varía radicalmente</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">04</div>
+      <div class="step-body"><strong>Permisos en centros comerciales:</strong> igual que en EE.UU., muchos shoppings tienen contratos exclusivos con agencias — hay que gestionarlo</div>
+    </div>
+  </div>
+  <div class="latam-box" style="margin-top:10px;">
+    <div class="latam-label">🌎 Aplicación al proyecto</div>
+    <div class="latam-text">Para investigar suplementos deportivos en Uruguay: web (acceso 89%, pero sesgo deportivo), gimnasio (acceso directo al segmento), o panel ómnibus (mayor representatividad, mayor costo). ¿Cuál elegiría su equipo y por qué?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 2 OBSERVACIÓN ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque II · minutos 50–90</div>
+  <div class="sec-title">Investigación<br>por observación</div>
+  <div class="sec-sub">Registrar lo que realmente ocurre, sin preguntar</div>
+</div>
+</section>
+
+<!-- ══ OBSERVACIÓN DEFINICIÓN Y CLASIFICACIÓN ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Observación — Definición y tipos · Malhotra 2016</div>
+  <div class="slide-h">Cuatro ejes de clasificación de la observación</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box">
+      <div class="col-label">Eje 1 — Entorno</div>
+      <div class="col-body"><strong>Natural:</strong> supermercado, calle, hogar.<br><strong>Artificial:</strong> laboratorio, sala controlada.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Eje 2 — Conocimiento del sujeto</div>
+      <div class="col-body"><strong>Abierta:</strong> el sujeto sabe que es observado.<br><strong>Encubierta:</strong> el sujeto no sabe. Mayor validez conductual, dilema ético.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Eje 3 — Estructura</div>
+      <div class="col-body"><strong>Estructurada:</strong> categorías predefinidas.<br><strong>No estructurada:</strong> registro abierto, anotaciones libres (más cualitativa).</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Eje 4 — Quién observa</div>
+      <div class="col-body"><strong>Humana:</strong> un investigador.<br><strong>Mecánica:</strong> cámara, sensor, software. Sin sesgo del observador, escalable.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">
+    <strong>Regla central:</strong> la observación accede al comportamiento real. La encuesta accede a lo que el sujeto cree/siente/reporta. Son complementarias, no sustitutas.
+  </div>
+</div>
+</section>
+
+<!-- ══ IKEA CASO ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso global · IKEA — Home Visits</div>
+  <div class="slide-h slide-h-white">Cómo IKEA rediseñó sus productos para culturas distintas</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El método:</strong> investigadores pasan tiempo en hogares de distintos países, observando cómo las familias usan el espacio, almacenan objetos, organizan rutinas — sin preguntar.
+    </div>
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El hallazgo en China:</strong> los dormitorios funcionan como salas de estar secundarias — se come, socializa y trabaja en el dormitorio. Esto es invisible para el consumidor: es simplemente "normal".
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.25);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">La decisión:</strong> catálogos y distribución de tiendas en Asia rediseñados con mayor proporción de muebles de dormitorio multifunción. Ninguna encuesta hubiera capturado este insight.
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;background:rgba(255,251,236,0.08);border-left-color:var(--gold);">
+    <div class="pause-label" style="color:var(--gold);">⏸ Para la clase</div>
+    <div class="pause-q" style="color:rgba(255,255,255,0.6);">¿Qué comportamientos de los uruguayos podrían descubrirse por observación que una encuesta no capturaría?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ VENTAJAS Y DESVENTAJAS ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Observación — ventajas y desventajas</div>
+  <div class="slide-h">La observación es más confiable para comportamiento, pero tiene límites importantes</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">✓ Ventajas</div>
+      <div class="col-body">
+        <ul>
+          <li>Registra comportamiento <strong>real</strong>, no reportado</li>
+          <li>Elimina sesgo de respuesta social</li>
+          <li>Útil para comportamientos <strong>inconscientes o rutinarios</strong></li>
+          <li>No requiere cooperación activa</li>
+          <li>Puede ser continua y automatizada</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">✗ Desventajas</div>
+      <div class="col-body">
+        <ul>
+          <li>No accede a motivaciones ni actitudes</li>
+          <li>El observador puede alterar el comportamiento</li>
+          <li>No accede a comportamiento privado o pasado</li>
+          <li>Costosa y lenta si es humana</li>
+          <li>Dilemas éticos en observación encubierta</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="piz">✏ Dibujar Figura 5.3 — clasificación de métodos de observación (natural/artificial, abierta/encubierta, estructurada/no estructurada, humana/mecánica)</div>
+</div>
+</section>
+
+<!-- ══ OBSERVACIÓN DIGITAL ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Actualización 2024 — Observación digital</div>
+  <div class="slide-h slide-h-white">El comportamiento online es inherentemente observable — a escala masiva</div>
+  <div style="font-size:13.5px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:12px;">
+    Clics, scroll, tiempo en página, secuencia de navegación, búsquedas, compras: todo el comportamiento digital es observación natural, no estructurada, sin intervención del investigador.
+  </div>
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-name">Google Analytics 4</div>
+      <div class="method-desc">Recorrido del usuario en sitio web, conversiones, fuentes de tráfico</div>
+    </div>
+    <div class="method-card">
+      <div class="method-name">Hotjar</div>
+      <div class="method-desc">Mapas de calor, grabaciones de sesión, funnel de comportamiento</div>
+    </div>
+    <div class="method-card">
+      <div class="method-name">FullStory</div>
+      <div class="method-desc">Replay de sesiones, análisis de frustración (rage clicks)</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>Equivalencia metodológica:</strong> el A/B testing de Netflix (2 versiones de una miniatura mostradas a distintos grupos) es un experimento de observación. Netflix observa cuál imagen genera más clics — sin preguntar nada a los usuarios.
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 3 OBSERVACIÓN MECÁNICA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque II (cont.) · minutos 70–90</div>
+  <div class="sec-title">Observación mecánica<br>y neuromarketing</div>
+  <div class="sec-sub">Del audímetro al EEG inalámbrico</div>
+</div>
+</section>
+
+<!-- ══ INSTRUMENTOS MECÁNICOS ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Observación mecánica — instrumentos · Malhotra 2016</div>
+  <div class="slide-h">Los dispositivos eliminan el sesgo del observador humano</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div>
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:13px 15px;margin-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">AUDÍMETRO</div>
+        <div style="font-size:12.5px;color:#333;line-height:1.5;">Registra encendido del TV y canal. Base del sistema Nielsen de ratings. <em>Hoy: streaming fragmentó el modelo.</em></div>
+      </div>
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:13px 15px;margin-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">SCANNER / PUNTO DE VENTA</div>
+        <div style="font-size:12.5px;color:#333;line-height:1.5;">Registro de compras por código de barras. La base de datos más grande de comportamiento de consumo real.</div>
+      </div>
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:13px 15px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">EYE TRACKER</div>
+        <div style="font-size:12.5px;color:#333;line-height:1.5;">Movimiento ocular → qué elemento de un aviso o envase atrae la atención. Hoy disponible portátil y a bajo costo.</div>
+      </div>
+    </div>
+    <div>
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:13px 15px;margin-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">GALVANÓMETRO / PUPILÓMETRO</div>
+        <div style="font-size:12.5px;color:#333;line-height:1.5;">Respuestas fisiológicas (sudoración, pupila) ante estímulos publicitarios → base del neuromarketing.</div>
+      </div>
+      <div style="background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:13px 15px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">TAQUISTOSCOPIO</div>
+        <div style="font-size:12.5px;color:#333;line-height:1.5;">Presenta imágenes a distintas velocidades → mide reconocimiento visual subliminal.</div>
+      </div>
+      <div class="latam-box" style="margin-top:8px;">
+        <div class="latam-label">🌎 LATAM</div>
+        <div class="latam-text">Kantar Ibope Media opera el sistema de audímetros en la mayoría de los países de la región para medición televisiva.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ NEUROMARKETING ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Actualización — Neuromarketing 2024</div>
+  <div class="slide-h slide-h-white">El caso Coca-Cola vs. Pepsi: lo que el fMRI reveló y la encuesta no podía</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El "desafío Pepsi":</strong> en prueba a ciegas, los consumidores preferían Pepsi. Con marca visible, preferían Coca-Cola. Encuesta directa no podía capturar por qué.
+    </div>
+    <div style="padding:9px 14px;background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">El fMRI:</strong> al ver la marca Coca-Cola, se activaban regiones del córtex prefrontal asociadas a memoria emocional y autopercepción — no solo el gusto. La marca es una experiencia cerebral diferente al producto.
+    </div>
+    <div style="padding:9px 14px;background:rgba(44,95,138,0.25);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:rgba(255,255,255,0.8);">
+      <strong style="color:white;">Tecnologías 2024:</strong> eye tracking portátil, EEG inalámbrico, reconocimiento facial de emociones (Affectiva), fMRI en laboratorio. En LATAM: BrainHouse (ARG), Mindcode (MEX).
+    </div>
+  </div>
+  <div class="piz-dark">✏ Opcional: dibujar espectro de métodos de neurociencia — del más accesible (eye tracking) al más exigente (fMRI)</div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 3 SOCIAL MEDIA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque III · minutos 90–120</div>
+  <div class="sec-title">Social media:<br>encuestas y observación</div>
+  <div class="sec-sub">Las redes como canal y como objeto de investigación</div>
+</div>
+</section>
+
+<!-- ══ SOCIAL LISTENING ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Social media — social listening y encuestas en RRSS</div>
+  <div class="slide-h">Dos usos metodológicos distintos de las redes sociales</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Canal de encuesta</div>
+      <div class="col-body">Distribuir cuestionarios via Facebook, Instagram, LinkedIn, WhatsApp.<br><br><strong>Problema central:</strong> responden los seguidores — no una muestra probabilística. Sesgo de autoselección máximo. Solo válido para investigación exploratoria o testeo de conceptos.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Objeto de observación (social listening)</div>
+      <div class="col-body">Monitoreo sistemático de conversaciones espontáneas sobre una marca, categoría o evento.<br><br>Casos Malhotra: <strong>JCPenney</strong> (rebranding fallido detectado antes que las encuestas), <strong>Burger King</strong> (quejas en Twitter → mejora de producto), <strong>GlaxoSmithKline</strong> (farmacovigilancia en foros de pacientes).</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">
+    <strong>Regla práctica:</strong> el social listening es observación, no encuesta. No se le pregunta al usuario — se registra lo que dice espontáneamente. Herramientas: Brandwatch, Sprout Social, Talkwalker, Mention.
+  </div>
+</div>
+</section>
+
+<!-- ══ CASO RAPPI ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Rappi / iFood / PedidosYa — delivery como superapp</div>
+  <div class="slide-h slide-h-white">Las plataformas de delivery son máquinas de observación del comportamiento a escala</div>
+  <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px;">
+    <div class="step-row">
+      <div class="step-num">📊</div>
+      <div class="step-body"><strong>Qué observan:</strong> hora de pedido, categoría, secuencia de pantallas, tiempo de decisión, abandono de carrito, respuesta a descuentos</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🔗</div>
+      <div class="step-body"><strong>Equivalencia metodológica:</strong> el scanner de punto de venta de Malhotra, pero con riqueza de datos incomparablemente mayor — y cruzado con datos financieros (Rappi Pay, iFood Pay)</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🌎</div>
+      <div class="step-body"><strong>Expansión 2024:</strong> Keeta (ex Meituan) en México; Rappi, iFood, 99Food compitiendo en Brasil — todos invierten fuertemente en IA aplicada a personalización y predicción de demanda</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">⚠</div>
+      <div class="step-body"><strong>El problema del investigador externo:</strong> estos datos los tiene la plataforma — no el cliente (el restaurante, la marca). La asimetría informativa es total</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 4 ÉTICA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque III · minutos 120–135</div>
+  <div class="sec-title">Ética en la<br>recopilación de datos</div>
+  <div class="sec-sub">Consentimiento, privacidad, sugging y respondentes sintéticos</div>
+</div>
+</section>
+
+<!-- ══ ÉTICA: PRÁCTICAS PROHIBIDAS ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética — Malhotra 2016 + actualización</div>
+  <div class="slide-h">Las cuatro tensiones éticas del capítulo</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;">SUGGING / FRUGGING</div>
+      <div style="font-size:13px;color:#333;line-height:1.5;">Vender o recaudar fondos usando una encuesta como pretexto. Destruye la confianza en la investigación legítima.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:4px;">OBSERVACIÓN ENCUBIERTA</div>
+      <div style="font-size:13px;color:#333;line-height:1.5;">Dilema: mayor validez conductual vs. ausencia de consentimiento. El debate sobre el comportamiento digital (cookies, tracking) es su versión 2024.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;">PRIVACIDAD Y USO DE DATOS</div>
+      <div style="font-size:13px;color:#333;line-height:1.5;">¿El consentimiento alcanza para el uso secundario de datos? Cambridge Analytica (2018) usó datos de encuestas académicas para targeting político sin consentimiento.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;margin-bottom:4px;">RESPONDENTES SINTÉTICOS (nuevo 2023–2024)</div>
+      <div style="font-size:13px;color:#333;line-height:1.5;">Usar LLMs para simular respuestas en lugar de encuestar personas reales. Reduce costos, pero si no se declara, es deceptivo para el cliente.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ MARCOS REGULATORIOS ══ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Regulación de datos — marco internacional + LATAM</div>
+  <div class="slide-h slide-h-white">El consentimiento digital tiene marcos legales distintos según jurisdicción</div>
+  <div style="display:flex;flex-direction:column;gap:7px;margin-top:10px;">
+    <div class="step-row">
+      <div class="step-num">🇪🇺</div>
+      <div class="step-body"><strong>GDPR (Europa, 2018):</strong> consentimiento explícito, finalidad específica, derecho al olvido. Estándar de referencia global.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🇧🇷</div>
+      <div class="step-body"><strong>LGPD (Brasil, 2020):</strong> primera ley comprehensiva de datos en LATAM, alineada al GDPR. Multas de hasta el 2% de la facturación.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🇲🇽</div>
+      <div class="step-body"><strong>LFPDPPP (México, 2010):</strong> pionera en LATAM, pero anterior al boom de datos. En debate de actualización.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🇺🇾</div>
+      <div class="step-body"><strong>Uruguay — Ley 18.331 (2008):</strong> pionera, alineada a estándares europeos. Regulada por la URCDP. Uruguay es el único país LATAM con adecuación reconocida por la UE.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">🇦🇷</div>
+      <div class="step-body"><strong>Argentina — Ley 25.326 (2000):</strong> en proceso de actualización legislativa para adecuarse a GDPR.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ CIERRE Y SÍNTESIS ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Cierre · minutos 135–150</div>
+  <div class="sec-title">Síntesis:<br>el árbol de decisión</div>
+  <div class="sec-sub">Encuesta u observación — ningún método es universalmente superior</div>
+</div>
+</section>
+
+<!-- ══ SLIDE CIERRE CONCEPTUAL ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Mapa de decisión — Capítulo 5</div>
+  <div class="slide-h">La regla de tres para elegir el método de recopilación</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:28px;color:var(--accent);line-height:1;flex-shrink:0;">1</div>
+      <div>
+        <div style="font-weight:600;color:var(--ink);font-size:14px;margin-bottom:4px;">¿Qué tipo de información necesito?</div>
+        <div style="font-size:13px;color:#555;line-height:1.5;">Actitudes/percepciones → encuesta. Comportamiento real → observación. Ambas → triangulación.</div>
+      </div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:28px;color:var(--blue);line-height:1;flex-shrink:0;">2</div>
+      <div>
+        <div style="font-weight:600;color:var(--ink);font-size:14px;margin-bottom:4px;">Si elijo encuesta, ¿qué canal?</div>
+        <div style="font-size:13px;color:#555;line-height:1.5;">Evaluar los seis criterios: flexibilidad, volumen, control, tasa de respuesta, velocidad, costo. Ningún método domina en todos.</div>
+      </div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:28px;color:var(--gold);line-height:1;flex-shrink:0;">3</div>
+      <div>
+        <div style="font-weight:600;color:var(--ink);font-size:14px;margin-bottom:4px;">¿Qué restricciones tiene mi contexto?</div>
+        <div style="font-size:13px;color:#555;line-height:1.5;">Presupuesto, tiempo, acceso al campo, brecha digital, regulación de datos, consideraciones éticas.</div>
+      </div>
+    </div>
+  </div>
+  <div class="piz">✏ Árbol de decisión completo en pizarrón: ¿Cuali/Cuanti? → ¿Encuesta/Observación? → ¿Qué canal? → ¿Qué instrumento? Resolver con el problema de investigación del proyecto de la clase.</div>
+</div>
+</section>
+
+<!-- ══ SLIDE FINAL ══ -->
+<section>
+<div class="slide s-close">
+  <div style="max-width:600px;">
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:20px;">Capítulo 5 · cierre</div>
+    <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;line-height:1.15;color:var(--paper);margin-bottom:20px;">Preguntar es necesario. <em style="color:#d4a0a0;">Observar es imprescindible.</em></div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:28px;">El investigador de mercados que solo encuesta tiene una visión a medias. El comportamiento real, especialmente en la era digital, es el dato más valioso — y a menudo el más ignorado.</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:8px 14px;font-size:12px;color:rgba(255,255,255,0.6);">Próximo: Cap. 6 · Experimentación</div>
+      <div style="background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.3);border-radius:6px;padding:8px 14px;font-size:12px;color:rgba(255,255,255,0.7);">Taller: diseño de encuesta del proyecto</div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  controls: true,
+  progress: true,
+  center: false,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  width: 1100,
+  height: 720,
+  margin: 0,
+  minScale: 0.3,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  .concept-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--ink); border-radius: 8px; padding: 22px 26px; margin-bottom: 28px; }
+  .concept-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--ink); text-transform: uppercase; margin-bottom: 10px; opacity: 0.6; }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+  .concept-box ul { padding-left: 1.3em; margin-top: 8px; }
+  .concept-box ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .def-term { display: inline-block; background: var(--ink); color: white; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+  .old-box { background: #f5f0eb; border: 1px solid var(--border); border-left: 4px solid #b0a898; border-radius: 8px; padding: 20px 24px; margin-bottom: 28px; }
+  .old-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: #9a9088; text-transform: uppercase; margin-bottom: 8px; }
+  .old-box p { font-size: 14px; color: #6b6056; line-height: 1.7; }
+
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+  .update-card ul { padding-left: 1.3em; margin-bottom: 14px; }
+  .update-card ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+  .latam-box ul { padding-left: 1.3em; }
+  .latam-box ul li { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 4px; }
+
+  .tool-box { background: var(--tool-bg); border: 1px solid var(--tool-border); border-left: 4px solid var(--tool-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .tool-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--tool-border); text-transform: uppercase; margin-bottom: 10px; }
+  .tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 12px; }
+  .tool-item { background: white; border: 1px solid #c0d4e8; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+  .tool-item strong { display: block; font-weight: 500; color: var(--accent2); font-size: 12.5px; }
+  .tool-item span { font-size: 12px; color: var(--muted); }
+
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .compare-col { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; }
+  .compare-col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+  .compare-col-pro .compare-col-label { color: #2d7a3a; }
+  .compare-col-con .compare-col-label { color: var(--accent); }
+  .compare-col ul { padding-left: 1.2em; }
+  .compare-col ul li { font-size: 13.5px; color: #333; line-height: 1.7; margin-bottom: 5px; }
+
+  .criteria-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+  .criteria-table th { background: var(--ink); color: white; padding: 10px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .criteria-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: #333; }
+  .criteria-table tr:nth-child(even) td { background: #faf8f5; }
+  .criteria-table .best { color: #2d7a3a; font-weight: 600; }
+  .criteria-table .worst { color: var(--accent); font-weight: 600; }
+
+  h3.subsection { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); margin: 32px 0 16px; }
+  p.body-text { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 16px; }
+
+  .footer-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 10px 20px; border-radius: 6px; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border); background: white; color: var(--muted); }
+  .nav-btn:hover { background: var(--cream); color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: #333; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 5</div>
+    <h1>Encuestas y<br><em>observación</em></h1>
+    <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:540px;line-height:1.7;margin-top:8px;">Los métodos para recopilar datos primarios cuantitativos — cuándo preguntar, cuándo observar, y cómo elegir el canal correcto.</p>
+    <div class="header-meta">
+      <span class="meta-chip">Malhotra (2016), Cap. 5</span>
+      <span class="meta-chip">Parte 2 · Diseño de investigación</span>
+      <span class="meta-chip">150 min · clase</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Contenido</div>
+    <div class="nav-section-label">Bloque I</div>
+    <a class="nav-item active" onclick="showSection('intro')">Apertura y caso</a>
+    <a class="nav-item" onclick="showSection('encuestas')">Encuestas: tipos y canales</a>
+    <a class="nav-item" onclick="showSection('factores')">Factores de selección</a>
+    <div class="nav-section-label">Bloque II</div>
+    <a class="nav-item" onclick="showSection('observacion')">Investigación por observación</a>
+    <a class="nav-item" onclick="showSection('mecanica')">Observación mecánica</a>
+    <div class="nav-section-label">Bloque III</div>
+    <a class="nav-item" onclick="showSection('socialmedia')">Social media y encuestas</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética y sesgos</a>
+    <a class="nav-item" onclick="showSection('latam')">Contexto LATAM</a>
+    <a class="nav-item" onclick="showSection('sintesis')">Síntesis y cierre</a>
+
+    <div class="legend">
+      <div class="nav-title" style="margin-bottom:12px;">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b0a898;"></div> Malhotra 2016</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ink);"></div> Marco conceptual</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent2);"></div> Actualización</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--lat-border);"></div> Contexto LATAM</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 0: INTRO / APERTURA               -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="intro" class="section active">
+      <div class="section-header">
+        <div class="section-number">Apertura · Bloque I</div>
+        <h2>¿Preguntar u observar?</h2>
+        <p class="section-intro">El capítulo 5 responde una pregunta práctica central: una vez que sabemos qué información necesitamos, ¿cómo la recopilamos? Las dos grandes familias de métodos cuantitativos primarios son la encuesta y la observación.</p>
+      </div>
+
+      <div class="case-highlight">
+        <div class="case-label">Caso de apertura · Dove — Real Beauty Sketches</div>
+        <h4>Cuando preguntar no alcanza: el caso Dove</h4>
+        <p>Unilever quería entender la brecha entre cómo las mujeres se perciben a sí mismas y cómo las perciben los demás. Una encuesta directa ("¿Te consideras bella?") producía respuestas socialmente deseables, no auténticas. La solución combinó encuesta cualitativa previa para entender el fenómeno, y luego encuesta estructurada para cuantificar la brecha en distintos mercados.</p>
+        <p>El resultado —la campaña "Real Beauty Sketches" (2013)— se convirtió en el video viral de marca más visto de la historia hasta ese momento, con 163 millones de vistas en 30 días. La investigación de mercados no solo informó el mensaje: <em>fue</em> el mensaje.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-top:8px;">Fuente: Ogilvy & Mather / Unilever case study, 2013. Reemplaza el caso Elizabeth Arden/Britney Spears de Malhotra, que usa el mismo principio metodológico.</p>
+      </div>
+
+      <p class="body-text">El capítulo 5 cubre los dos grandes tipos de recopilación de datos primarios <strong>cuantitativos</strong>: la encuesta (survey research) y la observación. La distinción es metodológicamente importante: en la encuesta, el respondente sabe que está siendo investigado y reporta sus actitudes o comportamientos. En la observación, el investigador registra directamente el comportamiento, sin necesidad de que el sujeto lo reporte.</p>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Marco conceptual — Malhotra 2016</div>
+        <p><strong>Datos primarios cuantitativos</strong> son datos originados específicamente para la investigación en curso, que admiten análisis estadístico. Se recopilan mediante dos grandes métodos:</p>
+        <ul>
+          <li><strong>Encuesta (survey research):</strong> se interroga a los individuos sobre variables de interés — actitudes, intenciones, comportamientos, percepciones.</li>
+          <li><strong>Observación:</strong> se registra el comportamiento actual de los sujetos, sin formular preguntas.</li>
+        </ul>
+        <p>La elección entre ambos métodos depende del tipo de información que se necesita: <em>la encuesta accede a lo que el sujeto piensa y siente; la observación accede a lo que realmente hace.</em></p>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('encuestas')">Siguiente: Encuestas →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 1: ENCUESTAS                       -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="encuestas" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>Encuestas: tipos y canales</h2>
+        <p class="section-intro">La encuesta es el método más utilizado en la investigación de mercados. Su fortaleza es la estandarización; su debilidad, la dependencia del auto-reporte.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Clasificación de encuestas</div>
+        <p>Las encuestas se clasifican según el <strong>modo de aplicación</strong>. Malhotra identifica cinco grandes canales, con sus variantes:</p>
+        <ul>
+          <li><strong>Encuestas telefónicas:</strong> tradicional (ETAC = Entrevista Telefónica Asistida por Computadora) y CATI (Computer-Assisted Telephone Interviewing).</li>
+          <li><strong>Encuestas personales:</strong> en el hogar, en centros comerciales (mall intercept), EPAC (Entrevista Personal Asistida por Computadora).</li>
+          <li><strong>Encuestas por correo:</strong> correo directo y paneles por correo.</li>
+          <li><strong>Encuestas electrónicas:</strong> por correo electrónico y basadas en web/internet.</li>
+          <li><strong>Encuestas ómnibus:</strong> servicio compartido donde distintas organizaciones compran espacio en un mismo cuestionario.</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection">El acrónimo METHODS (Malhotra)</h3>
+      <p class="body-text">Malhotra propone el acrónimo <strong>METHODS</strong> para recordar los tipos de encuesta según aplicación:</p>
+      <div class="concept-box">
+        <div class="concept-box-label">Acrónimo METHODS — Malhotra 2016</div>
+        <ul>
+          <li><strong>M</strong>ail panels (Panel por correo)</li>
+          <li><strong>E</strong>lectronic interviews (Encuestas electrónicas)</li>
+          <li><strong>T</strong>elephone interviews (Encuestas telefónicas)</li>
+          <li><strong>H</strong>ome interviewing (Encuestas en casa — personales)</li>
+          <li><strong>O</strong>n-site mall interviews (Encuestas en centros comerciales)</li>
+          <li><strong>D</strong>irect-mail interviews (Encuestas por correo directo)</li>
+          <li><strong>S</strong>oftware for CATI/CAPI (Software para ETAC/EPAC)</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El paisaje actual: encuestas digitales y móviles</h3>
+          <div class="tags"><span class="tag tag-bib">actualización 2024</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>En 2016, las encuestas web eran la categoría en crecimiento. En 2024 son el estándar dominante, y el canal <strong>móvil</strong> ya supera al escritorio como plataforma de respuesta en muchos mercados. Esto introduce nuevas variables de diseño: longitud de cuestionario adaptada a pantalla chica, respuestas con pulgares, diseño "mobile-first".</p>
+        <p>Las plataformas actuales (SurveyMonkey, Typeform, Qualtrics, Google Forms) permiten: ramificación condicional, lógica de salto, cuotas de muestreo en tiempo real, e integración con paneles online de respondentes.</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Plataformas de encuesta actuales</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Qualtrics</strong><span>Enterprise, XM Platform</span></div>
+            <div class="tool-item"><strong>SurveyMonkey</strong><span>SME, paneles integrados</span></div>
+            <div class="tool-item"><strong>Typeform</strong><span>UX conversacional</span></div>
+            <div class="tool-item"><strong>Google Forms</strong><span>Acceso, integración Sheets</span></div>
+            <div class="tool-item"><strong>SurveyGizmo</strong><span>CAPI / campo</span></div>
+            <div class="tool-item"><strong>Forsta (ex-FocusVision)</strong><span>Paneles cualitativos/cuanti</span></div>
+          </div>
+        </div>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Couper, M. (2017).</strong> "New developments in survey data collection." <em>Annual Review of Sociology</em>, 43, 121–145.</div>
+          <div class="ref-item"><strong>Revilla, M. & Ochoa, C. (2017).</strong> "Ideal and maximum length for a web survey." <em>International Journal of Market Research</em>, 59(5), 557–565.</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Encuestas ómnibus</h3>
+      <p class="body-text">La encuesta <strong>ómnibus</strong> es un formato especialmente relevante para empresas con presupuesto limitado: varias organizaciones compran módulos de preguntas en un mismo cuestionario que se aplica a una muestra representativa. El costo se distribuye entre todos los contratantes.</p>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto LATAM</div>
+        <p><strong>Encuestas ómnibus en América Latina:</strong> empresas como Ipsos LATAM, Kantar Ibope Media y Datum Internacional (Perú) ofrecen servicios ómnibus en los principales mercados de la región. En Uruguay, Equipos Consultores y Cifra han operado con este formato para medición de opinión pública y consumo. Para una startup o empresa mediana en Buenos Aires o Montevideo, el ómnibus puede ser la única forma viable de obtener datos cuantitativos representativos con presupuesto acotado.</p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('intro')">← Apertura</button>
+        <button class="nav-btn primary" onclick="showSection('factores')">Siguiente: Factores de selección →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 2: FACTORES DE SELECCIÓN           -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="factores" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Factores para elegir el tipo de encuesta</h2>
+        <p class="section-intro">Elegir el canal de encuesta no es una preferencia personal del investigador — es una decisión estructurada por seis criterios objetivos.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Criterios de selección</div>
+        <p>Malhotra identifica seis factores que determinan qué tipo de encuesta es el más adecuado para un proyecto específico:</p>
+        <ul>
+          <li><strong>1. Flexibilidad en la recopilación de datos:</strong> capacidad de adaptar preguntas, aclarar, profundizar.</li>
+          <li><strong>2. Cantidad y tipo de información:</strong> longitud del cuestionario, tipos de preguntas, complejidad.</li>
+          <li><strong>3. Control sobre la muestra:</strong> quien responde, cobertura geográfica, criterios de inclusión/exclusión.</li>
+          <li><strong>4. Tasas de respuesta:</strong> porcentaje de personas que completan el cuestionario.</li>
+          <li><strong>5. Tiempo requerido:</strong> velocidad de recopilación y análisis.</li>
+          <li><strong>6. Costo:</strong> presupuesto disponible para trabajo de campo.</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection">Tabla comparativa de métodos</h3>
+      <p class="body-text">La siguiente tabla sintetiza el desempeño relativo de los principales métodos en cada criterio, integrando los datos de Malhotra con actualizaciones para el contexto digital actual:</p>
+
+      <table class="criteria-table">
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Telefónica</th>
+            <th>Personal (hogar)</th>
+            <th>Mall Intercept</th>
+            <th>Correo</th>
+            <th>Web / Móvil</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Flexibilidad</strong></td>
+            <td>Media</td>
+            <td class="best">Alta</td>
+            <td>Media-alta</td>
+            <td class="worst">Baja</td>
+            <td>Media</td>
+          </tr>
+          <tr>
+            <td><strong>Volumen de datos</strong></td>
+            <td>Medio</td>
+            <td class="best">Alto</td>
+            <td>Medio</td>
+            <td class="worst">Bajo</td>
+            <td>Medio-alto</td>
+          </tr>
+          <tr>
+            <td><strong>Control de muestra</strong></td>
+            <td>Medio</td>
+            <td class="best">Alto</td>
+            <td>Medio</td>
+            <td class="worst">Bajo</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td><strong>Tasa de respuesta</strong></td>
+            <td>Baja-media</td>
+            <td class="best">Alta</td>
+            <td>Media</td>
+            <td class="worst">Muy baja</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td><strong>Velocidad</strong></td>
+            <td>Media-alta</td>
+            <td class="worst">Baja</td>
+            <td>Media</td>
+            <td class="worst">Muy baja</td>
+            <td class="best">Muy alta</td>
+          </tr>
+          <tr>
+            <td><strong>Costo</strong></td>
+            <td>Medio</td>
+            <td class="worst">Alto</td>
+            <td>Medio</td>
+            <td class="best">Bajo</td>
+            <td class="best">Muy bajo</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>✏ Pizarrón:</strong> Dibujar la Figura 5.1 de Malhotra — árbol de decisión para selección del método de encuesta. Los estudiantes pueden identificar qué camino tomaría el caso Dove o el caso del proyecto de la clase.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El problema de las tasas de respuesta en la era digital</h3>
+          <div class="tags"><span class="tag tag-bib">bibliografía</span></div>
+        </div>
+        <p>Las tasas de respuesta en encuestas han caído significativamente desde los años 90. El Pew Research Center reporta que sus encuestas telefónicas pasaron de tasas del 36% en 1997 a cerca del 6% en 2018. Las encuestas web tienen tasas promedio aún más variables: entre 10% y 40% según el panel y el tema.</p>
+        <p>Esto no invalida el método, pero obliga a replantear el diseño: longitud del cuestionario, incentivos, timing de envío, y calidad de la lista de contactos. El concepto de <strong>sesgo de no respuesta</strong> cobra especial importancia cuando las tasas caen.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencias</div>
+          <div class="ref-item"><strong>Pew Research Center (2019).</strong> "Response rates in telephone surveys have resumed their decline." pewresearch.org.</div>
+          <div class="ref-item"><strong>Groves, R. & Lyberg, L. (2010).</strong> "Total Survey Error: Past, Present, and Future." <em>Public Opinion Quarterly</em>, 74(5), 849–879.</div>
+        </div>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto LATAM — Limitaciones prácticas regionales</div>
+        <p>Malhotra menciona limitaciones prácticas para estudiantes que hacen trabajo de campo. En LATAM, estas restricciones son especialmente relevantes:</p>
+        <ul>
+          <li><strong>Encuestas en hogar:</strong> la inseguridad en muchas ciudades hace que las encuestas puerta a puerta sean inviables o éticamente cuestionables en algunos barrios.</li>
+          <li><strong>Teléfono:</strong> la penetración de telefonía fija es baja; WhatsApp reemplaza muchas funciones del teléfono, lo que ha dado lugar a encuestas por mensaje de voz o formularios enviados por la aplicación.</li>
+          <li><strong>Brecha digital:</strong> en Uruguay, el 89% de hogares tiene acceso a internet (AGESIC 2023), pero esto varía enormemente con países como Bolivia (47%) o Paraguay (51%), afectando la representatividad de encuestas web.</li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('encuestas')">← Tipos de encuesta</button>
+        <button class="nav-btn primary" onclick="showSection('observacion')">Siguiente: Observación →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 3: OBSERVACIÓN                     -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="observacion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03 · Bloque II</div>
+        <h2>Investigación por observación</h2>
+        <p class="section-intro">La observación registra el comportamiento tal como ocurre, sin depender de lo que el sujeto dice que hace. Es especialmente útil cuando el comportamiento es inconsciente, rutinario o difícil de verbalizar.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Definición y clasificación</div>
+        <p><strong>Investigación por observación:</strong> recopilación de datos mediante el registro del comportamiento actual de los sujetos, sin formularles preguntas. Puede ser:</p>
+        <ul>
+          <li><strong>Natural vs. artificial:</strong> el comportamiento se observa en su contexto real (supermercado) o en un entorno controlado (laboratorio).</li>
+          <li><strong>Abierta vs. encubierta:</strong> el sujeto sabe que está siendo observado o no.</li>
+          <li><strong>Estructurada vs. no estructurada:</strong> el observador registra categorías predefinidas o realiza anotaciones abiertas.</li>
+          <li><strong>Humana vs. mecánica:</strong> la observación la realiza una persona o un instrumento (cámara, sensor, software).</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection">Ventajas y desventajas de la observación</h3>
+
+      <div class="compare-grid">
+        <div class="compare-col compare-col-pro">
+          <div class="compare-col-label">✓ Ventajas</div>
+          <ul>
+            <li>Registra comportamiento real, no reportado</li>
+            <li>Elimina sesgos de respuesta social</li>
+            <li>Útil para comportamientos inconscientes</li>
+            <li>No requiere cooperación activa del sujeto</li>
+            <li>Puede ser continua y automática (sensores)</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-col-con">
+          <div class="compare-col-label">✗ Desventajas</div>
+          <ul>
+            <li>No accede a motivaciones ni actitudes</li>
+            <li>El observador puede influir en el comportamiento</li>
+            <li>Dificultad para observar comportamientos privados</li>
+            <li>No capta comportamientos pasados o futuros</li>
+            <li>Puede ser costosa y lenta (observación humana)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-highlight">
+        <div class="case-label">Caso global · IKEA — Observación etnográfica en el hogar</div>
+        <h4>Cómo IKEA rediseñó sus productos para culturas distintas</h4>
+        <p>IKEA emplea un programa de investigación etnográfica llamado "Home Visits" donde investigadores pasan tiempo en hogares de distintos países observando cómo las familias realmente usan el espacio, almacenan objetos y organizan su rutina diaria. No preguntan: observan.</p>
+        <p>Este método reveló que en China los dormitorios funcionan como salas de estar secundarias (la gente come, socializa y trabaja en el dormitorio), lo que llevó a IKEA a rediseñar sus catálogos y distribución de tiendas para el mercado asiático con una proporción mucho mayor de muebles de dormitorio multifunción.</p>
+        <p>La observación permitió descubrir comportamientos que los consumidores no hubieran podido verbalizar en una encuesta porque los consideraban "normales" e invisibles.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Observación digital: el comportamiento online es observable</h3>
+          <div class="tags"><span class="tag tag-caso">caso actual</span><span class="tag tag-bib">metodología</span></div>
+        </div>
+        <p>La revolución más importante en observación desde la publicación de Malhotra (2016) es que el <strong>comportamiento digital es inherentemente observable</strong> sin intervención del investigador: clics, scroll, tiempo en página, secuencia de visitas, búsquedas, compras. Esto es observación natural, no estructurada, y a escala masiva.</p>
+        <p>Herramientas como <strong>Google Analytics 4</strong>, <strong>Hotjar</strong> (mapas de calor, grabaciones de sesión) y <strong>FullStory</strong> permiten observar cómo los usuarios navegan por un sitio web — cuándo se detienen, dónde abandonan el proceso de compra, qué elementos ignoran. Esto es mucho más confiable que preguntar "¿Cómo navega usted nuestro sitio?"</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Kozinets, R. (2020).</strong> <em>Netnography: The Essential Guide to Qualitative Social Media Research</em>. Sage Publications. Cap. 4.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Pregunta para la clase:</strong> ¿Cuándo es éticamente problemático observar a las personas sin que lo sepan? ¿Existe diferencia entre observar en un supermercado y observar el comportamiento digital? ¿Qué dice la regulación vigente?
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('factores')">← Factores de selección</button>
+        <button class="nav-btn primary" onclick="showSection('mecanica')">Siguiente: Observación mecánica →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 4: OBSERVACIÓN MECÁNICA            -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="mecanica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Observación mecánica y tecnológica</h2>
+        <p class="section-intro">Los dispositivos mecánicos y digitales amplían enormemente las posibilidades de observación: automatizan el registro, eliminan el sesgo del observador y permiten escala masiva.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Tipos de observación mecánica</div>
+        <p>Malhotra identifica varios tipos de instrumentos mecánicos de observación:</p>
+        <ul>
+          <li><strong>Audímetro (audiometer):</strong> registra cuándo está encendido el televisor y en qué canal — usado por Nielsen para medir ratings de audiencia.</li>
+          <li><strong>Scanner / punto de venta:</strong> registra compras en supermercados mediante lectores de código de barras.</li>
+          <li><strong>Taquistoscopio:</strong> presenta imágenes a distintas velocidades para medir reconocimiento visual.</li>
+          <li><strong>Eye tracker (rastreador ocular):</strong> registra el movimiento de los ojos para detectar qué elementos de un anuncio o envase atraen la atención.</li>
+          <li><strong>Galvanómetro y aparatos psicofisiológicos:</strong> miden respuestas emocionales fisiológicas (sudoración, ritmo cardíaco) ante estímulos publicitarios.</li>
+          <li><strong>Pupilómetro:</strong> mide la dilatación de la pupila ante estímulos de interés.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Del audímetro al streaming: la evolución de la medición de audiencias</h3>
+          <div class="tags"><span class="tag tag-caso">actualización crítica</span></div>
+        </div>
+        <p>El audímetro de Nielsen fue la tecnología central de medición de audiencias durante décadas. El modelo supone que el televisor como objeto es el punto de consumo. Hoy eso es obsoleto en gran parte: el consumo de video se fragmenta entre YouTube, Netflix, TikTok, Twitch y decenas de plataformas, en dispositivos distintos (celular, tablet, smart TV, computadora).</p>
+        <p>Netflix, por ejemplo, <strong>no publica datos de audiencia</strong> auditados por terceros — hasta 2023 comenzó a compartir métricas limitadas. Esto crea una asimetría informativa: la plataforma observa todo sobre su audiencia, pero los anunciantes y productores no tienen acceso a esos datos.</p>
+        <p>En LATAM, Kantar Ibope Media opera el sistema de medición de televisión en la mayoría de los países de la región, usando audímetros electrónicos combinados con paneles de hogares.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Neuromarketing: las herramientas psicofisiológicas en 2024</h3>
+          <div class="tags"><span class="tag tag-bib">ciencia</span><span class="tag tag-caso">aplicación</span></div>
+        </div>
+        <p>Los galvanómetros y pupilómetros que Malhotra describe como instrumentos de laboratorio son ahora parte de la caja de herramientas del <strong>neuromarketing</strong>: el estudio de las respuestas cerebrales y fisiológicas ante estímulos de marketing.</p>
+        <p>Las tecnologías incluyen hoy: eye tracking portátil, EEG (electroencefalograma) inalámbrico, reconocimiento facial de emociones (Affectiva, iMotions), y resonancia magnética funcional (fMRI) en entornos de laboratorio especializado.</p>
+        <p>El caso Coca-Cola vs. Pepsi (el "desafío Pepsi") es el antecedente histórico clásico: los consumidores preferían Pepsi en prueba a ciegas, pero preferían Coca-Cola cuando veían la marca — un hallazgo que la encuesta directa no podía capturar, pero el fMRI sí.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Ariely, D. & Berns, G. (2010).</strong> "Neuromarketing: the hope and hype of neuroimaging in business." <em>Nature Reviews Neuroscience</em>, 11(4), 284–292.</div>
+          <div class="ref-item"><strong>Plassman, H. et al. (2012).</strong> "Branding the brain: A critical review and outlook." <em>Journal of Consumer Psychology</em>, 22(1), 18–36.</div>
+        </div>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto LATAM — Neuromarketing en la región</div>
+        <p>El neuromarketing tiene presencia creciente en América Latina. En Argentina, empresas como BrainHouse y Neurologyca ofrecen servicios de investigación con eye tracking y biometría. En México, Mindcode y Neuromarka son referentes del sector. En Brasil, el mercado es más desarrollado dada la escala.</p>
+        <p>Para una empresa mediana en Uruguay, el eye tracking aplicado a packaging o avisos gráficos es la entrada más accesible al neuromarketing — mucho más que el fMRI, que requiere instalaciones hospitalarias.</p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('observacion')">← Observación</button>
+        <button class="nav-btn primary" onclick="showSection('socialmedia')">Siguiente: Social media →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 5: SOCIAL MEDIA                    -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="socialmedia" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05 · Bloque III</div>
+        <h2>Social media: encuestas y observación</h2>
+        <p class="section-intro">Las redes sociales abren dos frentes metodológicos: como canal de encuesta (distribuir cuestionarios) y como objeto de observación (analizar lo que los usuarios publican).</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Social media y encuestas</div>
+        <p>Malhotra identifica en 2016 que Facebook, Twitter y LinkedIn permiten tanto distribuir encuestas como observar el comportamiento de los usuarios. Señala que las encuestas en social media tienen ventajas de costo y velocidad, pero limitaciones de representatividad: el panel que responde no es una muestra aleatoria de la población.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Social listening: la observación a escala en redes</h3>
+          <div class="tags"><span class="tag tag-caso">caso actual</span><span class="tag tag-tool">herramientas</span></div>
+        </div>
+        <p>El <strong>social listening</strong> es observación sistemática del comportamiento en redes sociales. No se trata de contar "me gusta" — es analizar el volumen, sentimiento y temáticas de conversaciones espontáneas sobre una marca, categoría o evento.</p>
+        <p>Malhotra menciona tres casos clásicos de social listening: JCPenney (rebranding fallido que las redes detectaron antes que las encuestas), Burger King (respuestas a quejas en Twitter que se convirtieron en datos de mejora de producto), y GlaxoSmithKline (monitoreo de efectos secundarios reportados espontáneamente en foros de pacientes).</p>
+        <div class="tool-box">
+          <div class="tool-label">🛠 Herramientas de social listening actuales</div>
+          <div class="tool-grid">
+            <div class="tool-item"><strong>Brandwatch</strong><span>Análisis de sentimiento, menciones</span></div>
+            <div class="tool-item"><strong>Sprout Social</strong><span>Gestión + escucha integrada</span></div>
+            <div class="tool-item"><strong>Mention</strong><span>Alertas en tiempo real</span></div>
+            <div class="tool-item"><strong>Talkwalker</strong><span>Análisis multicanal</span></div>
+            <div class="tool-item"><strong>Pulsar</strong><span>Audiencias y contexto</span></div>
+            <div class="tool-item"><strong>Hootsuite Insights</strong><span>Integración con gestión</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-highlight">
+        <div class="case-label">Caso LATAM · Rappi y el uso de datos de comportamiento digital</div>
+        <h4>Delivery como superapp: la observación a escala en LATAM</h4>
+        <p>Plataformas como Rappi (Colombia), iFood (Brasil), PedidosYa (Uruguay/Argentina) y Keeta (México, expansión 2024) no solo operan negocios de delivery — son máquinas de observación del comportamiento del consumidor a escala masiva. Registran: hora de pedido, categoría de producto, secuencia de pantallas, tiempo de decisión, abandono de carrito, respuesta a descuentos.</p>
+        <p>Esta observación digital es equivalente al scanner de punto de venta que Malhotra describe, pero con una riqueza de datos incomparablemente mayor. La expansión de estas apps hacia servicios financieros (Rappi Pay, iFood Pay) convierte los datos de consumo en datos de comportamiento financiero — una nueva frontera de la investigación por observación.</p>
+        <p style="font-size:12.5px;color:rgba(255,255,255,0.4);margin-top:6px;">Fuente: basado en análisis de industria. Ver caso guardado "Delivery Brasil como superapp" — El País UY.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>¿Puede usarse TikTok como panel de encuesta?</h3>
+          <div class="tags"><span class="tag tag-bib">metodología</span></div>
+        </div>
+        <p>Las encuestas distribuidas por Instagram Stories o TikTok generan respuestas rápidas y masivas. Pero presentan un problema de representatividad severo: responden los seguidores de ese perfil, no una muestra probabilística de ninguna población. El sesgo de autoselección es máximo.</p>
+        <p>Esto no significa que no tengan valor — sirven para testeo rápido de conceptos, generación de hipótesis, o investigación exploratoria. Pero los resultados no pueden extrapolarse a la población general. <strong>La facilidad metodológica no equivale a validez.</strong></p>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('mecanica')">← Observación mecánica</button>
+        <button class="nav-btn primary" onclick="showSection('etica')">Siguiente: Ética →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 6: ÉTICA                           -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 06</div>
+        <h2>Ética en encuestas y observación</h2>
+        <p class="section-intro">La recopilación de datos primarios genera tensiones éticas específicas: consentimiento, privacidad, deceptividad y uso de datos.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">📖 Malhotra 2016 — Ética en recopilación de datos</div>
+        <p>Malhotra señala tres tensiones éticas centrales en encuestas y observación:</p>
+        <ul>
+          <li><strong>Sugging (Selling Under the Guise of Surveying):</strong> usar una encuesta ficticia como pretexto para vender — práctica engañosa que deteriora la confianza pública en la investigación legítima.</li>
+          <li><strong>Frugging (Fundraising Under the Guise of Surveying):</strong> usar encuestas para recaudar fondos de forma encubierta.</li>
+          <li><strong>Observación encubierta:</strong> el debate entre eficacia (el sujeto actúa naturalmente) y ética (el sujeto no consintió ser observado).</li>
+          <li><strong>Privacidad y manejo de datos:</strong> qué se hace con los datos una vez recopilados; hasta dónde llega el consentimiento del respondente.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Consentimiento digital y marcos regulatorios actuales</h3>
+          <div class="tags"><span class="tag tag-bib">regulación</span><span class="tag tag-lat">LATAM</span></div>
+        </div>
+        <p>La observación digital masiva ha creado un nuevo problema de consentimiento: ¿los usuarios que aceptan los "términos y condiciones" de una app están dando consentimiento informado para ser objeto de investigación? El marco regulatorio responde de formas distintas en cada jurisdicción:</p>
+        <ul>
+          <li><strong>GDPR (Europa, 2018):</strong> exige consentimiento explícito, finalidad específica, y derecho al olvido.</li>
+          <li><strong>LGPD (Brasil, 2020):</strong> primera ley comprehensiva de protección de datos en LATAM, similar al GDPR.</li>
+          <li><strong>LFPDPPP (México, 2010):</strong> Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</li>
+          <li><strong>Uruguay — Ley 18.331 (2008):</strong> Uruguay fue pionero en LATAM, con protección de datos alineada a estándares europeos. Tiene una Unidad Reguladora y Control de Datos Personales (URCDP).</li>
+          <li><strong>Argentina — Ley 25.326 (2000):</strong> Ley de Protección de los Datos Personales, actualmente en proceso de actualización.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Pregunta ética central:</strong> El caso de Cambridge Analytica (2018) mostró que datos recopilados para investigación académica (encuestas de Facebook) fueron usados para targeting político sin consentimiento de los usuarios. ¿Qué responsabilidades tiene el investigador de mercados respecto al uso final de los datos que recopila?
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Respondentes sintéticos: el nuevo frente ético</h3>
+          <div class="tags"><span class="tag tag-bib">IA aplicada</span><span class="tag tag-caso">2024</span></div>
+        </div>
+        <p>En 2023–2024 surgió una práctica polémica: usar modelos de lenguaje (LLMs) para <strong>simular respondentes</strong> de encuestas, en lugar de encuestar a personas reales. Esto reduce costos dramáticamente pero plantea preguntas fundamentales sobre validez y ética.</p>
+        <p>Estudios iniciales muestran que los LLMs reproducen bien patrones demográficos promedio pero fallan en capturar diversidad real, opiniones marginales o comportamientos situacionales. La investigación de mercados que usa respondentes sintéticos sin declararlo es deceptiva respecto a sus clientes.</p>
+        <div class="ref-box">
+          <div class="ref-box-label">📚 Referencia</div>
+          <div class="ref-item"><strong>Argyle, L. et al. (2023).</strong> "Out of One, Many: Using Language Models to Simulate Human Samples." <em>Political Analysis</em>, 31(3), 337–351.</div>
+          <div class="ref-item"><strong>ESOMAR (2023).</strong> "Generative AI in Market Research: Guidelines." esomar.org.</div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('socialmedia')">← Social media</button>
+        <button class="nav-btn primary" onclick="showSection('latam')">Siguiente: LATAM →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 7: LATAM                           -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="latam" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 07</div>
+        <h2>Investigación de mercados en América Latina</h2>
+        <p class="section-intro">El contexto latinoamericano introduce particularidades metodológicas, tecnológicas y regulatorias que no están en el libro de Malhotra.</p>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Penetración digital y representatividad</div>
+        <p>Las encuestas web y móvil tienen representatividad variable según el país. Una encuesta web en Argentina (acceso 88%) o Uruguay (89%) es metodológicamente más robusta que la misma encuesta en Bolivia (47%) o Nicaragua (45%), donde la muestra de internautas es altamente sesgada hacia sectores urbanos y de mayor ingreso.</p>
+        <p>Esto implica que la elección del canal de encuesta no puede separarse del análisis de la infraestructura digital del mercado objetivo.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>El mercado de suplementos deportivos en Uruguay: aplicación práctica</h3>
+          <div class="tags"><span class="tag tag-lat">caso local</span><span class="tag tag-caso">proyecto curso</span></div>
+        </div>
+        <p>Como ejemplo cercano: para investigar el mercado de suplementos deportivos en Uruguay (SYLAB, Cibeles, USN), ¿qué método de encuesta es más adecuado?</p>
+        <ul>
+          <li><strong>Encuesta web:</strong> viable dado el alto acceso a internet en Uruguay, pero con sesgo hacia usuarios de redes sociales deportivas.</li>
+          <li><strong>Mall intercept en gimnasios:</strong> acceso directo al segmento relevante, muestra de conveniencia pero alta pertinencia.</li>
+          <li><strong>Panel online (Equipos Consultores, Factum):</strong> más representativo pero más costoso para una investigación de nicho.</li>
+        </ul>
+        <p>La observación en punto de venta (farmacias, tiendas de nutrición) podría complementar la encuesta: ¿qué productos toma la gente, cuánto tarda en decidir, qué revisa en la etiqueta?</p>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Empresas de investigación de mercados en LATAM</div>
+        <ul>
+          <li><strong>Ipsos LATAM:</strong> presencia en 18 países de la región, paneles cuantitativos y cualitativos.</li>
+          <li><strong>Kantar IBOPE Media / Kantar Millward Brown:</strong> medición de audiencias televisivas y brand equity.</li>
+          <li><strong>GfK LATAM:</strong> datos de consumo masivo (TNS Retail & Shopper).</li>
+          <li><strong>Nielsen LATAM:</strong> datos de punto de venta y paneles de consumidores.</li>
+          <li><strong>Uruguay:</strong> Equipos Consultores, Factum, Cifra, Radar — firmas nacionales con trayectoria en opinión pública y consumo.</li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('etica')">← Ética</button>
+        <button class="nav-btn primary" onclick="showSection('sintesis')">Siguiente: Síntesis →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 8: SÍNTESIS                        -->
+    <!-- ══════════════════════════════════════════ -->
+    <div id="sintesis" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 08 · Cierre</div>
+        <h2>Síntesis y mapa de decisión</h2>
+        <p class="section-intro">La decisión de método no es arbitraria: es una consecuencia lógica del tipo de información requerida, los recursos disponibles y el contexto del mercado.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Marco de decisión integrado — Capítulo 5</div>
+        <p><strong>Regla central:</strong> el método de recopilación debe alinearse con el tipo de información que el problema de investigación requiere:</p>
+        <ul>
+          <li>Si necesitás saber <strong>qué piensan o sienten</strong> los consumidores → encuesta.</li>
+          <li>Si necesitás saber <strong>qué hacen realmente</strong> los consumidores → observación.</li>
+          <li>Si necesitás ambas → triangulación (encuesta + observación, o métodos mixtos).</li>
+        </ul>
+        <p>La elección del <strong>canal</strong> de encuesta depende de: flexibilidad, volumen de datos, control de muestra, tasa de respuesta, tiempo y costo. Ningún método domina en todos los criterios.</p>
+      </div>
+
+      <div class="callout">
+        <strong>✏ Pizarrón final:</strong> Dibujar el árbol de decisión completo del capítulo: (1) ¿Cuali o cuanti? → (2) ¿Encuesta u observación? → (3) ¿Qué canal? → (4) ¿Qué instrumento? Los estudiantes deben poder navegar el árbol con el problema de investigación de su proyecto.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Términos y conceptos clave del capítulo</h3>
+          <div class="tags"><span class="tag tag-bib">repaso</span></div>
+        </div>
+        <ul>
+          <li><strong>Encuesta / survey research</strong> — método basado en interrogatorio directo</li>
+          <li><strong>ETAC / CATI</strong> — Entrevista Telefónica Asistida por Computadora</li>
+          <li><strong>EPAC / CAPI</strong> — Entrevista Personal Asistida por Computadora</li>
+          <li><strong>Mall intercept</strong> — encuesta en centro comercial</li>
+          <li><strong>Encuesta ómnibus</strong> — cuestionario compartido entre varios clientes</li>
+          <li><strong>Observación estructurada/no estructurada</strong> — registro con/sin categorías previas</li>
+          <li><strong>Observación encubierta/abierta</strong> — el sujeto sabe/no sabe que es observado</li>
+          <li><strong>Audímetro</strong> — dispositivo de medición de audiencias televisivas</li>
+          <li><strong>Eye tracker</strong> — dispositivo de seguimiento ocular</li>
+          <li><strong>Neuromarketing</strong> — aplicación de neurociencia a investigación de marketing</li>
+          <li><strong>Social listening</strong> — monitoreo sistemático de conversaciones en RRSS</li>
+          <li><strong>Sugging / Frugging</strong> — prácticas éticas prohibidas en investigación</li>
+          <li><strong>Sesgo de respuesta social</strong> — tendencia a responder lo socialmente aceptable</li>
+          <li><strong>Tasa de respuesta</strong> — % de personas que completan el cuestionario</li>
+        </ul>
+      </div>
+
+      <div class="footer-nav">
+        <button class="nav-btn" onclick="showSection('latam')">← LATAM</button>
+        <span></span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(item => {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+      item.classList.add('active');
+    }
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
