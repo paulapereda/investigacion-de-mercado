@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+    --tag-bg: #e8f0f8;
+    --tag-text: #1a3a5c;
+    --new-bg: #fef9ec;
+    --new-border: #d4a017;
+    --lat-bg: #eef6ee;
+    --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8;
+    --tool-border: #2c5f8a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.7; overflow-x: hidden; }
+
+  header { background: var(--ink); color: var(--paper); padding: 0; position: relative; overflow: hidden; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 56px 40px 44px; position: relative; z-index: 1; }
+  .header-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.05; max-width: 720px; margin-bottom: 24px; }
+  header h1 em { font-style: italic; color: #d4a0a0; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+  .meta-chip { font-size: 12px; font-weight: 500; padding: 5px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: rgba(255,255,255,0.75); letter-spacing: 0.5px; }
+  .header-bg { position: absolute; top: 0; right: 0; width: 420px; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%); pointer-events: none; }
+  .header-rule { height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; max-width: 1100px; margin: 0 auto; gap: 0; min-height: 100vh; }
+
+  aside { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 32px 24px; border-right: 1px solid var(--border); background: var(--cream); }
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .nav-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .nav-item { display: block; padding: 9px 12px; margin-bottom: 2px; border-radius: 6px; font-size: 13px; color: var(--muted); text-decoration: none; cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent; }
+  .nav-item:hover { background: var(--paper); color: var(--ink); }
+  .nav-item.active { background: var(--paper); color: var(--accent); border-left-color: var(--accent); font-weight: 500; }
+  .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--border); padding: 14px 12px 4px; font-family: 'DM Mono', monospace; }
+  .legend { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--muted); margin-bottom: 7px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  main { padding: 40px 48px 80px; max-width: 820px; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { margin-bottom: 36px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .section-number { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 12px; }
+  .section-intro { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 620px; }
+
+  .concept-box { background: #fafafa; border: 1px solid var(--border); border-left: 4px solid var(--ink); border-radius: 8px; padding: 22px 26px; margin-bottom: 28px; }
+  .concept-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--ink); text-transform: uppercase; margin-bottom: 10px; opacity: 0.6; }
+  .concept-box p { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+  .concept-box p:last-child { margin-bottom: 0; }
+  .concept-box strong { color: var(--ink); }
+  .concept-box ul { padding-left: 1.3em; margin-top: 8px; }
+  .concept-box ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .def-term { display: inline-block; background: var(--ink); color: white; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+  .update-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 28px 30px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; gap: 12px; }
+  .update-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0; }
+  .tag { font-size: 10.5px; font-weight: 500; padding: 3px 9px; border-radius: 12px; letter-spacing: 0.3px; white-space: nowrap; }
+  .tag-caso { background: #fdecea; color: #8b2218; border: 1px solid #f5c6c2; }
+  .tag-bib { background: #e8f0f8; color: #1a3a5c; border: 1px solid #b8d0e8; }
+  .tag-tool { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+  .tag-lat { background: #fff8e1; color: #795548; border: 1px solid #ffe082; }
+  .update-card p { font-size: 14.5px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+  .update-card p:last-child { margin-bottom: 0; }
+  .update-card ul { padding-left: 1.3em; margin-bottom: 14px; }
+  .update-card ul li { font-size: 14.5px; color: #333; line-height: 1.8; margin-bottom: 4px; }
+
+  .case-highlight { background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%); border-radius: 10px; padding: 28px 30px; margin: 20px 0; color: white; position: relative; overflow: hidden; }
+  .case-highlight::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(192,57,43,0.15) 0%, transparent 70%); pointer-events: none; }
+  .case-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+  .case-highlight h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: white; }
+  .case-highlight p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 12px; }
+  .case-highlight p:last-child { margin-bottom: 0; }
+
+  .ref-box { background: var(--tag-bg); border: 1px solid #b8d0e8; border-radius: 8px; padding: 16px 20px; margin: 14px 0; }
+  .ref-box-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent2); text-transform: uppercase; margin-bottom: 10px; }
+  .ref-item { font-size: 13px; color: #2a3a50; padding: 5px 0; border-bottom: 1px solid #d0e0f0; line-height: 1.6; }
+  .ref-item:last-child { border-bottom: none; }
+  .ref-item strong { color: var(--accent2); }
+
+  .latam-box { background: var(--lat-bg); border: 1px solid var(--lat-border); border-left: 4px solid var(--lat-border); border-radius: 8px; padding: 20px 24px; margin: 20px 0; }
+  .latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--lat-border); text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .latam-box p { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 10px; }
+  .latam-box p:last-child { margin-bottom: 0; }
+  .latam-box ul { padding-left: 1.3em; }
+  .latam-box ul li { font-size: 14px; color: #1a3a1a; line-height: 1.75; margin-bottom: 4px; }
+
+  .callout { border-left: 4px solid var(--gold); background: var(--new-bg); padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0; font-size: 14px; color: #4a3a10; line-height: 1.75; }
+  .callout strong { color: var(--gold); }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0; }
+  .compare-table th { background: var(--ink); color: var(--paper); padding: 10px 16px; text-align: left; font-weight: 500; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .compare-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.6; }
+  .compare-table tr:nth-child(even) td { background: #faf8f5; }
+  .compare-table tr:hover td { background: #f0ece4; }
+
+  .step-block { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+  .step-header { background: var(--cream); padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+  .step-num { background: var(--ink); color: white; font-family: 'DM Mono', monospace; font-size: 11px; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-title { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .step-body { padding: 16px 20px; font-size: 14px; color: #333; line-height: 1.75; }
+  .step-body ul { padding-left: 1.2em; margin-top: 8px; }
+  .step-body ul li { margin-bottom: 4px; line-height: 1.7; }
+
+  .error-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .error-bad { background: #fff5f5; border: 1px solid #f5c6c2; border-radius: 8px; padding: 14px 16px; }
+  .error-good { background: #f0fff4; border: 1px solid #a5d6a7; border-radius: 8px; padding: 14px 16px; }
+  .error-label { font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+  .error-bad .error-label { color: #8b2218; }
+  .error-good .error-label { color: #1b5e20; }
+  .error-text { font-size: 13px; color: #333; line-height: 1.6; font-style: italic; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .footer-nav { display: flex; justify-content: space-between; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .nav-btn { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink); transition: all 0.2s; text-decoration: none; }
+  .nav-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .nav-btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; }
+    main { padding: 24px 20px 60px; }
+    .error-pair { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 8</div>
+    <h1>Diseño de<br><em>cuestionarios</em></h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+      <span class="meta-chip">Malhotra Cap. 8 · Actualizado 2024</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-title">Secciones del Capítulo</div>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <div class="nav-section-label">Introducción</div>
+    <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+    <a class="nav-item" onclick="showSection('definicion')">Qué es un cuestionario</a>
+    <div class="nav-section-label">Proceso de diseño</div>
+    <a class="nav-item" onclick="showSection('paso1-2')">Pasos 1–2: Info y entrevista</a>
+    <a class="nav-item" onclick="showSection('paso3-4')">Pasos 3–4: Contenido</a>
+    <a class="nav-item" onclick="showSection('paso5')">Paso 5: Estructura</a>
+    <a class="nav-item" onclick="showSection('paso6')">Paso 6: Redacción</a>
+    <a class="nav-item" onclick="showSection('paso7')">Paso 7: Orden</a>
+    <a class="nav-item" onclick="showSection('paso8-10')">Pasos 8–10: Formato y prueba</a>
+    <div class="nav-section-label">Herramientas y Contexto</div>
+    <a class="nav-item" onclick="showSection('software')">Software y herramientas</a>
+    <a class="nav-item" onclick="showSection('social-media')">Social media e IA</a>
+    <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
+    <a class="nav-item" onclick="showSection('etica')">Ética en el diseño</a>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- DIAPOSITIVAS -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe src="capitulo_8_slides.html" style="width:100%; height:100%; border:none; display:block;" allowfullscreen title="Diapositivas Capítulo 8"></iframe>
+      </div>
+      <div class="footer-nav">
+        <span></span>
+        <a class="nav-btn primary" onclick="showSection('apertura')">Ir al contenido →</a>
+      </div>
+    </div>
+
+    <!-- CASO DE APERTURA -->
+    <div id="apertura" class="section">
+      <div class="section-header">
+        <div class="section-number">Introducción</div>
+        <h2>Caso de apertura</h2>
+        <p class="section-intro">El cuestionario del censo de EE.UU. 2010 como laboratorio de diseño.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Caso de apertura</div>
+        <p>El <strong>Censo de Estados Unidos 2010</strong> se realizó con un cuestionario de 10 preguntas —el más breve desde 1820. Después de pruebas piloto con múltiples versiones, el diseño final logró una tasa de respuesta del 74%, superior a la del 2000 (67%). Las claves: preguntas de vocabulario simple, instrucciones claras, y eliminación de preguntas que los encuestados no podían o no querían responder.</p>
+        <p>El caso ilustra los tres objetivos centrales de todo cuestionario: <strong>obtener la información requerida</strong>, <strong>motivar al encuestado</strong> para completarlo, y <strong>minimizar el error de respuesta</strong>.</p>
+      </div>
+
+      <div class="case-highlight">
+        <div class="case-label">Caso Actualizado · Latam</div>
+        <h4>INDEC Argentina 2022: el cuestionario del censo digital</h4>
+        <p>El Censo Nacional de Población de Argentina 2022 fue el primero de la región en ofrecer autocensado digital previo al día de campo. Más de 6 millones de hogares completaron el cuestionario online antes de la fecha oficial. El INDEC debió resolver problemas clásicos del diseño de cuestionarios: lenguaje inclusivo vs. claridad estadística, preguntas sobre identidad de género en contexto latinoamericano, y compatibilidad con dispositivos móviles de baja gama.</p>
+        <p>El resultado: el módulo digital redujo el tiempo de campo en zonas urbanas densas en un 40% y permitió validaciones en tiempo real que el papel no puede ofrecer.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>La cita que abre el capítulo: vigente más que nunca</h3>
+          <div class="tags"><span class="tag tag-bib">Referencia</span></div>
+        </div>
+        <p><em>"Poner a prueba un cuestionario es absolutamente esencial para tener éxito. Todos los investigadores profesionales lo saben y no se arriesgarán a desperdiciar el tiempo del público o su propio esfuerzo en un cuestionario que no se haya sometido a prueba con anterioridad."</em></p>
+        <p>— Diane Bowers, presidenta de CASRO (Council of American Survey Research Organizations). La prueba piloto sigue siendo el paso más omitido en la práctica y el que mayor impacto tiene sobre la calidad del dato.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('diapositivas')">← Diapositivas</a>
+        <a class="nav-btn primary" onclick="showSection('definicion')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- DEFINICIÓN -->
+    <div id="definicion" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 01</div>
+        <h2>¿Qué es un cuestionario?</h2>
+        <p class="section-intro">Definición, objetivos y ubicación en el proceso de investigación.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Definición</div>
+        <p><span class="def-term">Cuestionario</span> <strong>Técnica estructurada para la recopilación de datos</strong> que consiste en una serie de preguntas, orales o escritas, que responden los encuestados. Siempre va acompañado de un formulario de respuestas.</p>
+        <p>El cuestionario tiene tres objetivos simultáneos y a veces contradictorios:</p>
+        <ul>
+          <li><strong>Traducir la información requerida</strong> en preguntas que el encuestado pueda y quiera responder.</li>
+          <li><strong>Motivar y mantener al encuestado</strong> interesado durante toda la entrevista para reducir respuestas incompletas.</li>
+          <li><strong>Minimizar el error de respuesta</strong>: respuestas incorrectas, omisiones, o datos mal registrados.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Posición en el proceso:</strong> El cuestionario se diseña en la Fase 3 (Diseño de investigación), después de definir el problema, elegir el enfoque, y especificar las escalas de medición (Cap. 7). Es el instrumento que conecta el problema teórico con los datos reales.
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Cuestionario vs. formulario de observación</h3>
+          <div class="tags"><span class="tag tag-bib">Concepto del libro</span></div>
+        </div>
+        <p>El libro distingue entre cuestionarios (recopilación mediante preguntas a encuestados) y <strong>formularios de observación</strong> (recopilación mediante registro de conductas observables sin preguntas directas). Ambos requieren diseño sistemático. La diferencia clave: el formulario de observación no depende de la memoria ni de la disposición del sujeto a responder.</p>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Contexto Latinoamericano</div>
+        <p><strong>Encuestas telefónicas vs. digitales en LATAM:</strong> La penetración de smartphones en Uruguay, Argentina y Chile supera el 80%, pero en Paraguay, Bolivia y partes rurales de Perú aún está por debajo del 50%. Esto impone restricciones reales al diseño: no se puede asumir que todos los encuestados tienen acceso a cuestionarios digitales con lógica de salto compleja.</p>
+        <p>El INE Uruguay (ine.gub.uy) realiza sus encuestas de hogares principalmente por visita presencial en rutas censales, con cuestionario digital en tablet pero sin depender de conectividad del hogar.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('apertura')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso1-2')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASOS 1-2 -->
+    <div id="paso1-2" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Pasos 1–2</div>
+        <h2>Información requerida y tipo de entrevista</h2>
+        <p class="section-intro">Los primeros dos pasos definen el marco del cuestionario antes de escribir una sola pregunta.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Figura 8.2 — Proceso de diseño</div>
+        <p>El diseño del cuestionario sigue <strong>10 pasos interrelacionados</strong>. El proceso no es lineal: errores en un paso suelen obligar a regresar a pasos anteriores. La figura 8.2 del libro (✏ recomendada para el pizarrón) muestra el flujo completo.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <div class="step-title">Especificar la información que se necesita</div>
+        </div>
+        <div class="step-body">
+          <p>Antes de redactar preguntas, el investigador debe tener claro:</p>
+          <ul>
+            <li>¿Cuál es el problema de decisión que origina la investigación?</li>
+            <li>¿Qué información específica necesita cada hipótesis o variable de interés?</li>
+            <li>¿Quiénes son exactamente los encuestados? (perfil, nivel educativo, disponibilidad)</li>
+          </ul>
+          <p style="margin-top:10px;">Sin este paso, el cuestionario tiende a incluir preguntas "por si acaso" que alargan el formulario sin aportar datos accionables.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <div class="step-title">Especificar el tipo de entrevista</div>
+        </div>
+        <div class="step-body">
+          <p>El método de recopilación condiciona completamente el diseño:</p>
+          <table class="compare-table" style="margin-top:10px;">
+            <thead><tr><th>Método</th><th>Implicaciones de diseño</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Entrevista personal</strong></td><td>Permite preguntas largas, complejas, material visual. El entrevistador puede aclarar.</td></tr>
+              <tr><td><strong>Telefónica</strong></td><td>Solo preguntas cortas y sencillas. Sin escalas visuales.</td></tr>
+              <tr><td><strong>Correo / papel</strong></td><td>Instrucciones muy detalladas. Sin lógica de salto compleja. Alto riesgo de abandono.</td></tr>
+              <tr><td><strong>Online / CAWI</strong></td><td>Permite lógica de salto automática, validaciones en tiempo real, multimedia. Riesgo de respuesta acelerada.</td></tr>
+              <tr><td><strong>CAPI / tablet</strong></td><td>Combina ventajas de personal y digital. Estándar actual de muchas encuestadoras.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Mercado Libre y el diseño de encuestas posventa</h3>
+          <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LatAm</span></div>
+        </div>
+        <p>Mercado Libre envía entre 8 y 12 millones de encuestas de satisfacción por mes en América Latina. El cuestionario fue rediseñado en 2021 para adaptarse a las restricciones del canal: notificación push en app, máximo 3 preguntas, tiempo promedio de respuesta de 45 segundos. El Net Promoter Score (NPS) es la pregunta central, seguida de máximo 2 preguntas condicionales según la calificación dada.</p>
+        <p>El diseño sacrificó profundidad por volumen de respuestas: la tasa de respuesta pasó de 4% (cuestionario largo) a 31% (cuestionario de 3 preguntas en app).</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('definicion')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso3-4')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASOS 3-4 -->
+    <div id="paso3-4" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Pasos 3–4</div>
+        <h2>Contenido de las preguntas</h2>
+        <p class="section-intro">Determinar qué incluir y cómo superar las barreras del encuestado.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">3</div>
+          <div class="step-title">Determinar el contenido de cada pregunta</div>
+        </div>
+        <div class="step-body">
+          <p><strong>¿Es necesaria la pregunta?</strong> Toda pregunta debe contribuir directamente a la información requerida. Si los datos no tienen un uso claro en el análisis, la pregunta debe eliminarse.</p>
+          <p><strong>¿Se necesitan varias preguntas en vez de una?</strong> Cuando una pregunta toca más de un tema (preguntas doble-cañón), la respuesta es ambigua. Ejemplo incorrecto: <em>"¿Qué tan satisfecho está con el precio y la calidad del producto?"</em> — el encuestado puede tener opiniones distintas sobre cada dimensión.</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">4</div>
+          <div class="step-title">Superar la incapacidad y la renuencia a responder</div>
+        </div>
+        <div class="step-body">
+          <p><strong>Incapacidad para responder:</strong></p>
+          <ul>
+            <li><strong>¿Está informado el encuestado?</strong> — No preguntar sobre experiencias que el encuestado no ha tenido. Primero filtrar.</li>
+            <li><strong>¿Puede expresar la respuesta?</strong> — Algunos temas (emociones complejas, hábitos inconscientes) requieren técnicas proyectivas o escalas especiales.</li>
+          </ul>
+          <p style="margin-top:10px;"><strong>Renuencia a responder:</strong></p>
+          <ul>
+            <li><strong>Esfuerzo requerido:</strong> Si la pregunta exige recordar con precisión (ej. "¿cuánto gastó en supermercado en los últimos 6 meses?"), las respuestas serán inexactas. Usar rangos o anclas de referencia.</li>
+            <li><strong>Información delicada:</strong> Ingresos, deudas, vida sexual, opiniones sobre temas tabú. Técnicas: preguntas indirectas, randomized response, escalas anónimas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Nubank y las preguntas sobre comportamiento financiero</h3>
+          <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LatAm</span></div>
+        </div>
+        <p>Nubank, el mayor banco digital de América Latina (100M+ clientes en 2024), enfrenta el problema clásico de la información financiera sensible: los clientes no reportan con precisión sus deudas o hábitos de gasto en encuestas directas. La solución de Nubank combina datos transaccionales propios (no preguntan lo que ya saben) con preguntas de actitud sobre temas que los datos no capturan: intenciones futuras, percepciones de productos, razones de comportamiento.</p>
+        <p>Esto refleja un principio del libro actualizado: <strong>nunca preguntar lo que ya se puede observar</strong>.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso1-2')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso5')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASO 5 -->
+    <div id="paso5" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Paso 5</div>
+        <h2>Estructura de las preguntas</h2>
+        <p class="section-intro">Preguntas abiertas, de opción múltiple y dicotómicas: cuándo usar cada una.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Tipos de preguntas estructuradas</div>
+        <p>Las preguntas se clasifican según su grado de estructura. Las preguntas <strong>no estructuradas (abiertas)</strong> permiten que el encuestado responda con sus propias palabras —útiles en etapas exploratorias o como preguntas iniciales. Las preguntas <strong>estructuradas</strong> restringen las respuestas a opciones predefinidas.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr><th>Tipo</th><th>Definición</th><th>Ventajas</th><th>Limitaciones</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Abierta</strong></td>
+            <td>El encuestado responde libremente con sus propias palabras</td>
+            <td>Rica en matices; útil en exploración</td>
+            <td>Difícil de codificar; sesgo del entrevistador; mayor esfuerzo del encuestado</td>
+          </tr>
+          <tr>
+            <td><strong>Opción múltiple</strong></td>
+            <td>Se proporcionan varias alternativas de respuesta</td>
+            <td>Fácil de completar y analizar; exhaustiva si está bien diseñada</td>
+            <td>Sesgo del orden; puede omitir opciones; efecto de anclaje</td>
+          </tr>
+          <tr>
+            <td><strong>Dicotómica</strong></td>
+            <td>Solo dos alternativas (sí/no, de acuerdo/en desacuerdo)</td>
+            <td>Muy simple; rápida; alta tasa de respuesta</td>
+            <td>Pierde matices; puede forzar posición en encuestados neutrales</td>
+          </tr>
+          <tr>
+            <td><strong>De escala</strong></td>
+            <td>Usa una escala de medición (Likert, diferencial semántico, etc.)</td>
+            <td>Permite análisis estadístico sofisticado</td>
+            <td>Requiere calibración y validación previa</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <strong>Regla práctica:</strong> Usar preguntas estructuradas siempre que sea posible. En preguntas de opción múltiple, las alternativas deben ser <em>exhaustivas</em> (cubrir todas las respuestas posibles) y <em>mutuamente excluyentes</em> (ningún encuestado debería querer marcar dos opciones simultáneamente).
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Técnica de votación dividida (split ballot)</h3>
+          <div class="tags"><span class="tag tag-bib">Concepto del libro</span></div>
+        </div>
+        <p>Para reducir el sesgo del orden en preguntas de opción múltiple, se divide la muestra en grupos y cada grupo recibe las alternativas en orden diferente. Esto es estándar en plataformas digitales modernas (SurveyMonkey, Qualtrics) que lo hacen automáticamente con la opción "randomizar opciones".</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso3-4')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso6')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASO 6 -->
+    <div id="paso6" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Paso 6</div>
+        <h2>Redacción de las preguntas</h2>
+        <p class="section-intro">Las palabras importan: cómo la redacción cambia los resultados.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — 5 principios de redacción</div>
+        <ul>
+          <li><strong>Definir el tema:</strong> Toda pregunta debe especificar quién, qué, cuándo, dónde, cómo y por qué. Las preguntas vagas producen respuestas vagas.</li>
+          <li><strong>Usar palabras comunes:</strong> El vocabulario debe ser accesible para todos los encuestados, no solo para los más educados del universo.</li>
+          <li><strong>Evitar palabras ambiguas:</strong> Términos como "generalmente", "a menudo", "frecuentemente" significan cosas distintas para distintas personas. Reemplazar con rangos numéricos.</li>
+          <li><strong>Evitar preguntas inductoras:</strong> Una pregunta inductora lleva al encuestado a responder de cierta manera. Produce el sesgo de aquiescencia.</li>
+          <li><strong>Usar enunciados dobles:</strong> Incluir tanto versiones positivas como negativas de las aseveraciones en una escala de actitudes, para controlar el sesgo de respuesta.</li>
+        </ul>
+      </div>
+
+      <hr class="divider">
+      <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:16px; color:var(--ink);">Ejemplos de preguntas incorrectas vs. correctas</h3>
+
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Palabras ambiguas:</p>
+      <div class="error-pair">
+        <div class="error-bad">
+          <div class="error-label">❌ Incorrecto</div>
+          <div class="error-text">"¿Con qué frecuencia compra en tiendas departamentales?"<br>Opciones: Nunca / Ocasionalmente / A veces / A menudo / Regularmente</div>
+        </div>
+        <div class="error-good">
+          <div class="error-label">✓ Correcto</div>
+          <div class="error-text">"En un mes normal, ¿con qué frecuencia compra en tiendas departamentales?"<br>Opciones: Menos de 1 vez / 1-2 veces / 3-4 veces / Más de 4 veces</div>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px; margin-top:20px;">Pregunta inductora:</p>
+      <div class="error-pair">
+        <div class="error-bad">
+          <div class="error-label">❌ Inductora</div>
+          <div class="error-text">"¿Considera que los ciudadanos patriotas deben comprar automóviles importados, aun cuando eso deje sin empleo a sus compatriotas?"</div>
+        </div>
+        <div class="error-good">
+          <div class="error-label">✓ Neutral</div>
+          <div class="error-text">"¿Cree usted que las personas deben comprar automóviles importados?"<br>Opciones: Sí / No / No lo sé</div>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px; margin-top:20px;">Pregunta doble-cañón:</p>
+      <div class="error-pair">
+        <div class="error-bad">
+          <div class="error-label">❌ Doble-cañón</div>
+          <div class="error-text">"¿Qué tan satisfecho está con el precio y la calidad del producto?"</div>
+        </div>
+        <div class="error-good">
+          <div class="error-label">✓ Una dimensión</div>
+          <div class="error-text">Pregunta A: "¿Qué tan satisfecho está con el precio del producto?"<br>Pregunta B: "¿Qué tan satisfecho está con la calidad del producto?"</div>
+        </div>
+      </div>
+
+      <div class="update-card" style="margin-top:24px;">
+        <div class="update-card-header">
+          <h3>Caso: el efecto de la pregunta sobre el NPS de Telecom Argentina</h3>
+          <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LatAm</span></div>
+        </div>
+        <p>En 2022, Personal (Telecom Argentina) rediseñó su encuesta de NPS cambiando la escala de 0–10 a "Muy probable / Probable / Neutro / Poco probable / Muy poco probable" para encuestados de zonas con baja escolaridad. El resultado: el NPS calculado con escala descriptiva era 8 puntos más alto que el calculado con escala numérica —no porque la satisfacción hubiera cambiado, sino porque la comprensión de la escala numérica era inconsistente entre segmentos.</p>
+        <p>El caso ilustra que <strong>la redacción y el formato de la escala son inseparables del dato obtenido</strong>.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso5')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso7')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASO 7 -->
+    <div id="paso7" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Paso 7</div>
+        <h2>Orden de las preguntas</h2>
+        <p class="section-intro">La secuencia de preguntas influye directamente en las respuestas.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Principios de orden</div>
+        <ul>
+          <li><strong>Preguntas iniciales:</strong> Deben ser interesantes, sencillas y no intimidantes. Las preguntas de clasificación/filtro van al principio. El objetivo es lograr cooperación desde el primer momento.</li>
+          <li><strong>Tipo de información:</strong> Primero la información básica (el núcleo del estudio), luego clasificación (variables demográficas), al final identificación (nombre, teléfono).</li>
+          <li><strong>Preguntas difíciles o sensibles:</strong> Ubicarlas hacia el final, cuando ya se estableció rapport con el encuestado.</li>
+          <li><strong>Enfoque de embudo:</strong> De lo general a lo específico. Las preguntas específicas primero pueden sesgar las respuestas a preguntas generales posteriores.</li>
+          <li><strong>Orden lógico:</strong> Usar frases de transición entre temas para orientar al encuestado.</li>
+        </ul>
+      </div>
+
+      <div class="callout">
+        <strong>Figura 8.4 del libro (✏ pizarrón recomendado):</strong> El enfoque de embudo (funnel approach) — las preguntas van de amplias/generales en la parte superior a estrechas/específicas en la base. Esto impide que las preguntas específicas "contaminen" las respuestas a preguntas generales posteriores.
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Tabla 8.1 — Orden general de preguntas en un cuestionario</div>
+        <table class="compare-table">
+          <thead><tr><th>Tipo</th><th>Naturaleza</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Filtro / calificación</strong></td><td>Criterios de inclusión</td><td>"¿Quién hace la mayoría de las compras en su hogar?"</td></tr>
+            <tr><td><strong>Calentamiento</strong></td><td>General y sencilla</td><td>"¿Con qué frecuencia realiza compras de supermercado?"</td></tr>
+            <tr><td><strong>Fundamentales fáciles</strong></td><td>Núcleo del estudio, baja dificultad</td><td>"¿Qué tan importante es cada factor al elegir un supermercado?"</td></tr>
+            <tr><td><strong>Fundamentales difíciles</strong></td><td>Núcleo del estudio, mayor dificultad</td><td>"Ordene estos 8 supermercados según su preferencia."</td></tr>
+            <tr><td><strong>Clasificación</strong></td><td>Variables sociodemográficas</td><td>Edad, nivel de ingresos, nivel educativo.</td></tr>
+            <tr><td><strong>Identificación</strong></td><td>Datos de contacto</td><td>Nombre, correo, teléfono (si aplica).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Rappi y el orden de las preguntas post-pedido</h3>
+          <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LatAm</span></div>
+        </div>
+        <p>Rappi descubrió en 2023 que cuando la primera pregunta de su encuesta posventa era la calificación del repartidor, los puntajes al restaurante eran 0.3 puntos más altos que cuando se preguntaba primero por el restaurante. El efecto de contraste (halo inverso) era suficientemente grande para cambiar el ranking de restaurantes destacados en la plataforma.</p>
+        <p>Solucionaron el problema con randomización del orden entre encuestados: la mitad recibe primero la pregunta sobre el repartidor, la otra mitad sobre el restaurante.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso6')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('paso8-10')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- PASOS 8-10 -->
+    <div id="paso8-10" class="section">
+      <div class="section-header">
+        <div class="section-number">Proceso · Pasos 8–10</div>
+        <h2>Formato, reproducción y prueba piloto</h2>
+        <p class="section-intro">Los últimos tres pasos del proceso: el cuestionario no está listo hasta que pasa por el campo.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">8</div>
+          <div class="step-title">Elegir el formato y diseño gráfico</div>
+        </div>
+        <div class="step-body">
+          <ul>
+            <li>Dividir el cuestionario en partes temáticas numeradas.</li>
+            <li>El espaciado visual influye en la percepción de la longitud del cuestionario.</li>
+            <li>No amontonar preguntas para que parezca más corto — produce errores de omisión.</li>
+            <li>Cada pregunta completa debe caber en una sola página o pantalla.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">9</div>
+          <div class="step-title">Reproducción del cuestionario</div>
+        </div>
+        <div class="step-body">
+          <ul>
+            <li>Apariencia profesional: aumenta la credibilidad y la tasa de respuesta.</li>
+            <li>Cuestionarios largos en papel: usar formato de cuadernillo.</li>
+            <li>Formato de las categorías de respuesta: alineación consistente.</li>
+            <li>Numeración seriada de los cuestionarios para control de calidad del trabajo de campo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-header">
+          <div class="step-num">10</div>
+          <div class="step-title">Prueba piloto (pretest)</div>
+        </div>
+        <div class="step-body">
+          <p><strong>El paso más omitido y el más crítico.</strong> La prueba piloto debe realizarse siempre, sin excepción.</p>
+          <ul>
+            <li>Muestra piloto: similar a los encuestados reales (entre 15 y 30 personas para encuestas simples).</li>
+            <li>Comenzar con entrevistas personales, incluso si la encuesta final será telefónica o digital.</li>
+            <li>El entrevistador debe registrar observaciones sobre preguntas problemáticas, tiempos de respuesta, reacciones del encuestado.</li>
+            <li>Repetir la prueba piloto después de modificaciones sustanciales.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>A/B testing como prueba piloto digital</h3>
+          <div class="tags"><span class="tag tag-tool">Herramienta</span><span class="tag tag-caso">Caso real</span></div>
+        </div>
+        <p>Las plataformas de encuesta modernas (Qualtrics, SurveyMonkey, Typeform) permiten hacer A/B testing de versiones del cuestionario: mostrar versión A al 50% de los encuestados y versión B al otro 50%, y comparar tasas de completitud, tiempos de respuesta y distribución de respuestas. Esta es la versión digital y escalable de la prueba piloto clásica.</p>
+        <p>iFood (Brasil, 2022) usó A/B testing para probar 4 versiones de su encuesta de satisfacción: la versión con 3 preguntas cerradas + 1 abierta opcional logró 2.4x más respuestas completas que la versión con 7 preguntas cerradas.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso7')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('software')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- SOFTWARE -->
+    <div id="software" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 02</div>
+        <h2>Software y herramientas</h2>
+        <p class="section-intro">Del cuestionario en papel a las plataformas digitales y la IA.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Software para cuestionarios</div>
+        <p>El libro menciona plataformas como SurveyMonkey y Qualtrics como el estándar del mercado. Estas herramientas automatizan la lógica de salto, la randomización de opciones, el diseño gráfico y la exportación de datos. Reducen los errores de diseño más comunes y aceleran el ciclo de producción del cuestionario.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead><tr><th>Herramienta</th><th>Tipo</th><th>Fortaleza principal</th><th>Disponibilidad en LATAM</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qualtrics</strong></td><td>Profesional</td><td>Lógica avanzada, paneles integrados, análisis de texto</td><td>Disponible; costo elevado</td></tr>
+          <tr><td><strong>SurveyMonkey</strong></td><td>Profesional/SMB</td><td>Facilidad de uso, plantillas, NPS integrado</td><td>Ampliamente usada</td></tr>
+          <tr><td><strong>Google Forms</strong></td><td>Gratuito</td><td>Integración con Sheets; sin costo</td><td>Universalmente disponible</td></tr>
+          <tr><td><strong>Typeform</strong></td><td>Conversacional</td><td>UX superior; mayor tasa de completitud</td><td>Popular en startups LATAM</td></tr>
+          <tr><td><strong>KoBoToolbox</strong></td><td>Campo / sin internet</td><td>Trabajo offline; encuestas humanitarias</td><td>Muy usado en sector social LATAM</td></tr>
+          <tr><td><strong>REDCap</strong></td><td>Investigación académica</td><td>Cumplimiento con estándares de investigación clínica</td><td>Universidades de la región</td></tr>
+        </tbody>
+      </table>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>IA generativa en el diseño de cuestionarios</h3>
+          <div class="tags"><span class="tag tag-tool">Herramienta</span><span class="tag tag-caso">2024</span></div>
+        </div>
+        <p>Desde 2023, las herramientas de IA generativa (ChatGPT, Claude, Gemini) se usan ampliamente para:</p>
+        <ul>
+          <li><strong>Generar el borrador inicial</strong> de un cuestionario a partir de los objetivos de investigación.</li>
+          <li><strong>Detectar preguntas doble-cañón, inductoras o ambiguas</strong> en cuestionarios existentes.</li>
+          <li><strong>Traducir y adaptar cuestionarios</strong> para diferentes países y contextos culturales.</li>
+          <li><strong>Generar variantes A/B</strong> de preguntas para testing.</li>
+        </ul>
+        <p><strong>Limitación crítica:</strong> La IA no reemplaza la prueba piloto con encuestados reales. Puede generar cuestionarios lingüísticamente correctos pero con problemas de comprensión para públicos específicos que no están representados en su entrenamiento.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('paso8-10')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('social-media')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- SOCIAL MEDIA -->
+    <div id="social-media" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 03</div>
+        <h2>Social media e IA</h2>
+        <p class="section-intro">Nuevos canales, nuevas restricciones de diseño, nuevos sesgos.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Social media y diseño de cuestionarios</div>
+        <p>Los social media ofrecen tres formas de aplicar cuestionarios: <strong>encuestas nativas</strong> (polls de Instagram, X, LinkedIn), <strong>encuestas en comunidades privadas</strong> (grupos de Facebook, Discord), y <strong>encuestas enviadas por DM o notificación</strong>. Cada canal impone restricciones de diseño específicas: longitud, tipo de preguntas, y sesgo de autoselección.</p>
+      </div>
+
+      <table class="compare-table">
+        <thead><tr><th>Canal</th><th>Restricciones de diseño</th><th>Sesgo de autoselección</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Instagram Stories poll</strong></td><td>Solo 2 opciones; 24hs de duración</td><td>Alto: seguidores activos y jóvenes</td></tr>
+          <tr><td><strong>LinkedIn poll</strong></td><td>Máx. 4 opciones; 1–2 semanas</td><td>Medio-alto: profesionales con cuenta activa</td></tr>
+          <tr><td><strong>WhatsApp / encuesta en chat</strong></td><td>Sin estructura formal; conversacional</td><td>Depende del grupo; sesgo de conveniencia</td></tr>
+          <tr><td><strong>Encuesta embebida en email</strong></td><td>Máx. 3 preguntas para completar en preview</td><td>Depende de la base de datos del emisor</td></tr>
+          <tr><td><strong>Encuesta en app nativa</strong></td><td>Restricciones del canal + UX de la app</td><td>Usuarios activos de la plataforma</td></tr>
+        </tbody>
+      </table>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Synthetic respondents: la frontera ética de la IA en cuestionarios</h3>
+          <div class="tags"><span class="tag tag-tool">IA</span><span class="tag tag-bib">2023–2024</span></div>
+        </div>
+        <p>En 2023 surgió una práctica: usar LLMs (grandes modelos de lenguaje) para simular respuestas de encuestados antes de hacer el trabajo de campo. Las empresas de investigación llaman a esto <strong>"synthetic respondents"</strong> o <strong>"AI-simulated panels"</strong>. Algunas startups (Synthetic Users, Yabble) ofrecen esto como servicio.</p>
+        <p><strong>Usos legítimos:</strong> Pilotear el cuestionario, estimar distribución de respuestas para calcular tamaño de muestra, detectar preguntas problemáticas.</p>
+        <p><strong>Riesgo crítico:</strong> Presentar al cliente datos de respondentes sintéticos como si fueran datos de encuestados reales es una práctica no ética que viola los estándares de ESOMAR y AMAI. El investigador tiene el deber de transparencia sobre las fuentes de datos.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('software')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('internacional')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- INTERNACIONAL -->
+    <div id="internacional" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 04</div>
+        <h2>Investigación internacional y LatAm</h2>
+        <p class="section-intro">Adaptar cuestionarios a contextos multiculturales: más allá de la traducción.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Cuestionarios internacionales</div>
+        <p>El cuestionario debe adaptarse al entorno cultural específico: no puede estar sesgado hacia ninguna cultura. La adaptación implica:</p>
+        <ul>
+          <li><strong>Equivalencia conceptual:</strong> ¿El concepto tiene el mismo significado en ambas culturas? ("Privacidad" tiene distintas connotaciones en México vs. Alemania.)</li>
+          <li><strong>Equivalencia de escala:</strong> ¿Los anclajes de la escala (ej. "extremadamente de acuerdo") tienen la misma intensidad en diferentes idiomas?</li>
+          <li><strong>Traducción inversa:</strong> Traducir al idioma de destino y luego retro-traducir al idioma original. Las discrepancias revelan problemas de equivalencia.</li>
+          <li><strong>Adaptación del método:</strong> El canal preferido (presencial, teléfono, digital) varía significativamente entre países.</li>
+        </ul>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Desafíos específicos en LATAM</div>
+        <p><strong>1. Sesgo de aquiescencia (sí-diciente):</strong> En culturas con alta distancia al poder, los encuestados tienden a responder de manera socialmente deseable o a asentir independientemente de su opinión real. Especialmente pronunciado en entrevistas cara a cara con encuestadores percibidos como figuras de autoridad.</p>
+        <p><strong>2. Heterogeneidad intra-regional:</strong> Un cuestionario diseñado en Buenos Aires puede fallar en el nordeste brasileño no solo por el idioma, sino por diferencias culturales profundas. "Familia", "trabajo informal" y "confianza en instituciones" tienen acepciones muy distintas según el país y la región.</p>
+        <p><strong>3. Acceso y alfabetismo digital:</strong> El 35–40% de los adultos en Bolivia, Honduras y partes de Perú y Guatemala tienen dificultades con formularios digitales. Los cuestionarios diseñados solo para pantalla pierden estos segmentos sistemáticamente.</p>
+        <p><strong>4. Informalidad económica:</strong> Preguntas sobre ingresos formales pierden validez en economías con 50–70% de informalidad. Se recomienda preguntar por comportamiento de gasto en lugar de ingresos declarados.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Caso: Coca-Cola y la adaptación de cuestionarios para el cono sur</h3>
+          <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LatAm</span></div>
+        </div>
+        <p>Coca-Cola LATAM aplica su cuestionario global de Brand Health Tracking en 18 países de la región. El equipo de insights descubrió que la escala de "probabilidad de compra" de 1–10 producía distribuciones muy diferentes en Brasil (distribución normal) vs. Argentina (distribución bimodal con modos en 1 y 10). La causa: en Argentina, el contexto inflacionario extremo hace que la "probabilidad de compra" esté más asociada al precio del día que a la intención de compra subyacente.</p>
+        <p>La solución: preguntar por frecuencia de consumo (observable y retrospectiva) en lugar de intención de compra futura en mercados con alta inflación.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('social-media')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('etica')">Siguiente →</a>
+      </div>
+    </div>
+
+    <!-- ÉTICA -->
+    <div id="etica" class="section">
+      <div class="section-header">
+        <div class="section-number">Sección 05</div>
+        <h2>Ética en el diseño de cuestionarios</h2>
+        <p class="section-intro">El cuestionario como instrumento de poder: responsabilidad del investigador.</p>
+      </div>
+
+      <div class="concept-box">
+        <div class="concept-box-label">Malhotra — Ética y diseño de cuestionarios</div>
+        <p>El libro identifica tres problemas éticos centrales en el diseño de cuestionarios:</p>
+        <ul>
+          <li><strong>El sesgo intencional:</strong> Diseñar preguntas para obtener el resultado deseado por el cliente (ej. usar escalas sesgadas, preguntas inductoras deliberadas, omitir opciones de respuesta). El investigador tiene responsabilidad ética ante el encuestado y ante la sociedad, no solo ante el cliente.</li>
+          <li><strong>El acarreo (piggybacking):</strong> Incluir preguntas de investigación adicional sin informar al cliente que paga. Es una práctica no ética cuando el cliente desconoce el uso secundario de su muestra.</li>
+          <li><strong>La longitud excesiva:</strong> Cuestionarios que toman más de 30 minutos (excepto entrevistas personales en hogar, hasta 60 min) abusan del tiempo del encuestado.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Consentimiento informado en encuestas digitales: el contexto regulatorio</h3>
+          <div class="tags"><span class="tag tag-bib">Ética · Regulación</span></div>
+        </div>
+        <p>Las leyes de protección de datos personales en LATAM establecen obligaciones específicas para encuestas que recopilan datos identificables:</p>
+        <ul>
+          <li><strong>Uruguay — Ley 18.331:</strong> Consentimiento expreso para recopilación de datos sensibles. La encuesta debe declarar su finalidad y quién accederá a los datos.</li>
+          <li><strong>Brasil — LGPD (Lei 13.709/2018):</strong> Requiere base legal para el tratamiento de datos. Las encuestas de investigación pueden ampararse en "legítimo interés" pero deben documentarlo.</li>
+          <li><strong>México — LFPDPPP:</strong> Aviso de privacidad obligatorio antes de recopilar datos. Los formularios de encuesta deben incluir el aviso o un link al mismo.</li>
+          <li><strong>Argentina — Ley 25.326:</strong> El consentimiento del titular es requerido para datos sensibles. Los datos de encuesta no pueden cederse a terceros sin nuevo consentimiento.</li>
+        </ul>
+      </div>
+
+      <div class="update-card">
+        <div class="update-card-header">
+          <h3>Dark patterns en cuestionarios: cuando el diseño manipula</h3>
+          <div class="tags"><span class="tag tag-tool">Ética · UX</span><span class="tag tag-caso">2023</span></div>
+        </div>
+        <p>Los <strong>dark patterns</strong> son decisiones de diseño que guían al usuario hacia comportamientos que no elegiría de forma completamente informada. En cuestionarios, los dark patterns más comunes son:</p>
+        <ul>
+          <li><strong>Preselección de opciones</strong> que benefician al patrocinador.</li>
+          <li><strong>Diseño de escala asimétrico:</strong> 4 opciones negativas y solo 1 positiva (o viceversa).</li>
+          <li><strong>Fatiga inducida:</strong> Cuestionario deliberadamente largo para que el encuestado abandone su posición crítica y empiece a responder al azar o afirmativamente.</li>
+          <li><strong>Confirmatory bias:</strong> Preguntar primero "¿Está de acuerdo en que X es importante?" y después "¿Cuánto estaría dispuesto a pagar por X?"</li>
+        </ul>
+      </div>
+
+      <div class="latam-box">
+        <div class="latam-label">🌎 Estándares éticos profesionales en LATAM</div>
+        <p><strong>AMAI (México) y ESOMAR:</strong> Las principales asociaciones de investigación de mercados en la región cuentan con códigos de ética que regulan el diseño de cuestionarios. El Código ICC/ESOMAR establece que los encuestados no deben ser contactados con fines de investigación que encubran intenciones comerciales directas.</p>
+        <p>En Uruguay, la <strong>Cámara Uruguaya de Empresas de Investigación Social y de Mercado (CUEIM)</strong> adscribe a los estándares ESOMAR y exige que sus miembros cumplan el código de ética en todos los cuestionarios aplicados a residentes uruguayos.</p>
+      </div>
+
+      <div class="footer-nav">
+        <a class="nav-btn" onclick="showSection('internacional')">← Anterior</a>
+        <a class="nav-btn primary" onclick="showSection('diapositivas')">↑ Volver al inicio</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('active'); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(id)) n.classList.add('active');
+  });
+}
+// Activate first nav item
+document.querySelector('.nav-item').classList.add('active');
+</script>
+</body>
+</html>

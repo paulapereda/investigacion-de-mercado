@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 8 — Diseño de cuestionarios y formularios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; height: 100%; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 720px; display: flex; flex-direction: column; position: relative; box-sizing: border-box; }
+
+.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
+.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
+
+.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
+
+.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
+.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+
+.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h-white { color:white; }
+
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+.def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
+.def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
+.def-text strong { color:#d4a0a0; }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
+.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
+
+.ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table tr:nth-child(even) td { background:#faf8f5; }
+.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
+.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
+.ref-table-dark tr:nth-child(even) td { background:rgba(255,255,255,0.04); }
+
+.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+
+.latam-box { background:var(--greenbg); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:5px; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.55; }
+
+.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.6; }
+
+.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+
+.step-row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.step-pill { background:var(--ink); color:white; border-radius:6px; padding:7px 12px; font-size:11.5px; display:flex; align-items:center; gap:6px; }
+.step-pill-n { background:var(--accent); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:11px; font-family:'DM Mono',monospace; font-weight:700; flex-shrink:0; }
+.step-pill-t { line-height:1.3; }
+
+.err-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.err-bad { background:#fff5f5; border:1px solid #f5c6c2; border-radius:6px; padding:10px 12px; }
+.err-good { background:#f0fff4; border:1px solid #a5d6a7; border-radius:6px; padding:10px 12px; }
+.err-lab { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.err-bad .err-lab { color:#8b2218; }
+.err-good .err-lab { color:#1b5e20; }
+.err-txt { font-size:11.5px; color:#333; line-height:1.5; font-style:italic; }
+
+.acro-box { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 18px; margin-top:12px; }
+.acro-row { display:flex; align-items:baseline; gap:10px; margin-bottom:5px; }
+.acro-letter { font-family:'DM Mono',monospace; font-size:16px; font-weight:700; color:var(--accent); width:20px; flex-shrink:0; }
+.acro-text { font-size:12.5px; color:rgba(255,255,255,0.8); line-height:1.4; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════
+     PORTADA
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 8</div>
+  <div class="cover-title">Diseño de<br><em>cuestionarios</em><br>y formularios</div>
+  <span class="cover-chip">Paula Pereda · Universidad de Montevideo</span>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CASO DE APERTURA
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso de apertura</div>
+  <div class="slide-h slide-h-white">El cuestionario del Censo 2010 (EE.UU.)</div>
+  <ul class="bullets bullets-white">
+    <li>10 preguntas — el cuestionario censal más corto desde 1820</li>
+    <li>Tasa de respuesta: <strong style="color:#d4a0a0;">74%</strong> (vs. 67% en el censo del 2000)</li>
+    <li>Clave del éxito: lenguaje simple, sin tecnicismos, instrucciones claras</li>
+    <li>Cada 1% adicional de respuesta postal ahorró USD 85 millones en trabajo de campo</li>
+  </ul>
+  <div class="callout" style="margin-top:16px;">
+    <strong>3 objetivos de todo cuestionario:</strong> (1) Obtener la información requerida · (2) Motivar al encuestado · (3) Minimizar el error de respuesta
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 LATAM</div>
+    <div class="latam-text">Censo Argentina 2022: primer autocensado digital de la región. +6 millones de hogares online. Redujo tiempo de campo 40% en zonas urbanas densas.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     DEFINICIÓN
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Sección 01 · Definición</div>
+  <div class="slide-h">¿Qué es un cuestionario?</div>
+  <div class="def-block">
+    <div class="def-term-label">Cuestionario — Malhotra</div>
+    <div class="def-text">Técnica <strong>estructurada</strong> para la recopilación de datos que consiste en una serie de preguntas, orales o escritas, que responden los encuestados. Va siempre acompañado de un formulario de respuestas.</div>
+  </div>
+  <div class="two-col" style="margin-top:12px;">
+    <div class="col-box">
+      <div class="col-label">Cuestionario</div>
+      <div class="col-body">Preguntas directas al encuestado. Depende de la memoria y disposición del sujeto. Permite medir actitudes, intenciones y percepciones.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Formulario de observación</div>
+      <div class="col-body">Registro de conductas observables. No depende de la memoria ni de la disposición a responder. Usado en investigación etnográfica y de campo.</div>
+    </div>
+  </div>
+  <div class="piz">✏ Pizarrón — Figura 8.1: ubicación del cuestionario en el proceso de investigación (Paso 3, Diseño de investigación).</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROCESO — VISIÓN GENERAL
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Proceso de diseño</div>
+  <div class="slide-h">Los 10 pasos — Figura 8.2</div>
+  <div class="piz" style="margin-bottom:12px;">✏ Pizarrón — Dibujar el flujo de 10 pasos en columna vertical (Figura 8.2 del libro), con flechas de retroalimentación entre pasos no adyacentes.</div>
+  <div class="step-row">
+    <div class="step-pill"><div class="step-pill-n">1</div><div class="step-pill-t">Especificar<br>la información</div></div>
+    <div class="step-pill"><div class="step-pill-n">2</div><div class="step-pill-t">Tipo de<br>entrevista</div></div>
+    <div class="step-pill"><div class="step-pill-n">3</div><div class="step-pill-t">Contenido de<br>las preguntas</div></div>
+    <div class="step-pill"><div class="step-pill-n">4</div><div class="step-pill-t">Superar<br>barreras</div></div>
+    <div class="step-pill"><div class="step-pill-n">5</div><div class="step-pill-t">Estructura de<br>las preguntas</div></div>
+    <div class="step-pill" style="background:var(--blue);"><div class="step-pill-n" style="background:white;color:var(--blue);">6</div><div class="step-pill-t">Redacción</div></div>
+    <div class="step-pill" style="background:var(--blue);"><div class="step-pill-n" style="background:white;color:var(--blue);">7</div><div class="step-pill-t">Orden de<br>preguntas</div></div>
+    <div class="step-pill"><div class="step-pill-n">8</div><div class="step-pill-t">Formato<br>gráfico</div></div>
+    <div class="step-pill"><div class="step-pill-n">9</div><div class="step-pill-t">Reproducción</div></div>
+    <div class="step-pill" style="background:var(--accent);"><div class="step-pill-n" style="background:white;color:var(--accent);">10</div><div class="step-pill-t">Prueba<br>piloto</div></div>
+  </div>
+  <div class="callout">Los pasos están <strong>interrelacionados</strong>: un error en el paso 6 puede obligar a rediseñar desde el paso 3. El proceso no es lineal.</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASOS 1-2
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Pasos 1–2</div>
+  <div class="slide-h">Información y tipo de entrevista</div>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-label">Paso 1 · Información</div>
+      <div class="col-body">
+        <ul style="padding-left:1em; margin-top:4px;">
+          <li style="font-size:12px; margin-bottom:4px;">¿Qué decisión requiere estos datos?</li>
+          <li style="font-size:12px; margin-bottom:4px;">¿Qué variable responde cada pregunta?</li>
+          <li style="font-size:12px;">¿Quiénes son los encuestados? (educación, contexto)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Paso 2 · Tipo de entrevista</div>
+      <div class="col-body">
+        <ul style="padding-left:1em; margin-top:4px;">
+          <li style="font-size:12px; margin-bottom:4px;"><strong>Personal:</strong> preguntas largas, material visual</li>
+          <li style="font-size:12px; margin-bottom:4px;"><strong>Telefónica:</strong> corta, sin escalas visuales</li>
+          <li style="font-size:12px; margin-bottom:4px;"><strong>Online:</strong> lógica de salto automática</li>
+          <li style="font-size:12px;"><strong>CAPI/tablet:</strong> estándar actual de campo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    <strong>El canal define el cuestionario.</strong> Un cuestionario diseñado para entrevista personal fracasará en digital y viceversa.
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 LATAM — Mercado Libre</div>
+    <div class="latam-text">8–12 millones de encuestas/mes. Rediseño 2021: máx. 3 preguntas en app, 45 segundos promedio. Tasa de respuesta: 4% → 31%. El canal impuso el diseño.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASOS 3-4
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Pasos 3–4</div>
+  <div class="slide-h">Contenido y barreras del encuestado</div>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-label">Paso 3 · Contenido</div>
+      <div class="col-body">
+        <p style="font-size:12px; margin-bottom:6px;"><strong>¿Es necesaria la pregunta?</strong><br>Si el dato no se usará en el análisis, eliminarla.</p>
+        <p style="font-size:12px;"><strong>Preguntas doble-cañón:</strong> "¿Qué tan satisfecho con el precio <em>y</em> la calidad?" → dos preguntas separadas.</p>
+      </div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Paso 4 · Barreras</div>
+      <div class="col-body">
+        <p style="font-size:12px; margin-bottom:4px;"><strong>Incapacidad:</strong> ¿Está informado? ¿Puede expresarse? Filtrar antes de preguntar.</p>
+        <p style="font-size:12px; margin-bottom:4px;"><strong>Esfuerzo excesivo:</strong> Usar rangos en lugar de cifras exactas.</p>
+        <p style="font-size:12px;"><strong>Información delicada:</strong> Ingresos, deudas, sexualidad → preguntas indirectas, randomized response.</p>
+      </div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 LATAM — Nubank</div>
+    <div class="latam-text">100M+ clientes. No preguntan lo que ya observan en las transacciones. Solo preguntan sobre intenciones y percepciones que los datos no capturan. Principio: nunca preguntar lo que ya se puede observar.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASO 5 — ESTRUCTURA
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 5</div>
+  <div class="slide-h">Estructura de las preguntas</div>
+  <table class="ref-table">
+    <thead><tr><th>Tipo</th><th>Descripción</th><th>Cuándo usar</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Abierta</strong></td><td>Respuesta libre del encuestado</td><td>Exploración, preguntas iniciales</td></tr>
+      <tr><td><strong>Opción múltiple</strong></td><td>Varias alternativas predefinidas</td><td>Preferencias, comportamientos</td></tr>
+      <tr><td><strong>Dicotómica</strong></td><td>Solo 2 alternativas (sí/no)</td><td>Hechos verificables, filtros</td></tr>
+      <tr><td><strong>De escala</strong></td><td>Escala de medición (Likert, etc.)</td><td>Actitudes, percepciones</td></tr>
+    </tbody>
+  </table>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
+    <div class="pause-q">"Les preguntaron en una encuesta: '¿Está de acuerdo con que el gobierno debería regular mejor la IA?' ¿Qué problema tiene esta pregunta? ¿Qué tipo de pregunta usarían en su lugar?"</div>
+  </div>
+  <div class="callout">Regla: opciones deben ser <strong>exhaustivas</strong> (cubren todas las respuestas posibles) y <strong>mutuamente excluyentes</strong> (ningún encuestado necesita marcar dos). Incluir opción neutral en dicotómicas si hay neutrales esperados.</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASO 6 — REDACCIÓN
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6</div>
+  <div class="slide-h">Redacción de las preguntas — Acrónimo WORDS</div>
+  <div class="acro-box" style="background:#f5f0eb; border-color:var(--border);">
+    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">W</div><div class="acro-text" style="color:#333;">ho, What, When, Where, Why, How — Definir exactamente de qué se pregunta</div></div>
+    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">O</div><div class="acro-text" style="color:#333;">rdinary words — Vocabulario del encuestado, no del investigador</div></div>
+    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">R</div><div class="acro-text" style="color:#333;">egularly, usually, often — Evitar estas palabras ambiguas; usar rangos numéricos</div></div>
+    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">D</div><div class="acro-text" style="color:#333;">ual statements — Incluir versiones positivas y negativas en la escala</div></div>
+    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">S</div><div class="acro-text" style="color:#333;">pecifying how to answer (leading questions) — Evitar preguntas inductoras</div></div>
+  </div>
+  <div class="callout">El <strong>sesgo de aquiescencia</strong> es la tendencia a responder afirmativamente independientemente del contenido. Una pregunta inductora lo amplifica. Una escala balanceada (enunciados positivos y negativos) lo contrarresta.</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     EJEMPLOS REDACCIÓN
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6 · Ejemplos</div>
+  <div class="slide-h">Preguntas incorrectas vs. correctas</div>
+  <div class="err-grid">
+    <div class="err-bad">
+      <div class="err-lab">❌ Palabras ambiguas</div>
+      <div class="err-txt">"¿Con qué frecuencia compra?"<br>Opciones: Nunca / Ocasionalmente / A veces / A menudo</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Rangos objetivos</div>
+      <div class="err-txt">"En un mes normal, ¿cuántas veces compra?"<br>Opciones: Menos de 1 / 1-2 / 3-4 / Más de 4</div>
+    </div>
+    <div class="err-bad">
+      <div class="err-lab">❌ Inductora (sesgo)</div>
+      <div class="err-txt">"¿Considera que los ciudadanos patriotas deben comprar importados dejando sin empleo a sus compatriotas?"</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Neutral</div>
+      <div class="err-txt">"¿Cree usted que las personas deben comprar automóviles importados?"<br>Sí / No / No lo sé</div>
+    </div>
+    <div class="err-bad">
+      <div class="err-lab">❌ Doble-cañón</div>
+      <div class="err-txt">"¿Qué tan satisfecho está con el precio <em>y</em> la calidad del producto?"</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Una dimensión</div>
+      <div class="err-txt">Pregunta A: precio<br>Pregunta B: calidad<br>(separadas y evaluadas individualmente)</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASO 7 — ORDEN
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 7</div>
+  <div class="slide-h">Orden de las preguntas — Enfoque de embudo</div>
+  <div class="piz">✏ Pizarrón — Dibujar Figura 8.4: el embudo invertido con preguntas amplias en la parte superior y específicas en la base. Enfatizar que invertir el orden sesga las generales.</div>
+  <div class="two-col" style="margin-top:10px;">
+    <div>
+      <ul class="bullets">
+        <li><strong>Filtro / calificación</strong> — ¿Cumple criterios?</li>
+        <li><strong>Calentamiento</strong> — Simple, general, no intimidante</li>
+        <li><strong>Fundamentales fáciles</strong> — Núcleo del estudio</li>
+        <li><strong>Fundamentales difíciles</strong> — Complejas o sensibles</li>
+        <li><strong>Clasificación</strong> — Sociodemográficos</li>
+        <li><strong>Identificación</strong> — Nombre, contacto (último)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-box">
+        <div class="col-label">Acrónimo ORDER</div>
+        <div class="col-body">
+          <strong>O</strong>pening questions: simple<br>
+          <strong>R</strong>udimentary info first<br>
+          <strong>D</strong>ifficult questions last<br>
+          <strong>E</strong>xamine effect on later Qs<br>
+          <strong>R</strong>eview for logical sequence
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 LATAM — Rappi 2023</div>
+    <div class="latam-text">Efecto de orden: primero repartidor → puntaje al restaurante 0.3 pts más alto. Solución: randomización del orden entre encuestados.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PASOS 8-10
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Pasos 8–10</div>
+  <div class="slide-h slide-h-white">Formato, reproducción y prueba piloto</div>
+  <div class="two-col">
+    <div>
+      <p style="font-size:12px; color:rgba(255,255,255,0.6); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Paso 8 — Formato</p>
+      <ul class="bullets bullets-white">
+        <li>Dividir en partes temáticas numeradas</li>
+        <li>No amontonar preguntas por apariencia</li>
+        <li>Cada pregunta en una sola página/pantalla</li>
+      </ul>
+      <p style="font-size:12px; color:rgba(255,255,255,0.6); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin:10px 0 8px;">Paso 9 — Reproducción</p>
+      <ul class="bullets bullets-white">
+        <li>Apariencia profesional = mayor cooperación</li>
+        <li>Numeración seriada para control de campo</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:12px; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Paso 10 — Prueba piloto ★</p>
+      <ul class="bullets bullets-white">
+        <li>Obligatoria. Siempre. Sin excepciones.</li>
+        <li>Muestra similar a la real (15–30 personas)</li>
+        <li>Registrar observaciones, tiempos, reacciones</li>
+        <li>Comenzar con entrevista personal aunque la encuesta sea digital</li>
+        <li>Repetir tras cambios sustanciales</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>A/B testing digital:</strong> iFood (Brasil, 2022): versión 3 preguntas + 1 abierta opcional → 2.4x más respuestas completas que versión de 7 preguntas. La prueba piloto puede ser automatizada.
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SOFTWARE
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Herramientas</div>
+  <div class="slide-h">Software: del papel a la IA</div>
+  <table class="ref-table">
+    <thead><tr><th>Herramienta</th><th>Perfil</th><th>Uso en LATAM</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Qualtrics</strong></td><td>Profesional completo — paneles, análisis de texto</td><td>Grandes empresas y consultoras</td></tr>
+      <tr><td><strong>SurveyMonkey</strong></td><td>SMB / profesional — NPS integrado</td><td>Ampliamente usado</td></tr>
+      <tr><td><strong>Typeform</strong></td><td>Conversacional — mayor tasa de completitud</td><td>Startups y fintechs</td></tr>
+      <tr><td><strong>KoBoToolbox</strong></td><td>Campo / offline — sin conectividad</td><td>Sector social y ONG</td></tr>
+      <tr><td><strong>Google Forms</strong></td><td>Gratuito — integración con Sheets</td><td>Universidades, pymes</td></tr>
+    </tbody>
+  </table>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
+    <div class="pause-q">¿Cuál de estas herramientas usarían para su proyecto final y por qué? ¿Qué consideraciones de la encuesta (canal, muestra, tipo de preguntas) influyen en la elección?</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     IA EN CUESTIONARIOS
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">IA y cuestionarios · 2024</div>
+  <div class="slide-h slide-h-white">Synthetic respondents: oportunidad y riesgo</div>
+  <div class="two-col">
+    <div class="col-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
+      <div class="col-label">Usos legítimos de IA</div>
+      <ul style="padding-left:1em; margin-top:4px;">
+        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Generar borrador inicial del cuestionario</li>
+        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Detectar preguntas doble-cañón e inductoras</li>
+        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Traducir y adaptar culturalmente</li>
+        <li class="col-body-w" style="font-size:12px;">Generar variantes A/B para piloteo</li>
+      </ul>
+    </div>
+    <div class="col-box" style="background:rgba(192,57,43,0.1); border-color:rgba(192,57,43,0.3);">
+      <div class="col-label" style="color:#f5a09a;">Riesgos éticos</div>
+      <ul style="padding-left:1em; margin-top:4px;">
+        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Presentar datos sintéticos como reales al cliente</li>
+        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Sesgos del modelo entrenan el cuestionario</li>
+        <li class="col-body-w" style="font-size:12px;">No reemplaza prueba piloto con encuestados reales</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    Presentar respondentes sintéticos al cliente como encuestados reales viola el Código de Ética de <strong>ESOMAR y AMAI</strong>. El investigador tiene el deber de transparencia sobre las fuentes de datos.
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SOCIAL MEDIA
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Social media y cuestionarios</div>
+  <div class="slide-h">Encuestas nativas: restricciones de diseño</div>
+  <table class="ref-table">
+    <thead><tr><th>Canal</th><th>Restricción de diseño</th><th>Sesgo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Instagram Stories</strong></td><td>Solo 2 opciones · 24hs</td><td>Alto: seguidores jóvenes activos</td></tr>
+      <tr><td><strong>LinkedIn poll</strong></td><td>Máx. 4 opciones · hasta 2 semanas</td><td>Profesionales con cuenta activa</td></tr>
+      <tr><td><strong>WhatsApp</strong></td><td>Conversacional, sin estructura formal</td><td>Conveniencia según el grupo</td></tr>
+      <tr><td><strong>Email embed</strong></td><td>Máx. 3 preguntas en preview</td><td>Depende de la base del emisor</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">Todo canal de social media tiene sesgo de <strong>autoselección</strong>: solo responden usuarios activos de esa plataforma. Los resultados no son representativos del universo amplio sin corrección muestral.</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     LATAM
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Internacional y LatAm</div>
+  <div class="slide-h">Adaptar cuestionarios: más allá de traducir</div>
+  <ul class="bullets">
+    <li><strong>Equivalencia conceptual:</strong> "Privacidad" no significa lo mismo en México que en Alemania. Verificar antes de traducir.</li>
+    <li><strong>Equivalencia de escala:</strong> ¿"Extremadamente de acuerdo" tiene la misma intensidad en español y en portugués?</li>
+    <li><strong>Traducción inversa:</strong> Traducir → retro-traducir → comparar. Las discrepancias revelan problemas de equivalencia.</li>
+    <li><strong>Sesgo de aquiescencia:</strong> Mayor en culturas con alta distancia al poder. Usar preguntas balanceadas y anónimas.</li>
+    <li><strong>Informalidad económica:</strong> Preguntas sobre ingresos formales fallan en economías con 50–70% de informalidad. Preguntar por gasto, no por ingreso declarado.</li>
+  </ul>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Coca-Cola LATAM</div>
+    <div class="latam-text">Brand Health Tracking en 18 países. Argentina: escala de intención de compra sesgada por inflación. Solución: preguntar por frecuencia de consumo pasada, no intención futura.</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     ÉTICA
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ética en el diseño</div>
+  <div class="slide-h slide-h-white">Tres problemas éticos del libro + contexto digital</div>
+  <div class="two-col">
+    <div>
+      <p style="font-size:11px; color:rgba(255,255,255,0.4); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Malhotra — Tres problemas</p>
+      <ul class="bullets bullets-white">
+        <li><strong>Sesgo intencional:</strong> Diseñar preguntas para obtener el resultado que el cliente desea</li>
+        <li><strong>Acarreo (piggybacking):</strong> Incluir preguntas adicionales sin informar al cliente</li>
+        <li><strong>Extensión excesiva:</strong> Más de 30 min abusa del tiempo del encuestado</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:11px; color:rgba(255,255,255,0.4); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Actualización digital</p>
+      <ul class="bullets bullets-white">
+        <li><strong>Consentimiento + RGPD:</strong> LGPD (BR), Ley 18.331 (UY), LFPDPPP (MX) — aviso obligatorio</li>
+        <li><strong>Dark patterns:</strong> Diseño que manipula respuestas (preselección, asimetría de escala)</li>
+        <li><strong>Synthetic respondents:</strong> Datos simulados presentados como reales</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
+    <div class="pause-q">Un cliente les pide que diseñen el cuestionario de manera que "los resultados muestren que su producto es el preferido". ¿Cómo responden? ¿Qué pueden y qué no pueden hacer?</div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     ACRÓNIMO CIERRE
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Síntesis</div>
+  <div class="slide-h">Acrónimo QUESTIONNAIRE — lo que se llevan</div>
+  <div class="two-col">
+    <div>
+      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Objetivos</p>
+      <ul style="list-style:none; padding:0;">
+        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">Q</strong> — Questions respondents can and will answer</li>
+        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">U</strong> — Uplift (motivar) al encuestado</li>
+        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">E</strong> — Error elimination</li>
+      </ul>
+      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin:10px 0 8px;">Pasos</p>
+      <ul style="list-style:none; padding:0;">
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">S</strong> — Specify information needed</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">T</strong> — Type of interview method</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">I</strong> — Individual question content</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">O</strong> — Overcome inability/unwillingness</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">&nbsp;</p>
+      <ul style="list-style:none; padding:0;">
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">N</strong> — Nonstructured vs. structured</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">N</strong> — Nonbiased wording</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">A</strong> — Arrange questions in order</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">I</strong> — Identify form and layout</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">R</strong> — Reproduce the questionnaire</li>
+        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--accent);">E</strong> — Eliminate bugs by pretesting ★</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout"><strong>El paso más importante:</strong> La prueba piloto. El cuestionario no existe hasta que se testea con encuestados reales.</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CIERRE
+═══════════════════════════════════ -->
+<section>
+<div class="slide s-close" style="color:var(--paper);">
+  <div style="max-width:640px;">
+    <div class="cover-eyebrow">Tres ideas para llevarse del Capítulo 8</div>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">01</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">El cuestionario <em>traduce</em> el problema de investigación en preguntas que el encuestado puede y quiere responder. Sin esa traducción, los datos no sirven.</p>
+    </div>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">02</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">La redacción y el orden de las preguntas <em>son</em> el dato. Cambiar una palabra cambia la respuesta. El sesgo puede ser involuntario —o deliberado.</p>
+    </div>
+    <div>
+      <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">03</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">La prueba piloto no es opcional. Todo investigador profesional lo sabe. La IA puede ayudar a detectar errores, pero no reemplaza al encuestado real.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  progress: true,
+  controls: true,
+  center: false,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  width: 1280,
+  height: 720,
+});
+</script>
+</body>
+</html>
