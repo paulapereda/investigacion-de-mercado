@@ -545,6 +545,83 @@ con una línea en blanco — no con Enter.</span>
 
 <section>
 <div class="slide s-light">
+  <div class="eyebrow">Bloque 4 · Caso de práctica</div>
+  <div class="slide-h">La entrega que vamos a transcribir: Mendoza Wines</div>
+
+  <div class="two-col" style="gap:12px; margin-top:6px;">
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="col-box">
+        <div class="col-label">La empresa</div>
+        <div class="col-body">Bodega familiar en Luján de Cuyo, Argentina. Exporta Malbec y Cabernet a Brasil, EE.UU. y Europa. Canal de e-commerce propio desde 2021.</div>
+      </div>
+      <div class="col-box">
+        <div class="col-label">El problema</div>
+        <div class="col-body">Las ventas digitales directas cayeron del 18% al 9% de la facturación en tres años, mientras los competidores crecen en el mismo canal.</div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div class="col-box">
+        <div class="col-label" style="color:var(--blue);">Pregunta objetivo</div>
+        <div class="col-body" style="font-style:italic; color:#1a3a5c;">¿Cuáles son los factores que explican la disminución de ventas directas de Mendoza Wines a través de e-commerce entre 2021 y 2024?</div>
+      </div>
+      <div class="col-box">
+        <div class="col-label" style="color:var(--gold);">Estructura</div>
+        <div class="col-body">1. Contexto del problema &nbsp;·&nbsp; 2. Pregunta objetivo &nbsp;·&nbsp; 3. Preguntas específicas (5) &nbsp;·&nbsp; 4. Justificación</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Tarea del ejercicio</div>
+    <div class="tip-text">Tenés el <code>.docx</code> de esta entrega. La meta: reproducirla en LaTeX usando la plantilla del curso — portada, secciones, imagen e incluida — y descargar el PDF final.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 4 · La imagen del documento</div>
+  <div class="slide-h slide-h-white">Cómo insertar la imagen en LaTeX</div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:8px;">Paso 1 — Subir el archivo a Overleaf</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmt">% En Overleaf: botón de upload (ícono de flecha</span>
+<span class="cmt">% hacia arriba en el árbol de archivos)</span>
+<span class="cmt">% Subir: imagen_ejemplo.png</span>
+<span class="cmt">% El archivo aparece junto a los .tex y .sty</span>
+      </div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:8px; margin-top:14px;">Paso 2 — Insertar en el documento</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[H]</span>
+  <span class="cmd">\centering</span>
+  <span class="cmd">\includegraphics</span><span class="opt">[width=\textwidth]</span><span class="arg">{imagen_ejemplo}</span>
+  <span class="cmd">\caption</span><span class="arg">{Resumen visual de la investigación}</span>
+  <span class="cmd">\label</span><span class="arg">{fig:resumen}</span>
+<span class="cmd">\end</span><span class="arg">{figure}</span>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="col-box" style="background:#2a2a2a; border-color:#444;">
+        <div class="col-label" style="color:#79c0ff;">¿Dónde va en el documento?</div>
+        <div class="col-body-w">En Mendoza Wines, la imagen aparece al final de la <strong style="color:white;">Sección 1</strong> — después del párrafo de la entrevista con Rodrigo Fontana y antes de la Sección 2.</div>
+      </div>
+      <div class="col-box" style="background:#2a2a2a; border-color:#444;">
+        <div class="col-label" style="color:#ffa657;">width=\textwidth</div>
+        <div class="col-body-w">Ocupa todo el ancho del texto. Otras opciones: <code style="color:#ffa657;">0.8\textwidth</code>, <code style="color:#ffa657;">0.5\textwidth</code>. LaTeX escala la imagen manteniendo la proporción.</div>
+      </div>
+      <div class="col-box" style="background:#2a2a2a; border-color:#444;">
+        <div class="col-label" style="color:#7ee787;">Referenciar en el texto</div>
+        <div class="col-body-w">Escribir <code style="color:#7ee787;">como se observa en la Figura~\ref{fig:resumen}</code> y LaTeX numera automáticamente.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
   <div class="eyebrow">Bloque 4</div>
   <div class="slide-h">Práctica guiada — completar la plantilla con su entrega real</div>
 
@@ -552,8 +629,9 @@ con una línea en blanco — no con Enter.</span>
     <li><strong>Abrir la copia</strong> que hicieron en el paso anterior — si no llegaron a copiarla, hacerlo ahora</li>
     <li><strong>Completar los cuatro campos</strong> marcados con <code>← COMPLETAR</code>: título del proyecto, entrega, integrantes, fecha real del equipo</li>
     <li><strong>Cambiar <code>\nombreentrega</code></strong> a <code>Primera entrega</code> → compilar → verificar que el encabezado cambia en todas las páginas del PDF</li>
-    <li><strong>Agregar una referencia</strong> en <code>referencias.bib</code>: buscarla en Google Scholar → Citar → BibTeX → pegar la entrada → citar con <code>\parencite{clave}</code></li>
-    <li><strong>Download PDF</strong> → verificar portada, encabezado, y referencia en el texto</li>
+    <li><strong>Subir <code>imagen_ejemplo.png</code></strong> a Overleaf e insertarla al final de la Sección 1 con <code>\begin{figure}...\end{figure}</code></li>
+    <li><strong>Agregar una referencia</strong> en <code>referencias.bib</code>: buscarla en Google Scholar → Citar → BibTeX → citar con <code>\parencite{clave}</code></li>
+    <li><strong>Download PDF</strong> → verificar portada, imagen, encabezado y referencia</li>
   </ul>
 
   <div class="pause-box">
