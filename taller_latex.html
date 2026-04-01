@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller — LaTeX con Overleaf</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; height: 100%; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 720px; display: flex; flex-direction: column; position: relative; box-sizing: border-box; }
+
+.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
+.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
+.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
+
+.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
+
+.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
+.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+
+.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h-white { color:white; }
+
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
+
+.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+
+.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+
+/* Bloque de código LaTeX */
+.code-block {
+  background: #0d1117;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #e6edf3;
+  overflow: hidden;
+}
+.code-block .cmd  { color: #79c0ff; }   /* comandos \algo */
+.code-block .arg  { color: #a5d6ff; }   /* argumentos {algo} */
+.code-block .opt  { color: #ffa657; }   /* opcionales [algo] */
+.code-block .cmt  { color: #6e7681; font-style:italic; }  /* comentarios % */
+.code-block .str  { color: #7ee787; }   /* strings / texto */
+
+/* Tabla de referencia */
+.ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table tr:nth-child(even) td { background:#faf8f5; }
+.ref-table td:first-child { font-family:'DM Mono',monospace; font-size:11px; color:var(--blue); white-space:nowrap; }
+
+.ref-table-dark { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
+.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
+.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
+.ref-table-dark td:first-child { font-family:'DM Mono',monospace; color:#79c0ff; font-size:11px; white-space:nowrap; }
+.ref-table-dark tr:nth-child(even) td { background:rgba(255,255,255,0.04); }
+
+/* Pill de tiempo */
+.time-pill { display:inline-block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--accent); border:1px solid var(--accent); border-radius:20px; padding:3px 10px; margin-bottom:10px; }
+
+/* Comparación lado a lado Word vs LaTeX */
+.vs-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:12px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+.vs-col { padding:14px 16px; }
+.vs-col-a { background:#fff8f8; border-right:1px solid var(--border); }
+.vs-col-b { background:#f5f9f5; }
+.vs-header { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; }
+.vs-header-bad  { color:var(--accent); }
+.vs-header-good { color:var(--green); }
+.vs-item { font-size:12px; color:#444; line-height:1.6; padding:3px 0; border-bottom:1px solid rgba(0,0,0,0.06); }
+.vs-item:last-child { border-bottom:none; }
+.vs-item::before { margin-right:6px; }
+.vs-col-a .vs-item::before { content:'✗'; color:var(--accent); }
+.vs-col-b .vs-item::before { content:'✓'; color:var(--green); }
+
+/* Callout azul para tips de Overleaf */
+.tip-box { background:#eef3f9; border-left:5px solid var(--blue); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.tip-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:5px; }
+.tip-text { font-size:12.5px; color:#1a3a5c; line-height:1.55; }
+
+/* Nota docente */
+.nota-dark { background:rgba(255,255,255,0.06); border-left:4px solid var(--muted); border-radius:0 6px 6px 0; padding:10px 16px; margin-top:12px; }
+.nota-dark-text { font-size:12.5px; color:rgba(255,255,255,0.55); line-height:1.55; font-style:italic; }
+
+/* Numeración de pasos */
+.steps { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.step { display:flex; align-items:flex-start; gap:12px; }
+.step-num { font-family:'DM Mono',monospace; font-size:11px; color:white; background:var(--accent); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+.step-text { font-size:13px; color:#333; line-height:1.55; }
+.step-num-dark { background:var(--blue); color:white; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Taller de Herramientas · Investigación de Mercado</div>
+  <div class="cover-title">LaTeX con<br><em>Overleaf</em></div>
+  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+    <div class="cover-chip">Taller práctico</div>
+    <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     POR QUÉ LATEX — min 0–10
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 1</div>
+  <div class="sec-title">¿Por qué<br>no alcanza<br>con Word?</div>
+  <div class="sec-sub">El problema que LaTeX resuelve</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 1</div>
+  <div class="slide-h">El problema real: el formato se rompe</div>
+
+  <div class="vs-grid">
+    <div class="vs-col vs-col-a">
+      <div class="vs-header vs-header-bad">Word / Google Docs</div>
+      <div class="vs-item">Cambiar una tabla mueve todo el texto</div>
+      <div class="vs-item">La numeración de figuras se desordena</div>
+      <div class="vs-item">Cada computadora renderiza diferente</div>
+      <div class="vs-item">Las fórmulas estadísticas quedan mal</div>
+      <div class="vs-item">La bibliografía se gestiona a mano</div>
+    </div>
+    <div class="vs-col vs-col-b">
+      <div class="vs-header vs-header-good">LaTeX</div>
+      <div class="vs-item">Se recompila: el formato se reconstruye solo</div>
+      <div class="vs-item">Numeración automática siempre consistente</div>
+      <div class="vs-item">El PDF es idéntico en cualquier dispositivo</div>
+      <div class="vs-item">Fórmulas tipográficamente perfectas</div>
+      <div class="vs-item">BibTeX maneja las citas automáticamente</div>
+    </div>
+  </div>
+
+  <div class="pause-box" style="margin-top:14px;">
+    <div class="pause-label">Pregunta de apertura</div>
+    <div class="pause-q">¿Alguna vez entregaron un documento que se veía distinto en la computadora del docente? ¿Qué pasó?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 1</div>
+  <div class="slide-h">¿Qué es LaTeX y qué es Overleaf?</div>
+
+  <ul class="bullets">
+    <li><strong>LaTeX</strong> es un sistema de composición tipográfica: el autor escribe contenido y estructura; LaTeX genera el formato. Se usa en investigación académica, economía, estadística e ingeniería en todo el mundo</li>
+    <li><strong>Overleaf</strong> es un editor de LaTeX en el navegador — sin instalación, con vista previa en tiempo real, con historial de versiones y colaboración simultánea</li>
+    <li>La cuenta gratuita de Overleaf es suficiente para todo el trabajo del curso: ilimitados proyectos, compilación en tiempo real, plantillas disponibles</li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-label">Overleaf hoy</div>
+    <div class="tip-text">Abrir <strong>overleaf.com</strong> → <em>Register for free</em> con el correo universitario. El editor carga en el navegador. No hace falta instalar nada más.</div>
+  </div>
+
+  <div class="piz">✏ Mostrar Overleaf proyectado: crear cuenta, abrir un proyecto en blanco, señalar las tres columnas: árbol de archivos / editor / PDF preview.</div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ESTRUCTURA — min 10–25
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 2</div>
+  <div class="sec-title">Estructura<br>de un<br>documento</div>
+  <div class="sec-sub">Preámbulo · Cuerpo · Secciones · Listas</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 2</div>
+  <div class="slide-h slide-h-white">El esqueleto mínimo de cualquier documento</div>
+
+  <div class="code-block">
+<span class="cmd">\documentclass</span><span class="opt">[12pt, a4paper]</span><span class="arg">{article}</span>
+<br>
+<span class="cmt">% — Preámbulo: paquetes y configuración —</span>
+<span class="cmd">\usepackage</span><span class="opt">[utf8]</span><span class="arg">{inputenc}</span>   <span class="cmt">% tildes</span>
+<span class="cmd">\usepackage</span><span class="opt">[spanish]</span><span class="arg">{babel}</span>   <span class="cmt">% idioma</span>
+<span class="cmd">\usepackage</span><span class="arg">{geometry}</span>
+<span class="cmd">\geometry</span><span class="arg">{margin=2.5cm}</span>
+<br>
+<span class="cmd">\title</span><span class="arg">{Investigación de Mercado — Entrega 2}</span>
+<span class="cmd">\author</span><span class="arg">{Nombre del equipo}</span>
+<span class="cmd">\date</span><span class="arg">{Agosto 2025}</span>
+<br>
+<span class="cmt">% — Cuerpo del documento —</span>
+<span class="cmd">\begin</span><span class="arg">{document}</span>
+<span class="cmd">\maketitle</span>
+<br>
+<span class="str">Aquí va el contenido del informe.</span>
+<br>
+<span class="cmd">\end</span><span class="arg">{document}</span>
+  </div>
+
+  <div class="nota-dark">
+    <div class="nota-dark-text">Todo lo que está antes de <code style="color:#79c0ff">\begin{document}</code> es el preámbulo: se configura ahí, no aparece en el PDF. Todo lo que está dentro es lo que el lector ve.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 2</div>
+  <div class="slide-h slide-h-white">Secciones, párrafos y listas</div>
+
+  <div class="code-block">
+<span class="cmd">\section</span><span class="arg">{Contexto del problema}</span>
+<span class="str">Este es el primer párrafo. LaTeX separa párrafos
+con una línea en blanco — no con Enter.</span>
+<br>
+<span class="str">Este es el segundo párrafo.</span>
+<br>
+<span class="cmd">\subsection</span><span class="arg">{Antecedentes}</span>
+<span class="str">Texto de la subsección.</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{itemize}</span>           <span class="cmt">% lista con viñetas</span>
+  <span class="cmd">\item</span> <span class="str">Primer punto</span>
+  <span class="cmd">\item</span> <span class="str">Segundo punto</span>
+<span class="cmd">\end</span><span class="arg">{itemize}</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{enumerate}</span>         <span class="cmt">% lista numerada</span>
+  <span class="cmd">\item</span> <span class="str">Paso uno</span>
+  <span class="cmd">\item</span> <span class="str">Paso dos</span>
+<span class="cmd">\end</span><span class="arg">{enumerate}</span>
+  </div>
+
+  <div class="piz">✏ Práctica en vivo: cada estudiante abre Overleaf y reproduce esta estructura. Darles 4 minutos.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 2</div>
+  <div class="slide-h">Texto con énfasis y comandos de uso frecuente</div>
+
+  <table class="ref-table">
+    <tr>
+      <th>Comando</th>
+      <th>Resultado</th>
+      <th>Cuándo usarlo</th>
+    </tr>
+    <tr>
+      <td>\textbf{texto}</td>
+      <td><strong>texto en negrita</strong></td>
+      <td>Términos clave, nombres de variables</td>
+    </tr>
+    <tr>
+      <td>\textit{texto}</td>
+      <td><em>texto en itálica</em></td>
+      <td>Títulos de obras, términos en inglés</td>
+    </tr>
+    <tr>
+      <td>\underline{texto}</td>
+      <td style="text-decoration:underline">texto subrayado</td>
+      <td>Usar con moderación</td>
+    </tr>
+    <tr>
+      <td>\footnote{nota}</td>
+      <td>Nota al pie automática</td>
+      <td>Aclaraciones, fuentes secundarias</td>
+    </tr>
+    <tr>
+      <td>\newpage</td>
+      <td>Salto de página</td>
+      <td>Antes de una nueva sección importante</td>
+    </tr>
+    <tr>
+      <td>\tableofcontents</td>
+      <td>Índice generado automáticamente</td>
+      <td>Después de \maketitle en informes largos</td>
+    </tr>
+  </table>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     TABLAS Y FIGURAS — min 25–40
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3</div>
+  <div class="sec-title">Tablas,<br>figuras y<br>bibliografía</div>
+  <div class="sec-sub">Lo que más necesitan para las entregas</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3</div>
+  <div class="slide-h slide-h-white">Tablas profesionales con booktabs</div>
+
+  <div class="code-block">
+<span class="cmd">\usepackage</span><span class="arg">{booktabs}</span>   <span class="cmt">% en el preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{table}</span><span class="opt">[h]</span>
+  <span class="cmd">\centering</span>
+  <span class="cmd">\caption</span><span class="arg">{Variables del modelo de investigación}</span>
+  <span class="cmd">\begin</span><span class="arg">{tabular}</span><span class="opt">{lcc}</span>           <span class="cmt">% l=izq, c=centro</span>
+    <span class="cmd">\toprule</span>
+    <span class="str">Variable &amp; Tipo &amp; Escala \\</span>
+    <span class="cmd">\midrule</span>
+    <span class="str">Satisfacción del cliente &amp; Dependiente &amp; Likert 1–5 \\</span>
+    <span class="str">Precio percibido       &amp; Independiente &amp; Likert 1–5 \\</span>
+    <span class="str">Frecuencia de compra   &amp; Independiente &amp; Razón \\</span>
+    <span class="cmd">\bottomrule</span>
+  <span class="cmd">\end</span><span class="arg">{tabular}</span>
+<span class="cmd">\end</span><span class="arg">{table}</span>
+  </div>
+
+  <div class="nota-dark">
+    <div class="nota-dark-text"><code style="color:#79c0ff">booktabs</code> elimina las líneas verticales — el estándar en publicaciones académicas. La regla: una línea gruesa arriba, una delgada bajo el encabezado, una gruesa abajo.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3</div>
+  <div class="slide-h slide-h-white">Insertar figuras desde Excel o Python</div>
+
+  <div class="code-block">
+<span class="cmd">\usepackage</span><span class="arg">{graphicx}</span>   <span class="cmt">% en el preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[h]</span>
+  <span class="cmd">\centering</span>
+  <span class="cmd">\includegraphics</span><span class="opt">[width=0.75\textwidth]</span><span class="arg">{grafico_frecuencias.png}</span>
+  <span class="cmd">\caption</span><span class="arg">{Distribución de respuestas — pregunta 3}</span>
+  <span class="cmd">\label</span><span class="arg">{fig:frecuencias}</span>
+<span class="cmd">\end</span><span class="arg">{figure}</span>
+<br>
+<span class="cmt">% Para referenciar la figura en el texto:</span>
+<span class="str">Como se observa en la Figura~</span><span class="cmd">\ref</span><span class="arg">{fig:frecuencias}</span><span class="str">...</span>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Flujo recomendado</div>
+    <div class="tip-text">Exportar el gráfico desde Excel o Python como <strong>.png o .pdf</strong> → subirlo al proyecto en Overleaf (botón de upload en el árbol de archivos) → referenciarlo con <code>\includegraphics</code>.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3</div>
+  <div class="slide-h slide-h-white">Bibliografía con BibTeX</div>
+
+  <div class="two-col" style="gap:10px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Archivo referencias.bib</div>
+      <div class="code-block" style="font-size:11px;">
+<span class="cmd">@book</span><span class="arg">{malhotra2016,</span>
+  <span class="str">author  = {Malhotra, Naresh K.},</span>
+  <span class="str">title   = {Investigación de Mercados},</span>
+  <span class="str">year    = {2016},</span>
+  <span class="str">edition = {6},</span>
+  <span class="str">publisher = {Pearson}</span>
+<span class="arg">}</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">En el documento .tex</div>
+      <div class="code-block" style="font-size:11px;">
+<span class="cmt">% preámbulo:</span>
+<span class="cmd">\usepackage</span><span class="opt">[style=apa]</span><span class="arg">{biblatex}</span>
+<span class="cmd">\addbibresource</span><span class="arg">{referencias.bib}</span>
+<br>
+<span class="cmt">% en el texto:</span>
+<span class="str">Según </span><span class="cmd">\cite</span><span class="arg">{malhotra2016}</span><span class="str">...</span>
+<br>
+<span class="cmt">% al final:</span>
+<span class="cmd">\printbibliography</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Exportar desde Google Scholar</div>
+    <div class="tip-text">Buscar la obra en Scholar → botón <em>Citar</em> → <em>BibTeX</em> → copiar y pegar en el archivo <code>.bib</code>. La entrada ya viene con los campos correctos.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     PLANTILLA DEL CURSO — min 40–60
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 4</div>
+  <div class="sec-title">La plantilla<br>del curso</div>
+  <div class="sec-sub">Cómo copiarla · Qué contiene · Práctica guiada</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 4</div>
+  <div class="slide-h">Paso 1 — Abrir el link y copiar el proyecto</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Abrir el link de la plantilla del curso:<br>
+        <a href="https://www.overleaf.com/read/cyngkcsbkrdz#137c46"
+           style="font-family:'DM Mono',monospace; font-size:12px; color:var(--blue); word-break:break-all;">
+          overleaf.com/read/cyngkcsbkrdz#137c46
+        </a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">El link abre en modo <em>lectura</em> — se puede ver el código pero no editar. Para trabajar sobre ella: botón <strong>Menu</strong> (arriba a la izquierda) → <strong>Copy Project</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Overleaf pide un nombre para la copia — recomendado: <code>EntregaN_NombreEmpresa</code>. La copia queda en su cuenta, lista para editar</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Para trabajar en equipo: desde la copia, botón <strong>Share</strong> → <em>Turn on link sharing</em> → compartir el link de edición con los integrantes del grupo</div>
+    </div>
+  </div>
+
+  <div class="piz">✏ Demo en vivo: abrir el link proyectado → Menu → Copy Project → mostrar la copia en la cuenta.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 4</div>
+  <div class="slide-h">Paso 2 — Los cuatro archivos de la plantilla</div>
+
+  <div class="two-col" style="gap:12px; margin-top:4px;">
+    <div class="col-box">
+      <div class="col-label">plantilla_curso.tex</div>
+      <div class="col-body">El documento principal. Tiene cuatro líneas marcadas con <code style="font-size:11px; color:var(--accent);">← COMPLETAR</code>: título, subtítulo/entrega, integrantes, fecha. El resto ya está configurado.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">estilo_curso.sty</div>
+      <div class="col-body">El paquete de estilo: Palatino, márgenes, colores UM, encabezado con nombre de la entrega, comando <code>\portada</code>. <strong>No modificar.</strong></div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">referencias.bib</div>
+      <div class="col-body">Bibliografía. Malhotra (2016) ya está cargado. Agregar las fuentes propias en BibTeX — una entrada por fuente, exportable desde Google Scholar.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">logoum_transparente.png</div>
+      <div class="col-body">Logo de la Universidad. Se inserta automáticamente en la portada mediante <code>\portada</code>. No hace falta tocarlo.</div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Una sola línea cambia la entrega en toda la plantilla</div>
+    <div class="tip-text"><code style="color:var(--blue);">\def\nombreentrega{Primera entrega}</code> al inicio del <code>.tex</code> — cambiar el texto entre llaves. Aparece automáticamente en el encabezado de todas las páginas.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 4</div>
+  <div class="slide-h slide-h-white">La portada se genera con un solo comando</div>
+
+  <div class="code-block">
+<span class="cmt">% Al inicio del .tex — controla el encabezado de todas las páginas</span>
+<span class="cmd">\def</span><span class="arg">\nombreentrega</span><span class="str">{Primera entrega}</span>
+<br>
+<span class="cmt">% En el cuerpo — genera la portada completa</span>
+<span class="cmd">\portada</span>
+  <span class="arg">{Título del trabajo}</span>                <span class="cmt">% ← reemplazar</span>
+  <span class="arg">{Entrega 1 · Definición del problema}</span>  <span class="cmt">% ← reemplazar</span>
+  <span class="arg">{Nombre Apellido, Nombre Apellido}</span>    <span class="cmt">% ← reemplazar</span>
+  <span class="arg">{Montevideo, agosto de 2025}</span>          <span class="cmt">% ← reemplazar</span>
+  </div>
+
+  <div class="nota-dark">
+    <div class="nota-dark-text">El comando <code style="color:#79c0ff">\portada</code> genera la portada con los integrantes arriba a la izquierda, título centrado en la página, y el logo de la UM abajo. El PDF resultante es idéntico en cualquier computadora o sistema operativo.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 4</div>
+  <div class="slide-h">Práctica guiada — completar la plantilla con su entrega real</div>
+
+  <ul class="bullets">
+    <li><strong>Abrir la copia</strong> que hicieron en el paso anterior — si no llegaron a copiarla, hacerlo ahora</li>
+    <li><strong>Completar los cuatro campos</strong> marcados con <code>← COMPLETAR</code>: título del proyecto, entrega, integrantes, fecha real del equipo</li>
+    <li><strong>Cambiar <code>\nombreentrega</code></strong> a <code>Primera entrega</code> → compilar → verificar que el encabezado cambia en todas las páginas del PDF</li>
+    <li><strong>Agregar una referencia</strong> en <code>referencias.bib</code>: buscarla en Google Scholar → Citar → BibTeX → pegar la entrada → citar con <code>\parencite{clave}</code></li>
+    <li><strong>Download PDF</strong> → verificar portada, encabezado, y referencia en el texto</li>
+  </ul>
+
+  <div class="pause-box">
+    <div class="pause-label">Para los que terminan antes</div>
+    <div class="pause-q">¿Cómo invitarían a los integrantes del equipo a editar el proyecto al mismo tiempo? Encontrar el botón Share en Overleaf y probar el link de edición colaborativa.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     REFERENCIA RÁPIDA — min 60–75
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 5</div>
+  <div class="sec-title">Cheatsheet<br>y errores<br>frecuentes</div>
+  <div class="sec-sub">Lo que necesitan saber para no trabarse</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 5</div>
+  <div class="slide-h slide-h-white">Los 5 errores más comunes</div>
+
+  <table class="ref-table-dark">
+    <tr>
+      <th>Error</th>
+      <th>Causa</th>
+      <th>Solución</th>
+    </tr>
+    <tr>
+      <td>! Missing $ inserted</td>
+      <td>Símbolo matemático fuera de modo math</td>
+      <td>Rodear con <code>$...$</code> o usar <code>\%</code>, <code>\&amp;</code>, <code>\_</code></td>
+    </tr>
+    <tr>
+      <td>Undefined control sequence</td>
+      <td>Comando mal escrito o paquete faltante</td>
+      <td>Revisar ortografía del comando; agregar el <code>\usepackage</code></td>
+    </tr>
+    <tr>
+      <td>Tildes no aparecen</td>
+      <td>Falta <code>inputenc</code> o <code>babel</code></td>
+      <td>Agregar ambos paquetes en el preámbulo</td>
+    </tr>
+    <tr>
+      <td>La figura aparece en otro lugar</td>
+      <td>LaTeX reubica flotantes por diseño</td>
+      <td>Usar <code>[h!]</code> o el paquete <code>float</code> con <code>[H]</code></td>
+    </tr>
+    <tr>
+      <td>Bibliografía no aparece</td>
+      <td>Falta compilar dos veces o falta <code>\printbibliography</code></td>
+      <td>Compilar dos veces; verificar que el .bib está en el proyecto</td>
+    </tr>
+  </table>
+
+  <div class="nota-dark">
+    <div class="nota-dark-text">Overleaf muestra los errores en el panel inferior derecho con el número de línea. La mayoría se resuelven solos leyendo el mensaje de error.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 5</div>
+  <div class="slide-h">Cheatsheet: los 20 comandos del curso</div>
+
+  <div class="two-col" style="gap:10px; margin-top:0;">
+    <table class="ref-table" style="margin-top:0; font-size:11.5px;">
+      <tr><th colspan="2">Estructura</th></tr>
+      <tr><td>\section{}</td><td>Título de sección</td></tr>
+      <tr><td>\subsection{}</td><td>Subsección</td></tr>
+      <tr><td>\maketitle</td><td>Genera la portada</td></tr>
+      <tr><td>\tableofcontents</td><td>Índice automático</td></tr>
+      <tr><td>\newpage</td><td>Salto de página</td></tr>
+      <tr><td>\footnote{}</td><td>Nota al pie</td></tr>
+      <tr><th colspan="2">Texto</th></tr>
+      <tr><td>\textbf{}</td><td>Negrita</td></tr>
+      <tr><td>\textit{}</td><td>Itálica</td></tr>
+      <tr><td>\emph{}</td><td>Énfasis contextual</td></tr>
+      <tr><td>% comentario</td><td>No aparece en PDF</td></tr>
+    </table>
+    <table class="ref-table" style="margin-top:0; font-size:11.5px;">
+      <tr><th colspan="2">Entornos</th></tr>
+      <tr><td>\begin{itemize}</td><td>Lista con viñetas</td></tr>
+      <tr><td>\begin{enumerate}</td><td>Lista numerada</td></tr>
+      <tr><td>\begin{table}</td><td>Entorno tabla</td></tr>
+      <tr><td>\begin{figure}</td><td>Entorno figura</td></tr>
+      <tr><td>\caption{}</td><td>Epígrafe</td></tr>
+      <tr><th colspan="2">Bibliografía</th></tr>
+      <tr><td>\cite{clave}</td><td>Cita en texto</td></tr>
+      <tr><td>\printbibliography</td><td>Lista de referencias</td></tr>
+      <tr><th colspan="2">Recursos</th></tr>
+      <tr><td>overleaf.com/learn</td><td>Documentación oficial</td></tr>
+      <tr><td>tables-generator.com</td><td>Generar tablas visualmente</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
+    <div style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:20px;">Cierre del taller</div>
+    <div style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--paper); line-height:1.1; margin-bottom:28px;">A partir de hoy,<br>las entregas<br><em style="color:#d4a0a0;">se ven igual</em><br>en todos lados.</div>
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <div style="border-left:3px solid var(--accent); padding:4px 14px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PARA SEGUIR</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/learn — documentación oficial</div>
+      </div>
+      <div style="border-left:3px solid var(--blue); padding:4px 14px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PARA TABLAS</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">tables-generator.com — modo LaTeX</div>
+      </div>
+      <div style="border-left:3px solid var(--gold); padding:4px 14px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PLANTILLA</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/read/cyngkcsbkrdz — copiar y editar</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
