@@ -143,6 +143,34 @@
     aside { position: static; height: auto; }
     main { padding: 24px 20px 60px; }
   }
+
+  /* ── SLIDES FULL-PANEL MODE ──────────────────── */
+  body.slides-view main {
+    padding: 0;
+    max-width: none;
+  }
+  body.slides-view #diapositivas {
+    height: calc(100vh - 0px);
+    display: flex;
+    flex-direction: column;
+  }
+  body.slides-view #diapositivas .section-header {
+    display: none;
+  }
+  body.slides-view #diapositivas .footer-nav {
+    padding: 10px 20px;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  body.slides-view #diapositivas > div[style*="aspect-ratio"] {
+    flex: 1;
+    aspect-ratio: unset !important;
+    border-radius: 0 !important;
+    border: none !important;
+    margin-bottom: 0 !important;
+  }
+
 </style>
 </head>
 <body>
@@ -839,6 +867,15 @@ function showSection(id) {
 }
 // Initialize
 document.querySelector('.nav-item').classList.add('active');
+
+  // Init slides-view on load
+  window.addEventListener('DOMContentLoaded', function() {
+    const active = document.querySelector('.section.active');
+    if (active && active.id === 'diapositivas') {
+      document.body.classList.add('slides-view');
+    }
+  });
+
 </script>
 </body>
 </html>
