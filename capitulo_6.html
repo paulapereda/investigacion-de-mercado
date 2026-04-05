@@ -148,34 +148,6 @@
     aside { position: static; height: auto; }
     main { padding: 24px 20px 60px; }
   }
-
-  /* ── SLIDES FULL-PANEL MODE ──────────────────── */
-  body.slides-view main {
-    padding: 0;
-    max-width: none;
-  }
-  body.slides-view #diapositivas {
-    height: calc(100vh - 0px);
-    display: flex;
-    flex-direction: column;
-  }
-  body.slides-view #diapositivas .section-header {
-    display: none;
-  }
-  body.slides-view #diapositivas .footer-nav {
-    padding: 10px 20px;
-    background: var(--cream);
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  body.slides-view #diapositivas > div[style*="aspect-ratio"] {
-    flex: 1;
-    aspect-ratio: unset !important;
-    border-radius: 0 !important;
-    border: none !important;
-    margin-bottom: 0 !important;
-  }
-
 </style>
 </head>
 <body>
@@ -213,13 +185,14 @@
     <div class="nav-section-label">Contexto y Ética</div>
     <a class="nav-item" onclick="showSection('internacional')">Internacional y LatAm</a>
     <a class="nav-item" onclick="showSection('etica')">Ética en la experimentación</a>
-    <div class="legend">
-      <div class="nav-title">Leyenda</div>
+        <div class="legend">
+      <div class="nav-title" style="margin-bottom:12px;">Leyenda</div>
       <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
       <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
       <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
       <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
       <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
     </div>
   </aside>
 
@@ -957,15 +930,6 @@ function showSection(id) {
     if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(id)) n.classList.add('active');
   });
 }
-
-  // Init slides-view on load
-  window.addEventListener('DOMContentLoaded', function() {
-    const active = document.querySelector('.section.active');
-    if (active && active.id === 'diapositivas') {
-      document.body.classList.add('slides-view');
-    }
-  });
-
 </script>
 </body>
 </html>
