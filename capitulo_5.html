@@ -153,9 +153,7 @@
     <h1>Encuestas y<br><em>observación</em></h1>
     <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:540px;line-height:1.7;margin-top:8px;">Los métodos para recopilar datos primarios cuantitativos — cuándo preguntar, cuándo observar, y cómo elegir el canal correcto.</p>
     <div class="header-meta">
-      <span class="meta-chip">Malhotra (2016), Cap. 5</span>
-      <span class="meta-chip">Parte 2 · Diseño de investigación</span>
-      <span class="meta-chip">150 min · clase</span>
+      <span class="meta-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
     </div>
   </div>
   <div class="header-rule"></div>
@@ -165,7 +163,8 @@
   <aside>
     <div class="nav-title">Contenido</div>
     <div class="nav-section-label">Bloque I</div>
-    <a class="nav-item active" onclick="showSection('intro')">Apertura y caso</a>
+    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <a class="nav-item" onclick="showSection('intro')">Apertura y caso</a>
     <a class="nav-item" onclick="showSection('encuestas')">Encuestas: tipos y canales</a>
     <a class="nav-item" onclick="showSection('factores')">Factores de selección</a>
     <div class="nav-section-label">Bloque II</div>
@@ -177,21 +176,48 @@
     <a class="nav-item" onclick="showSection('latam')">Contexto LATAM</a>
     <a class="nav-item" onclick="showSection('sintesis')">Síntesis y cierre</a>
 
-    <div class="legend">
+        <div class="legend">
       <div class="nav-title" style="margin-bottom:12px;">Leyenda</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#b0a898;"></div> Malhotra 2016</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--ink);"></div> Marco conceptual</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--accent2);"></div> Actualización</div>
-      <div class="legend-item"><div class="legend-dot" style="background:var(--lat-border);"></div> Contexto LATAM</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+    </div>
     </div>
   </aside>
 
   <main>
 
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECCIÓN: DIAPOSITIVAS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div id="diapositivas" class="section active">
+      <div class="section-header">
+        <div class="section-number">Diapositivas</div>
+        <h2>Diapositivas de referencia</h2>
+        <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+      </div>
+
+      <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
+        <iframe
+          src="capitulo_5_slides.html"
+          style="width:100%; height:100%; border:none; display:block;"
+          allowfullscreen
+          title="Diapositivas Capítulo 5">
+        </iframe>
+      </div>
+
+      <div class="footer-nav">
+        <span></span>
+        <button class="nav-btn primary" onclick="showSection('intro')">Siguiente: Apertura y caso →</button>
+      </div>
+    </div>
+
     <!-- ══════════════════════════════════════════ -->
     <!-- SECCIÓN 0: INTRO / APERTURA               -->
     <!-- ══════════════════════════════════════════ -->
-    <div id="intro" class="section active">
+    <div id="intro" class="section">
       <div class="section-header">
         <div class="section-number">Apertura · Bloque I</div>
         <h2>¿Preguntar u observar?</h2>
