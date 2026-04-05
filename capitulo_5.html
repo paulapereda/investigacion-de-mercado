@@ -163,7 +163,7 @@
   <aside>
     <div class="nav-title">Contenido</div>
     <div class="nav-section-label">Bloque I</div>
-    <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+    <a class="nav-item active" onclick="showSection('diapositivas')">&#9654; Diapositivas</a>
     <a class="nav-item" onclick="showSection('intro')">Apertura y caso</a>
     <a class="nav-item" onclick="showSection('encuestas')">Encuestas: tipos y canales</a>
     <a class="nav-item" onclick="showSection('factores')">Factores de selección</a>
@@ -176,47 +176,36 @@
     <a class="nav-item" onclick="showSection('latam')">Contexto LATAM</a>
     <a class="nav-item" onclick="showSection('sintesis')">Síntesis y cierre</a>
 
-        <div class="legend">
-      <div class="nav-title" style="margin-bottom:12px;">Leyenda</div>
+    <div class="legend">
+      <div class="nav-title">Leyenda</div>
       <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
       <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
       <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
       <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
       <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
     </div>
-    </div>
   </aside>
 
   <main>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- SECCIÓN: DIAPOSITIVAS -->
-    <!-- ═══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════ -->
+    <!-- SECCIÓN 0: INTRO / APERTURA               -->
+    <!-- ══════════════════════════════════════════ -->
     <div id="diapositivas" class="section active">
       <div class="section-header">
         <div class="section-number">Diapositivas</div>
         <h2>Diapositivas de referencia</h2>
         <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
       </div>
-
       <div style="width:100%; aspect-ratio:16/9; border-radius:8px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;">
-        <iframe
-          src="capitulo_5_slides.html"
-          style="width:100%; height:100%; border:none; display:block;"
-          allowfullscreen
-          title="Diapositivas Capítulo 5">
-        </iframe>
+        <iframe src="capitulo_5_slides.html" style="width:100%; height:100%; border:none; display:block;" allowfullscreen title="Diapositivas Capítulo 5"></iframe>
       </div>
-
       <div class="footer-nav">
         <span></span>
         <button class="nav-btn primary" onclick="showSection('intro')">Siguiente: Apertura y caso →</button>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!-- SECCIÓN 0: INTRO / APERTURA               -->
-    <!-- ══════════════════════════════════════════ -->
     <div id="intro" class="section">
       <div class="section-header">
         <div class="section-number">Apertura · Bloque I</div>
