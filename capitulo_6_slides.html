@@ -122,45 +122,32 @@ ul.bullets-white li::before { color:var(--accent); }
 <div class="slide s-cover">
   <div class="cover-eyebrow">Investigación de Mercado · Capítulo 6</div>
   <div class="cover-title">Experimentación e<br><em>investigación causal</em></div>
-  <div style="margin-bottom:28px;">
-    <div class="chip-row">
-      <span class="chip chip-red">Malhotra 2016 · Cap. 6</span>
-      <span class="chip chip-blue">pp. 154–179</span>
-      <span class="chip chip-gold">150 minutos</span>
-    </div>
-  </div>
-  <span class="cover-chip">Paula Pereda · Universidad de Montevideo</span>
+  <span class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
 </div>
 </section>
 
 <!-- ══ AGENDA ══ -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Hoja de ruta · 150 minutos</div>
+  <div class="eyebrow">Hoja de ruta</div>
   <div class="slide-h">¿Qué vamos a aprender hoy?</div>
   <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px;">
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">0–20 min</span>
       <span style="font-size:13px;color:var(--ink);">Caso de apertura + concepto de causalidad</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">20–45 min</span>
       <span style="font-size:13px;color:var(--ink);">Tres condiciones de causalidad + terminología experimental</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">45–75 min</span>
       <span style="font-size:13px;color:var(--ink);">Validez interna y externa + variables extrañas</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">75–110 min</span>
       <span style="font-size:13px;color:var(--ink);">Tipos de diseños experimentales — notación y lógica</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">110–135 min</span>
       <span style="font-size:13px;color:var(--ink);">A/B testing digital + prueba de mercado</span>
     </div>
     <div style="display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;">
-      <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;">135–150 min</span>
       <span style="font-size:13px;color:var(--ink);">LatAm, ética + cierre</span>
     </div>
   </div>
@@ -170,7 +157,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══ SECCIÓN 1 — CAUSALIDAD ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 01 · minutos 0–20</div>
+  <div class="sec-num">Sección 01</div>
   <div class="sec-title">¿Qué significa<br>que X <em>causa</em> Y?</div>
   <div class="sec-sub">Causalidad: el sentido común vs. la ciencia</div>
 </div>
@@ -241,10 +228,36 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- Pausa correlación espuria Mercado Libre -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Correlación ≠ causalidad · pregunta diagnóstico</div>
+  <div class="slide-h">¿Por qué la correlación NO prueba que el envío gratis causa las ventas?</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+    <div style="background:#fff5f5;border:1px solid #f5c6c2;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:5px;">EL PROBLEMA</div>
+      <div style="font-size:13px;color:#333;line-height:1.55;">Los mejores vendedores tienen: mayor reputación, mejores fotos, mejores descripciones, más reseñas, precios más competitivos — <em>y además</em> pueden costear el envío gratis. La correlación puede reflejar que el vendedor mejor en todo tiene más ventas, no que el envío las causa.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;">CORRELACIÓN ESPURIA POR VARIABLE CONFUNDIDORA</div>
+      <div style="font-size:13px;color:#333;line-height:1.55;">Tanto el envío gratis como las ventas altas son <strong>consecuencias del mismo factor subyacente</strong>: la calidad general del vendedor. La correlación entre ambas no implica que una cause la otra.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:5px;">EL EJEMPLO CLÁSICO</div>
+      <div style="font-size:13px;color:#333;line-height:1.55;">En verano aumentan tanto las heladerías abiertas como los ahogados en playas — correlación positiva alta. Nadie concluiría que las heladerías causan ahogamientos: ambas son causadas por el <em>calor</em>. Esa correlación es espuria.</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Para la clase</div>
+    <div class="pause-q">¿Qué variables podrían estar detrás de la correlación entre envío gratis y ventas? ¿Cuántas explicaciones alternativas se les ocurren antes de aceptar la causal?</div>
+  </div>
+</div>
+</section>
+
 <!-- ══ SECCIÓN 2 — TRES CONDICIONES ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 02 · minutos 20–45</div>
+  <div class="sec-num">Sección 02</div>
   <div class="sec-title">Las tres condiciones<br>de causalidad</div>
   <div class="sec-sub">Ninguna sola es suficiente — las tres deben satisfacerse</div>
 </div>
@@ -281,6 +294,28 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- Dónde falla cada condición -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Las tres condiciones — dónde falla cada una</div>
+  <div class="slide-h">Covariación engaña · orden es ambiguo · alternativas nunca se descartan del todo</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;">CONDICIÓN 1 PUEDE ENGAÑAR — CORRELACIÓN ESPURIA</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">La covariación es la condición más fácil de detectar —y la más engañosa. Dos variables pueden correlacionar sin que ninguna cause a la otra, porque ambas son efectos de una tercera variable Z. La correlación necesaria, pero no suficiente.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:4px;">CONDICIÓN 2 — EL PROBLEMA DE LOS ESTUDIOS TRANSVERSALES</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Si mido satisfacción y lealtad en la <em>misma encuesta</em>, no puedo saber si la satisfacción produce lealtad o si los clientes leales valoran mejor el servicio retroactivamente. Cuando las variables se miden simultáneamente, la dirección causal es ambigua. El experimento resuelve esto estructuralmente.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 15px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:2px;margin-bottom:4px;">CONDICIÓN 3 — NUNCA SE SATISFACE ABSOLUTAMENTE</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Nunca se puede descartar <em>todo</em> factor alternativo con certeza absoluta. Lo que el diseño experimental hace es reducir progresivamente las explicaciones rivales plausibles hasta que la hipótesis causal sea la más parsimoniosa. La aleatorización es la herramienta más poderosa para esto.</div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- Caso Nubank -->
 <section>
 <div class="slide s-dark">
@@ -302,7 +337,41 @@ ul.bullets-white li::before { color:var(--accent); }
   </div>
   <div class="pause-box" style="margin-top:10px;">
     <div class="pause-label">⏸ Pregunta</div>
-    <div class="pause-q">¿Qué condición quedaría comprometida si Nubank ofreciera el límite mayor solo a usuarios que ya hubieran hecho 3 compras? ¿Por qué?</div>
+    <div class="pause-q">¿Qué condición quedaría comprometida si Nubank ofreciera el límite mayor solo a usuarios que ya hubieran hecho 3 compras? ¿Por qué? (Condición 3 — los usuarios con 3+ transacciones son sistemáticamente más activos y comprometidos antes del tratamiento: hay sesgo de selección)</div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Spotify — terminología en acción -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Terminología en acción · Spotify</div>
+  <div class="slide-h">Identificar VI, VD, grupos y variables extrañas en un caso real</div>
+  <div style="background:var(--ink);border-radius:8px;padding:11px 15px;margin-bottom:10px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">CONTEXTO</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.55;">Spotify quiere saber si una nueva sección de recomendaciones de podcasts en español en la pantalla de inicio produce oyentes nuevos entre usuarios que actualmente no escuchan podcasts en ARG, MEX y COL.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:11px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:5px;">VI — LO QUE SE MANIPULA</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Presencia o ausencia de la sección de recomendaciones de podcasts en la pantalla de inicio</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:11px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:2px;margin-bottom:5px;">VD — LO QUE SE MIDE</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Minutos de podcasts escuchados por semana. Tasa de conversión de no-oyente a oyente habitual</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:11px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:5px;">UNIDADES DE PRUEBA</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Usuarios activos que no escucharon ningún podcast en los últimos 90 días</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:11px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:5px;">VARIABLES EXTRAÑAS</div>
+      <div style="font-size:12.5px;color:#333;line-height:1.5;">Género musical preferido · antigüedad en plataforma · dispositivo principal · franja horaria de escucha</div>
+    </div>
+  </div>
+  <div class="pizarron" style="margin-top:8px;">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Pedir a un voluntario que repita VI, VD y variables extrañas con el caso Rite Aid de apertura. Si hay dudas, resolver antes de continuar.</span>
   </div>
 </div>
 </section>
@@ -310,7 +379,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══ SECCIÓN 3 — TERMINOLOGÍA ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 03 · minutos 35–50</div>
+  <div class="sec-num">Sección 03</div>
   <div class="sec-title">El lenguaje del<br>experimento</div>
   <div class="sec-sub">Variables, grupos, notación simbólica</div>
 </div>
@@ -372,7 +441,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══ SECCIÓN 4 — VALIDEZ ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 04 · minutos 45–75</div>
+  <div class="sec-num">Sección 04</div>
   <div class="sec-title">Validez interna<br>y externa</div>
   <div class="sec-sub">La tensión central del diseño experimental</div>
 </div>
@@ -441,7 +510,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══ SECCIÓN 5 — TIPOS DE DISEÑOS ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 05 · minutos 75–110</div>
+  <div class="sec-num">Sección 05</div>
   <div class="sec-title">Tipos de diseños<br>experimentales</div>
   <div class="sec-sub">Preexperimentales · Verdaderos · Estadísticos</div>
 </div>
@@ -535,13 +604,17 @@ ul.bullets-white li::before { color:var(--accent); }
     <span class="pizarron-icon">✏</span>
     <span class="pizarron-text">Dibujar en pizarrón: la tabla factorial 2×2 — Factor A (filas) × Factor B (columnas). Marcar las 4 celdas y mostrar cómo los efectos de A dependen del nivel de B.</span>
   </div>
+  <div class="pause-box" style="margin-top:8px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">Si iFood solo hubiera testeado descuento vs. recordatorio sin manipular el horario, ¿qué conclusión habría sacado? ¿Por qué estaría equivocada? (Habría promediado los efectos de ambos horarios y posiblemente concluido que el tipo de mensaje no importa — cuando cada uno tiene un horario óptimo muy diferente. La interacción hace incomprensible el efecto de cada factor por separado)</div>
+  </div>
 </div>
 </section>
 
 <!-- ══ SECCIÓN 6 — A/B TESTING Y PRUEBA DE MERCADO ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 06 · minutos 110–135</div>
+  <div class="sec-num">Sección 06</div>
   <div class="sec-title">A/B testing digital<br>y prueba de mercado</div>
   <div class="sec-sub">El experimento como herramienta de decisión empresarial</div>
 </div>
@@ -572,6 +645,32 @@ ul.bullets-white li::before { color:var(--accent); }
         <div class="latam-label">🌎 Escala LatAm</div>
         <div class="latam-text">Mercado Libre: 200+ experimentos activos. Rappi y Nubank tienen equipos dedicados a experimentación. La infraestructura experimental es hoy una ventaja competitiva real.</div>
       </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Limitaciones A/B testing desarrolladas -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">A/B testing — cuatro limitaciones críticas</div>
+  <div class="slide-h slide-h-white">Lo que Malhotra no podía anticipar en 2016</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    <div class="step-row">
+      <div class="step-num">01</div>
+      <div class="step-body"><strong>Peeking problem:</strong> parar el experimento al ver p &lt; 0,05 infla los falsos positivos. Si reviso los resultados cada hora y paro cuando hay resultado positivo, la probabilidad real de falso positivo puede superar el 30 %, no el 5 % nominal.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">02</div>
+      <div class="step-body"><strong>Efecto de novedad:</strong> los usuarios responden positivamente a <em>cualquier elemento nuevo</em> en una interfaz conocida. Experimentos cortos pueden capturar novedad y confundirla con un efecto genuino del diseño.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">03</div>
+      <div class="step-body"><strong>Spillover / contaminación:</strong> en plataformas de comunidad, usuarios del grupo control pueden ver contenido generado por el grupo experimental. El tratamiento contamina al control y subestima el efecto real.</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">04</div>
+      <div class="step-body"><strong>Validez externa parcial:</strong> los usuarios de la app son más jóvenes, urbanos y digitalmente activos que el mercado total. Los resultados pueden no generalizarse a segmentos offline — especialmente relevante en LATAM donde esos segmentos son mayoría.</div>
     </div>
   </div>
 </div>
@@ -617,7 +716,7 @@ ul.bullets-white li::before { color:var(--accent); }
   </ul>
   <div class="pause-box">
     <div class="pause-label">⏸ Para pensar</div>
-    <div class="pause-q">¿Qué problema de validez interna tiene un piloto geográfico restringido? ¿Cómo podría afectar la generalización al lanzamiento nacional?</div>
+    <div class="pause-q">¿Qué problema de validez tiene un piloto geográfico restringido — interna o externa? (Validez <em>externa</em>, no interna. El diseño puede ser causalmente válido dentro del mercado piloto, pero las regiones seleccionadas pueden no representar la diversidad demográfica, infraestructura bancaria y conectividad del país completo)</div>
   </div>
 </div>
 </section>
@@ -643,7 +742,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══ SECCIÓN 7 — LATAM Y ÉTICA ══ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 07 · minutos 135–150</div>
+  <div class="sec-num">Sección 07</div>
   <div class="sec-title">LatAm, ética<br>y cierre</div>
   <div class="sec-sub">Desafíos regionales + dilemas éticos en experimentación</div>
 </div>
@@ -694,6 +793,60 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- Pausa ética adolescentes -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética en experimentación — caso límite</div>
+  <div class="slide-h">¿Un diseño técnicamente válido puede ser éticamente inaceptable?</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+    <div style="background:#fff5f5;border:1px solid #f5c6c2;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:5px;">EL CASO</div>
+      <div style="font-size:13px;color:#333;line-height:1.55;">Una empresa de e-commerce latinoamericana quiere hacer un A/B test donde a usuarios identificados como adolescentes por el algoritmo se les muestra publicidad de bebidas energéticas de alto contenido en cafeína. Al grupo de control no se les muestra. El diseño experimental es técnicamente correcto.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:5px;">MARCO REGULATORIO POR PAÍS</div>
+      <div style="font-size:13px;color:#333;line-height:1.55;"><strong>Uruguay:</strong> Ley 18.331 + regulación de publicidad a menores. <strong>Brasil:</strong> ECA + LGPD. <strong>Argentina:</strong> Ley 25.326 + protecciones para menores. <strong>México:</strong> LFPDPPP.</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Para la clase</div>
+    <div class="pause-q">¿Es éticamente aceptable aunque el diseño sea técnicamente válido? ¿La eficacia del experimento justifica el uso en esta población? ¿Qué diferencia hay entre lo que es legal y lo que es ético?</div>
+  </div>
+  <div style="margin-top:8px;font-size:12px;color:var(--muted);font-style:italic;">No hay respuesta única. El objetivo es articular que validez técnica y aceptabilidad ética son dimensiones independientes.</div>
+</div>
+</section>
+
+<!-- Bibliografía -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Fuentes del capítulo</div>
+  <div class="slide-h slide-h-white">Bibliografía — Capítulo 6</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Malhotra, N. K. (2016).</strong> Investigación de mercados. Pearson. Cap. 6, pp. 154–179.</div>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Kohavi, R., Tang, D., & Xu, Y. (2020).</strong> Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing. Cambridge University Press.</div>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Gordon, B. et al. (2019).</strong> Inefficiencies in Digital Advertising Markets. <em>Journal of Marketing, 83(1),</em> 7–25.</div>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Kramer, A. et al. (2014).</strong> Experimental evidence of massive-scale emotional contagion through social networks. <em>PNAS, 111(24),</em> 8788–8790.</div>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Imbens, G. & Rubin, D. (2015).</strong> Causal Inference for Statistics, Social, and Biomedical Sciences. Cambridge University Press.</div>
+    </div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.07);padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Banco Central do Brasil (2023).</strong> Relatório de Pagamentos Pix 2023. bcb.gov.br</div>
+    </div>
+    <div style="padding:6px 0;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;"><strong style="color:white;">Mercado Libre (2024).</strong> Annual Report 2023. investors.mercadolibre.com</div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- Cierre -->
 <section>
 <div class="slide s-close">
@@ -709,7 +862,7 @@ ul.bullets-white li::before { color:var(--accent); }
     </ul>
     <div class="chip-row">
       <span class="chip chip-red">Capítulo 6 · Malhotra 2016</span>
-      <span class="chip chip-gold">Universidad de Montevideo</span>
+      <span class="chip chip-gold">Paula Pereda Suárez · Universidad de Montevideo</span>
     </div>
   </div>
 </div>
