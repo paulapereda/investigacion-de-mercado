@@ -338,12 +338,68 @@ con una línea en blanco — no con Enter.</span>
 
 
 <!-- ══════════════════════════════════════
+     LISTAS EN DETALLE — Bloque 2 extra
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 2 — Profundización</div>
+  <div class="slide-h">Listas: <code>itemize</code> vs <code>enumerate</code></div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:6px;">Viñetas — itemize</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\begin</span><span class="arg">{itemize}</span>
+  <span class="cmd">\item</span> <span class="str">Primer punto</span>
+  <span class="cmd">\item</span> <span class="str">Segundo punto</span>
+    <span class="cmd">\begin</span><span class="arg">{itemize}</span>       <span class="cmt">% anidada</span>
+      <span class="cmd">\item</span> <span class="str">Sub-punto</span>
+    <span class="cmd">\end</span><span class="arg">{itemize}</span>
+<span class="cmd">\end</span><span class="arg">{itemize}</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:6px;">Numerada — enumerate</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\usepackage</span><span class="arg">{enumitem}</span>   <span class="cmt">% preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{enumerate}</span><span class="opt">[label=\alph*.]</span>
+  <span class="cmd">\item</span> <span class="str">a. Primer ítem</span>
+  <span class="cmd">\item</span> <span class="str">b. Segundo ítem</span>
+<span class="cmd">\end</span><span class="arg">{enumerate}</span>
+<br>
+<span class="cmt">% Otros label: \arabic*, \roman*, \Alph*</span>
+      </div>
+    </div>
+  </div>
+
+  <table class="ref-table" style="margin-top:10px;">
+    <tr>
+      <th>Parámetro de <code>label</code></th>
+      <th>Resultado</th>
+      <th>Ejemplo de uso</th>
+    </tr>
+    <tr><td>\arabic*</td><td>1, 2, 3…</td><td>Pasos de un proceso</td></tr>
+    <tr><td>\alph*</td><td>a, b, c…</td><td>Opciones de respuesta en cuestionario</td></tr>
+    <tr><td>\roman*</td><td>i, ii, iii…</td><td>Secciones de metodología</td></tr>
+    <tr><td>\Alph*</td><td>A, B, C…</td><td>Alternativas en instrumentos</td></tr>
+  </table>
+
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">Pregunta</div>
+    <div class="pause-q">¿Cuándo usarían <code>itemize</code> y cuándo <code>enumerate</code> en un informe de investigación de mercado? ¿Qué diferencia comunica cada uno al lector?</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
      TABLAS Y FIGURAS — min 25–40
 ══════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
   <div class="sec-num">Bloque 3</div>
-  <div class="sec-title">Tablas,<br>figuras y<br>bibliografía</div>
+  <div class="sec-title">Tablas,<br>figuras y<br>ecuaciones</div>
   <div class="sec-sub">Lo que más necesitan para las entregas</div>
 </div>
 </section>
@@ -440,6 +496,373 @@ con una línea en blanco — no con Enter.</span>
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Exportar desde Google Scholar</div>
     <div class="tip-text">Buscar la obra en Scholar → botón <em>Citar</em> → <em>BibTeX</em> → copiar y pegar en el archivo <code>.bib</code>. La entrada ya viene con los campos correctos.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     IMÁGENES EN DETALLE — Bloque 3 extra
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3 — Imágenes en detalle</div>
+  <div class="slide-h slide-h-white">Parámetros de posición y tamaño</div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmt">% Parámetros de posición [h/t/b/p/H]:</span>
+<span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[H]</span>   <span class="cmt">% H = exactamente aquí</span>
+  <span class="cmd">\centering</span>
+  <span class="cmd">\includegraphics</span><span class="opt">[width=5cm]</span><span class="arg">{mi_imagen.jpg}</span>
+  <span class="cmd">\caption</span><span class="arg">{Título de la figura}</span>
+  <span class="cmd">\label</span><span class="arg">{fig:mi}</span>
+<span class="cmd">\end</span><span class="arg">{figure}</span>
+<br>
+<span class="cmt">% Para referenciar: La Figura~\ref{fig:mi} muestra…</span>
+      </div>
+    </div>
+    <div>
+      <table class="ref-table-dark" style="margin-top:0;">
+        <tr><th>Opción <code>[X]</code></th><th>Significado</th></tr>
+        <tr><td>h</td><td>Aquí, aproximadamente</td></tr>
+        <tr><td>t</td><td>Parte superior de la página</td></tr>
+        <tr><td>b</td><td>Parte inferior de la página</td></tr>
+        <tr><td>p</td><td>Página exclusiva de flotantes</td></tr>
+        <tr><td>H</td><td>Exactamente aquí (paquete <code>float</code>)</td></tr>
+        <tr><td>h!</td><td>Forzar posición, ignorar heurística LaTeX</td></tr>
+      </table>
+      <div class="nota-dark" style="margin-top:8px;">
+        <div class="nota-dark-text">Para <code>[H]</code> agregar <code>\usepackage{float}</code> en el preámbulo.</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="ref-table-dark" style="margin-top:10px;">
+    <tr><th>Parámetro de tamaño</th><th>Ejemplo</th><th>Resultado</th></tr>
+    <tr><td>width</td><td><code>width=5cm</code>, <code>width=0.5\textwidth</code></td><td>Ancho fijo o relativo al texto</td></tr>
+    <tr><td>height</td><td><code>height=3cm</code></td><td>Alto fijo, ancho se ajusta</td></tr>
+    <tr><td>scale</td><td><code>scale=0.5</code></td><td>Escala proporcional respecto al original</td></tr>
+    <tr><td>angle</td><td><code>angle=90</code></td><td>Rota la imagen en grados</td></tr>
+  </table>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3 — Imágenes en detalle</div>
+  <div class="slide-h slide-h-white">Múltiples imágenes en un mismo flotante</div>
+
+  <div class="code-block">
+<span class="cmd">\usepackage</span><span class="arg">{subcaption}</span>   <span class="cmt">% en el preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[H]</span>
+  <span class="cmd">\centering</span>
+  <span class="cmd">\begin</span><span class="arg">{subfigure}</span><span class="opt">[b]{0.45\textwidth}</span>
+    <span class="cmd">\includegraphics</span><span class="opt">[width=\textwidth]</span><span class="arg">{grafico_hombres.png}</span>
+    <span class="cmd">\caption</span><span class="arg">{Segmento masculino}</span>
+  <span class="cmd">\end</span><span class="arg">{subfigure}</span>
+  <span class="cmd">\hfill</span>   <span class="cmt">% espacio entre subfiguras</span>
+  <span class="cmd">\begin</span><span class="arg">{subfigure}</span><span class="opt">[b]{0.45\textwidth}</span>
+    <span class="cmd">\includegraphics</span><span class="opt">[width=\textwidth]</span><span class="arg">{grafico_mujeres.png}</span>
+    <span class="cmd">\caption</span><span class="arg">{Segmento femenino}</span>
+  <span class="cmd">\end</span><span class="arg">{subfigure}</span>
+  <span class="cmd">\caption</span><span class="arg">{Frecuencia de compra por segmento de género}</span>
+<span class="cmd">\end</span><span class="arg">{figure}</span>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Cuándo usar subfiguras</div>
+    <div class="tip-text">Ideal para comparar segmentos (género, edad, canal) o mostrar el antes/después de un insight. La leyenda de cada subfigura lleva letra automaticamente: (a), (b), (c)…</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     TABLAS AVANZADAS — Bloque 3 extra
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 3 — Tablas avanzadas</div>
+  <div class="slide-h">Generadores automáticos: evitar escribir tablas a mano</div>
+
+  <ul class="bullets">
+    <li><strong>tables-generator.com</strong> — pegar datos, elegir estilo <em>booktabs</em>, copiar el código LaTeX generado directo en Overleaf. Es la herramienta más práctica para el trabajo del curso</li>
+    <li><strong>Excel2LaTeX</strong> (plugin de Excel) — seleccionar rango en Excel → exportar como código LaTeX. Útil cuando ya se tiene la tabla en Excel con formato</li>
+    <li><strong>csvautotabular</strong> (paquete LaTeX) — leer directamente un archivo <code>.csv</code> y convertirlo en tabla sin intermediarios</li>
+  </ul>
+
+  <div class="tip-box" style="margin-top:12px;">
+    <div class="tip-label">Anatomía de una tabla booktabs bien hecha</div>
+    <div class="tip-text">
+      <code>\toprule</code> — línea gruesa inicial<br>
+      Fila de encabezados (en negrita, <code>\textbf</code>)<br>
+      <code>\midrule</code> — línea delgada bajo el encabezado<br>
+      Filas de datos (separadas por <code>\\</code>)<br>
+      <code>\bottomrule</code> — línea gruesa final<br>
+      Sin líneas verticales — el estándar APA y académico
+    </div>
+  </div>
+
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">Ejercicio rápido</div>
+    <div class="pause-q">Abrir tables-generator.com → tab LaTeX → cargar la tabla de variables de su entrega → copiar el código y pegarlo en Overleaf. ¿Cuánto tarda?</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ECUACIONES — Bloque 3 extra
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3b</div>
+  <div class="sec-title">Ecuaciones<br>y fórmulas</div>
+  <div class="sec-sub">El superpoder de LaTeX sobre Word</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3b — Ecuaciones</div>
+  <div class="slide-h slide-h-white">Modo matemático: en línea vs. en bloque</div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase;">En línea — dentro del párrafo</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="str">Si </span><span class="arg">$a = b$</span><span class="str"> entonces...</span>
+<span class="str">La muestra fue </span><span class="arg">$n = 385$</span><span class="str">.</span>
+<span class="str">El alfa de Cronbach es </span><span class="arg">$\alpha = 0.87$</span><span class="str">.</span>
+      </div>
+      <div style="margin-top:12px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase;">En bloque — ecuación destacada</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\begin</span><span class="arg">{equation}</span>
+  <span class="str">\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i</span>
+<span class="cmd">\end</span><span class="arg">{equation}</span>
+<br>
+<span class="cmt">% Sin número de ecuación:</span>
+<span class="cmd">\begin</span><span class="arg">{equation*}</span>
+  <span class="str">r = \frac{\sum(x-\bar{x})(y-\bar{y})}{\sqrt{\sum(x-\bar{x})^2 \sum(y-\bar{y})^2}}</span>
+<span class="cmd">\end</span><span class="arg">{equation*}</span>
+      </div>
+    </div>
+    <div>
+      <table class="ref-table-dark" style="margin-top:0;">
+        <tr><th>Símbolo</th><th>Código LaTeX</th></tr>
+        <tr><td>α β γ δ</td><td><code>\alpha \beta \gamma \delta</code></td></tr>
+        <tr><td>μ σ ρ</td><td><code>\mu \sigma \rho</code></td></tr>
+        <tr><td>Σ Π</td><td><code>\Sigma \Pi</code></td></tr>
+        <tr><td>x̄ (media)</td><td><code>\bar{x}</code></td></tr>
+        <tr><td>≠ ≈ ≤ ≥</td><td><code>\neq \approx \leq \geq</code></td></tr>
+        <tr><td>→ ← ↔</td><td><code>\to \leftarrow \leftrightarrow</code></td></tr>
+        <tr><td>fracciones</td><td><code>\frac{num}{den}</code></td></tr>
+        <tr><td>raíz</td><td><code>\sqrt{x}</code></td></tr>
+        <tr><td>suma</td><td><code>\sum_{i=1}^{n}</code></td></tr>
+        <tr><td>integral</td><td><code>\int_{a}^{b}</code></td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3b — Ecuaciones</div>
+  <div class="slide-h slide-h-white">Múltiples ecuaciones: align y gather</div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase;">align — alinea por el signo =</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\usepackage</span><span class="arg">{amsmath}</span>   <span class="cmt">% preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{align}</span>
+  <span class="str">H_0 &amp;: \mu_1 = \mu_2 \\</span>
+  <span class="str">H_1 &amp;: \mu_1 \neq \mu_2</span>
+<span class="cmd">\end</span><span class="arg">{align}</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); margin-bottom:6px; text-transform:uppercase;">gather — centradas, sin alinear</div>
+      <div class="code-block" style="font-size:11.5px;">
+<span class="cmd">\begin</span><span class="arg">{gather}</span>
+  <span class="str">NPS = \%Promotores - \%Detractores \\</span>
+  <span class="str">NPS \in [-100,\ 100]</span>
+<span class="cmd">\end</span><span class="arg">{gather}</span>
+      </div>
+    </div>
+  </div>
+
+  <table class="ref-table-dark" style="margin-top:10px;">
+    <tr><th>Entorno</th><th>Cuándo usarlo</th><th>Numeración</th></tr>
+    <tr><td><code>equation</code></td><td>Una sola fórmula destacada</td><td>Un número por bloque</td></tr>
+    <tr><td><code>align</code></td><td>Pasos derivados, hipótesis H₀/H₁</td><td>Un número por línea</td></tr>
+    <tr><td><code>gather</code></td><td>Varias fórmulas sin relación directa</td><td>Un número por línea</td></tr>
+    <tr><td><code>equation*</code></td><td>Fórmula sin numerar</td><td>Sin número</td></tr>
+  </table>
+
+  <div class="tip-box" style="margin-top:8px;">
+    <div class="tip-label">Editor visual de ecuaciones</div>
+    <div class="tip-text"><strong>codecogs.com/latex/eqneditor.php</strong> — escribir la ecuación con botones (similar al editor de Word) y copiar el código LaTeX generado. Ideal para fórmulas complejas.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     VARIABLES Y FUNCIONES — Bloque 3c
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3c</div>
+  <div class="sec-title">Variables<br>y funciones</div>
+  <div class="sec-sub">Automatizar para no repetirse</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3c — Variables y funciones</div>
+  <div class="slide-h slide-h-white">Variables con <code>\def</code> — un cambio, muchos lugares</div>
+
+  <div class="code-block">
+<span class="cmt">% Definir variables en el preámbulo:</span>
+<span class="cmd">\def</span><span class="arg">\empresa</span><span class="str">{Mercado Libre Uruguay}</span>
+<span class="cmd">\def</span><span class="arg">\entrega</span><span class="str">{Segunda entrega}</span>
+<span class="cmd">\def</span><span class="arg">\nmuestra</span><span class="str">{385}</span>
+<span class="cmd">\def</span><span class="arg">\ancho</span><span class="str">{0.7\textwidth}</span>
+<br>
+<span class="cmt">% Usar en el documento:</span>
+<span class="str">Esta investigación analiza el caso de </span><span class="arg">\empresa</span><span class="str">.</span>
+<span class="str">La muestra corresponde a $n = </span><span class="arg">\nmuestra</span><span class="str">$ usuarios.</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[H]</span>
+  <span class="cmd">\includegraphics</span><span class="opt">[\ancho]</span><span class="arg">{grafico.png}</span>
+<span class="cmd">\end</span><span class="arg">{figure}</span>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Por qué usar variables</div>
+    <div class="tip-text">Si el nombre de la empresa cambia, el tamaño muestral se actualiza, o se reutiliza la plantilla para otra entrega: se cambia <strong>en un solo lugar del preámbulo</strong> y LaTeX actualiza todo el documento automáticamente. La plantilla del curso ya usa este patrón con <code>\nombreentrega</code>.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 3c — Variables y funciones</div>
+  <div class="slide-h slide-h-white">Funciones con <code>\newcommand</code> — reutilizar estructuras complejas</div>
+
+  <div class="code-block">
+<span class="cmt">% Función para insertar figura con parámetros:</span>
+<span class="cmt">% #1 = archivo, #2 = ancho, #3 = epígrafe, #4 = label</span>
+<span class="cmd">\newcommand</span><span class="arg">{\mifigura}</span><span class="opt">[4]</span><span class="str">{</span>
+  <span class="cmd">\begin</span><span class="arg">{figure}</span><span class="opt">[H]</span>
+    <span class="cmd">\centering</span>
+    <span class="cmd">\includegraphics</span><span class="opt">[width=#2]</span><span class="arg">{#1}</span>
+    <span class="cmd">\caption</span><span class="arg">{#3}</span>
+    <span class="cmd">\label</span><span class="arg">{fig:#4}</span>
+  <span class="cmd">\end</span><span class="arg">{figure}</span>
+<span class="str">}</span>
+<br>
+<span class="cmt">% Usarla en el documento:</span>
+<span class="arg">\mifigura</span><span class="str">{grafico_nps.png}{0.8\textwidth}{Evolución del NPS — 2022–2024}{nps}</span>
+<span class="arg">\mifigura</span><span class="str">{mapa_calor.png}{0.6\textwidth}{Mapa de calor por segmento}{calor}</span>
+  </div>
+
+  <div class="nota-dark" style="margin-top:10px;">
+    <div class="nota-dark-text">Una función escribe el código repetitivo una sola vez. El Template-Informe de Overleaf que usamos en el curso ya define funciones como <code>\portada</code> con exactamente este mecanismo. Cuando necesiten algo que se repite 5 veces, vale la pena crear un <code>\newcommand</code>.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     HACKS AVANZADOS — Bloque 3d
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3d</div>
+  <div class="sec-title">Más allá<br>del informe</div>
+  <div class="sec-sub">Gráficos, diagramas y control de versiones</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 3d — Capacidades avanzadas</div>
+  <div class="slide-h">Diagramas de flujo con TikZ</div>
+
+  <ul class="bullets">
+    <li><strong>TikZ</strong> (paquete <code>tikz</code>) permite dibujar cualquier figura vectorial con código: diagramas de flujo, árboles de decisión, grafos, mapas de proceso. El resultado es tipográficamente perfecto y escala sin perder calidad</li>
+    <li>Para investigación de mercado: útil para diagramar el proceso de muestreo, el Customer Decision Journey, o el diseño del cuestionario</li>
+    <li>La curva de aprendizaje es alta — para uso en el curso se recomienda empezar con plantillas de <strong>texample.net/tikz</strong> y adaptar</li>
+  </ul>
+
+  <div class="two-col" style="gap:12px; margin-top:10px;">
+    <div class="code-block" style="font-size:11px;">
+<span class="cmd">\usepackage</span><span class="arg">{tikz}</span>
+<span class="cmd">\usetikzlibrary</span><span class="arg">{shapes, arrows.meta}</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{tikzpicture}</span>
+  <span class="str">\node (inicio) [draw, rounded corners]</span>
+  <span class="str">      {Problema de investigación};</span>
+  <span class="str">\node (diseño) [draw, below=of inicio]</span>
+  <span class="str">      {Diseño del estudio};</span>
+  <span class="str">\draw [-&gt;] (inicio) -- (diseño);</span>
+<span class="cmd">\end</span><span class="arg">{tikzpicture}</span>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Alternativas más rápidas</div>
+      <div class="col-body">Para la mayoría de los diagramas del curso conviene <strong>exportar como .png</strong> desde Canva, PowerPoint, o draw.io e insertarlo con <code>\includegraphics</code>. TikZ es poderoso pero costoso en tiempo de aprendizaje inicial.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 3d — Capacidades avanzadas</div>
+  <div class="slide-h">Gráficos estadísticos con pgfplots</div>
+
+  <div class="two-col" style="gap:14px; margin-top:6px;">
+    <div>
+      <div class="code-block" style="font-size:11px;">
+<span class="cmd">\usepackage</span><span class="arg">{pgfplots}</span>   <span class="cmt">% preámbulo</span>
+<br>
+<span class="cmd">\begin</span><span class="arg">{tikzpicture}</span>
+<span class="cmd">\begin</span><span class="arg">{axis}</span><span class="opt">[</span>
+  <span class="str">title={Satisfacción por segmento},</span>
+  <span class="str">xlabel={Segmento},</span>
+  <span class="str">ylabel={Puntaje medio},</span>
+  <span class="str">ybar, xtick=data</span>
+<span class="opt">]</span>
+<span class="cmd">\addplot</span> <span class="str">coordinates {</span>
+  <span class="str">(1,3.8) (2,4.2) (3,3.5)</span>
+<span class="str">};</span>
+<span class="cmd">\end</span><span class="arg">{axis}</span>
+<span class="cmd">\end</span><span class="arg">{tikzpicture}</span>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div class="col-box">
+        <div class="col-label">¿Vale la pena?</div>
+        <div class="col-body">Para el curso: <strong>no necesariamente</strong>. Exportar gráficos desde R, Python (matplotlib/seaborn) o Excel y pegarlos como PNG es más práctico y rápido. pgfplots brilla en tesis o papers donde el gráfico debe estar en el mismo flujo tipográfico.</div>
+      </div>
+      <div class="col-box">
+        <div class="col-label" style="color:var(--blue);">Recursos</div>
+        <div class="col-body">overleaf.com/learn/latex/Pgfplots_package<br>pgfplots.net — galería de ejemplos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:10px;">
+    <div class="tip-label">Control de versiones con Git</div>
+    <div class="tip-text">Al ser texto plano, los archivos <code>.tex</code> funcionan perfectamente con Git. Overleaf tiene integración nativa con GitHub: cada compilación queda como commit. Ideal para proyectos largos o entregas en equipo donde se quiere rastrear quién cambió qué.</div>
   </div>
 </div>
 </section>
@@ -739,6 +1162,75 @@ con una línea en blanco — no con Enter.</span>
 <!-- ══════════════════════════════════════
      CIERRE
 ══════════════════════════════════════ -->
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque 5 — Cheatsheet ampliado</div>
+  <div class="slide-h slide-h-white">Comandos avanzados: ecuaciones, variables e imágenes</div>
+
+  <div class="two-col" style="gap:10px; margin-top:0;">
+    <table class="ref-table-dark" style="margin-top:0; font-size:11.5px;">
+      <tr><th colspan="2">Ecuaciones</th></tr>
+      <tr><td>$...$</td><td>Fórmula en línea</td></tr>
+      <tr><td>\begin{equation}</td><td>Fórmula numerada en bloque</td></tr>
+      <tr><td>\begin{align}</td><td>Varias fórmulas alineadas</td></tr>
+      <tr><td>\frac{a}{b}</td><td>Fracción a/b</td></tr>
+      <tr><td>\sqrt{x}</td><td>Raíz cuadrada</td></tr>
+      <tr><td>\sum_{i=1}^{n}</td><td>Sumatoria</td></tr>
+      <tr><td>\bar{x}</td><td>Media (x con barra)</td></tr>
+      <tr><td>\alpha \beta \mu \sigma</td><td>Letras griegas</td></tr>
+      <tr><th colspan="2">Variables y funciones</th></tr>
+      <tr><td>\def\var{valor}</td><td>Definir variable reutilizable</td></tr>
+      <tr><td>\newcommand{\f}[n]{}</td><td>Crear función con n parámetros</td></tr>
+    </table>
+    <table class="ref-table-dark" style="margin-top:0; font-size:11.5px;">
+      <tr><th colspan="2">Imágenes (detalle)</th></tr>
+      <tr><td>[H]</td><td>Exactamente aquí (paquete float)</td></tr>
+      <tr><td>[h!]</td><td>Forzar posición aproximada</td></tr>
+      <tr><td>width=0.8\textwidth</td><td>80% del ancho del texto</td></tr>
+      <tr><td>scale=0.5</td><td>50% del tamaño original</td></tr>
+      <tr><td>angle=90</td><td>Rotar imagen</td></tr>
+      <tr><td>\begin{subfigure}</td><td>Múltiples imágenes en un flotante</td></tr>
+      <tr><th colspan="2">Herramientas externas</th></tr>
+      <tr><td>tables-generator.com</td><td>Tablas visuales → código LaTeX</td></tr>
+      <tr><td>codecogs.com/eqneditor</td><td>Editor visual de ecuaciones</td></tr>
+      <tr><td>texample.net/tikz</td><td>Galería de diagramas TikZ</td></tr>
+      <tr><td>overleaf.com/learn</td><td>Documentación oficial</td></tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque 5 — Resumen final</div>
+  <div class="slide-h">LaTeX vs Word: cuándo usar cada uno</div>
+
+  <div class="vs-grid" style="margin-top:10px;">
+    <div class="vs-col vs-col-a">
+      <div class="vs-header vs-header-bad">Seguí usando Word cuando…</div>
+      <div class="vs-item">El documento tiene menos de 3 páginas y no tiene fórmulas</div>
+      <div class="vs-item">Necesitás comentarios de revisión estilo track-changes</div>
+      <div class="vs-item">El cliente o destinatario necesita editar el .docx</div>
+      <div class="vs-item">No hay tablas, figuras numeradas ni bibliografía formal</div>
+    </div>
+    <div class="vs-col vs-col-b">
+      <div class="vs-header vs-header-good">Usá LaTeX cuando…</div>
+      <div class="vs-item">El informe tiene figuras numeradas, tablas y bibliografía</div>
+      <div class="vs-item">El PDF debe verse idéntico en cualquier computadora</div>
+      <div class="vs-item">Hay ecuaciones o notación estadística formal</div>
+      <div class="vs-item">Trabajás en equipo sobre el mismo documento (Overleaf Share)</div>
+      <div class="vs-item">El documento es una tesis, paper o entrega de curso formal</div>
+    </div>
+  </div>
+
+  <div class="pause-box" style="margin-top:12px;">
+    <div class="pause-label">Pregunta de cierre</div>
+    <div class="pause-q">¿Qué parte de sus entregas anteriores se habría beneficiado más de usar LaTeX? ¿La portada, las tablas, las figuras, o las referencias?</div>
+  </div>
+</div>
+</section>
+
 <section>
 <div class="slide s-close">
   <div style="display:flex; flex-direction:column; justify-content:center; height:100%;">
@@ -750,11 +1242,15 @@ con una línea en blanco — no con Enter.</span>
         <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/learn — documentación oficial</div>
       </div>
       <div style="border-left:3px solid var(--blue); padding:4px 14px;">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PARA TABLAS</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">TABLAS SIN CÓDIGO</div>
         <div style="font-size:13px; color:rgba(255,255,255,0.7);">tables-generator.com — modo LaTeX</div>
       </div>
       <div style="border-left:3px solid var(--gold); padding:4px 14px;">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PLANTILLA</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">ECUACIONES</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">codecogs.com/eqneditor — editor visual</div>
+      </div>
+      <div style="border-left:3px solid rgba(255,255,255,0.3); padding:4px 14px;">
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PLANTILLA DEL CURSO</div>
         <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/read/cyngkcsbkrdz — copiar y editar</div>
       </div>
     </div>
