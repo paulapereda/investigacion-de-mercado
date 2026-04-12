@@ -47,70 +47,66 @@
 .s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
 
 .eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-.eyebrow-light { color:rgba(255,255,255,0.35); }
+.eyebrow-light { color:rgba(255,255,255,0.45); }
 .slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
 .slide-h-white { color:white; }
 
 ul.bullets { list-style:none; padding:0; margin:0; }
-ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.6; color:#222; padding:7px 0 7px 22px; border-bottom:1px solid var(--border); position:relative; }
 ul.bullets li:last-child { border-bottom:none; }
 ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
-ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li { color:rgba(255,255,255,0.92); border-color:rgba(255,255,255,0.1); }
 ul.bullets-white li::before { color:var(--accent); }
 
 .def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
 .def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
-.def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
-.def-text strong { color:#a0b8d4; }
+.def-text { font-size:13px; color:rgba(255,255,255,0.92); line-height:1.65; }
+.def-text strong { color:#a0c8e8; }
 
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:4px; }
 .col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-box-dark { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.14); border-radius:8px; padding:14px 16px; }
 .col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
-.col-body  { font-size:12.5px; color:#444; line-height:1.55; }
-.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
+.col-label-w { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.55); text-transform:uppercase; margin-bottom:6px; }
+.col-body  { font-size:12.5px; color:#222; line-height:1.6; }
+.col-body-w { font-size:12.5px; color:rgba(255,255,255,0.92); line-height:1.6; }
 
 .ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
 .ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
-.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.5; font-size:12px; color:#1a1a1a; }
 .ref-table tr:nth-child(even) td { background:#faf8f5; }
-.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
-.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
+
+.ref-table-dark th { background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.7); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
+.ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.1); vertical-align:top; line-height:1.5; color:rgba(255,255,255,0.92); font-size:12px; }
 .ref-table-dark tr:nth-child(even) td { background:rgba(255,255,255,0.04); }
 
 .pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
 .pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
-.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+.pause-q { font-size:13px; font-style:italic; color:#3a2c00; line-height:1.6; }
 
 .latam-box { background:var(--greenbg); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
 .latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:5px; }
-.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.55; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.6; }
 
-.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.6; }
+.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#3a2c00; line-height:1.65; }
 
-.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+.piz { margin-top:9px; padding:8px 14px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:12px; color:#3a3530; font-style:italic; }
 
-/* Scale badges */
 .scale-row { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:12px; }
 .scale-box { border-radius:8px; padding:12px 14px; }
-.snom { background:#f0e8ff; border:1px solid #d4b8f8; }
-.sord { background:#fff0e0; border:1px solid #f8d890; }
-.sint { background:#e0f0ff; border:1px solid #90c8f8; }
-.sraz { background:#e0ffe8; border:1px solid #90e8a8; }
-.scale-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; }
+.snom { background:#f0e8ff; border:1px solid #c8a8f0; }
+.sord { background:#fff0e0; border:1px solid #e8c878; }
+.sint { background:#e0f0ff; border:1px solid #80b8f0; }
+.sraz { background:#e0ffe8; border:1px solid #70d888; }
+.scale-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; margin-bottom:5px; font-weight:700; }
 .snom .scale-label { color:#5a2d8a; }
 .sord .scale-label { color:#8a4a00; }
 .sint .scale-label { color:#003a8a; }
 .sraz .scale-label { color:#005a1a; }
-.scale-name { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; margin-bottom:4px; }
-.scale-body { font-size:11px; line-height:1.5; color:#444; }
-
-.tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:10px; }
-.tool-item { background:white; border:1px solid #c0d4e8; border-radius:6px; padding:9px 12px; }
-.tool-name { font-weight:600; font-size:12px; color:var(--blue); margin-bottom:2px; }
-.tool-desc { font-size:11px; color:var(--muted); line-height:1.35; }
-
-.big-quote { font-family:'Playfair Display',serif; font-size:1.15rem; font-style:italic; color:rgba(255,255,255,0.75); line-height:1.6; max-width:700px; margin-bottom:16px; }
-.big-quote-attr { font-family:'DM Mono',monospace; font-size:11px; color:rgba(255,255,255,0.35); letter-spacing:1px; }
+.scale-name { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; margin-bottom:4px; color:var(--ink); }
+.scale-body { font-size:11.5px; line-height:1.55; color:#2a2a2a; }
+.scale-eg { font-size:10.5px; color:#444; font-style:italic; margin-top:5px; border-top:1px solid rgba(0,0,0,0.1); padding-top:5px; }
 </style>
 </head>
 <body>
@@ -124,168 +120,154 @@ ul.bullets-white li::before { color:var(--accent); }
 <div class="slide s-cover">
   <div class="cover-eyebrow">Investigación de Mercado · Capítulo 7</div>
   <div class="cover-title">Medición y<br><em>escalamiento</em></div>
-  <div class="cover-chip">Paula Pereda · Universidad de Montevideo · 150 min</div>
-  <div style="margin-top:32px;font-size:13px;color:rgba(255,255,255,0.4);">Malhotra (2016) · pp. 180–211</div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
 </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!-- HOJA DE RUTA -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<section>
-<div class="slide s-light">
-  <div class="eyebrow">Estructura de la clase · 150 minutos</div>
-  <div class="slide-h">¿Qué vamos a cubrir hoy?</div>
-  <table class="ref-table">
-    <thead><tr><th>Bloque</th><th>Contenido</th><th>Min.</th></tr></thead>
-    <tbody>
-      <tr><td><strong>1. Apertura</strong></td><td>Caso NPS y el problema de medir bien</td><td>0–15</td></tr>
-      <tr><td><strong>2. Fundamentos</strong></td><td>Medición vs. escalamiento · Las 4 escalas básicas</td><td>15–45</td></tr>
-      <tr><td><strong>3. Comparativas</strong></td><td>Comparación pareada · Rangos · Suma constante</td><td>45–65</td></tr>
-      <tr><td><strong>4. No comparativas</strong></td><td>Likert · Diferencial semántico · Stapel · Multi-reactivos</td><td>65–105</td></tr>
-      <tr><td><strong>5. Evaluación</strong></td><td>Confiabilidad · Validez · Errores de medición</td><td>105–125</td></tr>
-      <tr><td><strong>6. Contexto y ética</strong></td><td>Social media · IA · LATAM · Ética</td><td>125–145</td></tr>
-      <tr><td><strong>7. Cierre</strong></td><td>Tres ideas para llevarse</td><td>145–150</td></tr>
-    </tbody>
-  </table>
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 1: APERTURA -->
+<!-- APERTURA -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Bloque 1 · minutos 0–15</div>
-  <div class="sec-title">Apertura:<br>¿Medir bien importa?</div>
+  <div class="sec-num">Apertura</div>
+  <div class="sec-title">¿Medir bien<br>importa?</div>
   <div class="sec-sub">Spoiler: sí. Y más de lo que parece.</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Caso de apertura · minutos 0–10</div>
+  <div class="eyebrow eyebrow-light">Caso de apertura</div>
   <div class="slide-h slide-h-white">El NPS y la pregunta de si el 10 vale el doble que el 5</div>
-  <ul class="bullets bullets-white" style="margin-bottom:12px;">
-    <li>NPS: "¿Con qué probabilidad recomendarías esta empresa?" en escala 0–10</li>
-    <li>Detractores (0–6), pasivos (7–8), promotores (9–10). NPS = % promotores − % detractores</li>
-    <li>¿Es correcto calcular el promedio de 0–10? ¿Es de intervalo o de razón?</li>
-    <li>Un cliente con 8 y otro con 4: ¿el primero es "el doble" de leal?</li>
+  <ul class="bullets bullets-white" style="margin-bottom:14px;">
+    <li><strong style="color:white;">¿Qué es el NPS?</strong> "¿Con qué probabilidad recomendarías esta empresa?" Escala 0–10. Detractores (0–6), pasivos (7–8), promotores (9–10). NPS = % promotores − % detractores.</li>
+    <li>Es la métrica de lealtad más usada globalmente. Miles de empresas —desde Rappi hasta Antel— la aplican como indicador principal de experiencia del cliente.</li>
+    <li>Pregunta incómoda: ¿es correcto calcular el <em>promedio</em> de esos números 0 a 10? ¿Un cliente con 8 es "el doble de leal" que uno con 4?</li>
+    <li>La respuesta depende del <strong style="color:#a0c8e8;">tipo de escala</strong> que sea el NPS. Y ese es exactamente el tema de hoy.</li>
   </ul>
   <div class="pause-box">
     <div class="pause-label">⏸ Pausa — pregunta para clase</div>
-    <div class="pause-q">¿Qué tipo de escala es el NPS? ¿Por qué importa la respuesta para cómo se analiza?</div>
+    <div class="pause-q">¿Qué tipo de escala es el NPS — nominal, ordinal, de intervalo o de razón? ¿Por qué importa la respuesta para cómo se analiza?</div>
   </div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Caso Mercado Libre · minutos 10–15</div>
+  <div class="eyebrow">Caso Mercado Libre</div>
   <div class="slide-h">¿El NPS mide lo mismo en Argentina y en Brasil?</div>
-  <div class="two-col">
+  <div class="two-col" style="margin-bottom:12px;">
     <div class="col-box">
       <div class="col-label">El problema</div>
-      <div class="col-body">Mercado Libre aplica el mismo NPS en 9 países. Pero en Argentina, dar un 8 es "casi perfecto"; en Brasil, el 10 es habitual para experiencias buenas. Mismo nivel de servicio objetivo → NPS diferente según país.</div>
+      <div class="col-body">Mercado Libre aplica el mismo NPS en 9 países. En Argentina, dar un 8 es "casi perfecto" culturalmente. En Brasil, el 10 es habitual para experiencias buenas. Mismo nivel de servicio objetivo → NPS diferente según país.</div>
     </div>
     <div class="col-box">
       <div class="col-label">La lección</div>
       <div class="col-body">Una escala no es culturalmente neutra. La equivalencia de escala entre países es un problema metodológico real, no una curiosidad académica. <strong>Lo que una escala produce depende del contexto en que se aplica.</strong></div>
     </div>
   </div>
-  <div class="callout" style="margin-top:14px;">
+  <div class="latam-box">
+    <div class="latam-label">🌎 Uruguay</div>
+    <div class="latam-text">La escala educativa 1–12 produce compresión de respuestas hacia 7–8 en encuestas de satisfacción: el 6 es mentalmente "el mínimo aceptable" y el 10 es "perfección inalcanzable". Este sesgo afecta mediciones de Antel, OSE y la mayoría de las empresas de servicios que aplican escalas numéricas.</div>
+  </div>
+  <div class="callout">
     <strong>Pregunta central del capítulo:</strong> ¿Cómo elegir la escala correcta para medir lo que queremos medir, en el contexto donde vamos a medir?
   </div>
 </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 2: FUNDAMENTOS -->
+<!-- FUNDAMENTOS -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Bloque 2 · minutos 15–45</div>
-  <div class="sec-title">Fundamentos:<br>Medición y las<br>cuatro escalas básicas</div>
-  <div class="sec-sub">Malhotra pp. 182–189</div>
+  <div class="sec-num">Sección 1</div>
+  <div class="sec-title">Medición y<br>escalamiento:<br>conceptos base</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Conceptos base · minutos 15–22</div>
+  <div class="eyebrow">Conceptos base</div>
   <div class="slide-h">Medición ≠ Escalamiento</div>
-  <div class="two-col">
+  <div class="two-col" style="margin-bottom:12px;">
     <div class="def-block">
       <div class="def-term-label">Medición</div>
-      <div class="def-text">Asignación de números u otros símbolos a <strong>características</strong> de objetos según un conjunto de reglas. No medimos personas, medimos sus atributos: actitud, gasto, frecuencia de compra.</div>
+      <div class="def-text">Asignación de números u otros símbolos a <strong>características</strong> de objetos según un conjunto de reglas. No medimos personas — medimos sus atributos: actitud, gasto, frecuencia de compra, intención.</div>
     </div>
     <div class="def-block">
       <div class="def-term-label">Escalamiento</div>
-      <div class="def-text">Extensión de la medición: creación de un <strong>continuo</strong> sobre el cual se localizan los objetos. El resultado de sumar 5 reactivos de Likert es un escalamiento.</div>
+      <div class="def-text">Extensión de la medición: creación de un <strong>continuo</strong> sobre el cual se localizan los objetos medidos. Sumar 7 reactivos de Likert sobre actitud hacia McDonald's produce un continuo de 7 a 35 → eso es escalamiento.</div>
     </div>
   </div>
-  <div class="callout" style="margin-top:14px;">
-    <strong>Regla de oro:</strong> las reglas de asignación deben ser estándar y constantes — no cambian según el objeto ni con el tiempo.
+  <div class="callout">
+    <strong>Regla fundamental:</strong> las reglas de asignación deben ser estándar y constantes — no cambian según el objeto medido ni con el tiempo. Una escala de satisfacción mensual debe funcionar igual en enero y en julio para que los datos sean comparables.
   </div>
+  <div class="piz">✏ Pizarrón: ejemplo — medir actitud hacia 5 restaurantes (1=desfavorable, 2=neutral, 3=favorable) → sumar calificaciones → continuo de 5 a 15 = eso es el escalamiento</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Las cuatro escalas · minutos 22–38 · ✏ Figura 7.2 — dibujar en pizarrón</div>
+  <div class="eyebrow">Las cuatro escalas básicas · ✏ Figura 7.2 — dibujar en pizarrón</div>
   <div class="slide-h">De menor a mayor nivel de medición</div>
   <div class="scale-row">
     <div class="scale-box snom">
       <div class="scale-label">Nominal</div>
       <div class="scale-name">Clasificar</div>
-      <div class="scale-body">Números solo identifican categorías. Sin orden ni magnitud.<br><br><em>Ej: marca favorita (1=Coca, 2=Pepsi)</em><br><br>Operación válida: moda</div>
+      <div class="scale-body">Números solo identifican categorías. Sin orden ni magnitud. Cualquier reetiquetado es equivalente.</div>
+      <div class="scale-eg">Marca favorita (1=Coca, 2=Pepsi). Número de camiseta. Código postal.<br><strong>Válido:</strong> moda, frecuencias.<br><strong>Inválido:</strong> promedio.</div>
     </div>
     <div class="scale-box sord">
       <div class="scale-label">Ordinal</div>
       <div class="scale-name">Ordenar</div>
-      <div class="scale-body">Indica posición relativa. No dice cuánto separa al 1° del 2°.<br><br><em>Ej: ranking de preferencia de restaurantes</em><br><br>Operación válida: mediana</div>
+      <div class="scale-body">Indica posición relativa. No dice cuánto separa al 1° del 2°. Las diferencias entre rangos no son comparables.</div>
+      <div class="scale-eg">Ranking de restaurantes. Clasificación socioeconómica.<br><strong>Válido:</strong> mediana, percentiles.<br><strong>Inválido:</strong> media aritmética.</div>
     </div>
     <div class="scale-box sint">
       <div class="scale-label">Intervalo</div>
       <div class="scale-name">Comparar distancias</div>
-      <div class="scale-body">Distancias iguales = cantidades iguales. Cero arbitrario.<br><br><em>Ej: temperatura en °C, escala Likert</em><br><br>Operación válida: media, SD, correlación</div>
+      <div class="scale-body">Distancias iguales = cantidades iguales. El cero es arbitrario: 0°C no es "ausencia de temperatura".</div>
+      <div class="scale-eg">Temperatura °C. Escalas de Likert. NPS.<br><strong>Válido:</strong> media, SD, correlación, regresión.<br><strong>Inválido:</strong> razones.</div>
     </div>
     <div class="scale-box sraz">
       <div class="scale-label">Razón</div>
       <div class="scale-name">Cero absoluto</div>
-      <div class="scale-body">Todas las propiedades anteriores + cero fijo real.<br><br><em>Ej: ventas, edad, cuota de mercado</em><br><br>Operación válida: razones, CV</div>
+      <div class="scale-body">Todas las propiedades anteriores + cero fijo y real. El doble de X realmente significa el doble.</div>
+      <div class="scale-eg">Ventas, cuota de mercado, edad, gasto mensual.<br><strong>Válido:</strong> todo — incluyendo razones y CV.</div>
     </div>
   </div>
-  <div class="piz">✏ Pizarrón: dibujar la pirámide de las cuatro escalas mostrando las propiedades que se suman en cada nivel (Figura 7.2)</div>
+  <div class="piz">✏ Pizarrón: pirámide (Figura 7.2) — propiedades acumuladas hacia arriba: clasificar → ordenar → distancias iguales → cero absoluto</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Errores frecuentes · minutos 38–45</div>
-  <div class="slide-h slide-h-white">El error de confundir el tipo de escala</div>
+  <div class="eyebrow eyebrow-light">Errores frecuentes</div>
+  <div class="slide-h slide-h-white">Consecuencias de confundir el tipo de escala</div>
   <table class="ref-table-dark" style="margin-top:8px;">
-    <thead><tr><th>Error</th><th>Qué está mal</th><th>Consecuencia</th></tr></thead>
+    <thead><tr><th>Error cometido</th><th>Por qué está mal</th><th>Consecuencia práctica</th></tr></thead>
     <tbody>
-      <tr><td>Calcular el promedio del número de camiseta de los jugadores</td><td>Escala nominal → el promedio no tiene significado</td><td>Conclusión sin sentido matemático</td></tr>
-      <tr><td>Decir que el 1° puesto es "el doble de bueno" que el 2°</td><td>Escala ordinal → no hay magnitud de diferencia</td><td>Sobreinterpretación del dato</td></tr>
-      <tr><td>Decir que 20°C es "el doble de caliente" que 10°C</td><td>Escala de intervalo → el cero es arbitrario</td><td>Razón matemáticamente inválida</td></tr>
-      <tr><td>Calcular ratio sobre una escala Likert de 1–5</td><td>Probable intervalo, no razón</td><td>Puede ser válido con precaución empírica</td></tr>
+      <tr><td>Calcular el promedio del número de camiseta de los jugadores</td><td>Nominal — los números no tienen magnitud ni orden</td><td>Conclusión matemáticamente sin sentido</td></tr>
+      <tr><td>Decir que el 1° puesto es "el doble de bueno" que el 2°</td><td>Ordinal — no hay información sobre la magnitud de la diferencia</td><td>Sobreinterpretación del dato</td></tr>
+      <tr><td>Decir que 20°C es "el doble de caliente" que 10°C</td><td>Intervalo — cero arbitrario, las razones no tienen sentido</td><td>Comparación matemáticamente inválida</td></tr>
+      <tr><td>Calcular razones en una escala Likert (ej: "el doble de satisfecho")</td><td>Intervalo — el 4 no es "el doble" del 2</td><td>Conclusión engañosa sobre magnitudes relativas</td></tr>
+      <tr><td>Comparar promedios de NPS entre Argentina y Brasil sin calibración</td><td>Inequivalencia cultural de la escala de 0–10</td><td>Diferencias espurias entre mercados</td></tr>
     </tbody>
   </table>
-  <div class="pause-box" style="margin-top:14px;">
-    <div class="pause-label">⏸ Pausa — volvemos al NPS</div>
-    <div class="pause-q">¿Cuál es ahora la respuesta: el NPS es una escala de intervalo o de razón? ¿Qué implica eso para el análisis?</div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Volvemos al NPS</div>
+    <div class="pause-q">¿El NPS es de intervalo o de razón? ¿Podemos calcular el promedio? ¿Tiene sentido decir que un NPS de 40 es "el doble de bueno" que un NPS de 20?</div>
   </div>
 </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 3: ESCALAS COMPARATIVAS -->
+<!-- COMPARATIVAS -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Bloque 3 · minutos 45–65</div>
+  <div class="sec-num">Sección 2</div>
   <div class="sec-title">Escalas<br>comparativas</div>
   <div class="sec-sub">Comparación pareada · Rangos ordenados · Suma constante</div>
 </div>
@@ -293,229 +275,303 @@ ul.bullets-white li::before { color:var(--accent); }
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Comparativas vs. no comparativas · minutos 45–50 · ✏ Figura 7.4 — dibujar en pizarrón</div>
-  <div class="slide-h">Comparativas: los objetos se evalúan entre sí</div>
-  <div class="two-col">
+  <div class="eyebrow">Comparativas vs. no comparativas · ✏ Figura 7.4 — dibujar en pizarrón</div>
+  <div class="slide-h">Dos familias de técnicas de escalamiento</div>
+  <div class="two-col" style="margin-bottom:12px;">
     <div class="col-box">
       <div class="col-label">Escalas comparativas</div>
-      <div class="col-body">El encuestado evalúa un objeto <strong>relativo a otro</strong>. "¿Preferís Coca o Pepsi?" Los datos solo tienen propiedades ordinales. También llamadas: escalas no métricas.</div>
+      <div class="col-body">El encuestado evalúa cada objeto <strong>en relación con otro</strong>. "¿Preferís Coca o Pepsi?" Los datos solo tienen propiedades ordinales. También llamadas: escalas <em>no métricas</em>.<br><br>Permiten saber <strong>qué</strong> se prefiere, no cuánto.</div>
     </div>
     <div class="col-box">
       <div class="col-label">Escalas no comparativas</div>
-      <div class="col-body">Cada objeto se evalúa <strong>independientemente</strong>. "¿Cuánto te gusta Coca en una escala de 1 a 7?" Datos de intervalo. También llamadas: escalas monádicas o métricas.</div>
+      <div class="col-body">Cada objeto se evalúa <strong>de forma independiente</strong>. "¿Cuánto te gusta Coca en una escala de 1 a 7?" Datos de intervalo. También llamadas: escalas <em>monádicas</em> o <em>métricas</em>.<br><br>Permiten saber <strong>cuánto</strong> gusta cada opción en términos absolutos.</div>
     </div>
   </div>
-  <div class="piz" style="margin-top:14px;">✏ Pizarrón: dibujar el árbol de la Figura 7.4 — Clasificación de técnicas de escalamiento</div>
+  <div class="callout">
+    <strong>Regla de selección:</strong> si necesitás saber <em>cuál</em> prefieren → comparativa. Si necesitás saber <em>cuánto</em> les gusta cada opción en términos absolutos → no comparativa. La elección afecta directamente qué análisis estadístico es legítimo.
+  </div>
+  <div class="piz">✏ Pizarrón: árbol Figura 7.4 — Comparativas (pareada / rangos / suma constante) vs. No comparativas (continua / por reactivos: Likert, diferencial semántico, Stapel)</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Técnicas comparativas · minutos 50–65</div>
-  <div class="slide-h">Las tres técnicas comparativas</div>
+  <div class="eyebrow">Las tres técnicas comparativas</div>
+  <div class="slide-h">Cuándo y cómo usarlas</div>
   <table class="ref-table">
-    <thead><tr><th>Técnica</th><th>Funcionamiento</th><th>Cuándo</th><th>Limitación</th></tr></thead>
+    <thead><tr><th>Técnica</th><th>Cómo funciona</th><th>Cuándo usarla</th><th>Limitación clave</th></tr></thead>
     <tbody>
-      <tr><td><strong>Comparación pareada</strong></td><td>Se presentan 2 objetos; se elige el preferido</td><td>Pocas marcas (≤7)</td><td>n(n−1)/2 pares con muchas marcas</td></tr>
-      <tr><td><strong>Rangos ordenados</strong></td><td>Se ordena de mejor a peor</td><td>Hasta ~10 objetos</td><td>No dice cuánto separa posiciones</td></tr>
-      <tr><td><strong>Suma constante</strong></td><td>Se distribuyen 100 puntos entre objetos</td><td>Importancia relativa de atributos</td><td>Difícil con muchos atributos</td></tr>
+      <tr><td><strong>Comparación pareada</strong></td><td>Se presentan 2 objetos; el encuestado elige cuál prefiere. Se repite para todos los pares posibles.</td><td>Pocas marcas o atributos (≤7). Cuando se quiere preferencia directa sin ambigüedad.</td><td>Con n objetos se necesitan n(n−1)/2 pares. Con 10 marcas: 45 comparaciones. Impráctico a escala.</td></tr>
+      <tr><td><strong>Rangos ordenados</strong></td><td>El encuestado ordena todos los objetos de mejor a peor en una sola pregunta.</td><td>Hasta ~10 objetos. Rankings de atributos de producto o marcas en una categoría.</td><td>Solo posición relativa. No sabemos si la diferencia entre 1° y 2° es grande o pequeña.</td></tr>
+      <tr><td><strong>Suma constante</strong></td><td>Se distribuyen 100 puntos entre los objetos según preferencia o importancia relativa.</td><td>Medir importancia relativa de atributos (precio, calidad, servicio, marca).</td><td>Cognitivamente exigente con más de 6–7 atributos. Los puntajes deben sumar 100.</td></tr>
     </tbody>
   </table>
-  <div class="latam-box">
-    <div class="latam-label">🌎 LatAm — Suma constante en banca</div>
-    <div class="latam-text">Santander Uruguay y BBVA Montevideo usan la suma constante para medir qué atributos pesan más en la elección de banco principal: "Distribuí 100 puntos entre: tasa de interés, comisiones, atención, app digital, cercanía de sucursal."</div>
+  <div class="latam-box" style="margin-top:10px;">
+    <div class="latam-label">🌎 LatAm — banca y servicios públicos</div>
+    <div class="latam-text">Santander Uruguay y BBVA Montevideo usan suma constante para medir qué atributos pesan más en la elección de banco. El INE usa rangos ordenados en encuestas de satisfacción con servicios públicos: tiempo de espera, amabilidad del personal, resolución efectiva, accesibilidad.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso: comparación pareada digital</div>
+  <div class="slide-h slide-h-white">Spotify y la calibración de algoritmos de recomendación</div>
+  <ul class="bullets bullets-white" style="margin-bottom:14px;">
+    <li>Para diseñar <em>Discover Weekly</em>, Spotify presentó a paneles de usuarios pares de canciones: "¿Cuál preferirías encontrar en una playlist de descubrimiento?"</li>
+    <li>Con miles de pares evaluados, construyeron un modelo de preferencias que alimentó el algoritmo. La lógica es exactamente la comparación pareada de Malhotra — ejecutada a escala digital.</li>
+    <li>El resultado: el algoritmo aprendió a distinguir entre canciones que los usuarios quieren <em>descubrir</em> y canciones que ya conocen bien — una distinción que una encuesta de satisfacción genérica no habría podido capturar.</li>
+    <li>La ventaja de la comparación pareada digital: puede escalar con A/B testing. La desventaja persiste: igualmente requiere que el par sea bien construido para que la elección sea informativa.</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta para clase</div>
+    <div class="pause-q">Si una empresa de streaming quiere saber qué género prefieren sus usuarios latinoamericanos entre 8 géneros posibles, ¿cuántas comparaciones pareadas necesita? ¿Qué técnica recomendarían en su lugar?</div>
   </div>
 </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 4: ESCALAS NO COMPARATIVAS -->
+<!-- NO COMPARATIVAS -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Bloque 4 · minutos 65–105</div>
+  <div class="sec-num">Sección 3</div>
   <div class="sec-title">Escalas no<br>comparativas</div>
   <div class="sec-sub">Likert · Diferencial semántico · Stapel · Multi-reactivos</div>
 </div>
 </section>
 
-<!-- LIKERT -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Escala de Likert · minutos 65–78</div>
+  <div class="eyebrow">Escala de Likert</div>
   <div class="slide-h">La escala más usada en investigación de mercados</div>
   <div class="def-block" style="margin-bottom:12px;">
-    <div class="def-term-label">Definición — Malhotra 2016</div>
-    <div class="def-text">Los encuestados indican su grado de <strong>acuerdo o desacuerdo</strong> con afirmaciones sobre el objeto de interés. Se suman los puntajes para obtener una puntuación total. Generalmente 5 categorías.</div>
+    <div class="def-term-label">Definición — Malhotra</div>
+    <div class="def-text">Los encuestados indican su grado de <strong>acuerdo o desacuerdo</strong> con una serie de afirmaciones sobre el objeto de interés. Se suman los puntajes para obtener una puntuación total del constructo. Generalmente 5 categorías.</div>
   </div>
-  <div style="font-family:'DM Mono',monospace; font-size:12px; background:white; border:1px solid var(--border); padding:14px; border-radius:6px; line-height:2.2; margin-bottom:10px;">
-    "Los precios de Mercado Libre son justos"<br>
-    [1] Totalmente en desacuerdo &nbsp; [2] En desacuerdo &nbsp; [3] Neutro &nbsp; [4] De acuerdo &nbsp; [5] Totalmente de acuerdo
+  <div style="font-family:'DM Mono',monospace; font-size:12px; background:white; border:1px solid var(--border); padding:14px; border-radius:6px; line-height:2.3; margin-bottom:10px; color:#1a1a1a;">
+    "Los precios de Mercado Libre son justos para el valor que ofrecen"<br>
+    [1] Totalmente en desacuerdo &nbsp;&nbsp; [2] En desacuerdo &nbsp;&nbsp; [3] Neutro &nbsp;&nbsp; [4] De acuerdo &nbsp;&nbsp; [5] Totalmente de acuerdo
   </div>
-  <div class="pause-box">
-    <div class="pause-label">⏸ Debate — ¿5, 7 o 10 puntos?</div>
-    <div class="pause-q">En Uruguay, donde la escala educativa va de 1 a 12, ¿cómo creen que responden los encuestados a una escala de 1 a 10? ¿Hay sesgo cultural?</div>
-  </div>
+  <ul class="bullets">
+    <li><strong>Ventaja principal:</strong> fácil de construir y administrar. Los encuestados la entienden sin instrucciones extensas.</li>
+    <li><strong>Se asume como de intervalo:</strong> esto habilita medias, desviaciones estándar, correlaciones de Pearson y regresión. El debate psicométrico sobre si es ordinal o de intervalo está activo, pero la convención en investigación de mercados es tratarla como intervalo.</li>
+    <li><strong>Reactivos negativos:</strong> deben invertirse antes de sumar para que todos los ítems apunten en la misma dirección.</li>
+  </ul>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Diseño de Likert · minutos 78–85</div>
-  <div class="slide-h slide-h-white">¿Cuántas categorías? ¿Par o impar?</div>
+  <div class="eyebrow eyebrow-light">Diseño de la escala de Likert</div>
+  <div class="slide-h slide-h-white">Decisiones clave: número de categorías y punto neutral</div>
+  <div class="three-col" style="margin-bottom:14px;">
+    <div class="col-box-dark">
+      <div class="col-label-w">5 puntos</div>
+      <div class="col-body-w">Simple. Ideal para encuestas largas o respondentes con menor escolaridad. Menor discriminación entre posiciones adyacentes.</div>
+    </div>
+    <div class="col-box-dark">
+      <div class="col-label-w">7 puntos</div>
+      <div class="col-body-w">Más discriminación entre actitudes. Recomendada por la literatura para constructos actitudinales complejos como lealtad, satisfacción o confianza en la marca.</div>
+    </div>
+    <div class="col-box-dark">
+      <div class="col-label-w">10 puntos</div>
+      <div class="col-body-w">Familiar (similar a notas escolares). Pero puede generar ambigüedad en los puntos intermedios: ¿qué diferencia hay entre "7" y "8" en la mente del encuestado?</div>
+    </div>
+  </div>
   <ul class="bullets bullets-white">
-    <li><strong>5 puntos:</strong> simple, ideal para encuestas largas o públicos con menor escolaridad</li>
-    <li><strong>7 puntos:</strong> más discriminación; recomendada para constructos actitudinales complejos</li>
-    <li><strong>10 puntos:</strong> familiar (similar a notas escolares) pero introduce ambigüedad en el centro</li>
-    <li><strong>Par (sin punto medio):</strong> fuerza posición cuando no se quiere permitir neutralidad</li>
-    <li><strong>Impar (con punto medio):</strong> válido cuando existe la posibilidad real de indiferencia</li>
+    <li><strong style="color:white;">Par (sin punto medio):</strong> fuerza posición cuando el investigador considera que no hay indiferentes genuinos en el tema.</li>
+    <li><strong style="color:white;">Impar (con punto medio):</strong> permite que quienes genuinamente no tienen opinión formada lo expresen. Recomendada cuando la neutralidad es una respuesta válida y esperada.</li>
   </ul>
-  <div class="latam-box">
-    <div class="latam-label">🌎 Uruguay — Antel y OSE</div>
-    <div class="latam-text">En encuestas de satisfacción con escala 1–10, investigadores locales reportan compresión hacia 7–8 entre encuestados más educados, posiblemente por la escala educativa 1–12 donde el 6 es "el mínimo aceptable" y el 12 es "perfección inalcanzable".</div>
+  <div class="latam-box" style="margin-top:10px;">
+    <div class="latam-label">🌎 Uruguay — sesgo de escala educativa</div>
+    <div class="latam-text">En escalas 1–10, la escala educativa 1–12 hace que el 6 sea mentalmente "el mínimo aceptable" y el 10 "perfección inalcanzable". Resultado: compresión sistemática de respuestas hacia 7–8 que no refleja diferencias reales de satisfacción.</div>
   </div>
 </div>
 </section>
 
-<!-- DIFERENCIAL SEMÁNTICO -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Diferencial semántico · minutos 85–95</div>
+  <div class="eyebrow">Escala de diferencial semántico</div>
   <div class="slide-h">Ideal para imagen de marca y posicionamiento</div>
-  <div class="def-block" style="margin-bottom:12px;">
-    <div class="def-term-label">Definición — Malhotra 2016</div>
-    <div class="def-text">Escala de <strong>7 puntos</strong> cuyos extremos son <strong>adjetivos bipolares</strong>. Se analiza mediante perfiles de marcas. Los adjetivos alternan de lado para evitar sesgo de posición.</div>
+  <div class="def-block" style="margin-bottom:10px;">
+    <div class="def-term-label">Definición — Malhotra</div>
+    <div class="def-text">Escala de <strong>7 puntos</strong> cuyos extremos son <strong>adjetivos bipolares</strong> (opuestos semánticos). Los adjetivos negativos alternan de lado para evitar sesgo de posición. Se analiza con <em>análisis de perfil</em>: media de cada reactivo graficada para comparar marcas.</div>
   </div>
-  <div style="font-family:'DM Mono',monospace; font-size:11.5px; background:white; border:1px solid var(--border); padding:12px; border-radius:6px; line-height:2.1; margin-bottom:10px;">
-    Natural &nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp; Artificial<br>
-    Accesible &nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp; Exclusiva<br>
-    Moderna &nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp; Tradicional
+  <div style="font-family:'DM Mono',monospace; font-size:11.5px; background:white; border:1px solid var(--border); padding:12px; border-radius:6px; line-height:2.3; margin-bottom:10px; color:#1a1a1a;">
+    Natural &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Artificial<br>
+    Accesible &nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Exclusiva<br>
+    Moderna &nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tradicional<br>
+    Confiable &nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Riesgosa
   </div>
-  <div class="piz">✏ Pizarrón: dibujar el análisis de perfil de Dove vs. Avon con los adjetivos anteriores — dos líneas superpuestas que se cruzan en distintos puntos</div>
+  <ul class="bullets">
+    <li><strong>Usos principales:</strong> comparación de marcas, imagen corporativa, posicionamiento percibido, desarrollo de estrategia publicitaria.</li>
+    <li><strong>Análisis de perfil:</strong> al graficar las medias de dos marcas en el mismo gráfico, se visualizan inmediatamente las dimensiones de diferenciación y similitud.</li>
+  </ul>
+  <div class="piz">✏ Pizarrón: dibujar el análisis de perfil — dos líneas superpuestas (Marca A vs. Marca B) que se cruzan en distintos atributos, mostrando dónde se diferencia el posicionamiento</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Caso diferencial semántico · minutos 93–100</div>
-  <div class="slide-h slide-h-white">Nubank vs. Banco República: imagen percibida</div>
-  <div style="font-family:'DM Mono',monospace; font-size:11px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); padding:12px; border-radius:6px; line-height:2.0; margin-bottom:12px; color:rgba(255,255,255,0.8);">
-    Burocrático &nbsp;&nbsp; 1 — 2 — 3 — [4] — 5 — 6 — 7 &nbsp;&nbsp; Ágil<br>
-    Impersonal &nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — [6] — 7 &nbsp;&nbsp; Cercano<br>
-    Costoso &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — [7] &nbsp;&nbsp; Gratuito<br>
-    Físico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — [7] &nbsp;&nbsp; Digital
+  <div class="eyebrow eyebrow-light">Caso: diferencial semántico en LATAM</div>
+  <div class="slide-h slide-h-white">Nubank vs. banco tradicional: imagen percibida en Uruguay</div>
+  <div style="font-family:'DM Mono',monospace; font-size:11.5px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); padding:14px; border-radius:6px; line-height:2.3; margin-bottom:14px; color:rgba(255,255,255,0.95);">
+    Burocrático &nbsp;&nbsp;&nbsp; 1 — 2 — [3] — 4 — 5 — 6 — 7 &nbsp;&nbsp;&nbsp; Ágil<br>
+    Impersonal &nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — [5] — 6 — 7 &nbsp;&nbsp;&nbsp; Cercano<br>
+    Costoso &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — [7] &nbsp;&nbsp;&nbsp; Gratuito<br>
+    Físico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 — 2 — 3 — 4 — 5 — 6 — [7] &nbsp;&nbsp;&nbsp; Digital
   </div>
   <ul class="bullets bullets-white">
-    <li>El atributo "físico/digital" fue el más discriminante entre segmentos etarios (18–35 vs. 35+)</li>
-    <li>En mercados con alta bancarización reciente, "Gratuito" es el atributo con mayor diferenciación percibida de Nubank</li>
-    <li>El análisis de perfil permite ver exactamente en qué dimensiones se diferencian las marcas</li>
+    <li>[ ] indica la posición media percibida de Nubank en el segmento 18–35 años.</li>
+    <li><strong style="color:white;">"Físico/Digital"</strong> es el atributo más discriminante entre segmentos etarios: mayores de 50 valoran más lo físico; menores de 35 prefieren lo digital.</li>
+    <li><strong style="color:white;">"Gratuito"</strong> es la dimensión con mayor diferenciación percibida de Nubank respecto a bancos tradicionales en mercados con bancarización reciente.</li>
+    <li>El análisis de perfil permite al equipo de marketing visualizar en qué dimensiones comunicar — y cuáles no son batallas que valga dar.</li>
   </ul>
 </div>
 </section>
 
-<!-- STAPEL -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Escala de Stapel · minutos 100–105</div>
-  <div class="slide-h">Un adjetivo, diez categorías, sin punto neutral</div>
-  <div class="two-col">
+  <div class="eyebrow">Escala de Stapel</div>
+  <div class="slide-h">Un solo adjetivo, diez categorías, sin punto neutral</div>
+  <div class="two-col" style="margin-bottom:12px;">
     <div class="def-block">
-      <div class="def-term-label">Stapel — Malhotra 2016</div>
-      <div class="def-text">Escala <strong>unipolar</strong>, −5 a +5, sin cero (sin punto neutral). Un solo adjetivo. Cuanto más positivo, más precisa la descripción. Se presenta verticalmente. No requiere prueba de bipolaridad.</div>
+      <div class="def-term-label">Definición — Malhotra</div>
+      <div class="def-text">Escala <strong>unipolar</strong> de −5 a +5, sin cero. Un solo adjetivo. Cuanto más positivo, más precisa es la descripción del objeto. Se presenta verticalmente. No requiere prueba previa de bipolaridad de adjetivos.</div>
     </div>
     <div class="col-box">
       <div class="col-label">¿Cuándo elegir Stapel?</div>
       <div class="col-body">
-        <strong>Ventaja:</strong> se puede administrar por teléfono o voz (WhatsApp, IVR).<br><br>
-        <strong>Útil cuando:</strong> es difícil construir pares bipolares válidos, o cuando el encuestado necesita escuchar (no leer) la escala.<br><br>
-        <strong>Desventaja:</strong> algunos encuestados la encuentran confusa.
+        <strong>Ventaja clave:</strong> se puede administrar por teléfono o audio (WhatsApp, IVR) — no necesita que el encuestado vea la escala.<br><br>
+        <strong>Útil cuando:</strong> es difícil construir pares bipolares válidos, o cuando la encuesta es verbal.<br><br>
+        <strong>Produce:</strong> resultados similares al diferencial semántico.<br><br>
+        <strong>Desventaja:</strong> algunos encuestados la encuentran confusa. Es la menos usada de las tres.
       </div>
     </div>
   </div>
   <div class="latam-box">
-    <div class="latam-label">🌎 LatAm — Encuestas por voz</div>
-    <div class="latam-text">En zonas rurales de Brasil y México con baja alfabetización, encuestas IVR y WhatsApp audio usan variantes de Stapel: "Del +5 al -5, ¿qué tan bien describe la palabra RÁPIDO al servicio que recibiste?"</div>
+    <div class="latam-label">🌎 LatAm — encuestas por voz</div>
+    <div class="latam-text">En zonas rurales de Brasil y México con baja alfabetización, las encuestas IVR y WhatsApp audio crecen como canal. La Stapel verbal —"del +5 al −5, ¿qué tan bien describe RÁPIDO al servicio?"— es comprensible por audio donde el diferencial semántico no lo es.</div>
   </div>
-</div>
-</section>
-
-<!-- MULTI-REACTIVOS -->
-<section>
-<div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Multi-reactivos · minutos 105–112</div>
-  <div class="slide-h slide-h-white">¿Por qué un solo reactivo no alcanza?</div>
-  <ul class="bullets bullets-white">
-    <li><strong>Un solo reactivo</strong> captura una sola faceta de un constructo complejo</li>
-    <li><strong>"Lealtad"</strong> no puede medirse con una sola pregunta — tiene dimensiones actitudinales y comportamentales</li>
-    <li><strong>Escalas multi-reactivo:</strong> múltiples ítems se combinan en una puntuación total que mide mejor el constructo</li>
-    <li><strong>Ejemplo Malhotra:</strong> 7 reactivos Likert para "actitud hacia McDonald's" — calidad, servicio, precio, conveniencia, etc.</li>
-    <li><strong>Regla práctica:</strong> siempre que sea posible, usar escalas multi-reactivo. Miden mejor que un reactivo solo.</li>
-  </ul>
-  <div class="callout" style="margin-top:10px;">
-    <strong>NPS como caso límite:</strong> es un reactivo único para un constructo complejo (lealtad). Por eso su validez empírica es debatida en la literatura.
-  </div>
-</div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 5: CONFIABILIDAD Y VALIDEZ -->
-<!-- ══════════════════════════════════════════════════════════ -->
-<section>
-<div class="slide s-section">
-  <div class="sec-num">Bloque 5 · minutos 112–132</div>
-  <div class="sec-title">Evaluación:<br>Confiabilidad<br>y validez</div>
-  <div class="sec-sub">Malhotra pp. 201–208</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Errores de medición · minutos 112–122 · ✏ Figura 7.7 — dibujar en pizarrón</div>
-  <div class="slide-h">Dos tipos de error — dos problemas distintos</div>
-  <div class="two-col">
-    <div class="col-box">
-      <div class="col-label">Error sistemático</div>
-      <div class="col-body"><strong>Constante.</strong> Afecta siempre de la misma manera. Ejemplos: escala mal diseñada, orden de preguntas que genera sesgo, reactivos ambiguos.<br><br>Afecta la <strong>VALIDEZ</strong>.</div>
-    </div>
-    <div class="col-box">
-      <div class="col-label">Error aleatorio</div>
-      <div class="col-body"><strong>Variable.</strong> Cambia cada vez que se mide. Ejemplos: estado emocional del encuestado, fatiga, ruido ambiental, distracciones.<br><br>Afecta la <strong>CONFIABILIDAD</strong>.</div>
-    </div>
-  </div>
-  <div class="def-block" style="margin-top:12px;">
-    <div class="def-term-label">Relación fundamental</div>
-    <div class="def-text"><strong>Sin confiabilidad → sin validez posible.</strong> Pero confiabilidad no garantiza validez: puedo medir consistentemente algo que no es lo que quiero medir.</div>
-  </div>
-  <div class="piz">✏ Pizarrón: los tres círculos concéntricos de la Figura 7.7 — puntuación observada = puntuación verdadera + error sistemático + error aleatorio</div>
+  <div class="eyebrow">Comparación de las tres escalas no comparativas</div>
+  <div class="slide-h">¿Cuándo usar Likert, diferencial semántico o Stapel?</div>
+  <table class="ref-table">
+    <thead><tr><th>Dimensión</th><th>Likert</th><th>Diferencial semántico</th><th>Stapel</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tipo de respuesta</strong></td><td>Acuerdo/desacuerdo con afirmaciones</td><td>Posición entre adjetivos bipolares</td><td>Precisión de un solo adjetivo</td></tr>
+      <tr><td><strong>Puntos estándar</strong></td><td>5 o 7</td><td>7</td><td>10 (−5 a +5)</td></tr>
+      <tr><td><strong>Uso principal</strong></td><td>Actitudes, satisfacción, constructos multidimensionales</td><td>Imagen de marca, posicionamiento</td><td>Descripción de atributos, encuestas verbales</td></tr>
+      <tr><td><strong>Análisis típico</strong></td><td>Suma de reactivos, análisis factorial</td><td>Análisis de perfil, media por reactivo</td><td>Igual que diferencial semántico</td></tr>
+      <tr><td><strong>Administración</strong></td><td>Escrita, online</td><td>Requiere ver la escala</td><td>Escrita o verbal (teléfono, audio)</td></tr>
+    </tbody>
+  </table>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Confiabilidad y validez · minutos 122–132</div>
-  <div class="slide-h slide-h-white">Cómo evaluarlas en la práctica</div>
-  <table class="ref-table-dark">
-    <thead><tr><th>Concepto</th><th>Qué mide</th><th>Cómo se evalúa</th><th>Indicador típico</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Confiabilidad</strong></td><td>Libre de error aleatorio</td><td>Test-retest, confiabilidad entre evaluadores, consistencia interna</td><td>Alfa de Cronbach ≥ 0.70</td></tr>
-      <tr><td><strong>Validez de contenido</strong></td><td>¿Cubre el constructo?</td><td>Revisión de expertos, literatura</td><td>Juicio experto</td></tr>
-      <tr><td><strong>Validez de criterio</strong></td><td>¿Predice lo que debe predecir?</td><td>Correlación con medida externa</td><td>Correlación significativa</td></tr>
-      <tr><td><strong>Validez de constructo</strong></td><td>¿Mide el constructo correcto?</td><td>Análisis factorial, validez convergente/discriminante</td><td>Cargas factoriales, AVE</td></tr>
-    </tbody>
-  </table>
-  <div class="pause-box" style="margin-top:10px;">
-    <div class="pause-label">⏸ Caso diagnóstico</div>
-    <div class="pause-q">Una escala de lealtad obtiene alfa = 0.82 en Chile y alfa = 0.61 en Argentina para la misma muestra de supermercados. ¿Qué puede estar pasando? ¿Es un problema de confiabilidad o de validez?</div>
+  <div class="eyebrow eyebrow-light">Escalas de reactivos múltiples</div>
+  <div class="slide-h slide-h-white">Por qué un solo reactivo no es suficiente para medir constructos complejos</div>
+  <ul class="bullets bullets-white" style="margin-bottom:14px;">
+    <li>Un constructo como <strong style="color:white;">lealtad</strong>, <strong style="color:white;">satisfacción</strong> o <strong style="color:white;">valor percibido</strong> tiene múltiples dimensiones que un solo reactivo no puede capturar.</li>
+    <li>Las escalas multi-reactivo combinan varios ítems en una puntuación total. La suma o promedio de los ítems es la medición del constructo.</li>
+    <li><strong style="color:white;">Ejemplo Malhotra:</strong> 7 reactivos de Likert para medir "actitud hacia McDonald's" — calidad de comida, servicio, precio, conveniencia, limpieza, variedad, ubicación. Cada uno captura una dimensión distinta.</li>
+    <li><strong style="color:white;">Regla central:</strong> siempre que sea posible, usar escalas multi-reactivo. Permiten mayor exactitud — y esa exactitud se mide con confiabilidad y validez.</li>
+  </ul>
+  <div class="callout">
+    <strong>NPS como caso límite:</strong> un reactivo único para un constructo complejo. Keiningham et al. (2007) muestran que el NPS no predice mejor el crecimiento de ingresos que otras métricas multi-reactivo de satisfacción.
   </div>
 </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!-- BLOQUE 6: SOCIAL MEDIA, IA, LATAM, ÉTICA -->
+<!-- CONFIABILIDAD Y VALIDEZ -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Bloque 6 · minutos 132–148</div>
+  <div class="sec-num">Sección 4</div>
+  <div class="sec-title">Confiabilidad<br>y validez</div>
+  <div class="sec-sub">Evaluación de escalas de reactivos múltiples</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Errores de medición · ✏ Figura 7.7 — dibujar en pizarrón</div>
+  <div class="slide-h">Dos tipos de error — dos problemas distintos</div>
+  <div class="two-col" style="margin-bottom:12px;">
+    <div class="col-box">
+      <div class="col-label">Error sistemático</div>
+      <div class="col-body"><strong>Constante.</strong> Afecta la medición siempre de la misma manera. Desplaza todas las mediciones en la misma dirección.<br><br><strong>Ejemplos:</strong> escala mal diseñada, orden de preguntas que genera sesgo, reactivos ambiguos, instrucciones confusas.<br><br>Afecta la <strong>VALIDEZ</strong>: mide algo diferente a lo que se quiere medir.</div>
+    </div>
+    <div class="col-box">
+      <div class="col-label">Error aleatorio</div>
+      <div class="col-body"><strong>Variable.</strong> Cambia cada vez que se mide. No tiene dirección sistemática.<br><br><strong>Ejemplos:</strong> estado emocional del encuestado, fatiga a mitad del cuestionario, ruido ambiental durante la entrevista.<br><br>Afecta la <strong>CONFIABILIDAD</strong>: la medición es imprecisa e inestable.</div>
+    </div>
+  </div>
+  <div class="def-block">
+    <div class="def-term-label">Relación fundamental — Malhotra</div>
+    <div class="def-text"><strong>Sin confiabilidad → sin validez posible.</strong> Pero confiabilidad no garantiza validez: puedo medir consistentemente algo que no es lo que quiero medir. Un termómetro que siempre marca 2°C de más es confiable, pero no válido.</div>
+  </div>
+  <div class="piz">✏ Pizarrón: tres círculos concéntricos (Figura 7.7) — puntuación observada → puntuación verdadera + error sistemático → puntuación verdadera</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Confiabilidad</div>
+  <div class="slide-h">Grado en que la medición está libre de error aleatorio</div>
+  <div class="def-block" style="margin-bottom:12px;">
+    <div class="def-term-label">Alfa de Cronbach — indicador estándar de consistencia interna</div>
+    <div class="def-text">Mide qué tan correlacionados están los reactivos entre sí. Si todos miden el mismo constructo latente, deberían correlacionar alto. Umbral aceptable en investigación de mercados: <strong>α ≥ 0.70</strong>.</div>
+  </div>
+  <table class="ref-table">
+    <thead><tr><th>Rango de alfa</th><th>Interpretación</th><th>Acción recomendada</th></tr></thead>
+    <tbody>
+      <tr><td><strong>α ≥ 0.90</strong></td><td>Muy alta</td><td>Cuidado: puede indicar redundancia entre reactivos. Evaluar si algunos ítems son duplicados.</td></tr>
+      <tr><td><strong>0.70 ≤ α &lt; 0.90</strong></td><td>Aceptable</td><td>Adecuada para investigación de mercados. Continuar con evaluación de validez.</td></tr>
+      <tr><td><strong>α &lt; 0.70</strong></td><td>Insuficiente</td><td>Revisar y reescribir reactivos. No es válido concluir sobre el constructo con esta escala.</td></tr>
+    </tbody>
+  </table>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">⏸ Caso diagnóstico</div>
+    <div class="pause-q">Una escala de lealtad a supermercados obtiene α = 0.82 en Santiago y α = 0.61 en Buenos Aires para muestras equivalentes. ¿Qué puede estar pasando? ¿Es un problema de la escala o del contexto de mercado?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Tipos de validez</div>
+  <div class="slide-h slide-h-white">Cómo evaluar si la escala mide lo que debe medir</div>
+  <table class="ref-table-dark" style="margin-bottom:12px;">
+    <thead><tr><th>Tipo</th><th>Pregunta que responde</th><th>Cómo se evalúa</th><th>Indicador</th></tr></thead>
+    <tbody>
+      <tr><td><strong>De contenido</strong></td><td>¿Los reactivos cubren todas las dimensiones relevantes del constructo?</td><td>Revisión por expertos, revisión de literatura</td><td>Consenso de panel experto</td></tr>
+      <tr><td><strong>De criterio</strong></td><td>¿La escala predice lo que debería predecir?</td><td>Correlación con medida externa conocida o futura</td><td>Correlación significativa</td></tr>
+      <tr><td><strong>De constructo</strong></td><td>¿La escala se comporta como la teoría predice?</td><td>Análisis factorial, validez convergente y discriminante</td><td>Cargas factoriales, AVE &gt; 0.5</td></tr>
+    </tbody>
+  </table>
+  <ul class="bullets bullets-white">
+    <li>Una escala puede ser <strong style="color:white;">confiable pero no válida</strong>: mide consistentemente el constructo equivocado.</li>
+    <li>Una escala <strong style="color:white;">válida debe ser confiable</strong>: no puede medir correctamente algo de forma inconsistente.</li>
+    <li>En la práctica mínima: alfa de Cronbach para confiabilidad + correlación con comportamiento observable para validez de criterio.</li>
+  </ul>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- SOCIAL MEDIA, IA, LATAM, ÉTICA -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 5</div>
   <div class="sec-title">Social media,<br>IA, LatAm<br>y ética</div>
   <div class="sec-sub">El capítulo en contexto actual</div>
 </div>
@@ -523,44 +579,59 @@ ul.bullets-white li::before { color:var(--accent); }
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Escalas digitales · minutos 132–140</div>
-  <div class="slide-h">Las escalas nativas digitales: ¿qué tipo de escala son?</div>
+  <div class="eyebrow">Escalas nativas digitales</div>
+  <div class="slide-h">¿Qué tipo de escala son las estrellas de Mercado Libre?</div>
   <table class="ref-table">
-    <thead><tr><th>Escala digital</th><th>Plataforma</th><th>Tipo</th><th>Problema metodológico</th></tr></thead>
+    <thead><tr><th>Escala digital</th><th>Plataforma</th><th>Tipo de escala</th><th>Problema metodológico</th></tr></thead>
     <tbody>
-      <tr><td>Estrellas 1–5</td><td>Amazon, Mercado Libre</td><td>Ordinal (¿intervalo?)</td><td>Sesgo de extremos: mayoría son 1 o 5</td></tr>
-      <tr><td>Pulgar arriba/abajo</td><td>YouTube, Netflix</td><td>Nominal dicotómica</td><td>Pierde información de grado</td></tr>
-      <tr><td>Emojis de reacción</td><td>Facebook, LinkedIn</td><td>Ordinal nominal</td><td>El orden entre emojis es ambiguo</td></tr>
-      <tr><td>Análisis de sentimientos IA</td><td>Reviews, Twitter/X</td><td>Cuasi-ordinal</td><td>Validez cultural: el sarcasmo, el lunfardo</td></tr>
+      <tr><td><strong>Estrellas 1–5</strong></td><td>Amazon, Mercado Libre, Google Maps</td><td>Ordinal (¿intervalo?)</td><td>Sesgo de extremos: distribución bimodal — mayoría son 1 o 5. Las categorías 2–4 son rarísimas en la práctica real.</td></tr>
+      <tr><td><strong>Pulgar arriba/abajo</strong></td><td>YouTube, Netflix</td><td>Nominal dicotómica</td><td>Pierde toda información de grado. No distingue entre "me gustó mucho" y "me gustó un poco".</td></tr>
+      <tr><td><strong>Emojis de reacción</strong></td><td>Facebook, LinkedIn</td><td>Ordinal nominal</td><td>El orden entre emojis (❤️ vs. 😮 vs. 😢) no es claro ni universalmente compartido entre culturas.</td></tr>
+      <tr><td><strong>Score de sentimientos IA</strong></td><td>Reviews, redes sociales</td><td>Cuasi-ordinal</td><td>Validez cultural: el sarcasmo, el lunfardo y el coloquial brasileño generan errores sistemáticos en modelos entrenados en inglés.</td></tr>
     </tbody>
   </table>
-  <div class="callout">
-    <strong>Distinción clave:</strong> el análisis de sentimientos con IA es <em>procesamiento de datos cualitativos a escala</em>, no investigación de actitudes. No reemplaza a las escalas — las complementa.
+  <div class="callout" style="margin-top:8px;">
+    <strong>Distinción clave:</strong> el análisis de sentimientos con IA es <em>procesamiento de datos cualitativos a escala</em>. Complementa las escalas — no las reemplaza.
   </div>
 </div>
 </section>
 
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">LATAM y ética · minutos 140–148</div>
-  <div class="slide-h slide-h-white">Tres sesgos y tres dilemas éticos</div>
-  <div class="two-col">
-    <div class="col-box">
-      <div class="col-label">Sesgos culturales LATAM</div>
-      <div class="col-body-w" style="color:#ddd;">
-        <strong style="color:white;">Aquiescencia:</strong> responder sí independientemente del contenido. Más pronunciado con menor educación.<br><br>
-        <strong style="color:white;">Sesgo de extremos:</strong> usar solo 1 o 5. Documentado en Brasil y México.<br><br>
-        <strong style="color:white;">Deseo social:</strong> decir lo que el entrevistador quiere. Más frecuente en entrevistas cara a cara.
-      </div>
+  <div class="eyebrow eyebrow-light">Sesgos culturales en LATAM</div>
+  <div class="slide-h slide-h-white">Tres sesgos que afectan la medición en América Latina</div>
+  <div class="three-col" style="margin-bottom:14px;">
+    <div class="col-box-dark">
+      <div class="col-label-w">Aquiescencia</div>
+      <div class="col-body-w">Tendencia a responder afirmativamente o con valores altos independientemente del contenido. Más pronunciada con menor nivel educativo. Infla artificialmente los promedios de escalas de Likert.</div>
     </div>
-    <div class="col-box">
-      <div class="col-label">Dilemas éticos</div>
-      <div class="col-body-w" style="color:#ddd;">
-        <strong style="color:white;">Escala trucada:</strong> todas las opciones son positivas para garantizar resultados favorables al cliente.<br><br>
-        <strong style="color:white;">Sin consentimiento:</strong> inferir actitudes del comportamiento digital sin informar al usuario (LGPD, Ley 18.331 UY, Ley 25.326 AR).<br><br>
-        <strong style="color:white;">Reactivo único como multi:</strong> reportar NPS como medición completa de lealtad.
-      </div>
+    <div class="col-box-dark">
+      <div class="col-label-w">Sesgo de extremos</div>
+      <div class="col-body-w">Tendencia a usar solo las categorías extremas: 1 o 5. Documentado en Brasil y México. Produce distribuciones bimodales que no reflejan diferencias reales de actitud entre satisfacción media y alta.</div>
     </div>
+    <div class="col-box-dark">
+      <div class="col-label-w">Deseo social</div>
+      <div class="col-body-w">Tendencia a responder lo que el entrevistador parece querer escuchar. Más frecuente en entrevistas cara a cara en contextos con alta distancia de poder (Hofstede). Afecta temas sensibles: ingresos, comportamiento de compra.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Caso Rappi — sesgo de extremos entre países</div>
+    <div class="latam-text">Colombia tiene sistemáticamente mayor CSAT promedio que Argentina para el mismo nivel de servicio objetivo. Las distribuciones muestran que colombianos usan más el 5 y casi nunca el 1–2; los argentinos tienen distribución más plana. No es que los argentinos estén menos satisfechos — la escala funciona diferente en cada cultura.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética en la medición</div>
+  <div class="slide-h">Tres dilemas éticos en el uso de escalas</div>
+  <ul class="bullets" style="margin-bottom:14px;">
+    <li><strong>Escala trucada:</strong> diseñar un Likert donde todas las opciones son positivas ("satisfecho", "muy satisfecho", "extremadamente satisfecho") para garantizar que los resultados favorezcan al cliente. Es un error sistemático deliberado. Malhotra es explícito: el investigador tiene la responsabilidad de asegurar la aplicabilidad y utilidad de las escalas — no de producir el resultado más cómodo.</li>
+    <li><strong>Escalamiento implícito sin consentimiento:</strong> las plataformas digitales infieren actitudes del comportamiento del usuario (tiempo de visualización, clics, secuencias de compra) sin informarle. En Uruguay (Ley 18.331), Brasil (LGPD 2020) y Argentina (Ley 25.326) esto tiene implicancias legales al construir perfiles de actitud sin consentimiento específico.</li>
+    <li><strong>Reactivo único presentado como medición completa:</strong> reportar el NPS como si midiera "lealtad" de forma integral cuando es un solo reactivo con validez empírica cuestionada. Simplificar no siempre es transparente.</li>
+  </ul>
+  <div class="callout">
+    <strong>Principio rector:</strong> el tipo de escala elegido debe ser el metodológicamente correcto, no el que produce el resultado más conveniente para el cliente.
   </div>
 </div>
 </section>
@@ -570,12 +641,12 @@ ul.bullets-white li::before { color:var(--accent); }
 <!-- ══════════════════════════════════════════════════════════ -->
 <section>
 <div class="slide s-close">
-  <div class="sec-num" style="margin-bottom:16px;">Cierre · minutos 148–150</div>
+  <div class="sec-num" style="margin-bottom:16px;">Cierre</div>
   <div class="sec-title" style="font-size:2.0rem;margin-bottom:24px;color:var(--paper);">Tres ideas<br>para llevarse</div>
-  <ul class="bullets bullets-white" style="max-width:680px;margin-bottom:24px;">
-    <li><strong style="color:white;">① El tipo de escala determina qué podés analizar</strong> — Antes de elegir un análisis estadístico, determiná el nivel de medición. Calcular promedios de datos nominales es un error, aunque el software lo haga sin quejarse.</li>
-    <li><strong style="color:white;">② Confiabilidad no garantiza validez</strong> — Podés medir consistentemente algo equivocado. La pregunta no es "¿los datos son consistentes?" sino "¿la escala mide lo que quiero medir?"</li>
-    <li><strong style="color:white;">③ Las escalas no son culturalmente neutras</strong> — El mismo NPS puede producir resultados distintos en Argentina y Brasil sin que haya diferencia real de satisfacción. La equivalencia de escala es un problema metodológico concreto en investigación de mercados regional.</li>
+  <ul class="bullets bullets-white" style="max-width:700px;margin-bottom:24px;">
+    <li><strong style="color:white;">① El tipo de escala determina qué podés analizar</strong> — Antes de elegir un análisis estadístico, determiná el nivel de medición. Calcular promedios de datos nominales es un error, aunque el software lo haga sin quejarse. La medición mal pensada invalida el análisis.</li>
+    <li><strong style="color:white;">② Confiabilidad no garantiza validez</strong> — Podés medir consistentemente algo equivocado. La pregunta no es solo "¿los datos son consistentes?" sino "¿la escala mide lo que quiero medir en este contexto específico?"</li>
+    <li><strong style="color:white;">③ Las escalas no son culturalmente neutras</strong> — El mismo NPS puede producir resultados distintos en Argentina y Brasil sin que haya diferencia real en la experiencia del cliente. La equivalencia de escala es un problema metodológico concreto en investigación regional.</li>
   </ul>
   <div class="cover-chip">Próxima clase: Capítulo 8 — Diseño de cuestionarios y formularios</div>
 </div>
