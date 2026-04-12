@@ -210,6 +210,29 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- INTUITIVA: causalidad cotidiana vs. científica -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">En la práctica — sentido común vs. ciencia</div>
+  <div class="slide-h">El mismo evento, dos formas de leerlo</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">LO QUE DICE EL GERENTE</div>
+      <div style="font-size:14px;color:var(--ink);font-style:italic;margin-bottom:6px;">"Lanzamos la campaña en marzo y las ventas subieron un 18 %. La campaña lo causó."</div>
+      <div style="font-size:12.5px;color:#666;">Sentido común: X → Y. Determinista. No considera que en marzo también bajaron los precios del competidor, empezó el otoño y se cobró el aguinaldo.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:6px;">LO QUE DICE EL INVESTIGADOR</div>
+      <div style="font-size:14px;color:var(--ink);font-style:italic;margin-bottom:6px;">"La campaña <em>aumentó la probabilidad</em> de compra — en 8 puntos porcentuales — cuando controlamos precio, estacionalidad y acción del competidor."</div>
+      <div style="font-size:12.5px;color:#666;">Probabilístico. Cuantifica el efecto incremental de X, manteniendo todo lo demás constante. Es más modesto — y mucho más útil para decidir.</div>
+    </div>
+    <div style="background:var(--greenbg);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="font-size:13px;color:#1a3a1a;"><strong>La pregunta que distingue a ambos:</strong> ¿qué hubiera pasado con las ventas si la campaña <em>no</em> hubiera existido? El experimento responde eso. El correlacional, no.</div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- Caso Mercado Libre apertura -->
 <section>
 <div class="slide s-dark">
@@ -290,6 +313,40 @@ ul.bullets-white li::before { color:var(--accent); }
         <div style="font-size:12.5px;color:#555;line-height:1.5;">Deben descartarse explicaciones rivales. Esto es lo más difícil — y es precisamente lo que el diseño experimental busca garantizar con control y aleatorización.</div>
       </div>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- INTUITIVA: tres condiciones aplicadas a un caso mínimo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Las tres condiciones — una misma situación, tres filtros</div>
+  <div class="slide-h">¿La nueva etiqueta de PedidosYa <em>causó</em> más pedidos?</div>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+    <div style="display:flex;gap:12px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;color:var(--accent);font-weight:900;line-height:1;flex-shrink:0;">1</span>
+      <div>
+        <div style="font-weight:600;font-size:13px;margin-bottom:3px;">¿Covariación? — ¿Subieron los pedidos cuando se puso la etiqueta?</div>
+        <div style="font-size:12.5px;color:#555;">Sí: +12 % en las dos semanas siguientes. ✓ Condición satisfecha. <em>Pero no es suficiente.</em></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;color:var(--blue);font-weight:900;line-height:1;flex-shrink:0;">2</span>
+      <div>
+        <div style="font-weight:600;font-size:13px;margin-bottom:3px;">¿Orden temporal? — ¿La etiqueta apareció <em>antes</em> del aumento?</div>
+        <div style="font-size:12.5px;color:#555;">Sí: la etiqueta se lanzó el lunes, el aumento se midió en los 14 días siguientes. ✓ Condición satisfecha.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;color:var(--gold);font-weight:900;line-height:1;flex-shrink:0;">3</span>
+      <div>
+        <div style="font-weight:600;font-size:13px;margin-bottom:3px;">¿Eliminación de alternativas? — ¿Qué más pasó esa semana?</div>
+        <div style="font-size:12.5px;color:#555;line-height:1.5;">También hubo una promoción de descuentos, lluvia intensa (más deliveries) y el competidor tuvo problemas de servicio. <span style="color:var(--accent);font-weight:600;">✗ Condición NO satisfecha sin un diseño experimental.</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;padding:8px 14px;background:#f5f5f5;border-radius:6px;">
+    Las primeras dos condiciones son fáciles de cumplir con datos observacionales. La tercera exige un diseño experimental — es la razón por la que el experimento existe.
   </div>
 </div>
 </section>
@@ -409,6 +466,41 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- INTUITIVA: terminología aplicada en 60 segundos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Terminología — aplicada en un caso mínimo</div>
+  <div class="slide-h">Un café en Montevideo decide si el olor a pan recién horneado aumenta el ticket promedio</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-top:3px solid var(--accent);">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">VI — MANIPULO</div>
+      <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:4px;">Difusor de olor activo</div>
+      <div style="font-size:12px;color:#666;">Encendido (experimental) o apagado (control). Es lo único que cambia entre los grupos.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-top:3px solid var(--blue);">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:2px;margin-bottom:6px;">VD — MIDO</div>
+      <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:4px;">Ticket promedio por cliente</div>
+      <div style="font-size:12px;color:#666;">Se mide al final de cada turno en ambos grupos. El sistema de caja ya lo registra.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-top:3px solid var(--gold);">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">VARIABLES EXTRAÑAS</div>
+      <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:4px;">Lo que podría confundir</div>
+      <div style="font-size:12px;color:#666;">Día de la semana, clima, turno (mañana/tarde), empleado de caja, eventos del barrio.</div>
+    </div>
+  </div>
+  <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div style="background:var(--greenbg);border:1px solid #a5d6a7;border-radius:8px;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;margin-bottom:4px;">GRUPO EXPERIMENTAL</div>
+      <div style="font-size:12.5px;color:#1a3a1a;">Los días (o turnos) donde el difusor está activo. Reciben el tratamiento X.</div>
+    </div>
+    <div style="background:#f5f5f5;border:1px solid var(--border);border-radius:8px;padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;margin-bottom:4px;">GRUPO DE CONTROL</div>
+      <div style="font-size:12.5px;color:#555;">Los días (o turnos) donde el difusor está apagado. Son el punto de comparación.</div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- Notación simbólica -->
 <section>
 <div class="slide s-light">
@@ -434,6 +526,33 @@ ul.bullets-white li::before { color:var(--accent); }
       <div class="def-text" style="font-family:'DM Mono',monospace;font-size:14px;line-height:1.8;">R: X → O₁ &nbsp;&nbsp;(grupo experimental)<br>R: — → O₁ &nbsp;&nbsp;(grupo de control)</div>
     </div>
     <div style="font-size:12px;color:var(--muted);margin-top:6px;font-style:italic;">La R garantiza que los grupos son equivalentes antes del tratamiento — por eso no se necesita pretest. Este es el diseño estándar del A/B testing moderno.</div>
+  </div>
+</div>
+</section>
+
+<!-- INTUITIVA: leer la notación en voz alta -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Notación — ejercicio de lectura</div>
+  <div class="slide-h slide-h-white">¿Cómo se "lee" un diseño experimental en notación de Malhotra?</div>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:16px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:15px;color:#8ab4d4;letter-spacing:2px;margin-bottom:10px;">R: O₁ → X → O₂<br>R: O₁ → &nbsp;&nbsp;&nbsp;→ O₂</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
+        <strong style="color:white;">Traducción en voz alta:</strong><br>
+        "Asignamos aleatoriamente (R). Medimos antes a ambos grupos (O₁). Al grupo experimental le aplicamos el tratamiento (X); al control no. Medimos a ambos de nuevo al final (O₂)."<br><br>
+        <strong style="color:white;">Nombre:</strong> Pretest-postest con grupo de control. Diseño experimental verdadero.
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:16px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:15px;color:#8ab4d4;letter-spacing:2px;margin-bottom:10px;">R: X → O₁<br>R: &nbsp;&nbsp;&nbsp;→ O₁</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
+        <strong style="color:white;">Traducción en voz alta:</strong><br>
+        "Asignamos aleatoriamente (R). No medimos antes — no hace falta porque la R ya garantiza equivalencia. Aplicamos X al experimental. Medimos al final (O₁)."<br><br>
+        <strong style="color:white;">Nombre:</strong> Solo postest con grupo de control. El A/B test estándar.
+      </div>
+    </div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.3);font-style:italic;">Sin R → los grupos pueden ser distintos desde el inicio → no se puede atribuir nada causalmente.</div>
   </div>
 </div>
 </section>
@@ -472,6 +591,32 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- INTUITIVA: validez interna vs externa con espectro -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Validez — la tensión en imágenes</div>
+  <div class="slide-h">Mismo experimento, dos preguntas completamente distintas</div>
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center;margin-top:14px;">
+    <div style="background:white;border:2px solid var(--accent);border-radius:10px;padding:18px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:8px;">VALIDEZ INTERNA</div>
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;">¿El tratamiento <em>realmente</em> causó la diferencia?</div>
+      <div style="font-size:12.5px;color:#555;line-height:1.55;">En el laboratorio de Nielsen en Montevideo: se controla todo — temperatura, iluminación, tiempo. El resultado es cristalino. Pero... ¿alguien compra así en la vida real?</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;padding:0 14px;">
+      <div style="font-size:28px;color:var(--border);">⇄</div>
+    </div>
+    <div style="background:white;border:2px solid var(--blue);border-radius:10px;padding:18px 20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:8px;">VALIDEZ EXTERNA</div>
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;">¿El efecto aparecería en el mercado real?</div>
+      <div style="font-size:12.5px;color:#555;line-height:1.55;">En 200 supermercados de toda Argentina: todo varía al mismo tiempo — clima, promotoras, competencia. El entorno es real, pero ¿cuánto causó X versus el resto?</div>
+    </div>
+  </div>
+  <div style="margin-top:14px;background:#f5f0eb;border-radius:8px;padding:12px 16px;font-size:13px;color:#555;line-height:1.55;">
+    <strong style="color:var(--ink);">La estrategia de Malhotra:</strong> laboratorio primero (→ validez interna), campo después (→ validez externa). El A/B testing digital es un punto intermedio valioso: aleatorización real + comportamiento real, pero solo en usuarios digitales.
+  </div>
+</div>
+</section>
+
 <!-- Variables extrañas -->
 <section>
 <div class="slide s-light">
@@ -486,6 +631,33 @@ ul.bullets-white li::before { color:var(--accent); }
     <tr><td><strong>Mortalidad experimental</strong></td><td>Abandono diferencial entre grupos</td><td>Usuarios del grupo con nueva UI abandonan la app más; solo quedan los que se adaptan bien</td></tr>
     <tr><td><strong>Regresión estadística</strong></td><td>Valores extremos regresan a la media</td><td>Seleccionar tiendas con ventas excepcionalmente bajas para el grupo experimental</td></tr>
   </table>
+</div>
+</section>
+
+<!-- INTUITIVA: variables extrañas en un único experimento contado día a día -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Variables extrañas — todo lo que puede salir mal en un experimento real</div>
+  <div class="slide-h slide-h-white">Un experimento de 8 semanas en una cadena de farmacias uruguaya</div>
+  <div style="font-size:12.5px;color:rgba(255,255,255,0.55);margin-bottom:10px;">VI: nueva señalética digital en góndola. VD: ventas de vitaminas. 10 farmacias con señalética, 10 sin ella.</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:rgba(192,57,43,0.15);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);min-width:80px;padding-top:2px;">SEMANA 2</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">El Ministerio de Salud lanza campaña nacional sobre vitamina D. Ambos grupos venden más — pero más en las farmacias del grupo control, que por azar están en zonas con más adultos mayores. <strong style="color:white;">→ Historia + Sesgo de selección.</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:rgba(44,95,138,0.2);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:#8ab4d4;min-width:80px;padding-top:2px;">SEMANA 4</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">Se aplicó una encuesta de satisfacción inicial. Ahora los clientes que la respondieron están más atentos a los productos de salud. <strong style="color:white;">→ Administración de pruebas.</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:rgba(184,134,11,0.15);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);min-width:80px;padding-top:2px;">SEMANA 6</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">3 farmacias experimentales cambian de encargado de turno. El nuevo personal no sabe cómo explicar la señalética. Las ventas caen en esas 3 tiendas. <strong style="color:white;">→ Mortalidad experimental (por variación operacional).</strong></div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;background:rgba(45,122,58,0.15);border-left:3px solid var(--green);border-radius:0 6px 6px 0;">
+      <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);min-width:80px;padding-top:2px;">SEMANA 8</span>
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.8);">Las 2 farmacias con ventas de vitaminas más bajas del país estaban en el grupo experimental. Esta semana tienen ventas "normales". <strong style="color:white;">→ Regresión estadística.</strong></div>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -537,6 +709,40 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- INTUITIVA: tres familias como herramientas con diferente potencia -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tres familias — cuándo usar cada una</div>
+  <div class="slide-h">La familia de diseño se elige según lo que está en juego, no lo que es más fácil</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+    <div style="display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="flex-shrink:0;font-size:24px;">🔍</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;">PREEXPERIMENTAL — EXPLORAR</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:3px;">"¿Vale la pena investigar esto en serio?"</div>
+        <div style="font-size:12.5px;color:#666;">Probás el nuevo packaging en una sola tienda amiga durante un mes. Rápido, barato, sin rigor. Te da una señal inicial, no una respuesta causal.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="flex-shrink:0;font-size:24px;">⚗️</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;margin-bottom:4px;">VERDADERO — CONFIRMAR</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:3px;">"¿El nuevo packaging realmente sube las ventas?"</div>
+        <div style="font-size:12.5px;color:#666;">Asignás aleatoriamente 40 tiendas: 20 con nuevo packaging, 20 con el actual. La R te da respuesta causal válida sobre una VI.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;">
+      <div style="flex-shrink:0;font-size:24px;">🧮</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:2px;margin-bottom:4px;">ESTADÍSTICO (FACTORIAL) — OPTIMIZAR</div>
+        <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:3px;">"¿Qué combinación de packaging + precio es la mejor?"</div>
+        <div style="font-size:12.5px;color:#666;">Dos packaging × tres precios = 6 celdas. Mide efecto de cada factor y su interacción. Si el precio barato solo funciona con el packaging nuevo — eso es una interacción.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- Diseños preexperimentales -->
 <section>
 <div class="slide s-light">
@@ -557,6 +763,29 @@ ul.bullets-white li::before { color:var(--accent); }
     </div>
   </div>
   <div class="notation-box" style="margin-top:10px;">R ausente → grupos no equivalentes → sesgo de selección → inferencia causal inválida</div>
+</div>
+</section>
+
+<!-- INTUITIVA: por qué los preexperimentales fallan -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Diseños preexperimentales — por qué fallan en la práctica</div>
+  <div class="slide-h slide-h-white">El mismo resultado, tres interpretaciones incompatibles</div>
+  <div style="font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Situación: tras poner pantallas digitales en 5 sucursales bancarias (E1 — estudio de caso único), el NPS sube de 62 a 71.</div>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="padding:10px 14px;background:rgba(192,57,43,0.15);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.85);"><strong style="color:white;">Explicación A:</strong> Las pantallas mejoraron la experiencia del cliente. <em>(Lo que el gerente quiere concluir.)</em></div>
+    </div>
+    <div style="padding:10px 14px;background:rgba(44,95,138,0.2);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;">
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.85);"><strong style="color:white;">Explicación B:</strong> Ese mes el banco resolvió un problema sistémico de cajeros que llevaba 3 meses sin solución. El NPS hubiera subido igual sin las pantallas. <em>(Historia.)</em></div>
+    </div>
+    <div style="padding:10px 14px;background:rgba(184,134,11,0.15);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;">
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.85);"><strong style="color:white;">Explicación C:</strong> Las 5 sucursales elegidas son las del centro comercial, donde los clientes son más jóvenes y tecnófilos. Cualquier novedad digital los entusiasma. <em>(Sesgo de selección.)</em></div>
+    </div>
+    <div style="padding:10px 14px;background:rgba(255,255,255,0.05);border-left:3px solid rgba(255,255,255,0.2);border-radius:0 6px 6px 0;">
+      <div style="font-size:12.5px;color:rgba(255,255,255,0.65);">Sin grupo de control y sin aleatorización, las tres explicaciones son igualmente válidas. El diseño preexperimental no puede distinguirlas — por eso no permite inferencia causal.</div>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -584,6 +813,29 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 </section>
 
+<!-- INTUITIVA: EV1 vs EV2 — cuándo el pretest molesta -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">EV1 vs EV2 — cuándo el pretest ayuda y cuándo estorba</div>
+  <div class="slide-h">La R hace el pretest prescindible — y a veces lo convierte en un problema</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;margin-bottom:6px;">EV1 — CON PRETEST</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;">Útil cuando no confiás del todo en la aleatorización</div>
+      <div style="font-size:12.5px;color:#555;line-height:1.5;margin-bottom:8px;">Si tenés pocas unidades (12 tiendas, 6 ciudades), la R puede no garantizar equivalencia perfecta por azar. El O₁ te permite verificar que los grupos eran similares antes.</div>
+      <div style="background:#fff5f5;border-radius:6px;padding:8px 10px;font-size:12px;color:var(--accent);">⚠ Riesgo: el pretest sensibiliza a los participantes. Los que respondieron la encuesta inicial ya están "activados" sobre el tema.</div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;margin-bottom:6px;">EV2 — SIN PRETEST ★</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;">Ideal cuando tenés muchas unidades y medición comportamental</div>
+      <div style="font-size:12.5px;color:#555;line-height:1.5;margin-bottom:8px;">Con 10.000 usuarios de una app asignados aleatoriamente, la R garantiza equivalencia estadística. No necesitás medir antes — y si medís, sesgás el experimento.</div>
+      <div style="background:var(--greenbg);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--green);">✓ Es el diseño del A/B testing. La caja registra ventas por sí sola — no hay encuesta previa que altere nada.</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;text-align:center;">La R no es un atajo — es la garantía. Sin R, ningún postest del mundo salva la inferencia causal.</div>
+</div>
+</section>
+
 <!-- Diseño factorial -->
 <section>
 <div class="slide s-light">
@@ -607,6 +859,38 @@ ul.bullets-white li::before { color:var(--accent); }
   <div class="pause-box" style="margin-top:8px;">
     <div class="pause-label">⏸ Pregunta</div>
     <div class="pause-q">Si iFood solo hubiera testeado descuento vs. recordatorio sin manipular el horario, ¿qué conclusión habría sacado? ¿Por qué estaría equivocada? (Habría promediado los efectos de ambos horarios y posiblemente concluido que el tipo de mensaje no importa — cuando cada uno tiene un horario óptimo muy diferente. La interacción hace incomprensible el efecto de cada factor por separado)</div>
+  </div>
+</div>
+</section>
+
+<!-- INTUITIVA: interacción — el efecto que solo el factorial puede ver -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Interacción — lo que el experimento simple no puede ver</div>
+  <div class="slide-h">Si solo testeo un factor a la vez, puedo llegar a la conclusión equivocada</div>
+  <div style="margin-top:10px;">
+    <div style="font-size:13px;color:#555;margin-bottom:12px;">Rappi quiere optimizar sus notificaciones push. Tiene dos ideas: <strong>¿mensaje de descuento o recordatorio de carrito?</strong> y <strong>¿enviarlo a mediodía o a las 7pm?</strong></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div>
+        <div style="background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:12px 14px;margin-bottom:6px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px;">SI SOLO TESTO TIPO DE MENSAJE</div>
+          <div style="font-size:12.5px;color:#333;">Descuento promedio: (Alta + Baja) / 2 = Media<br>Recordatorio promedio: (Baja + Alta) / 2 = Media<br><strong>Conclusión:</strong> "No importa el tipo de mensaje." ← <span style="color:var(--accent);">INCORRECTO</span></div>
+        </div>
+        <div style="background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:12px 14px;">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);margin-bottom:4px;">SI SOLO TESTO HORARIO</div>
+          <div style="font-size:12.5px;color:#333;">Mediodía promedio: (Alta + Baja) / 2 = Media<br>7pm promedio: (Baja + Alta) / 2 = Media<br><strong>Conclusión:</strong> "No importa el horario." ← <span style="color:var(--accent);">INCORRECTO</span></div>
+        </div>
+      </div>
+      <div style="background:var(--greenbg);border:1px solid #a5d6a7;border-radius:8px;padding:14px 16px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);margin-bottom:6px;">CON DISEÑO FACTORIAL 2×2</div>
+        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+          <tr><th style="background:#1a3a1a;color:white;padding:5px 8px;text-align:left;"></th><th style="background:#1a3a1a;color:white;padding:5px 8px;text-align:center;">Mediodía</th><th style="background:#1a3a1a;color:white;padding:5px 8px;text-align:center;">7pm</th></tr>
+          <tr><td style="padding:6px 8px;border-bottom:1px solid #a5d6a7;font-weight:600;color:#1a3a1a;">Descuento</td><td style="padding:6px 8px;border-bottom:1px solid #a5d6a7;text-align:center;color:var(--green);font-weight:700;">Alta ✓</td><td style="padding:6px 8px;border-bottom:1px solid #a5d6a7;text-align:center;color:var(--accent);">Baja</td></tr>
+          <tr><td style="padding:6px 8px;font-weight:600;color:#1a3a1a;">Recordatorio</td><td style="padding:6px 8px;text-align:center;color:var(--accent);">Baja</td><td style="padding:6px 8px;text-align:center;color:var(--green);font-weight:700;">Alta ✓</td></tr>
+        </table>
+        <div style="font-size:12px;color:#1a3a1a;margin-top:8px;"><strong>Conclusión real:</strong> cada mensaje tiene su momento óptimo. La interacción es la respuesta — y es invisible sin el factorial.</div>
+      </div>
+    </div>
   </div>
 </div>
 </section>
