@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -27,97 +28,99 @@
 
 .slide { width: 100%; height: 720px; display: flex; flex-direction: column; position: relative; box-sizing: border-box; }
 
-.s-cover  { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
-.s-cover::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold)); }
-.cover-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:18px; }
-.cover-title { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
+.s-cover  { background: var(–ink); color: var(–paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after  { content:’’; position:absolute; bottom:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,var(–accent),var(–blue),var(–gold)); }
+.cover-eyebrow { font-family:‘DM Mono’,monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(–accent); margin-bottom:18px; }
+.cover-title { font-family:‘Playfair Display’,serif; font-size:clamp(2.8rem,5.5vw,4.4rem); font-weight:900; line-height:1.0; margin-bottom:28px; }
 .cover-title em { color:#d4a0a0; font-style:italic; }
 .cover-chip { font-size:12px; color:rgba(255,255,255,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:5px 14px; display:inline-block; }
 
-.s-section { background:var(--ink); color:var(--paper); justify-content:center; padding:60px 72px; }
-.s-section::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
-.sec-num  { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:12px; }
-.sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(--paper); }
+.s-section { background:var(–ink); color:var(–paper); justify-content:center; padding:60px 72px; }
+.s-section::after { content:’’; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(–accent),var(–blue)); }
+.sec-num  { font-family:‘DM Mono’,monospace; font-size:11px; letter-spacing:3px; color:var(–accent); text-transform:uppercase; margin-bottom:12px; }
+.sec-title { font-family:‘Playfair Display’,serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; color:var(–paper); }
 .sec-sub  { font-size:15px; color:rgba(255,255,255,0.45); margin-top:14px; font-style:italic; }
 
-.s-light { background:var(--paper); padding:44px 68px 36px; justify-content:flex-start; }
-.s-light::after { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
+.s-light { background:var(–paper); padding:44px 68px 36px; justify-content:flex-start; }
+.s-light::after { content:’’; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(–accent),var(–blue)); }
 .s-dark  { background:#1e1e1e; padding:44px 68px 36px; justify-content:flex-start; }
-.s-dark::after  { content:''; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--accent),var(--blue)); }
-.s-close { background:var(--ink); padding:60px 72px; justify-content:center; }
+.s-dark::after  { content:’’; position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(–accent),var(–blue)); }
+.s-close { background:var(–ink); padding:60px 72px; justify-content:center; }
 
-.eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.eyebrow { font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(–muted); margin-bottom:8px; }
 .eyebrow-light { color:rgba(255,255,255,0.35); }
-.slide-h { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:16px; }
+.slide-h { font-family:‘Playfair Display’,serif; font-size:clamp(1.3rem,2.6vw,1.75rem); font-weight:700; line-height:1.2; color:var(–ink); margin-bottom:16px; }
 .slide-h-white { color:white; }
 
 ul.bullets { list-style:none; padding:0; margin:0; }
-ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(–border); position:relative; }
 ul.bullets li:last-child { border-bottom:none; }
-ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets li::before { content:’—’; position:absolute; left:0; color:var(–accent); font-weight:700; }
 ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
-ul.bullets-white li::before { color:var(--accent); }
+ul.bullets-white li::before { color:var(–accent); }
 
-.def-block { background:var(--ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
-.def-term-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.def-block { background:var(–ink); border-radius:8px; padding:13px 18px; margin-bottom:10px; }
+.def-term-label { font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(–accent); margin-bottom:6px; }
 .def-text { font-size:13px; color:rgba(255,255,255,0.85); line-height:1.6; }
 .def-text strong { color:#d4a0a0; }
 
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
 .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:4px; }
-.col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-box { background:white; border:1px solid var(–border); border-radius:8px; padding:14px 16px; }
 .col-box-dark { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 16px; }
-.col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
-.col-label-blue { color:var(--blue); }
-.col-label-gold { color:var(--gold); }
-.col-label-green { color:var(--green); }
+.col-label { font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:2px; color:var(–accent); text-transform:uppercase; margin-bottom:6px; }
+.col-label-blue { color:var(–blue); }
+.col-label-gold { color:var(–gold); }
+.col-label-green { color:var(–green); }
 .col-body  { font-size:12.5px; color:#444; line-height:1.55; }
 .col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
 
 .ref-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:10px; }
-.ref-table th { background:var(--ink); color:var(--paper); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; }
-.ref-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.45; font-size:12px; }
+.ref-table th { background:var(–ink); color:var(–paper); padding:7px 12px; text-align:left; font-family:‘DM Mono’,monospace; font-size:10px; letter-spacing:1px; }
+.ref-table td { padding:7px 12px; border-bottom:1px solid var(–border); vertical-align:top; line-height:1.45; font-size:12px; }
 .ref-table tr:nth-child(even) td { background:#faf8f5; }
-.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
+.ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:‘DM Mono’,monospace; font-size:10px; }
 .ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
 
-.pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
-.pause-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:4px; }
+.pause-box { background:#fffbec; border-left:5px solid var(–gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
+.pause-label { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:2px; color:var(–gold); text-transform:uppercase; margin-bottom:4px; }
 .pause-q { font-size:13px; color:#4a3a10; line-height:1.5; font-style:italic; }
 
-.latam-box { background:var(--greenbg); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
-.latam-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:4px; }
+.latam-box { background:var(–greenbg); border-left:4px solid var(–green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:2px; color:var(–green); text-transform:uppercase; margin-bottom:4px; }
 .latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.5; }
 
-.notation-box { background:#f0f4f8; border:1px solid #c0d4e8; border-radius:8px; padding:12px 18px; margin:10px 0; font-family:'DM Mono',monospace; font-size:14px; color:var(--blue); letter-spacing:1px; }
-.notation-box-dark { background:rgba(44,95,138,0.2); border:1px solid rgba(44,95,138,0.4); border-radius:8px; padding:12px 18px; margin:10px 0; font-family:'DM Mono',monospace; font-size:14px; color:#8ab4d4; letter-spacing:1px; }
+.notation-box { background:#f0f4f8; border:1px solid #c0d4e8; border-radius:8px; padding:12px 18px; margin:10px 0; font-family:‘DM Mono’,monospace; font-size:14px; color:var(–blue); letter-spacing:1px; }
+.notation-box-dark { background:rgba(44,95,138,0.2); border:1px solid rgba(44,95,138,0.4); border-radius:8px; padding:12px 18px; margin:10px 0; font-family:‘DM Mono’,monospace; font-size:14px; color:#8ab4d4; letter-spacing:1px; }
 
-.design-row { display:flex; align-items:flex-start; gap:14px; padding:10px 0; border-bottom:1px solid var(--border); }
+.design-row { display:flex; align-items:flex-start; gap:14px; padding:10px 0; border-bottom:1px solid var(–border); }
 .design-row:last-child { border-bottom:none; }
-.design-badge { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1px; padding:3px 8px; border-radius:10px; white-space:nowrap; flex-shrink:0; margin-top:2px; }
+.design-badge { font-family:‘DM Mono’,monospace; font-size:9px; letter-spacing:1px; padding:3px 8px; border-radius:10px; white-space:nowrap; flex-shrink:0; margin-top:2px; }
 .badge-pre { background:#fdecea; color:#8b2218; border:1px solid #f5c6c2; }
 .badge-true { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
 .badge-stat { background:#e8f0f8; color:#1a3a5c; border:1px solid #b8d0e8; }
 .design-text { font-size:12.5px; color:#333; line-height:1.5; }
-.design-text strong { color:var(--ink); }
+.design-text strong { color:var(–ink); }
 
-.pizarron { background:rgba(184,134,11,0.12); border:1px dashed var(--gold); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px; }
+.pizarron { background:rgba(184,134,11,0.12); border:1px dashed var(–gold); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px; }
 .pizarron-icon { font-size:16px; }
 .pizarron-text { font-size:11.5px; color:#5a4000; font-style:italic; }
 
 .chip-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-.chip { font-family:'DM Mono',monospace; font-size:10px; padding:3px 10px; border-radius:12px; border:1px solid; }
+.chip { font-family:‘DM Mono’,monospace; font-size:10px; padding:3px 10px; border-radius:12px; border:1px solid; }
 .chip-red { background:#fdecea; color:#8b2218; border-color:#f5c6c2; }
 .chip-blue { background:#e8f0f8; color:#1a3a5c; border-color:#b8d0e8; }
 .chip-gold { background:#fff8e1; color:#5a4000; border-color:#ffe082; }
 .chip-green { background:#eef6ee; color:#1b5e20; border-color:#a5d6a7; }
 </style>
+
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
 <!-- ══ PORTADA ══ -->
+
 <section>
 <div class="slide s-cover">
   <div class="cover-eyebrow">Investigación de Mercado · Capítulo 6</div>
@@ -127,6 +130,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ AGENDA ══ -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Hoja de ruta</div>
@@ -155,6 +159,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 1 — CAUSALIDAD ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 01</div>
@@ -164,6 +169,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso apertura -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Caso de apertura · Rite Aid Drug Company</div>
@@ -185,6 +191,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Causalidad cotidiana vs. científica -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Concepto central · Malhotra Cap. 6</div>
@@ -211,6 +218,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: causalidad cotidiana vs. científica -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">En la práctica — sentido común vs. ciencia</div>
@@ -219,7 +227,7 @@ ul.bullets-white li::before { color:var(--accent); }
     <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:6px;">LO QUE DICE EL GERENTE</div>
       <div style="font-size:14px;color:var(--ink);font-style:italic;margin-bottom:6px;">"Lanzamos la campaña en marzo y las ventas subieron un 18 %. La campaña lo causó."</div>
-      <div style="font-size:12.5px;color:#666;">Sentido común: X → Y. Determinista. No considera que en marzo también bajaron los precios del competidor, empezó el otoño y se cobró el aguinaldo.</div>
+      <div style="font-size:12.5px;color:#666;">Sentido común: X → Y. Determinista. No considera que en marzo también bajaron los precios del competidor, empezó el otoño y el competidor principal tuvo problemas de stock.</div>
     </div>
     <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;margin-bottom:6px;">LO QUE DICE EL INVESTIGADOR</div>
@@ -234,6 +242,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso Mercado Libre apertura -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Caso LatAm · Mercado Libre</div>
@@ -252,6 +261,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Pausa correlación espuria Mercado Libre -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Correlación ≠ causalidad · pregunta diagnóstico</div>
@@ -278,6 +288,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 2 — TRES CONDICIONES ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 02</div>
@@ -287,6 +298,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Tres condiciones -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — p. 157</div>
@@ -318,6 +330,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: tres condiciones aplicadas a un caso mínimo -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Las tres condiciones — una misma situación, tres filtros</div>
@@ -352,6 +365,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Dónde falla cada condición -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Las tres condiciones — dónde falla cada una</div>
@@ -374,6 +388,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso Nubank -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Caso LatAm · Nubank (Brasil)</div>
@@ -400,6 +415,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso Spotify — terminología en acción -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Terminología en acción · Spotify</div>
@@ -434,6 +450,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 3 — TERMINOLOGÍA ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 03</div>
@@ -443,6 +460,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Terminología -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — pp. 159–161</div>
@@ -467,6 +485,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: terminología aplicada en 60 segundos -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Terminología — aplicada en un caso mínimo</div>
@@ -502,6 +521,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Notación simbólica -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Notación estándar — Malhotra 2016</div>
@@ -531,6 +551,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: leer la notación en voz alta -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Notación — ejercicio de lectura</div>
@@ -558,6 +579,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 4 — VALIDEZ ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 04</div>
@@ -567,6 +589,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Validez: definiciones -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — p. 162, Figura 6.4</div>
@@ -592,6 +615,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: validez interna vs externa con espectro -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Validez — la tensión en imágenes</div>
@@ -618,6 +642,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Variables extrañas -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — pp. 163+ · Variables de confusión</div>
@@ -635,6 +660,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: variables extrañas en un único experimento contado día a día -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Variables extrañas — todo lo que puede salir mal en un experimento real</div>
@@ -662,6 +688,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso Falabella - historia -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Caso · Historia como variable extraña</div>
@@ -680,6 +707,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 5 — TIPOS DE DISEÑOS ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 05</div>
@@ -689,6 +717,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Clasificación general -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — pp. 163–169</div>
@@ -710,6 +739,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: tres familias como herramientas con diferente potencia -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Tres familias — cuándo usar cada una</div>
@@ -744,6 +774,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Diseños preexperimentales -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Diseños preexperimentales — Malhotra pp. 164–165</div>
@@ -767,6 +798,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: por qué los preexperimentales fallan -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Diseños preexperimentales — por qué fallan en la práctica</div>
@@ -790,6 +822,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Diseños verdaderos -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Diseños experimentales verdaderos — Malhotra pp. 166–167</div>
@@ -814,6 +847,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: EV1 vs EV2 — cuándo el pretest molesta -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">EV1 vs EV2 — cuándo el pretest ayuda y cuándo estorba</div>
@@ -837,6 +871,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Diseño factorial -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Diseño estadístico — Malhotra pp. 168–169</div>
@@ -864,6 +899,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- INTUITIVA: interacción — el efecto que solo el factorial puede ver -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Interacción — lo que el experimento simple no puede ver</div>
@@ -896,6 +932,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 6 — A/B TESTING Y PRUEBA DE MERCADO ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 06</div>
@@ -905,6 +942,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- A/B testing -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Experimentación en la web — Malhotra p. 169 (actualizado)</div>
@@ -935,6 +973,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Limitaciones A/B testing desarrolladas -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">A/B testing — cuatro limitaciones críticas</div>
@@ -961,6 +1000,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Prueba de mercado -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — pp. 171–175</div>
@@ -987,6 +1027,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Caso Pix -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Caso LatAm · Banco Central do Brasil — Pix (2020)</div>
@@ -1006,6 +1047,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Lab vs campo -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — pp. 163 y 171 (actualizado)</div>
@@ -1024,6 +1066,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- ══ SECCIÓN 7 — LATAM Y ÉTICA ══ -->
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Sección 07</div>
@@ -1033,6 +1076,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Desafíos LatAm -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">🌎 Contexto LatAm — Experimentación en la región</div>
@@ -1048,6 +1092,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Ética -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Malhotra 2016 — p. 176 + actualización (Facebook 2014)</div>
@@ -1078,6 +1123,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Pausa ética adolescentes -->
+
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Ética en experimentación — caso límite</div>
@@ -1101,6 +1147,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Bibliografía -->
+
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Fuentes del capítulo</div>
@@ -1132,6 +1179,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </section>
 
 <!-- Cierre -->
+
 <section>
 <div class="slide s-close">
   <div style="color:var(--paper); max-width:600px;">
@@ -1156,6 +1204,7 @@ ul.bullets-white li::before { color:var(--accent); }
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+
 <script>
 Reveal.initialize({
   hash: true,
@@ -1169,5 +1218,6 @@ Reveal.initialize({
   height: 720,
 });
 </script>
+
 </body>
 </html>
