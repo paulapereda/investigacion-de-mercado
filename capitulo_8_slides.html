@@ -17,6 +17,8 @@
   --border: #d4cec5;
   --green:  #2d7a3a;
   --greenbg:#eef6ee;
+  --purple: #6a3ea0;
+  --purplebg:#f5f0ff;
 }
 .reveal-viewport { background: var(--ink); }
 .reveal .slides { font-family: 'DM Sans', sans-serif; }
@@ -64,8 +66,14 @@ ul.bullets-white li::before { color:var(--accent); }
 .def-text strong { color:#d4a0a0; }
 
 .two-col { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:4px; }
 .col-box { background:white; border:1px solid var(--border); border-radius:8px; padding:14px 16px; }
+.col-box-dark { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 16px; }
 .col-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px; }
+.col-label-blue { color:var(--blue); }
+.col-label-gold { color:var(--gold); }
+.col-label-green { color:var(--green); }
+.col-label-purple { color:var(--purple); }
 .col-body  { font-size:12.5px; color:#444; line-height:1.55; }
 .col-body-w { font-size:12.5px; color:rgba(255,255,255,0.75); line-height:1.55; }
 
@@ -75,539 +83,1056 @@ ul.bullets-white li::before { color:var(--accent); }
 .ref-table tr:nth-child(even) td { background:#faf8f5; }
 .ref-table-dark th { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.5); padding:7px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:10px; }
 .ref-table-dark td { padding:7px 12px; border-bottom:1px solid rgba(255,255,255,0.08); vertical-align:top; line-height:1.45; color:rgba(255,255,255,0.8); font-size:12px; }
-.ref-table-dark tr:nth-child(even) td { background:rgba(255,255,255,0.04); }
 
 .pause-box { background:#fffbec; border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:12px; }
-.pause-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
-.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.55; }
+.pause-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:4px; }
+.pause-q { font-size:13px; color:#4a3a10; line-height:1.5; font-style:italic; }
 
-.latam-box { background:var(--greenbg); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
-.latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:5px; }
-.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.55; }
+.latam-box { background:var(--greenbg); border-left:4px solid var(--green); border-radius:0 8px 8px 0; padding:10px 16px; margin-top:10px; }
+.latam-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:4px; }
+.latam-text { font-size:12.5px; color:#1a3a1a; line-height:1.5; }
 
-.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.6; }
+.callout { border-left:4px solid var(--gold); background:#fffbec; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#4a3a00; line-height:1.55; }
+.callout-dk { border-left:4px solid var(--gold); background:rgba(184,134,11,0.1); padding:10px 16px; border-radius:0 8px 8px 0; margin-top:10px; font-size:13px; color:#f0d890; line-height:1.55; }
 
-.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
+.pizarron { background:rgba(184,134,11,0.12); border:1px dashed var(--gold); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px; }
+.pizarron-icon { font-size:16px; flex-shrink:0; }
+.pizarron-text { font-size:11.5px; color:#5a4000; font-style:italic; line-height:1.45; }
+.pizarron-dk { background:rgba(184,134,11,0.15); border:1px dashed rgba(184,134,11,0.5); border-radius:8px; padding:8px 14px; margin-top:8px; display:flex; align-items:center; gap:8px; }
+.pizarron-dk .pizarron-text { color:#e5c270; }
 
-.step-row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
-.step-pill { background:var(--ink); color:white; border-radius:6px; padding:7px 12px; font-size:11.5px; display:flex; align-items:center; gap:6px; }
-.step-pill-n { background:var(--accent); color:white; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:11px; font-family:'DM Mono',monospace; font-weight:700; flex-shrink:0; }
-.step-pill-t { line-height:1.3; }
+.chip-row { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.chip { font-family:'DM Mono',monospace; font-size:10px; padding:3px 10px; border-radius:12px; border:1px solid; }
+.chip-red { background:#fdecea; color:#8b2218; border-color:#f5c6c2; }
+.chip-blue { background:#e8f0f8; color:#1a3a5c; border-color:#b8d0e8; }
+.chip-gold { background:#fff8e1; color:#5a4000; border-color:#ffe082; }
+.chip-green { background:#eef6ee; color:#1b5e20; border-color:#a5d6a7; }
 
+/* Err pairs */
 .err-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
-.err-bad { background:#fff5f5; border:1px solid #f5c6c2; border-radius:6px; padding:10px 12px; }
-.err-good { background:#f0fff4; border:1px solid #a5d6a7; border-radius:6px; padding:10px 12px; }
-.err-lab { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:5px; }
+.err-bad { background:#fff5f5; border:1px solid #f5c6c2; border-radius:8px; padding:11px 14px; }
+.err-good { background:#f0fff4; border:1px solid #a5d6a7; border-radius:8px; padding:11px 14px; }
+.err-lab { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:6px; }
 .err-bad .err-lab { color:#8b2218; }
 .err-good .err-lab { color:#1b5e20; }
-.err-txt { font-size:11.5px; color:#333; line-height:1.5; font-style:italic; }
+.err-txt { font-size:12px; color:#333; line-height:1.5; }
+.err-txt em { color:#666; font-style:italic; }
 
-.acro-box { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:14px 18px; margin-top:12px; }
-.acro-row { display:flex; align-items:baseline; gap:10px; margin-bottom:5px; }
-.acro-letter { font-family:'DM Mono',monospace; font-size:16px; font-weight:700; color:var(--accent); width:20px; flex-shrink:0; }
-.acro-text { font-size:12.5px; color:rgba(255,255,255,0.8); line-height:1.4; }
+/* Step pills */
+.step-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-top:12px; }
+.step-pill { background:white; border:1px solid var(--border); border-radius:8px; padding:10px 8px; text-align:center; position:relative; }
+.step-pill.blue-s { border-left:3px solid var(--blue); }
+.step-pill.red-s  { border-left:3px solid var(--accent); }
+.step-pill.gold-s { border-left:3px solid var(--gold); }
+.step-pill .step-n { font-family:'DM Mono',monospace; font-size:11px; color:var(--accent); margin-bottom:3px; letter-spacing:1px; }
+.step-pill .step-t { font-size:11px; color:#333; line-height:1.3; font-weight:500; }
+.step-pill.red-s .step-n { color:var(--accent); font-weight:700; }
+
+/* Agenda row */
+.agenda-row { display:flex; align-items:center; gap:12px; padding:8px 14px; background:white; border:1px solid var(--border); border-radius:0 8px 8px 0; }
+.agenda-time { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); min-width:70px; }
+.agenda-text { font-size:13px; color:var(--ink); }
+
+/* Acro box */
+.acro-row { display:flex; align-items:flex-start; gap:10px; margin-bottom:7px; }
+.acro-letter { font-family:'DM Mono',monospace; font-size:18px; font-weight:700; color:var(--accent); width:22px; flex-shrink:0; line-height:1.2; }
+.acro-text { font-size:12.5px; line-height:1.5; color:#333; }
+.acro-text strong { color:var(--ink); }
+
+/* Funnel */
+.funnel-vis { display:flex; flex-direction:column; align-items:center; margin:12px 0; gap:4px; }
+.funnel-row { display:flex; align-items:center; gap:12px; }
+.funnel-bar { height:24px; background:linear-gradient(90deg, var(--accent), var(--blue)); border-radius:4px; display:flex; align-items:center; justify-content:center; color:white; font-size:11px; font-family:'DM Mono',monospace; }
+.funnel-lbl { font-size:11.5px; color:#555; width:180px; }
+
+/* Objective grid */
+.obj-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:8px; }
+.obj-card { background:white; border:1px solid var(--border); border-radius:8px; padding:12px 14px; position:relative; }
+.obj-num { font-family:'DM Mono',monospace; font-size:22px; font-weight:900; color:var(--accent); line-height:1; margin-bottom:6px; }
+.obj-card.blue-n .obj-num { color:var(--blue); }
+.obj-card.green-n .obj-num { color:var(--green); }
+.obj-h { font-weight:700; font-size:13px; color:var(--ink); margin-bottom:4px; }
+.obj-t { font-size:11.5px; color:#555; line-height:1.5; }
+
+/* Law tags */
+.law-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:8px; }
+.law-card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:6px; padding:9px 11px; }
+.law-country { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--accent); letter-spacing:1.5px; margin-bottom:3px; }
+.law-name { font-size:11px; color:rgba(255,255,255,0.85); line-height:1.4; }
 </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
-<!-- ═══════════════════════════════════
-     PORTADA
-═══════════════════════════════════ -->
+<!-- ══ PORTADA ══ -->
 <section>
 <div class="slide s-cover">
   <div class="cover-eyebrow">Investigación de Mercado · Capítulo 8</div>
   <div class="cover-title">Diseño de<br><em>cuestionarios</em><br>y formularios</div>
-  <span class="cover-chip">Paula Pereda · Universidad de Montevideo</span>
+  <div style="margin-bottom:28px;">
+    <div class="chip-row">
+      <span class="chip chip-red">Malhotra 2016 · Cap. 8</span>
+    </div>
+  </div>
+  <span class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     CASO DE APERTURA
-═══════════════════════════════════ -->
+<!-- ══ AGENDA ══ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Hoja de ruta</div>
+  <div class="slide-h">¿Qué vamos a aprender hoy?</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+    <div class="agenda-row" style="border-left:4px solid var(--accent);">
+      <span class="agenda-time">Bloque 1</span>
+      <span class="agenda-text">Apertura: Censo 2010, definición, objetivos y posición en el proceso</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--accent);">
+      <span class="agenda-time">Bloque 2</span>
+      <span class="agenda-text">Pasos 1–4: información, entrevista, contenido y barreras del encuestado</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 3</span>
+      <span class="agenda-text">Paso 5: estructura de las preguntas — abiertas, opción múltiple, dicotómicas, escala</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 4</span>
+      <span class="agenda-text">Paso 6: redacción — acrónimo WORDS y errores clásicos</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 5</span>
+      <span class="agenda-text">Pasos 7–10: orden, formato, reproducción y prueba piloto</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--gold);">
+      <span class="agenda-time">Bloque 6</span>
+      <span class="agenda-text">Software, IA, social media, adaptación internacional y ética</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--green);">
+      <span class="agenda-time">Cierre</span>
+      <span class="agenda-text">Síntesis y conexión con el Capítulo 9 — Muestreo</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 01 — APERTURA Y DEFINICIÓN ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 01</div>
+  <div class="sec-title">Apertura y definición<br>del cuestionario</div>
+  <div class="sec-sub">Impacto económico del diseño · Tres objetivos simultáneos · Posición en el proceso</div>
+</div>
+</section>
+
+<!-- Caso apertura Censo -->
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Caso de apertura</div>
-  <div class="slide-h slide-h-white">El cuestionario del Censo 2010 (EE.UU.)</div>
+  <div class="eyebrow eyebrow-light">Caso de apertura · Malhotra 2016</div>
+  <div class="slide-h slide-h-white">El cuestionario del Censo EE.UU. 2010</div>
   <ul class="bullets bullets-white">
-    <li>10 preguntas — el cuestionario censal más corto desde 1820</li>
-    <li>Tasa de respuesta: <strong style="color:#d4a0a0;">74%</strong> (vs. 67% en el censo del 2000)</li>
-    <li>Clave del éxito: lenguaje simple, sin tecnicismos, instrucciones claras</li>
-    <li>Cada 1% adicional de respuesta postal ahorró USD 85 millones en trabajo de campo</li>
+    <li><strong>10 preguntas</strong> — el cuestionario censal más corto desde 1820</li>
+    <li>Tasa de respuesta: <strong style="color:#d4a0a0;">74%</strong> vs. 67% en el censo del 2000 — <strong style="color:#d4a0a0;">+7 puntos porcentuales</strong></li>
+    <li>Cada punto porcentual adicional de respuesta postal = <strong style="color:#d4a0a0;">USD 85 millones</strong> ahorrados en trabajo de campo</li>
+    <li>Claves de diseño: lenguaje simple, instrucciones claras, eliminación de preguntas no esenciales</li>
+    <li>Pruebas piloto rigurosas durante años — el proceso fue público y auditado</li>
   </ul>
-  <div class="callout" style="margin-top:16px;">
-    <strong>3 objetivos de todo cuestionario:</strong> (1) Obtener la información requerida · (2) Motivar al encuestado · (3) Minimizar el error de respuesta
-  </div>
-  <div class="latam-box">
-    <div class="latam-label">🌎 LATAM</div>
-    <div class="latam-text">Censo Argentina 2022: primer autocensado digital de la región. +6 millones de hogares online. Redujo tiempo de campo 40% en zonas urbanas densas.</div>
+  <div class="callout-dk">El diseño del cuestionario tiene <strong>impacto económico directo y medible</strong>. No es un detalle técnico: es una decisión estratégica.</div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1); border-left-color:var(--gold);">
+    <div class="pause-label">⏸ Pregunta de apertura</div>
+    <div class="pause-q" style="color:#f0d890;">¿Alguien completó alguna encuesta en los últimos días? ¿En el celular, en el correo, en persona? Hoy vamos a ver los cuestionarios desde el otro lado: el del investigador que los diseña.</div>
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     DEFINICIÓN
-═══════════════════════════════════ -->
+<!-- Caso LATAM INDEC -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Sección 01 · Definición</div>
+  <div class="eyebrow">Contexto LATAM · Censo 2022</div>
+  <div class="slide-h">INDEC Argentina: primer censo con autocensado digital previo</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">La innovación</div>
+      <div class="col-body">Más de <strong>6 millones de hogares</strong> completaron el cuestionario online antes de la fecha oficial de campo. Primer censo de la región con esta modalidad.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">Desafíos clásicos de diseño</div>
+      <div class="col-body">Lenguaje inclusivo vs. claridad estadística · Preguntas sobre identidad de género en contexto LATAM · Compatibilidad con dispositivos móviles de baja gama</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Resultado operativo</div>
+    <div class="latam-text">El módulo digital redujo el tiempo de campo en zonas urbanas densas en un <strong>40%</strong> y permitió validaciones en tiempo real que el papel no puede ofrecer. El diseño técnico del cuestionario no es un tema abstracto — tuvo impacto operativo directo en el trabajo de campo.</div>
+  </div>
+</div>
+</section>
+
+<!-- Definición -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Concepto central · Malhotra Cap. 8</div>
   <div class="slide-h">¿Qué es un cuestionario?</div>
   <div class="def-block">
-    <div class="def-term-label">Cuestionario — Malhotra</div>
+    <div class="def-term-label">Cuestionario — Malhotra 2016</div>
     <div class="def-text">Técnica <strong>estructurada</strong> para la recopilación de datos que consiste en una serie de preguntas, orales o escritas, que responden los encuestados. Va siempre acompañado de un formulario de respuestas.</div>
   </div>
+  <div class="callout" style="margin-top:14px;">La palabra clave es <strong>estructurada</strong>. A diferencia de una conversación o una entrevista en profundidad, el cuestionario tiene preguntas fijas, orden determinado y opciones de respuesta especificadas. Esta estructura es lo que permite comparar respuestas entre personas — que es el propósito de la investigación cuantitativa.</div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Para pensar</div>
+    <div class="pause-q">El cuestionario <em>traduce</em> el problema de investigación al lenguaje del encuestado. ¿Qué se pierde — y qué se gana — en esa traducción?</div>
+  </div>
+</div>
+</section>
+
+<!-- Tres objetivos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Objetivos del cuestionario · Malhotra</div>
+  <div class="slide-h">Tres objetivos simultáneos — y a veces contradictorios</div>
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="obj-num">01</div>
+      <div class="obj-h">Obtener la información requerida</div>
+      <div class="obj-t">Traducir el problema de investigación en preguntas que el encuestado puede responder. Dos preguntas aparentemente similares pueden producir datos completamente distintos.</div>
+    </div>
+    <div class="obj-card blue-n">
+      <div class="obj-num">02</div>
+      <div class="obj-h">Motivar y mantener al encuestado</div>
+      <div class="obj-t">Un cuestionario aburrido, confuso o intimidante produce respuestas distraídas o abandono a mitad. La tasa de completitud importa tanto como el diseño de cada pregunta.</div>
+    </div>
+    <div class="obj-card green-n">
+      <div class="obj-num">03</div>
+      <div class="obj-h">Minimizar el error de respuesta</div>
+      <div class="obj-t">El error de respuesta ocurre cuando la respuesta es incorrecta o se registra mal. El cuestionario puede ser fuente directa de ese error si no está bien diseñado.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">El desafío del diseño: estos tres objetivos a menudo entran en tensión. Una pregunta perfecta para medir puede ser tediosa de responder. Una pregunta motivadora puede ser vaga. El oficio del investigador es encontrar el equilibrio.</div>
+</div>
+</section>
+
+<!-- Posición en el proceso -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Posición en el proceso · Figura 8.1</div>
+  <div class="slide-h">Dónde entra el cuestionario en la investigación de mercados</div>
+  <div class="pizarron">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Pizarrón — <strong>Figura 8.1 del libro</strong>: diagrama de los seis pasos del proceso de investigación de mercados. El Cap. 8 entra en el <strong>Paso 3 — Diseño de investigación</strong>, después de medición y escalamiento (Cap. 7) y antes del muestreo (Cap. 9).</span>
+  </div>
   <div class="two-col" style="margin-top:12px;">
-    <div class="col-box">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Antes del cuestionario</div>
+      <div class="col-body"><strong>Cap. 7 — Medición y escalamiento.</strong> Definimos cómo asignar números a las características de los objetos (escalas Likert, diferencial semántico, Stapel).</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">Después del cuestionario</div>
+      <div class="col-body"><strong>Cap. 9 — Muestreo.</strong> A quién le aplicamos el cuestionario. Cuántas personas necesitamos y cómo las elegimos.</div>
+    </div>
+  </div>
+  <div class="callout"><strong>El error se propaga.</strong> Un error de diseño en el Paso 3 produce datos defectuosos en el Paso 4, análisis distorsionados en el Paso 5, y conclusiones incorrectas en el Paso 6. No hay corrección posible en el análisis para un cuestionario mal diseñado.</div>
+</div>
+</section>
+
+<!-- Cuestionario vs. formulario de observación -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Distinción conceptual · Malhotra</div>
+  <div class="slide-h">Cuestionario vs. formulario de observación</div>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
       <div class="col-label">Cuestionario</div>
-      <div class="col-body">Preguntas directas al encuestado. Depende de la memoria y disposición del sujeto. Permite medir actitudes, intenciones y percepciones.</div>
+      <div class="col-body">Preguntas directas al encuestado. Depende de la <strong>memoria</strong> y <strong>disposición</strong> del sujeto. Permite medir actitudes, intenciones y percepciones. Puede ser oral, escrito o digital.</div>
     </div>
-    <div class="col-box">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
       <div class="col-label">Formulario de observación</div>
-      <div class="col-body">Registro de conductas observables. No depende de la memoria ni de la disposición a responder. Usado en investigación etnográfica y de campo.</div>
+      <div class="col-body">Registro de conductas observables. <strong>No</strong> depende de la memoria ni de la disposición a responder. Usado en investigación etnográfica y de campo. No requiere contacto con el sujeto.</div>
     </div>
   </div>
-  <div class="piz">✏ Pizarrón — Figura 8.1: ubicación del cuestionario en el proceso de investigación (Paso 3, Diseño de investigación).</div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════
-     PROCESO — VISIÓN GENERAL
-═══════════════════════════════════ -->
-<section>
-<div class="slide s-light">
-  <div class="eyebrow">Proceso de diseño</div>
-  <div class="slide-h">Los 10 pasos — Figura 8.2</div>
-  <div class="piz" style="margin-bottom:12px;">✏ Pizarrón — Dibujar el flujo de 10 pasos en columna vertical (Figura 8.2 del libro), con flechas de retroalimentación entre pasos no adyacentes.</div>
-  <div class="step-row">
-    <div class="step-pill"><div class="step-pill-n">1</div><div class="step-pill-t">Especificar<br>la información</div></div>
-    <div class="step-pill"><div class="step-pill-n">2</div><div class="step-pill-t">Tipo de<br>entrevista</div></div>
-    <div class="step-pill"><div class="step-pill-n">3</div><div class="step-pill-t">Contenido de<br>las preguntas</div></div>
-    <div class="step-pill"><div class="step-pill-n">4</div><div class="step-pill-t">Superar<br>barreras</div></div>
-    <div class="step-pill"><div class="step-pill-n">5</div><div class="step-pill-t">Estructura de<br>las preguntas</div></div>
-    <div class="step-pill" style="background:var(--blue);"><div class="step-pill-n" style="background:white;color:var(--blue);">6</div><div class="step-pill-t">Redacción</div></div>
-    <div class="step-pill" style="background:var(--blue);"><div class="step-pill-n" style="background:white;color:var(--blue);">7</div><div class="step-pill-t">Orden de<br>preguntas</div></div>
-    <div class="step-pill"><div class="step-pill-n">8</div><div class="step-pill-t">Formato<br>gráfico</div></div>
-    <div class="step-pill"><div class="step-pill-n">9</div><div class="step-pill-t">Reproducción</div></div>
-    <div class="step-pill" style="background:var(--accent);"><div class="step-pill-n" style="background:white;color:var(--accent);">10</div><div class="step-pill-t">Prueba<br>piloto</div></div>
-  </div>
-  <div class="callout">Los pasos están <strong>interrelacionados</strong>: un error en el paso 6 puede obligar a rediseñar desde el paso 3. El proceso no es lineal.</div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════
-     PASOS 1-2
-═══════════════════════════════════ -->
-<section>
-<div class="slide s-light">
-  <div class="eyebrow">Pasos 1–2</div>
-  <div class="slide-h">Información y tipo de entrevista</div>
-  <div class="two-col">
-    <div class="col-box">
-      <div class="col-label">Paso 1 · Información</div>
-      <div class="col-body">
-        <ul style="padding-left:1em; margin-top:4px;">
-          <li style="font-size:12px; margin-bottom:4px;">¿Qué decisión requiere estos datos?</li>
-          <li style="font-size:12px; margin-bottom:4px;">¿Qué variable responde cada pregunta?</li>
-          <li style="font-size:12px;">¿Quiénes son los encuestados? (educación, contexto)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-box">
-      <div class="col-label">Paso 2 · Tipo de entrevista</div>
-      <div class="col-body">
-        <ul style="padding-left:1em; margin-top:4px;">
-          <li style="font-size:12px; margin-bottom:4px;"><strong>Personal:</strong> preguntas largas, material visual</li>
-          <li style="font-size:12px; margin-bottom:4px;"><strong>Telefónica:</strong> corta, sin escalas visuales</li>
-          <li style="font-size:12px; margin-bottom:4px;"><strong>Online:</strong> lógica de salto automática</li>
-          <li style="font-size:12px;"><strong>CAPI/tablet:</strong> estándar actual de campo</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:14px;">
-    <strong>El canal define el cuestionario.</strong> Un cuestionario diseñado para entrevista personal fracasará en digital y viceversa.
-  </div>
-  <div class="latam-box">
-    <div class="latam-label">🌎 LATAM — Mercado Libre</div>
-    <div class="latam-text">8–12 millones de encuestas/mes. Rediseño 2021: máx. 3 preguntas en app, 45 segundos promedio. Tasa de respuesta: 4% → 31%. El canal impuso el diseño.</div>
+  <div class="callout" style="margin-top:12px;">Si quiero saber <strong>cuántas veces</strong> alguien toca un producto en la góndola → observación. Si quiero saber <strong>por qué</strong> lo tocó → cuestionario. Ambos instrumentos requieren diseño sistemático. Los principios de este capítulo aplican a los dos.</div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta a la clase</div>
+    <div class="pause-q">¿Por qué el error de respuesta es responsabilidad del <em>diseñador</em> y no solo del encuestado? Piensen en un ejemplo concreto de una pregunta que podría producir errores involuntarios.</div>
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PASOS 3-4
-═══════════════════════════════════ -->
+<!-- ══ SECCIÓN 02 — PROCESO Y PASOS 1 A 4 ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 02</div>
+  <div class="sec-title">El proceso de diseño:<br>pasos 1 a 4</div>
+  <div class="sec-sub">Información requerida · Tipo de entrevista · Contenido · Barreras del encuestado</div>
+</div>
+</section>
+
+<!-- Los 10 pasos — visión de conjunto -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Pasos 3–4</div>
-  <div class="slide-h">Contenido y barreras del encuestado</div>
-  <div class="two-col">
-    <div class="col-box">
-      <div class="col-label">Paso 3 · Contenido</div>
-      <div class="col-body">
-        <p style="font-size:12px; margin-bottom:6px;"><strong>¿Es necesaria la pregunta?</strong><br>Si el dato no se usará en el análisis, eliminarla.</p>
-        <p style="font-size:12px;"><strong>Preguntas doble-cañón:</strong> "¿Qué tan satisfecho con el precio <em>y</em> la calidad?" → dos preguntas separadas.</p>
-      </div>
-    </div>
-    <div class="col-box">
-      <div class="col-label">Paso 4 · Barreras</div>
-      <div class="col-body">
-        <p style="font-size:12px; margin-bottom:4px;"><strong>Incapacidad:</strong> ¿Está informado? ¿Puede expresarse? Filtrar antes de preguntar.</p>
-        <p style="font-size:12px; margin-bottom:4px;"><strong>Esfuerzo excesivo:</strong> Usar rangos en lugar de cifras exactas.</p>
-        <p style="font-size:12px;"><strong>Información delicada:</strong> Ingresos, deudas, sexualidad → preguntas indirectas, randomized response.</p>
-      </div>
-    </div>
+  <div class="eyebrow">Visión de conjunto · Figura 8.2</div>
+  <div class="slide-h">Los 10 pasos del diseño de cuestionarios</div>
+  <div class="step-grid">
+    <div class="step-pill red-s"><div class="step-n">Paso 1</div><div class="step-t">Especificar información</div></div>
+    <div class="step-pill red-s"><div class="step-n">Paso 2</div><div class="step-t">Tipo de entrevista</div></div>
+    <div class="step-pill red-s"><div class="step-n">Paso 3</div><div class="step-t">Contenido de preguntas</div></div>
+    <div class="step-pill red-s"><div class="step-n">Paso 4</div><div class="step-t">Superar barreras</div></div>
+    <div class="step-pill red-s"><div class="step-n">Paso 5</div><div class="step-t">Estructura de preguntas</div></div>
+    <div class="step-pill blue-s"><div class="step-n">Paso 6</div><div class="step-t">Redacción (WORDS)</div></div>
+    <div class="step-pill blue-s"><div class="step-n">Paso 7</div><div class="step-t">Orden (ORDER)</div></div>
+    <div class="step-pill blue-s"><div class="step-n">Paso 8</div><div class="step-t">Formato y diseño</div></div>
+    <div class="step-pill blue-s"><div class="step-n">Paso 9</div><div class="step-t">Reproducción</div></div>
+    <div class="step-pill gold-s"><div class="step-n" style="color:var(--gold);">Paso 10 ★</div><div class="step-t">Prueba piloto</div></div>
   </div>
-  <div class="latam-box">
-    <div class="latam-label">🌎 LATAM — Nubank</div>
-    <div class="latam-text">100M+ clientes. No preguntan lo que ya observan en las transacciones. Solo preguntan sobre intenciones y percepciones que los datos no capturan. Principio: nunca preguntar lo que ya se puede observar.</div>
+  <div class="callout" style="margin-top:14px;">El proceso <strong>no es lineal</strong>. Los pasos están interrelacionados y el desarrollo implica ciclos de repetición. Un error detectado en el Paso 6 puede obligar a regresar al Paso 3. En la práctica, las iteraciones son la norma, no la excepción.</div>
+</div>
+</section>
+
+<!-- Paso 1 -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 1 · Malhotra</div>
+  <div class="slide-h">Especificar la información que se necesita</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:12px;">Antes de escribir una sola pregunta, hay <strong>tres preguntas</strong> que el investigador tiene que responder:</p>
+  <ul class="bullets">
+    <li>¿Cuál es el <strong>problema de decisión</strong> que origina esta investigación? ¿Qué decisión va a tomar el cliente con estos datos?</li>
+    <li>¿Qué <strong>información específica</strong> necesita cada hipótesis o variable de interés del diseño de investigación?</li>
+    <li>¿Quiénes son exactamente los <strong>encuestados</strong>? Su perfil condiciona el lenguaje, la longitud y el canal.</li>
+  </ul>
+  <div class="callout">Sin este paso, el cuestionario tiende a incluir preguntas "por si acaso" que alargan el formulario sin aportar datos accionables. <strong>Un cuestionario largo no es necesariamente un cuestionario mejor.</strong></div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Regla práctica</div>
+    <div class="pause-q">Si no podés decir exactamente en qué parte del análisis vas a usar los datos de una pregunta, esa pregunta no debería estar en el cuestionario.</div>
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PASO 5 — ESTRUCTURA
-═══════════════════════════════════ -->
+<!-- Paso 2 — intro canal define diseño -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Paso 5</div>
-  <div class="slide-h">Estructura de las preguntas</div>
+  <div class="eyebrow">Paso 2 · Malhotra</div>
+  <div class="slide-h">Especificar el tipo de entrevista — el canal define el diseño</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:12px;">El método de recopilación <strong>determina por completo</strong> el diseño del cuestionario. Un cuestionario diseñado para entrevista personal fracasará en digital. Las restricciones del canal son restricciones de diseño.</p>
   <table class="ref-table">
-    <thead><tr><th>Tipo</th><th>Descripción</th><th>Cuándo usar</th></tr></thead>
+    <thead><tr><th>Método</th><th>Implicaciones de diseño</th><th>Restricción principal</th></tr></thead>
     <tbody>
-      <tr><td><strong>Abierta</strong></td><td>Respuesta libre del encuestado</td><td>Exploración, preguntas iniciales</td></tr>
-      <tr><td><strong>Opción múltiple</strong></td><td>Varias alternativas predefinidas</td><td>Preferencias, comportamientos</td></tr>
-      <tr><td><strong>Dicotómica</strong></td><td>Solo 2 alternativas (sí/no)</td><td>Hechos verificables, filtros</td></tr>
-      <tr><td><strong>De escala</strong></td><td>Escala de medición (Likert, etc.)</td><td>Actitudes, percepciones</td></tr>
+      <tr><td><strong>Personal</strong></td><td>Preguntas largas, material visual, aclaración en tiempo real</td><td>Costo del entrevistador; sesgo del entrevistador</td></tr>
+      <tr><td><strong>Telefónica</strong></td><td>Solo preguntas cortas y sencillas; sin escalas visuales</td><td>El encuestado no puede ver el cuestionario</td></tr>
+      <tr><td><strong>Correo / papel</strong></td><td>Instrucciones muy detalladas; sin lógica de salto compleja</td><td>Alto riesgo de abandono y respuestas incompletas</td></tr>
+      <tr><td><strong>Online / CAWI</strong></td><td>Lógica de salto automática, multimedia, validaciones</td><td>Riesgo de respuesta acelerada sin leer</td></tr>
+      <tr><td><strong>CAPI / tablet</strong></td><td>Combina ventajas personal + digital; estándar actual LATAM</td><td>Requiere capacitación del entrevistador</td></tr>
     </tbody>
   </table>
+  <div class="callout"><strong>Regla:</strong> primero definir el universo objetivo, luego el canal. Nunca al revés. El canal es <em>consecuencia</em> de la definición del universo, no una preferencia independiente.</div>
+</div>
+</section>
+
+<!-- Caso Mercado Libre -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Mercado Libre</div>
+  <div class="slide-h slide-h-white">8 a 12 millones de encuestas por mes — el canal forzó el diseño</div>
+  <ul class="bullets bullets-white">
+    <li>Mercado Libre aplica entre <strong>8 y 12 millones de encuestas</strong> de satisfacción por mes en América Latina</li>
+    <li>En 2021 rediseñaron el cuestionario para adaptarse a las restricciones del canal: <strong>notificación push dentro de la app</strong></li>
+    <li>Restricciones del nuevo diseño: máximo 3 preguntas, tiempo promedio de respuesta de 45 segundos</li>
+    <li>Tasa de respuesta: del <strong style="color:#d4a0a0;">4% con el cuestionario largo</strong> al <strong style="color:#a5d6a7;">31% con el de 3 preguntas</strong> — multiplicación por 7</li>
+  </ul>
+  <div class="callout-dk">El canal no es un detalle técnico — es la <strong>primera restricción de diseño</strong>. El diseño adaptado al canal multiplicó por 7 la tasa de respuesta.</div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1); border-left-color:var(--gold);">
+    <div class="pause-label">⏸ Pregunta a la clase</div>
+    <div class="pause-q" style="color:#f0d890;">Tienen que diseñar una encuesta para medir satisfacción con el transporte público en Montevideo. ¿Qué tipo de entrevista usarían y por qué? ¿Qué restricciones impone ese canal al diseño del cuestionario?</div>
+  </div>
+</div>
+</section>
+
+<!-- Paso 3 — contenido -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 3 · Malhotra</div>
+  <div class="slide-h">Contenido: dos preguntas para cada ítem</div>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">① ¿Es necesaria la pregunta?</div>
+      <div class="col-body">Toda pregunta debe contribuir directamente a la información requerida. Si el dato <strong>no va a usarse en el análisis</strong>, la pregunta se elimina. No hay preguntas "de cortesía" ni "por si acaso". Malhotra es explícito: sin uso satisfactorio de los datos, la pregunta se elimina.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">② ¿Se necesitan varias preguntas en vez de una?</div>
+      <div class="col-body">Cuando una pregunta toca <strong>más de una dimensión simultáneamente</strong>, se llama <em>pregunta doble-cañón</em>. El encuestado puede tener opiniones distintas sobre cada dimensión. La solución es siempre separar: una pregunta por dimensión.</div>
+    </div>
+  </div>
+  <div class="err-grid">
+    <div class="err-bad">
+      <div class="err-lab">❌ Pregunta doble-cañón</div>
+      <div class="err-txt">"¿Qué tan satisfecho está con el <em>precio</em> y la <em>calidad</em> del producto?"</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Una dimensión por pregunta</div>
+      <div class="err-txt">A — "¿Qué tan satisfecho está con el <em>precio</em>?"<br>B — "¿Qué tan satisfecho está con la <em>calidad</em>?"</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Paso 4 — barreras -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 4 · Malhotra</div>
+  <div class="slide-h">Superar la incapacidad y la renuencia a responder</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Incapacidad para responder</div>
+      <div class="col-body">
+        <strong>¿Está informado el encuestado?</strong> No tiene sentido preguntar sobre experiencias que no ha tenido. Filtrar con preguntas de calificación.<br><br>
+        <strong>¿Puede expresar la respuesta?</strong> Emociones complejas y hábitos inconscientes requieren <em>técnicas proyectivas</em> o escalas especiales (Cap. 7).
+      </div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">Renuencia para responder</div>
+      <div class="col-body">
+        <strong>Esfuerzo excesivo:</strong> exigir cifras exactas ("¿cuánto gastó en supermercado en 6 meses?") produce respuestas inexactas. Solución: <em>rangos o anclas de referencia</em>.<br><br>
+        <strong>Información delicada:</strong> ingresos, deudas, temas tabú. Técnicas: preguntas indirectas, tercera persona, <em>respuesta aleatorizada</em>.
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Caso Nubank -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Nubank</div>
+  <div class="slide-h slide-h-white">100 millones de clientes: nunca preguntar lo que ya se puede observar</div>
+  <ul class="bullets bullets-white">
+    <li>Nubank es el <strong>mayor banco digital de América Latina</strong> con más de 100 millones de clientes en 2024</li>
+    <li>En sus encuestas de satisfacción <strong>no preguntan</strong> lo que ya pueden observar en los datos transaccionales (frecuencia de uso, tickets, categorías de gasto)</li>
+    <li>Solo preguntan sobre <strong>intenciones futuras</strong>, percepciones de productos nuevos, y razones de comportamiento que los datos propios no pueden revelar</li>
+    <li>Resultado: cuestionarios más cortos, mayor tasa de respuesta, datos con <strong>valor marginal genuino</strong></li>
+  </ul>
+  <div class="callout-dk">El principio en acción: <strong>nunca preguntar lo que ya se puede observar</strong>. Aplicar este criterio al Paso 3 reduce la longitud y aumenta la calidad de las respuestas.</div>
+  <div class="latam-box" style="background:rgba(45,122,58,0.15); border-left-color:var(--green);">
+    <div class="latam-label" style="color:#a5d6a7;">🌎 Aplicación práctica</div>
+    <div class="latam-text" style="color:#c8e6c9;">Antes de agregar una pregunta al cuestionario, preguntar: ¿este dato ya existe en una base interna? Si la respuesta es sí, no va al cuestionario.</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 03 — PASO 5: ESTRUCTURA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 03</div>
+  <div class="sec-title">Paso 5:<br>estructura de las preguntas</div>
+  <div class="sec-sub">Abiertas · Opción múltiple · Dicotómicas · De escala</div>
+</div>
+</section>
+
+<!-- Paso 5 — intro 4 tipos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 5 · Malhotra</div>
+  <div class="slide-h">Cuatro tipos de preguntas según estructura</div>
+  <table class="ref-table">
+    <thead><tr><th>Tipo</th><th>Descripción</th><th>Cuándo usar</th><th>Limitación</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Abierta</strong></td><td>Respuesta libre, con palabras del encuestado</td><td>Exploración, preguntas iniciales</td><td>Difícil de codificar y analizar a escala</td></tr>
+      <tr><td><strong>Opción múltiple</strong></td><td>Alternativas predefinidas — exhaustivas y mutuamente excluyentes</td><td>Preferencias, comportamientos</td><td>Sesgo del orden entre alternativas</td></tr>
+      <tr><td><strong>Dicotómica</strong></td><td>Solo 2 alternativas (sí/no, acuerdo/desacuerdo)</td><td>Filtros, hechos verificables</td><td>Pierde matices; incluir neutro si aplica</td></tr>
+      <tr><td><strong>De escala</strong></td><td>Likert, diferencial semántico, Stapel (Cap. 7)</td><td>Actitudes y percepciones</td><td>Requiere validación previa de la escala</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">Un cuestionario con <strong>muchas preguntas abiertas</strong> es un cuestionario cualitativo, no cuantitativo. Si el análisis requiere codificación a escala, las preguntas deben tener estructura.</div>
+</div>
+</section>
+
+<!-- Opción múltiple — reglas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 5 · Opción múltiple</div>
+  <div class="slide-h">Dos reglas irrenunciables para las alternativas</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">① Exhaustivas</div>
+      <div class="col-body">Las alternativas deben <strong>cubrir todas las opciones posibles</strong>. Si no es viable listar todo, incluir la opción "Otro (especifique)". Un encuestado que no encuentra su respuesta en la lista produce dato faltante o respuesta falsa.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">② Mutuamente excluyentes</div>
+      <div class="col-body">Ningún encuestado debería necesitar marcar <strong>dos opciones</strong>. Si las categorías se superponen ("18–30 años" y "25–45 años"), la data es inútil. Si las alternativas son numerosas, considerar dividir en más de una pregunta.</div>
+    </div>
+  </div>
+  <div class="err-grid">
+    <div class="err-bad">
+      <div class="err-lab">❌ Categorías que se superponen</div>
+      <div class="err-txt">Edad: □ 18–30 &nbsp; □ 25–45 &nbsp; □ 40–60 &nbsp; □ 55+<br><em>→ Una persona de 28 años puede marcar dos opciones.</em></div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Categorías disjuntas</div>
+      <div class="err-txt">Edad: □ 18–24 &nbsp; □ 25–34 &nbsp; □ 35–44 &nbsp; □ 45–54 &nbsp; □ 55+<br><em>→ Cada edad entra en exactamente una categoría.</em></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Split ballot -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Recurso técnico · Paso 5</div>
+  <div class="slide-h">Split ballot (votación dividida) — control del sesgo del orden</div>
+  <div class="def-block">
+    <div class="def-term-label">Split ballot</div>
+    <div class="def-text">Se divide la muestra en grupos. Cada grupo recibe las <strong>alternativas en un orden diferente</strong>. Esto reduce el sesgo del orden: la tendencia a elegir con más frecuencia las primeras opciones (efecto primacía) o las últimas (efecto recencia).</div>
+  </div>
+  <div class="callout" style="margin-top:14px;">Plataformas digitales modernas — <strong>Qualtrics, SurveyMonkey, Typeform</strong> — hacen esto automáticamente con la opción "randomizar alternativas". No hay excusa técnica para no aplicarlo en canal digital.</div>
   <div class="pause-box">
-    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
-    <div class="pause-q">"Les preguntaron en una encuesta: '¿Está de acuerdo con que el gobierno debería regular mejor la IA?' ¿Qué problema tiene esta pregunta? ¿Qué tipo de pregunta usarían en su lugar?"</div>
+    <div class="pause-label">⏸ Para el proyecto</div>
+    <div class="pause-q">¿En qué preguntas de sus cuestionarios de proyecto aplicarían split ballot? ¿En cuáles no tendría sentido aplicarlo?</div>
   </div>
-  <div class="callout">Regla: opciones deben ser <strong>exhaustivas</strong> (cubren todas las respuestas posibles) y <strong>mutuamente excluyentes</strong> (ningún encuestado necesita marcar dos). Incluir opción neutral en dicotómicas si hay neutrales esperados.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PASO 6 — REDACCIÓN
-═══════════════════════════════════ -->
+<!-- Caso aerolínea -->
 <section>
-<div class="slide s-light">
-  <div class="eyebrow">Paso 6</div>
-  <div class="slide-h">Redacción de las preguntas — Acrónimo WORDS</div>
-  <div class="acro-box" style="background:#f5f0eb; border-color:var(--border);">
-    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">W</div><div class="acro-text" style="color:#333;">ho, What, When, Where, Why, How — Definir exactamente de qué se pregunta</div></div>
-    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">O</div><div class="acro-text" style="color:#333;">rdinary words — Vocabulario del encuestado, no del investigador</div></div>
-    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">R</div><div class="acro-text" style="color:#333;">egularly, usually, often — Evitar estas palabras ambiguas; usar rangos numéricos</div></div>
-    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">D</div><div class="acro-text" style="color:#333;">ual statements — Incluir versiones positivas y negativas en la escala</div></div>
-    <div class="acro-row"><div class="acro-letter" style="color:var(--accent);">S</div><div class="acro-text" style="color:#333;">pecifying how to answer (leading questions) — Evitar preguntas inductoras</div></div>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ejercicio de cierre · Paso 5</div>
+  <div class="slide-h slide-h-white">Una pregunta, tres problemas de diseño</div>
+  <div style="background:rgba(192,57,43,0.15); border-left:4px solid var(--accent); padding:14px 18px; border-radius:0 8px 8px 0; margin-bottom:14px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; color:#f5a09a; letter-spacing:2px; margin-bottom:6px;">❌ PREGUNTA PROBLEMÁTICA</div>
+    <div style="font-size:14px; color:white; line-height:1.5; font-style:italic;">"¿Cómo calificaría la puntualidad, el servicio a bordo y la experiencia de check-in?" &nbsp; (1 = muy malo, 5 = muy bueno)</div>
   </div>
-  <div class="callout">El <strong>sesgo de aquiescencia</strong> es la tendencia a responder afirmativamente independientemente del contenido. Una pregunta inductora lo amplifica. Una escala balanceada (enunciados positivos y negativos) lo contrarresta.</div>
+  <ul class="bullets bullets-white">
+    <li><strong>Problema 1 — Doble (triple) cañón:</strong> puntualidad, servicio a bordo y check-in son tres dimensiones distintas que merecen preguntas separadas</li>
+    <li><strong>Problema 2 — Sin marco de referencia:</strong> no especifica el vuelo ni la fecha. El encuestado responde sobre el último vuelo, sobre el promedio o sobre el mejor que recuerda</li>
+    <li><strong>Problema 3 — Ancla intermedia ambigua:</strong> sin ancla descriptiva en el "3", ese punto puede significar cosas distintas para distintas personas</li>
+  </ul>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1); border-left-color:var(--gold); margin-top:14px;">
+    <div class="pause-label">⏸ Pregunta a la clase</div>
+    <div class="pause-q" style="color:#f0d890;">¿Cómo reescribirían esta pregunta para resolver los tres problemas? ¿Cuántas preguntas necesitan?</div>
+  </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     EJEMPLOS REDACCIÓN
-═══════════════════════════════════ -->
+<!-- ══ SECCIÓN 04 — PASO 6: REDACCIÓN (WORDS) ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 04</div>
+  <div class="sec-title">Paso 6:<br>redacción de las preguntas</div>
+  <div class="sec-sub">El paso más artesanal · Acrónimo WORDS · Errores clásicos</div>
+</div>
+</section>
+
+<!-- Paso 6 — intro WORDS -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Paso 6 · Ejemplos</div>
-  <div class="slide-h">Preguntas incorrectas vs. correctas</div>
+  <div class="eyebrow">Paso 6 · Malhotra</div>
+  <div class="slide-h">Las palabras importan — el acrónimo WORDS</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:12px;">Este es el paso <strong>más artesanal</strong> del proceso. Una pregunta redactada de dos formas aparentemente similares puede producir resultados completamente distintos. Malhotra propone cinco principios que se pueden recordar con el acrónimo <strong>WORDS</strong>:</p>
+  <div style="background:#f5f0eb; border:1px solid var(--border); border-radius:8px; padding:14px 16px;">
+    <div class="acro-row"><div class="acro-letter">W</div><div class="acro-text"><strong>Who, What, When, Where, Why, How</strong> — definir con precisión el tema de la pregunta</div></div>
+    <div class="acro-row"><div class="acro-letter">O</div><div class="acro-text"><strong>Ordinary words</strong> — vocabulario accesible para todos los encuestados</div></div>
+    <div class="acro-row"><div class="acro-letter">R</div><div class="acro-text"><strong>Regularly, usually, often</strong> — evitar palabras ambiguas de frecuencia</div></div>
+    <div class="acro-row"><div class="acro-letter">D</div><div class="acro-text"><strong>Dual statements</strong> — incluir enunciados positivos <em>y</em> negativos en la escala</div></div>
+    <div class="acro-row"><div class="acro-letter">S</div><div class="acro-text"><strong>Specifying how to answer</strong> — evitar preguntas inductoras</div></div>
+  </div>
+</div>
+</section>
+
+<!-- W — 6 preguntas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6 · WORDS — letra W</div>
+  <div class="slide-h">W: definir exactamente qué se pregunta</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:10px;">Toda pregunta debe definir con precisión su tema. Si falta una de las seis coordenadas — quién, qué, cuándo, dónde, por qué, cómo — el encuestado tiene que adivinar.</p>
+  <div class="err-grid">
+    <div class="err-bad">
+      <div class="err-lab">❌ Incompleta</div>
+      <div class="err-txt">"¿Qué marca de champú usa?"<br><br><em>→ ¿El champú que usó esta mañana? ¿Durante la semana? ¿En casa? ¿En el gimnasio?</em></div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Las 6 coordenadas especificadas</div>
+      <div class="err-txt">"¿Qué marca o marcas de champú utilizó personalmente <em>en casa</em> durante <em>el último mes</em>? En caso de haber usado más de una, liste todas las marcas pertinentes."</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">La versión correcta resuelve: <strong>quién</strong> (la persona encuestada), <strong>qué</strong> (marca de champú), <strong>cuándo</strong> (último mes), <strong>dónde</strong> (en casa), <strong>cómo</strong> (todas las marcas usadas).</div>
+</div>
+</section>
+
+<!-- O — ordinary words -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6 · WORDS — letra O</div>
+  <div class="slide-h">O: vocabulario accesible a todos los encuestados</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:10px;">El nivel de referencia es la <strong>escolaridad promedio de la población</strong>, no la del investigador. Una palabra que el investigador usa sin pensar puede ser opaca para el encuestado.</p>
+  <div class="err-grid">
+    <div class="err-bad">
+      <div class="err-lab">❌ Vocabulario técnico</div>
+      <div class="err-txt">"¿Considera que la <em>distribución</em> de bebidas gaseosas es <em>adecuada</em>?"</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Vocabulario ordinario</div>
+      <div class="err-txt">"¿Cree que <em>siempre hay</em> bebidas gaseosas <em>disponibles cuando desea comprarlas</em>?"</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">La segunda versión pregunta <em>lo mismo</em> con vocabulario que <strong>cualquier encuestado</strong> puede procesar. El test mental: ¿una persona con educación primaria entendería esta pregunta sin pedir aclaración?</div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Aplicación</div>
+    <div class="pause-q">Revisen una pregunta de su cuestionario de proyecto. ¿Hay alguna palabra que el encuestado "promedio" no usa en su habla cotidiana? Reescríbanla.</div>
+  </div>
+</div>
+</section>
+
+<!-- R — palabras ambiguas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6 · WORDS — letra R</div>
+  <div class="slide-h">R: evitar "frecuentemente" y palabras ambiguas de frecuencia</div>
+  <p style="font-size:13px; color:#333; line-height:1.6; margin-bottom:10px;">Términos como "generalmente", "normalmente", "con frecuencia", "a menudo", "regularmente", "ocasionalmente" tienen <strong>significados distintos para distintas personas</strong>. Usar rangos numéricos objetivos.</p>
   <div class="err-grid">
     <div class="err-bad">
       <div class="err-lab">❌ Palabras ambiguas</div>
-      <div class="err-txt">"¿Con qué frecuencia compra?"<br>Opciones: Nunca / Ocasionalmente / A veces / A menudo</div>
+      <div class="err-txt">"¿Con qué frecuencia compra en tiendas departamentales?"<br><br>Opciones: Nunca · Ocasionalmente · A veces · A menudo · Regularmente<br><br><em>→ Tres personas que compran 1 vez/mes pueden marcar tres categorías distintas.</em></div>
     </div>
     <div class="err-good">
       <div class="err-lab">✓ Rangos objetivos</div>
-      <div class="err-txt">"En un mes normal, ¿cuántas veces compra?"<br>Opciones: Menos de 1 / 1-2 / 3-4 / Más de 4</div>
+      <div class="err-txt">"En un mes normal, ¿con qué frecuencia compra en tiendas departamentales?"<br><br>Opciones: Menos de 1 vez · 1–2 veces · 3–4 veces · Más de 4 veces<br><br><em>→ Marco de referencia estable. Categorías definidas objetivamente.</em></div>
     </div>
+  </div>
+</div>
+</section>
+
+<!-- D y S combinados -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 6 · WORDS — letras D y S</div>
+  <div class="slide-h">D: dual statements — S: evitar preguntas inductoras</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">D — Dual statements</div>
+      <div class="col-body">En una escala de actitudes, incluir tanto versiones <strong>positivas como negativas</strong> de las aseveraciones. Controla el <em>sesgo de aquiescencia</em>: la tendencia a responder afirmativamente sin leer el contenido específico de cada ítem.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">S — Specifying how to answer</div>
+      <div class="col-body">Una <strong>pregunta inductora</strong> lleva al encuestado a responder de cierta manera. La redacción sesga la respuesta, produciendo también sesgo de aquiescencia.</div>
+    </div>
+  </div>
+  <div class="err-grid">
     <div class="err-bad">
-      <div class="err-lab">❌ Inductora (sesgo)</div>
-      <div class="err-txt">"¿Considera que los ciudadanos patriotas deben comprar importados dejando sin empleo a sus compatriotas?"</div>
+      <div class="err-lab">❌ Pregunta inductora · ejemplo del libro</div>
+      <div class="err-txt">"¿Considera que los <em>ciudadanos patriotas</em> que viven en este país deben comprar automóviles importados, <em>aun cuando esto deje sin empleo a sus compatriotas</em>?"</div>
     </div>
     <div class="err-good">
       <div class="err-lab">✓ Neutral</div>
-      <div class="err-txt">"¿Cree usted que las personas deben comprar automóviles importados?"<br>Sí / No / No lo sé</div>
-    </div>
-    <div class="err-bad">
-      <div class="err-lab">❌ Doble-cañón</div>
-      <div class="err-txt">"¿Qué tan satisfecho está con el precio <em>y</em> la calidad del producto?"</div>
-    </div>
-    <div class="err-good">
-      <div class="err-lab">✓ Una dimensión</div>
-      <div class="err-txt">Pregunta A: precio<br>Pregunta B: calidad<br>(separadas y evaluadas individualmente)</div>
+      <div class="err-txt">"¿Cree usted que las personas deben comprar automóviles importados?"<br><br>Opciones: Sí · No · No lo sé</div>
     </div>
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PASO 7 — ORDEN
-═══════════════════════════════════ -->
+<!-- Caso Telecom Argentina NPS -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Telecom Argentina (Personal)</div>
+  <div class="slide-h slide-h-white">El efecto de la escala sobre el NPS — cuando la redacción <em>es</em> el dato</div>
+  <ul class="bullets bullets-white">
+    <li>En 2022, Personal (Telecom Argentina) rediseñó su encuesta de NPS para zonas con baja escolaridad</li>
+    <li>Cambio: de escala numérica <strong>0 a 10</strong> a opciones descriptivas — Muy probable, Probable, Neutro, Poco probable, Muy poco probable</li>
+    <li>Resultado: el NPS calculado fue <strong style="color:#a5d6a7;">8 puntos más alto</strong> con la escala descriptiva</li>
+    <li>La satisfacción <em>no había cambiado</em>: la comprensión de la escala numérica era inconsistente entre segmentos</li>
+    <li>Tres personas con el mismo nivel de satisfacción marcaban "7", "8" y "9" en la numérica, mientras las tres marcaban "Muy probable" en la descriptiva</li>
+  </ul>
+  <div class="callout-dk"><strong>La redacción y el formato de la escala son inseparables del dato obtenido.</strong> Cambiar el formato cambia la métrica, aunque la realidad subyacente sea la misma.</div>
+</div>
+</section>
+
+<!-- ══ SECCIÓN 05 — PASOS 7 A 10 ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 05</div>
+  <div class="sec-title">Pasos 7 a 10:<br>orden, formato y prueba</div>
+  <div class="sec-sub">Embudo · Formato visual · Reproducción · Pretest obligatorio</div>
+</div>
+</section>
+
+<!-- Paso 7 — cinco principios -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Paso 7</div>
-  <div class="slide-h">Orden de las preguntas — Enfoque de embudo</div>
-  <div class="piz">✏ Pizarrón — Dibujar Figura 8.4: el embudo invertido con preguntas amplias en la parte superior y específicas en la base. Enfatizar que invertir el orden sesga las generales.</div>
-  <div class="two-col" style="margin-top:10px;">
-    <div>
-      <ul class="bullets">
-        <li><strong>Filtro / calificación</strong> — ¿Cumple criterios?</li>
-        <li><strong>Calentamiento</strong> — Simple, general, no intimidante</li>
-        <li><strong>Fundamentales fáciles</strong> — Núcleo del estudio</li>
-        <li><strong>Fundamentales difíciles</strong> — Complejas o sensibles</li>
-        <li><strong>Clasificación</strong> — Sociodemográficos</li>
-        <li><strong>Identificación</strong> — Nombre, contacto (último)</li>
-      </ul>
+  <div class="eyebrow">Paso 7 · Malhotra</div>
+  <div class="slide-h">Orden de las preguntas — cinco principios</div>
+  <ul class="bullets">
+    <li><strong>Preguntas iniciales:</strong> interesantes, sencillas y no intimidantes. Las primeras preguntas establecen el tono y determinan si el encuestado va a colaborar</li>
+    <li><strong>Tipo de información:</strong> primero la información básica (núcleo del estudio), luego clasificación (variables demográficas), al final identificación (nombre, teléfono)</li>
+    <li><strong>Preguntas difíciles o sensibles:</strong> hacia el final, cuando el encuestado ya superó la inercia inicial y tiene menos probabilidad de abandonar</li>
+    <li><strong>Enfoque de embudo:</strong> de lo general a lo específico. Las preguntas específicas primero pueden sesgar las respuestas a preguntas generales posteriores</li>
+    <li><strong>Orden lógico:</strong> agrupar preguntas sobre un mismo tema. Al cambiar de tema, usar frases breves de transición</li>
+  </ul>
+  <div class="callout">El acrónimo <strong>ORDER</strong>: <strong>O</strong>pening simple · <strong>R</strong>udimentary info first · <strong>D</strong>ifficult questions last · <strong>E</strong>xamine effect on later Qs · <strong>R</strong>eview for logical sequence.</div>
+</div>
+</section>
+
+<!-- Enfoque embudo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Paso 7 · Figura 8.4</div>
+  <div class="slide-h">El enfoque de embudo: de lo general a lo específico</div>
+  <div class="funnel-vis">
+    <div class="funnel-row"><div class="funnel-bar" style="width:420px;">Preguntas generales</div><div class="funnel-lbl">Actitudes amplias, comportamiento global</div></div>
+    <div class="funnel-row"><div class="funnel-bar" style="width:340px;">Preguntas de categoría</div><div class="funnel-lbl">Sobre el tipo de producto o servicio</div></div>
+    <div class="funnel-row"><div class="funnel-bar" style="width:260px;">Preguntas de marca</div><div class="funnel-lbl">Sobre una marca específica</div></div>
+    <div class="funnel-row"><div class="funnel-bar" style="width:180px;">Atributos específicos</div><div class="funnel-lbl">Precio, empaque, experiencia</div></div>
+    <div class="funnel-row"><div class="funnel-bar" style="width:120px;">Demográficas</div><div class="funnel-lbl">Clasificación e identificación</div></div>
+  </div>
+  <div class="callout"><strong>Ejemplo clásico:</strong> si primero pregunto por la importancia de la ubicación al elegir un supermercado, la siguiente pregunta general sobre criterios de elección estará contaminada — la ubicación aparece sobrerrepresentada.</div>
+</div>
+</section>
+
+<!-- Caso Rappi orden -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · Rappi — 2023</div>
+  <div class="slide-h slide-h-white">El orden de las preguntas cambia el ranking de restaurantes</div>
+  <ul class="bullets bullets-white">
+    <li>Rappi descubrió en 2023 que el orden de las preguntas en su encuesta posventa afectaba los resultados de manera significativa</li>
+    <li>Cuando la primera pregunta era sobre <strong>el repartidor</strong>, los puntajes al restaurante eran <strong style="color:#d4a0a0;">0,3 puntos más altos</strong> que cuando la primera pregunta era sobre el restaurante</li>
+    <li>Efecto de <strong>contraste positivo</strong>: el encuestado ajusta el puntaje al restaurante por comparación con el repartidor anterior</li>
+    <li>En una escala de 1 a 5, una diferencia de 0,3 puntos es <strong>suficiente para cambiar el ranking</strong> de restaurantes destacados en la plataforma</li>
+  </ul>
+  <div class="callout-dk"><strong>Solución:</strong> randomización del orden de preguntas entre encuestados — la mitad recibe primero la pregunta sobre el repartidor, la otra mitad sobre el restaurante. Split ballot aplicado al orden completo del cuestionario.</div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1); border-left-color:var(--gold);">
+    <div class="pause-label">⏸ Implicación</div>
+    <div class="pause-q" style="color:#f0d890;">Si el orden puede cambiar el ranking público de un restaurante, el diseño del cuestionario tiene <em>consecuencias económicas directas</em> para terceros que no participan de su diseño.</div>
+  </div>
+</div>
+</section>
+
+<!-- Pasos 8 y 9 -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Pasos 8 y 9 · Malhotra</div>
+  <div class="slide-h">Formato y reproducción — cuatro principios de diseño gráfico</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Paso 8 — Formato gráfico</div>
+      <div class="col-body">
+        <ul style="padding-left:1em; margin-top:2px;">
+          <li style="margin-bottom:4px;">Dividir el cuestionario en <strong>partes temáticas numeradas</strong></li>
+          <li style="margin-bottom:4px;">No amontonar preguntas para que parezca más corto — produce errores de omisión</li>
+          <li style="margin-bottom:4px;">Cada pregunta completa en <strong>una sola página o pantalla</strong></li>
+          <li>El espaciado visual influye en la percepción de longitud</li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <div class="col-box">
-        <div class="col-label">Acrónimo ORDER</div>
-        <div class="col-body">
-          <strong>O</strong>pening questions: simple<br>
-          <strong>R</strong>udimentary info first<br>
-          <strong>D</strong>ifficult questions last<br>
-          <strong>E</strong>xamine effect on later Qs<br>
-          <strong>R</strong>eview for logical sequence
-        </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label">Paso 9 — Reproducción</div>
+      <div class="col-body">
+        <ul style="padding-left:1em; margin-top:2px;">
+          <li style="margin-bottom:4px;">Apariencia profesional = mayor <strong>credibilidad</strong> y cooperación</li>
+          <li style="margin-bottom:4px;">Numeración seriada de formularios para control de calidad de campo</li>
+          <li>Previsualizar en todos los dispositivos del público objetivo — en LATAM, <strong>smartphone</strong> ante todo</li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="latam-box">
-    <div class="latam-label">🌎 LATAM — Rappi 2023</div>
-    <div class="latam-text">Efecto de orden: primero repartidor → puntaje al restaurante 0.3 pts más alto. Solución: randomización del orden entre encuestados.</div>
-  </div>
+  <div class="callout">En LATAM, el smartphone es el <strong>dispositivo principal</strong> de acceso a internet para la mayoría de los segmentos. Un cuestionario digital no testeado en móvil es un cuestionario que excluye a gran parte del universo.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     PASOS 8-10
-═══════════════════════════════════ -->
-<section>
-<div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Pasos 8–10</div>
-  <div class="slide-h slide-h-white">Formato, reproducción y prueba piloto</div>
-  <div class="two-col">
-    <div>
-      <p style="font-size:12px; color:rgba(255,255,255,0.6); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Paso 8 — Formato</p>
-      <ul class="bullets bullets-white">
-        <li>Dividir en partes temáticas numeradas</li>
-        <li>No amontonar preguntas por apariencia</li>
-        <li>Cada pregunta en una sola página/pantalla</li>
-      </ul>
-      <p style="font-size:12px; color:rgba(255,255,255,0.6); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin:10px 0 8px;">Paso 9 — Reproducción</p>
-      <ul class="bullets bullets-white">
-        <li>Apariencia profesional = mayor cooperación</li>
-        <li>Numeración seriada para control de campo</li>
-      </ul>
-    </div>
-    <div>
-      <p style="font-size:12px; color:var(--accent); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Paso 10 — Prueba piloto ★</p>
-      <ul class="bullets bullets-white">
-        <li>Obligatoria. Siempre. Sin excepciones.</li>
-        <li>Muestra similar a la real (15–30 personas)</li>
-        <li>Registrar observaciones, tiempos, reacciones</li>
-        <li>Comenzar con entrevista personal aunque la encuesta sea digital</li>
-        <li>Repetir tras cambios sustanciales</li>
-      </ul>
-    </div>
-  </div>
-  <div class="callout">
-    <strong>A/B testing digital:</strong> iFood (Brasil, 2022): versión 3 preguntas + 1 abierta opcional → 2.4x más respuestas completas que versión de 7 preguntas. La prueba piloto puede ser automatizada.
-  </div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════
-     SOFTWARE
-═══════════════════════════════════ -->
+<!-- Paso 10 — prueba piloto -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Herramientas</div>
-  <div class="slide-h">Software: del papel a la IA</div>
-  <table class="ref-table">
-    <thead><tr><th>Herramienta</th><th>Perfil</th><th>Uso en LATAM</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Qualtrics</strong></td><td>Profesional completo — paneles, análisis de texto</td><td>Grandes empresas y consultoras</td></tr>
-      <tr><td><strong>SurveyMonkey</strong></td><td>SMB / profesional — NPS integrado</td><td>Ampliamente usado</td></tr>
-      <tr><td><strong>Typeform</strong></td><td>Conversacional — mayor tasa de completitud</td><td>Startups y fintechs</td></tr>
-      <tr><td><strong>KoBoToolbox</strong></td><td>Campo / offline — sin conectividad</td><td>Sector social y ONG</td></tr>
-      <tr><td><strong>Google Forms</strong></td><td>Gratuito — integración con Sheets</td><td>Universidades, pymes</td></tr>
-    </tbody>
-  </table>
-  <div class="pause-box">
-    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
-    <div class="pause-q">¿Cuál de estas herramientas usarían para su proyecto final y por qué? ¿Qué consideraciones de la encuesta (canal, muestra, tipo de preguntas) influyen en la elección?</div>
+  <div class="eyebrow">Paso 10 · Malhotra · ★ OBLIGATORIO</div>
+  <div class="slide-h">La prueba piloto (pretest) — el paso más omitido y más importante</div>
+  <div class="def-block">
+    <div class="def-term-label">Cita que abre el capítulo</div>
+    <div class="def-text">"Poner a prueba un cuestionario es <strong>absolutamente esencial</strong> para tener éxito. Todos los investigadores profesionales lo saben." No hay excepciones.</div>
   </div>
+  <ul class="bullets" style="margin-top:10px;">
+    <li><strong>Muestra similar a la real:</strong> entre <strong>15 y 30 personas</strong> para encuestas simples; más para cuestionarios complejos o con múltiples segmentos</li>
+    <li><strong>Comenzar con entrevistas personales</strong>, incluso si la encuesta final será digital — ver las reacciones del encuestado aporta información que los datos no capturan</li>
+    <li>El entrevistador del pretest debe registrar observaciones: <strong>titubeos, confusiones, tiempos inusualmente largos</strong></li>
+    <li>Después de cambios sustanciales, <strong>repetir</strong> la prueba piloto — una modificación puede resolver un problema y crear otro</li>
+  </ul>
+  <div class="callout"><strong>No hay corrección posible</strong> en el análisis para un cuestionario que no fue testeado. Los problemas de diseño se convierten en ruido estadístico irrecuperable.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     IA EN CUESTIONARIOS
-═══════════════════════════════════ -->
+<!-- Caso iFood A/B testing -->
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">IA y cuestionarios · 2024</div>
-  <div class="slide-h slide-h-white">Synthetic respondents: oportunidad y riesgo</div>
-  <div class="two-col">
-    <div class="col-box" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
-      <div class="col-label">Usos legítimos de IA</div>
-      <ul style="padding-left:1em; margin-top:4px;">
-        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Generar borrador inicial del cuestionario</li>
-        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Detectar preguntas doble-cañón e inductoras</li>
-        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Traducir y adaptar culturalmente</li>
-        <li class="col-body-w" style="font-size:12px;">Generar variantes A/B para piloteo</li>
-      </ul>
+  <div class="eyebrow eyebrow-light">Caso LATAM · iFood — Brasil, 2022</div>
+  <div class="slide-h slide-h-white">A/B testing: la prueba piloto escalada al canal digital</div>
+  <ul class="bullets bullets-white">
+    <li>iFood usó A/B testing para probar <strong>cuatro versiones</strong> de su encuesta posventa en 2022</li>
+    <li>La versión con <strong>3 preguntas cerradas + 1 abierta opcional</strong> obtuvo <strong style="color:#a5d6a7;">2,4 veces más respuestas completas</strong> que la versión con 7 preguntas cerradas</li>
+    <li>La versión ganadora también tuvo menor tiempo promedio de respuesta y menor tasa de abandono</li>
+  </ul>
+  <div class="two-col" style="margin-top:12px;">
+    <div class="col-box-dark">
+      <div class="col-label" style="color:#a5d6a7;">Prueba piloto tradicional</div>
+      <div class="col-body-w">Entrevistas cara a cara con 15–30 personas. Observación directa de reacciones. Limitada en escala pero rica en información cualitativa.</div>
     </div>
-    <div class="col-box" style="background:rgba(192,57,43,0.1); border-color:rgba(192,57,43,0.3);">
-      <div class="col-label" style="color:#f5a09a;">Riesgos éticos</div>
-      <ul style="padding-left:1em; margin-top:4px;">
-        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Presentar datos sintéticos como reales al cliente</li>
-        <li class="col-body-w" style="margin-bottom:4px; font-size:12px;">Sesgos del modelo entrenan el cuestionario</li>
-        <li class="col-body-w" style="font-size:12px;">No reemplaza prueba piloto con encuestados reales</li>
-      </ul>
+    <div class="col-box-dark">
+      <div class="col-label" style="color:#a5d6a7;">A/B testing digital</div>
+      <div class="col-body-w">Dos o más versiones mostradas aleatoriamente a la muestra real. Compara tasas de completitud, tiempos y distribución de respuestas a escala masiva.</div>
     </div>
   </div>
-  <div class="callout" style="margin-top:14px;">
-    Presentar respondentes sintéticos al cliente como encuestados reales viola el Código de Ética de <strong>ESOMAR y AMAI</strong>. El investigador tiene el deber de transparencia sobre las fuentes de datos.
-  </div>
+  <div class="callout-dk">Los dos enfoques son <strong>complementarios</strong>, no alternativos. La prueba piloto cualitativa detecta problemas de comprensión; el A/B testing mide el efecto agregado de cambios de diseño.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     SOCIAL MEDIA
-═══════════════════════════════════ -->
+<!-- ══ SECCIÓN 06 — SOFTWARE, IA Y SOCIAL MEDIA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 06</div>
+  <div class="sec-title">Software, IA y<br>social media</div>
+  <div class="sec-sub">Herramientas del mercado · Synthetic respondents · Canales nativos</div>
+</div>
+</section>
+
+<!-- Software -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Software · panorama 2024</div>
+  <div class="slide-h">Del papel a las plataformas especializadas</div>
+  <table class="ref-table">
+    <thead><tr><th>Herramienta</th><th>Perfil</th><th>Uso típico</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Qualtrics</strong></td><td>Estándar profesional completo — paneles, análisis de texto, geolocalización, lógica avanzada</td><td>Grandes empresas, consultoras y universidades con licencia institucional</td></tr>
+      <tr><td><strong>SurveyMonkey</strong></td><td>Profesional SMB — NPS integrado, plantillas, exportación SPSS/Excel</td><td>Ampliamente usado en toda LATAM</td></tr>
+      <tr><td><strong>Typeform</strong></td><td>Interfaz conversacional — una pregunta por pantalla, mayor completitud reportada</td><td>Startups y fintechs de LATAM</td></tr>
+      <tr><td><strong>KoBoToolbox</strong></td><td>Especializado en campo offline, sin conectividad, gratuito para ONG</td><td>Investigación humanitaria y sector social</td></tr>
+      <tr><td><strong>Google Forms</strong></td><td>Gratuito, integración con Sheets, universalmente disponible</td><td>Universidades, pymes, proyectos académicos</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">Las herramientas gratuitas son hoy <strong>suficientemente poderosas</strong> para la mayoría de los proyectos académicos y de investigación de pequeña y mediana escala. El presupuesto ya no es una barrera técnica.</div>
+</div>
+</section>
+
+<!-- IA y synthetic respondents -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">IA y cuestionarios · 2023–2024</div>
+  <div class="slide-h slide-h-white">IA generativa y synthetic respondents: oportunidad y riesgo ético</div>
+  <div class="two-col">
+    <div class="col-box-dark">
+      <div class="col-label" style="color:#a5d6a7;">Usos legítimos</div>
+      <div class="col-body-w">
+        <ul style="padding-left:1em; margin-top:2px;">
+          <li style="margin-bottom:4px;">Generar <strong>borrador inicial</strong> del cuestionario</li>
+          <li style="margin-bottom:4px;">Detectar preguntas <strong>doble-cañón e inductoras</strong></li>
+          <li style="margin-bottom:4px;">Traducir y <strong>adaptar culturalmente</strong></li>
+          <li>Generar variantes A/B para piloteo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box-dark" style="border-color:rgba(192,57,43,0.3); background:rgba(192,57,43,0.08);">
+      <div class="col-label" style="color:#f5a09a;">Riesgos éticos críticos</div>
+      <div class="col-body-w">
+        <ul style="padding-left:1em; margin-top:2px;">
+          <li style="margin-bottom:4px;"><strong>Datos sintéticos presentados como reales</strong> al cliente</li>
+          <li style="margin-bottom:4px;">Los sesgos del modelo se <strong>transfieren</strong> al cuestionario</li>
+          <li><strong>No reemplaza</strong> la prueba piloto con encuestados reales</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout-dk">Startups como <strong>Synthetic Users y Yabble</strong> ofrecen simular respuestas desde 2023. Presentar synthetic respondents como encuestados reales viola el <strong>Código de Ética ESOMAR y AMAI</strong>. El investigador tiene el deber de transparencia sobre todas las fuentes de datos que reporta.</div>
+</div>
+</section>
+
+<!-- Social media canales -->
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Social media y cuestionarios</div>
-  <div class="slide-h">Encuestas nativas: restricciones de diseño</div>
+  <div class="slide-h">Tres formas de aplicar cuestionarios en redes sociales</div>
   <table class="ref-table">
-    <thead><tr><th>Canal</th><th>Restricción de diseño</th><th>Sesgo</th></tr></thead>
+    <thead><tr><th>Canal</th><th>Restricción de diseño</th><th>Sesgo de autoselección</th></tr></thead>
     <tbody>
-      <tr><td><strong>Instagram Stories</strong></td><td>Solo 2 opciones · 24hs</td><td>Alto: seguidores jóvenes activos</td></tr>
-      <tr><td><strong>LinkedIn poll</strong></td><td>Máx. 4 opciones · hasta 2 semanas</td><td>Profesionales con cuenta activa</td></tr>
-      <tr><td><strong>WhatsApp</strong></td><td>Conversacional, sin estructura formal</td><td>Conveniencia según el grupo</td></tr>
-      <tr><td><strong>Email embed</strong></td><td>Máx. 3 preguntas en preview</td><td>Depende de la base del emisor</td></tr>
+      <tr><td><strong>Instagram Stories</strong></td><td>Solo 2 opciones · 24 horas de duración</td><td>Alto: solo seguidores activos, típicamente jóvenes</td></tr>
+      <tr><td><strong>LinkedIn polls</strong></td><td>Máximo 4 opciones · hasta 2 semanas</td><td>Profesionales con cuenta activa</td></tr>
+      <tr><td><strong>WhatsApp</strong></td><td>Conversacional, sin estructura formal</td><td>Depende de la composición del grupo</td></tr>
+      <tr><td><strong>Email embebido</strong></td><td>Máximo 3 preguntas visibles en preview</td><td>Depende de la base de datos del emisor</td></tr>
+      <tr><td><strong>Encuesta en app nativa</strong></td><td>Restricciones de la plataforma + UX</td><td>Usuarios activos de esa app</td></tr>
     </tbody>
   </table>
-  <div class="callout">Todo canal de social media tiene sesgo de <strong>autoselección</strong>: solo responden usuarios activos de esa plataforma. Los resultados no son representativos del universo amplio sin corrección muestral.</div>
+  <div class="callout"><strong>Regla general:</strong> todo canal de social media tiene sesgo de autoselección. Los resultados <strong>no son representativos</strong> del universo amplio sin corrección muestral explícita. Usar con precaución en investigación concluyente.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     LATAM
-═══════════════════════════════════ -->
+<!-- ══ SECCIÓN 07 — INTERNACIONAL, LATAM Y ÉTICA ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 07</div>
+  <div class="sec-title">Internacional,<br>LATAM y ética</div>
+  <div class="sec-sub">Cuatro equivalencias · Desafíos de la región · Tres problemas éticos</div>
+</div>
+</section>
+
+<!-- Cuatro equivalencias -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Internacional y LatAm</div>
-  <div class="slide-h">Adaptar cuestionarios: más allá de traducir</div>
+  <div class="eyebrow">Adaptación internacional · Malhotra</div>
+  <div class="slide-h">Cuatro dimensiones de equivalencia antes de adaptar un cuestionario</div>
   <ul class="bullets">
-    <li><strong>Equivalencia conceptual:</strong> "Privacidad" no significa lo mismo en México que en Alemania. Verificar antes de traducir.</li>
-    <li><strong>Equivalencia de escala:</strong> ¿"Extremadamente de acuerdo" tiene la misma intensidad en español y en portugués?</li>
-    <li><strong>Traducción inversa:</strong> Traducir → retro-traducir → comparar. Las discrepancias revelan problemas de equivalencia.</li>
-    <li><strong>Sesgo de aquiescencia:</strong> Mayor en culturas con alta distancia al poder. Usar preguntas balanceadas y anónimas.</li>
-    <li><strong>Informalidad económica:</strong> Preguntas sobre ingresos formales fallan en economías con 50–70% de informalidad. Preguntar por gasto, no por ingreso declarado.</li>
+    <li><strong>Equivalencia conceptual:</strong> "Privacidad" no tiene el mismo significado en México que en Alemania. "Familia" implica composición y roles distintos entre países. Verificar que los conceptos centrales sean equivalentes culturalmente</li>
+    <li><strong>Equivalencia de escala:</strong> ¿"Extremadamente de acuerdo" tiene la misma intensidad en español y en portugués? Los anclajes descriptivos pueden no ser equivalentes entre culturas o incluso entre países del mismo idioma</li>
+    <li><strong>Traducción inversa:</strong> traducir al idioma de destino, luego retro-traducir al idioma original sin ver el original, y comparar. Las discrepancias revelan problemas de equivalencia</li>
+    <li><strong>Adaptación del método:</strong> el canal preferido varía entre países. Lo que funciona en Argentina puede no funcionar en Bolivia</li>
   </ul>
-  <div class="latam-box">
-    <div class="latam-label">🌎 Coca-Cola LATAM</div>
-    <div class="latam-text">Brand Health Tracking en 18 países. Argentina: escala de intención de compra sesgada por inflación. Solución: preguntar por frecuencia de consumo pasada, no intención futura.</div>
+</div>
+</section>
+
+<!-- Desafíos específicos LATAM -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Contexto LATAM</div>
+  <div class="slide-h">Cuatro desafíos específicos de la investigación en LATAM</div>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label-green col-label">① Sesgo de aquiescencia</div>
+      <div class="col-body">En culturas con <strong>alta distancia al poder</strong>, los encuestados tienden a asentir frente a un entrevistador percibido como figura de autoridad. Solución: preguntas balanceadas, técnicas proyectivas, grupos homogéneos en NSE.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label-green col-label">② Heterogeneidad intra-regional</div>
+      <div class="col-body">Un cuestionario diseñado en Buenos Aires <strong>puede fallar en el nordeste brasileño</strong>. Familia, trabajo informal y confianza en instituciones tienen acepciones muy distintas entre países y regiones.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label-green col-label">③ Alfabetismo digital desigual</div>
+      <div class="col-body">Entre <strong>35% y 40%</strong> de los adultos en Bolivia, Honduras y partes de Perú y Guatemala tienen dificultades con formularios digitales. Los cuestionarios exclusivamente digitales pierden estos segmentos de manera sistemática.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label-green col-label">④ Inflación e informalidad</div>
+      <div class="col-body">El ingreso declarado es poco confiable en economías con alta inflación y <strong>50%–70% de informalidad</strong>. Preguntar por <em>comportamiento de gasto</em>, no por ingreso declarado.</div>
+    </div>
   </div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     ÉTICA
-═══════════════════════════════════ -->
+<!-- Caso Coca-Cola -->
 <section>
 <div class="slide s-dark">
-  <div class="eyebrow eyebrow-light">Ética en el diseño</div>
-  <div class="slide-h slide-h-white">Tres problemas éticos del libro + contexto digital</div>
-  <div class="two-col">
-    <div>
-      <p style="font-size:11px; color:rgba(255,255,255,0.4); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Malhotra — Tres problemas</p>
-      <ul class="bullets bullets-white">
-        <li><strong>Sesgo intencional:</strong> Diseñar preguntas para obtener el resultado que el cliente desea</li>
-        <li><strong>Acarreo (piggybacking):</strong> Incluir preguntas adicionales sin informar al cliente</li>
-        <li><strong>Extensión excesiva:</strong> Más de 30 min abusa del tiempo del encuestado</li>
-      </ul>
-    </div>
-    <div>
-      <p style="font-size:11px; color:rgba(255,255,255,0.4); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Actualización digital</p>
-      <ul class="bullets bullets-white">
-        <li><strong>Consentimiento + RGPD:</strong> LGPD (BR), Ley 18.331 (UY), LFPDPPP (MX) — aviso obligatorio</li>
-        <li><strong>Dark patterns:</strong> Diseño que manipula respuestas (preselección, asimetría de escala)</li>
-        <li><strong>Synthetic respondents:</strong> Datos simulados presentados como reales</li>
-      </ul>
-    </div>
-  </div>
-  <div class="pause-box">
-    <div class="pause-label">⏸ Pausa · Pregunta a la clase</div>
-    <div class="pause-q">Un cliente les pide que diseñen el cuestionario de manera que "los resultados muestren que su producto es el preferido". ¿Cómo responden? ¿Qué pueden y qué no pueden hacer?</div>
-  </div>
+  <div class="eyebrow eyebrow-light">Caso LATAM · Coca-Cola</div>
+  <div class="slide-h slide-h-white">Cuando el contexto macroeconómico invalida la escala</div>
+  <ul class="bullets bullets-white">
+    <li>Coca-Cola LATAM aplica su cuestionario global de <strong>Brand Health Tracking</strong> en 18 países de la región</li>
+    <li>El equipo de insights descubrió que la escala de <strong>intención de compra de 1 a 10</strong> producía <strong style="color:#d4a0a0;">distribución bimodal en Argentina</strong> — con modos en 1 y en 10</li>
+    <li>La explicación: en un contexto de inflación extrema, la intención de compra estaba determinada por el <strong>precio del día</strong>, no por la lealtad de marca</li>
+    <li>La misma pregunta, con la misma escala, medía <strong>cosas distintas</strong> en distintos países</li>
+  </ul>
+  <div class="callout-dk"><strong>Solución:</strong> en mercados con alta inflación, preguntar por <em>frecuencia de consumo pasada</em> — observable y retrospectiva — en lugar de intención de compra futura. El indicador cambia pero la pregunta de negocio subyacente se conserva.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     ACRÓNIMO CIERRE
-═══════════════════════════════════ -->
+<!-- Ética: tres problemas clásicos -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Síntesis</div>
-  <div class="slide-h">Acrónimo QUESTIONNAIRE — lo que se llevan</div>
-  <div class="two-col">
-    <div>
-      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">Objetivos</p>
-      <ul style="list-style:none; padding:0;">
-        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">Q</strong> — Questions respondents can and will answer</li>
-        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">U</strong> — Uplift (motivar) al encuestado</li>
-        <li style="font-size:12px; padding:3px 0; color:#333;"><strong style="color:var(--accent);">E</strong> — Error elimination</li>
-      </ul>
-      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin:10px 0 8px;">Pasos</p>
-      <ul style="list-style:none; padding:0;">
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">S</strong> — Specify information needed</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">T</strong> — Type of interview method</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">I</strong> — Individual question content</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">O</strong> — Overcome inability/unwillingness</li>
-      </ul>
+  <div class="eyebrow">Ética en el diseño · Malhotra</div>
+  <div class="slide-h">Tres problemas éticos centrales del libro</div>
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="obj-num">01</div>
+      <div class="obj-h">Sesgo intencional</div>
+      <div class="obj-t">Diseñar preguntas para obtener el resultado que el cliente <em>desea</em>: inductoras deliberadas, escalas sesgadas, omitir opciones que afectarían el resultado. El investigador tiene responsabilidad ante el encuestado y ante la sociedad, no solo ante el cliente.</div>
     </div>
-    <div>
-      <p style="font-size:11px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; font-family:'DM Mono',monospace; margin-bottom:8px;">&nbsp;</p>
-      <ul style="list-style:none; padding:0;">
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">N</strong> — Nonstructured vs. structured</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">N</strong> — Nonbiased wording</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">A</strong> — Arrange questions in order</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">I</strong> — Identify form and layout</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--blue);">R</strong> — Reproduce the questionnaire</li>
-        <li style="font-size:12px; padding:2px 0; color:#333;"><strong style="color:var(--accent);">E</strong> — Eliminate bugs by pretesting ★</li>
-      </ul>
+    <div class="obj-card blue-n">
+      <div class="obj-num">02</div>
+      <div class="obj-h">Acarreo (piggybacking)</div>
+      <div class="obj-t">Incluir preguntas de investigación <em>adicional</em> en el cuestionario del cliente sin informarle. El cliente paga por el acceso a su muestra; usarla para recopilar datos propios sin su conocimiento es una práctica no ética.</div>
+    </div>
+    <div class="obj-card green-n">
+      <div class="obj-num">03</div>
+      <div class="obj-h">Longitud excesiva</div>
+      <div class="obj-t">Cuestionarios que toman <strong>más de 30 minutos</strong> abusan del tiempo del encuestado (excepto entrevistas personales en hogar, donde hasta 60 minutos es aceptable). La fatiga produce respuestas aleatorias o sesgadas hacia el final.</div>
     </div>
   </div>
-  <div class="callout"><strong>El paso más importante:</strong> La prueba piloto. El cuestionario no existe hasta que se testea con encuestados reales.</div>
 </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     CIERRE
-═══════════════════════════════════ -->
+<!-- Ética digital: regulación, dark patterns, synthetic -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Actualización digital · Ética 2024</div>
+  <div class="slide-h slide-h-white">Tres temas que el libro no podía anticipar</div>
+  <div style="display:flex; flex-direction:column; gap:9px; margin-top:6px;">
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--accent); border-radius:0 8px 8px 0; padding:10px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:#f5a09a; letter-spacing:2px; margin-bottom:4px;">CONSENTIMIENTO Y REGULACIÓN</div>
+      <div style="font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Regulación de datos obliga a aviso de privacidad y consentimiento antes de recopilar datos personales.</div>
+      <div class="law-grid" style="margin-top:8px;">
+        <div class="law-card"><div class="law-country">BR</div><div class="law-name">LGPD</div></div>
+        <div class="law-card"><div class="law-country">UY</div><div class="law-name">Ley 18.331</div></div>
+        <div class="law-card"><div class="law-country">AR</div><div class="law-name">Ley 25.326</div></div>
+        <div class="law-card"><div class="law-country">MX</div><div class="law-name">LFPDPPP</div></div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--gold); border-radius:0 8px 8px 0; padding:10px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:#f0d890; letter-spacing:2px; margin-bottom:4px;">DARK PATTERNS</div>
+      <div style="font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Diseño que <strong>manipula respuestas</strong> sin que el encuestado lo perciba: preselección de opciones favorables, asimetría deliberada en la escala, fatiga inducida para que el encuestado abandone su posición crítica.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--blue); border-radius:0 8px 8px 0; padding:10px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:#8ab4d4; letter-spacing:2px; margin-bottom:4px;">SYNTHETIC RESPONDENTS</div>
+      <div style="font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5;">Presentar al cliente datos de respondentes simulados por IA <strong>como si fueran reales</strong> viola los estándares de ESOMAR y AMAI. El investigador tiene el deber de transparencia sobre todas las fuentes de datos que reporta.</div>
+    </div>
+  </div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1); border-left-color:var(--gold); margin-top:14px;">
+    <div class="pause-label">⏸ Debate final</div>
+    <div class="pause-q" style="color:#f0d890;">Un cliente les pide diseñar el cuestionario para que los resultados muestren que su producto es el preferido. Ofrece el doble de honorarios si los resultados son favorables. ¿Qué pueden hacer? ¿Qué no pueden hacer?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══ CIERRE ══ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Cierre</div>
+  <div class="sec-title">Síntesis y conexión<br>con el Capítulo 9</div>
+  <div class="sec-sub">Las ideas para llevarse · Preview del Muestreo</div>
+</div>
+</section>
+
+<!-- Síntesis QUESTIONNAIRE -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Síntesis · Acrónimo QUESTIONNAIRE</div>
+  <div class="slide-h">Objetivos + 10 pasos en un solo acrónimo</div>
+  <div class="two-col">
+    <div>
+      <p style="font-size:10px; font-family:'DM Mono',monospace; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;">Objetivos</p>
+      <div class="acro-row"><div class="acro-letter">Q</div><div class="acro-text"><strong>Questions</strong> respondents can and will answer</div></div>
+      <div class="acro-row"><div class="acro-letter">U</div><div class="acro-text"><strong>Uplift</strong> — motivar al encuestado</div></div>
+      <div class="acro-row"><div class="acro-letter">E</div><div class="acro-text"><strong>Error</strong> elimination — minimizar el error de respuesta</div></div>
+      <p style="font-size:10px; font-family:'DM Mono',monospace; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin:12px 0 8px;">Pasos 1 a 5</p>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">S</div><div class="acro-text"><strong>Specify</strong> information needed</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">T</div><div class="acro-text"><strong>Type</strong> of interview method</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">I</div><div class="acro-text"><strong>Individual</strong> question content</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">O</div><div class="acro-text"><strong>Overcome</strong> inability and unwillingness</div></div>
+    </div>
+    <div>
+      <p style="font-size:10px; font-family:'DM Mono',monospace; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px;">Pasos 6 a 10</p>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">N</div><div class="acro-text"><strong>Nonstructured</strong> vs. structured questions</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">N</div><div class="acro-text"><strong>Nonbiased</strong> question wording — WORDS</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">A</div><div class="acro-text"><strong>Arrange</strong> questions in order — ORDER</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">I</div><div class="acro-text"><strong>Identify</strong> form and layout</div></div>
+      <div class="acro-row"><div class="acro-letter" style="color:var(--blue);">R</div><div class="acro-text"><strong>Reproduce</strong> the questionnaire</div></div>
+      <div class="acro-row"><div class="acro-letter">E</div><div class="acro-text"><strong>Eliminate</strong> bugs by pretesting ★</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Tres ideas para llevarse -->
 <section>
 <div class="slide s-close" style="color:var(--paper);">
-  <div style="max-width:640px;">
+  <div style="max-width:720px;">
     <div class="cover-eyebrow">Tres ideas para llevarse del Capítulo 8</div>
     <div style="margin-bottom:20px;">
       <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">01</p>
-      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">El cuestionario <em>traduce</em> el problema de investigación en preguntas que el encuestado puede y quiere responder. Sin esa traducción, los datos no sirven.</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:white; line-height:1.4;">El cuestionario <em>traduce</em> el problema de investigación en preguntas que el encuestado puede y quiere responder. Sin esa traducción cuidadosa, los datos responden las preguntas equivocadas aunque estén perfectamente recolectados.</p>
     </div>
     <div style="margin-bottom:20px;">
       <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">02</p>
-      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">La redacción y el orden de las preguntas <em>son</em> el dato. Cambiar una palabra cambia la respuesta. El sesgo puede ser involuntario —o deliberado.</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:white; line-height:1.4;">La redacción y el orden <em>son</em> el dato. Cambiar una palabra cambia la respuesta. El sesgo puede ser involuntario — por falta de cuidado — o deliberado — por presión del cliente. En ambos casos el resultado es el mismo: datos que no reflejan la realidad.</p>
     </div>
     <div>
       <p style="font-size:14px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; letter-spacing:1px; margin-bottom:6px;">03</p>
-      <p style="font-family:'Playfair Display',serif; font-size:1.15rem; color:white; line-height:1.4;">La prueba piloto no es opcional. Todo investigador profesional lo sabe. La IA puede ayudar a detectar errores, pero no reemplaza al encuestado real.</p>
+      <p style="font-family:'Playfair Display',serif; font-size:1.05rem; color:white; line-height:1.4;">La prueba piloto no es opcional. <em>Nunca.</em> La IA puede ayudar a identificar problemas potenciales, pero ningún modelo reemplaza la observación de encuestados reales respondiendo el formulario.</p>
     </div>
+    <div style="margin-top:22px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1); font-size:12px; color:rgba(255,255,255,0.35);">Próxima clase — Capítulo 9 · <strong>Muestreo</strong>: ¿a quién le aplicamos el cuestionario? ¿Cuántas personas necesitamos y cómo las elegimos para que los resultados sean representativos?</div>
   </div>
 </div>
 </section>
