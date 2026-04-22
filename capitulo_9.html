@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 9</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a; --paper: #f7f4ef; --cream: #ede9e1; --accent: #c0392b;
+    --accent2: #2c5f8a; --gold: #b8860b; --muted: #6b6560; --border: #d4cec5;
+    --tag-bg: #e8f0f8; --tag-text: #1a3a5c; --new-bg: #fef9ec;
+    --new-border: #d4a017; --lat-bg: #eef6ee; --lat-border: #2d7a3a;
+    --tool-bg: #f0f4f8; --tool-border: #2c5f8a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); line-height:1.7; overflow-x:hidden; }
+
+  header { background:var(--ink); color:var(--paper); padding:0; position:relative; overflow:hidden; }
+  .header-inner { max-width:1100px; margin:0 auto; padding:56px 40px 44px; position:relative; z-index:1; }
+  .header-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+  header h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,7vw,5rem); font-weight:900; line-height:1.05; max-width:720px; margin-bottom:24px; }
+  header h1 em { font-style:italic; color:#d4a0a0; }
+  .header-meta { display:flex; gap:24px; flex-wrap:wrap; margin-top:28px; }
+  .meta-chip { font-size:12px; font-weight:500; padding:5px 12px; border:1px solid rgba(255,255,255,0.2); border-radius:20px; color:rgba(255,255,255,0.75); letter-spacing:0.5px; }
+  .header-bg { position:absolute; top:0; right:0; width:420px; height:100%; background:linear-gradient(135deg,transparent 40%,rgba(192,57,43,0.08) 100%); pointer-events:none; }
+  .header-rule { height:4px; background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 50%,var(--gold) 100%); }
+
+  .layout { display:grid; grid-template-columns:260px 1fr; max-width:1100px; margin:0 auto; gap:0; min-height:100vh; }
+
+  aside { position:sticky; top:0; height:100vh; overflow-y:auto; padding:32px 24px; border-right:1px solid var(--border); background:var(--cream); }
+  aside::-webkit-scrollbar { width:4px; }
+  aside::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+  .nav-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+  .nav-item { display:block; padding:9px 12px; margin-bottom:2px; border-radius:6px; font-size:13px; color:var(--muted); text-decoration:none; cursor:pointer; transition:all 0.2s; border-left:3px solid transparent; }
+  .nav-item:hover { background:var(--paper); color:var(--ink); }
+  .nav-item.active { background:var(--paper); color:var(--accent); border-left-color:var(--accent); font-weight:500; }
+  .nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--border); padding:14px 12px 4px; font-family:'DM Mono',monospace; }
+  .legend { margin-top:28px; padding-top:20px; border-top:1px solid var(--border); }
+  .legend-item { display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--muted); margin-bottom:7px; }
+  .legend-dot { width:10px; height:10px; border-radius:2px; flex-shrink:0; }
+
+  main { padding:40px 48px 80px; max-width:820px; }
+
+  .section { display:none; animation:fadeIn 0.3s ease; }
+  .section.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .section-header { margin-bottom:36px; padding-bottom:20px; border-bottom:1px solid var(--border); }
+  .section-number { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:8px; }
+  .section-header h2 { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; line-height:1.2; color:var(--ink); margin-bottom:12px; }
+  .section-intro { font-size:15px; color:var(--muted); line-height:1.8; max-width:620px; }
+
+  .concept-box { background:#fafafa; border:1px solid var(--border); border-left:4px solid var(--ink); border-radius:8px; padding:22px 26px; margin-bottom:28px; }
+  .concept-box-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--ink); text-transform:uppercase; margin-bottom:10px; opacity:0.6; }
+  .concept-box p { font-size:14.5px; color:#333; line-height:1.8; margin-bottom:10px; }
+  .concept-box p:last-child { margin-bottom:0; }
+  .concept-box strong { color:var(--ink); }
+  .concept-box ul { padding-left:1.3em; margin-top:8px; }
+  .concept-box ul li { font-size:14.5px; color:#333; line-height:1.8; margin-bottom:4px; }
+
+  .def-term { display:inline-block; background:var(--ink); color:white; font-size:11px; font-family:'DM Mono',monospace; letter-spacing:1.5px; padding:2px 8px; border-radius:4px; margin-right:4px; vertical-align:middle; }
+
+  .update-card { background:white; border:1px solid var(--border); border-radius:10px; padding:28px 30px; margin-bottom:24px; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+  .update-card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; gap:12px; }
+  .update-card h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--ink); line-height:1.3; }
+  .tags { display:flex; gap:6px; flex-wrap:wrap; flex-shrink:0; }
+  .tag { font-size:10.5px; font-weight:500; padding:3px 9px; border-radius:12px; letter-spacing:0.3px; white-space:nowrap; }
+  .tag-caso { background:#fdecea; color:#8b2218; border:1px solid #f5c6c2; }
+  .tag-bib { background:#e8f0f8; color:#1a3a5c; border:1px solid #b8d0e8; }
+  .tag-tool { background:#e8f5e9; color:#1b5e20; border:1px solid #a5d6a7; }
+  .tag-lat { background:#fff8e1; color:#795548; border:1px solid #ffe082; }
+  .update-card p { font-size:14.5px; line-height:1.8; color:#333; margin-bottom:14px; }
+  .update-card p:last-child { margin-bottom:0; }
+  .update-card ul { padding-left:1.3em; margin-bottom:14px; }
+  .update-card ul li { font-size:14.5px; color:#333; line-height:1.8; margin-bottom:4px; }
+
+  .case-highlight { background:linear-gradient(135deg,#1a1a1a 0%,#2c2c2c 100%); border-radius:10px; padding:28px 30px; margin:20px 0; color:white; position:relative; overflow:hidden; }
+  .case-highlight::before { content:''; position:absolute; top:0; right:0; width:200px; height:200px; background:radial-gradient(circle,rgba(192,57,43,0.15) 0%,transparent 70%); pointer-events:none; }
+  .case-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; color:var(--accent); text-transform:uppercase; margin-bottom:10px; }
+  .case-highlight h4 { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; margin-bottom:12px; color:white; }
+  .case-highlight p { font-size:14px; color:rgba(255,255,255,0.8); line-height:1.75; margin-bottom:12px; }
+  .case-highlight p:last-child { margin-bottom:0; }
+
+  .ref-box { background:var(--tag-bg); border:1px solid #b8d0e8; border-radius:8px; padding:16px 20px; margin:14px 0; }
+  .ref-box-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent2); text-transform:uppercase; margin-bottom:10px; }
+  .ref-item { font-size:13px; color:#2a3a50; padding:5px 0; border-bottom:1px solid #d0e0f0; line-height:1.6; }
+  .ref-item:last-child { border-bottom:none; }
+  .ref-item strong { color:var(--accent2); }
+
+  .latam-box { background:var(--lat-bg); border:1px solid var(--lat-border); border-left:4px solid var(--lat-border); border-radius:8px; padding:20px 24px; margin:20px 0; }
+  .latam-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--lat-border); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+  .latam-box p { font-size:14px; color:#1a3a1a; line-height:1.75; margin-bottom:10px; }
+  .latam-box p:last-child { margin-bottom:0; }
+  .latam-box ul { padding-left:1.3em; }
+  .latam-box ul li { font-size:14px; color:#1a3a1a; line-height:1.75; margin-bottom:4px; }
+
+  .callout { border-left:4px solid var(--gold); background:var(--new-bg); padding:16px 20px; border-radius:0 8px 8px 0; margin:20px 0; font-size:14px; color:#4a3a10; line-height:1.75; }
+  .callout strong { color:var(--gold); }
+
+  .compare-table { width:100%; border-collapse:collapse; font-size:13.5px; margin:16px 0; }
+  .compare-table th { background:var(--ink); color:var(--paper); padding:10px 16px; text-align:left; font-weight:500; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px; }
+  .compare-table td { padding:10px 16px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.6; }
+  .compare-table tr:nth-child(even) td { background:#faf8f5; }
+  .compare-table tr:hover td { background:#f0ece4; }
+
+  .step-block { border:1px solid var(--border); border-radius:8px; margin-bottom:16px; overflow:hidden; }
+  .step-header { background:var(--cream); padding:12px 20px; display:flex; align-items:center; gap:12px; border-bottom:1px solid var(--border); }
+  .step-num { background:var(--ink); color:white; font-family:'DM Mono',monospace; font-size:11px; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step-title { font-weight:600; font-size:14px; color:var(--ink); }
+  .step-body { padding:16px 20px; font-size:14px; color:#333; line-height:1.75; }
+  .step-body ul { padding-left:1.2em; margin-top:8px; }
+  .step-body ul li { margin-bottom:4px; line-height:1.7; }
+
+  .tec-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+  .tec-card { border-radius:8px; padding:18px 20px; }
+  .tec-card.prob { background:#e8f0f8; border:1px solid #b8d0e8; }
+  .tec-card.noprob { background:#fdecea; border:1px solid #f5c6c2; }
+  .tec-card-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; margin-bottom:8px; font-weight:600; }
+  .tec-card.prob .tec-card-label { color:#1a3a5c; }
+  .tec-card.noprob .tec-card-label { color:#8b2218; }
+  .tec-card p { font-size:13.5px; line-height:1.75; margin-bottom:8px; }
+  .tec-card p:last-child { margin-bottom:0; }
+
+  .error-pair { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; }
+  .error-bad { background:#fff5f5; border:1px solid #f5c6c2; border-radius:8px; padding:14px 16px; }
+  .error-good { background:#f0fff4; border:1px solid #a5d6a7; border-radius:8px; padding:14px 16px; }
+  .error-label { font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; font-weight:600; }
+  .error-bad .error-label { color:#8b2218; }
+  .error-good .error-label { color:#1b5e20; }
+  .error-text { font-size:13px; color:#333; line-height:1.6; }
+
+  .decision-box { border:2px solid var(--ink); border-radius:10px; padding:20px 24px; margin:16px 0; }
+  .decision-q { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  .decision-text { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:10px; line-height:1.4; }
+  .decision-opts { font-size:13.5px; color:#444; line-height:1.8; }
+
+  hr.divider { border:none; border-top:1px solid var(--border); margin:32px 0; }
+
+  .footer-nav { display:flex; justify-content:space-between; margin-top:48px; padding-top:24px; border-top:1px solid var(--border); }
+  .nav-btn { display:flex; align-items:center; gap:8px; padding:10px 20px; border:1px solid var(--border); border-radius:8px; background:white; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--ink); transition:all 0.2s; text-decoration:none; }
+  .nav-btn:hover { background:var(--ink); color:white; border-color:var(--ink); }
+  .nav-btn.primary { background:var(--ink); color:white; border-color:var(--ink); }
+  .nav-btn.primary:hover { background:var(--accent); border-color:var(--accent); }
+
+  @media(max-width:768px){
+    .layout{grid-template-columns:1fr;}
+    aside{position:static;height:auto;}
+    main{padding:24px 20px 60px;}
+    .tec-grid,.error-pair{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 9</div>
+    <h1>Muestreo:<br><em>diseño</em> y procedimientos</h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+      <span class="meta-chip">Malhotra Cap. 9 · Actualizado 2024</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+<aside>
+  <div class="nav-title">Secciones del Capítulo</div>
+  <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+  <div class="nav-section-label">Conceptos base</div>
+  <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+  <a class="nav-item" onclick="showSection('conceptos')">Conceptos fundamentales</a>
+  <a class="nav-item" onclick="showSection('proceso')">El proceso (8 pasos)</a>
+  <div class="nav-section-label">Técnicas</div>
+  <a class="nav-item" onclick="showSection('no-prob')">No probabilísticas</a>
+  <a class="nav-item" onclick="showSection('probabilisticas')">Probabilísticas</a>
+  <a class="nav-item" onclick="showSection('seleccion')">Selección de técnica</a>
+  <div class="nav-section-label">Contexto y ética</div>
+  <a class="nav-item" onclick="showSection('internet')">Muestreo en internet</a>
+  <a class="nav-item" onclick="showSection('latam')">Contexto LATAM</a>
+  <a class="nav-item" onclick="showSection('etica')">Ética</a>
+  <div class="legend">
+    <div class="nav-title">Leyenda</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+  </div>
+</aside>
+
+<main>
+
+<!-- DIAPOSITIVAS -->
+<div id="diapositivas" class="section active">
+  <div class="section-header">
+    <div class="section-number">Diapositivas</div>
+    <h2>Diapositivas de referencia</h2>
+    <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar. Presioná <strong>F</strong> para pantalla completa.</p>
+  </div>
+  <div style="width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:32px;">
+    <iframe src="capitulo_9_slides.html" style="width:100%;height:100%;border:none;display:block;" allowfullscreen title="Diapositivas Capítulo 9"></iframe>
+  </div>
+  <div class="footer-nav">
+    <span></span>
+    <a class="nav-btn primary" onclick="showSection('apertura')">Ir al contenido →</a>
+  </div>
+</div>
+
+<!-- APERTURA -->
+<div id="apertura" class="section">
+  <div class="section-header">
+    <div class="section-number">Introducción</div>
+    <h2>Caso de apertura</h2>
+    <p class="section-intro">¿A quién le preguntamos? El problema del muestreo en la práctica.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Caso de apertura</div>
+    <p>Una vez definido el problema de investigación, el enfoque, el diseño, las escalas y el cuestionario, la pregunta siguiente es: <strong>¿a quién le aplicamos ese cuestionario?</strong> El muestreo responde esa pregunta con rigor metodológico.</p>
+    <p>El capítulo plantea que la selección de la muestra no es un detalle operativo — es la decisión que determina si los resultados son válidos y generalizables al universo objetivo.</p>
+  </div>
+
+  <div class="case-highlight">
+    <div class="case-label">Caso Actualizado · LATAM</div>
+    <h4>Falabella Chile: tres opciones para medir satisfacción con 14 millones de clientes</h4>
+    <p>Falabella quería medir la satisfacción con su programa de fidelidad CMR en Chile. Tenía tres opciones: <strong>censo</strong> (14 millones de clientes — inviable en costo y tiempo), <strong>muestra de conveniencia</strong> (los que responden espontáneamente en la app — sesgo de autoselección severo), o <strong>muestra diseñada</strong> (2.400 clientes seleccionados con criterios explícitos por región, NSE y frecuencia de uso — representativa, en campo en una semana).</p>
+    <p>La opción diseñada requiere dominar el proceso y las técnicas que vemos en este capítulo.</p>
+  </div>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>El error más frecuente en proyectos de investigación</h3>
+      <div class="tags"><span class="tag tag-bib">Advertencia metodológica</span></div>
+    </div>
+    <p>El error más frecuente en investigación de grado: usar técnicas no probabilísticas (conveniencia, cuotas) y redactar conclusiones que implican generalización estadística al universo ("los consumidores de Montevideo prefieren..."). Si la muestra no es probabilística, las conclusiones deben decir "en esta muestra" — no "en la población".</p>
+    <p>La validez de las conclusiones depende directamente del diseño muestral. No se puede corregir en el análisis.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('diapositivas')">← Diapositivas</a>
+    <a class="nav-btn primary" onclick="showSection('conceptos')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- CONCEPTOS FUNDAMENTALES -->
+<div id="conceptos" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 01</div>
+    <h2>Conceptos fundamentales</h2>
+    <p class="section-intro">Población, elemento, marco muestral, unidad de muestreo y muestra — cinco conceptos para dominar el capítulo.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Figura 9.1 — Jerarquía de conceptos</div>
+    <p>Los cinco conceptos fundamentales del muestreo se articulan en una jerarquía que va desde la definición abstracta hasta la selección concreta:</p>
+    <ul>
+      <li><strong>Población (universo):</strong> conjunto de todos los elementos que comparten las características definidas para el problema de investigación.</li>
+      <li><strong>Elemento:</strong> objeto sobre el que se realiza la medición — persona, hogar, empresa, producto, transacción.</li>
+      <li><strong>Marco muestral:</strong> representación operativa de los elementos de la población — la lista, la base de datos, el mapa del que se extrae la muestra.</li>
+      <li><strong>Unidad de muestreo:</strong> unidad básica disponible para selección. Puede coincidir con el elemento (seleccionamos personas) o ser un agrupador (seleccionamos hogares cuando el elemento es el individuo).</li>
+      <li><strong>Muestra:</strong> el subgrupo de la población que efectivamente participa en el estudio.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <strong>Censo vs. muestra:</strong> el censo recuenta todos los elementos de la población y elimina el error muestral — pero no el error no muestral. Una muestra bien diseñada con supervisión rigurosa puede ser más exacta que un censo mal ejecutado. <strong>Tamaño no es sinónimo de calidad.</strong>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">Definir la población objetivo: cuatro dimensiones</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:16px;">Una definición incompleta produce datos que responden una pregunta diferente al problema de investigación. Toda definición de población debe especificar:</p>
+  <table class="compare-table">
+    <thead><tr><th>Dimensión</th><th>Pregunta</th><th>Ejemplo — delivery Montevideo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Elemento</strong></td><td>¿Quién o qué se mide?</td><td>Persona con al menos un pedido en los últimos 3 meses</td></tr>
+      <tr><td><strong>Unidad de muestreo</strong></td><td>¿Cuál es la unidad de selección?</td><td>Individuo con cuenta activa en la plataforma</td></tr>
+      <tr><td><strong>Extensión</strong></td><td>¿Dónde?</td><td>Montevideo y área metropolitana</td></tr>
+      <tr><td><strong>Tiempo</strong></td><td>¿Cuándo?</td><td>Usuarios activos entre marzo y junio 2024</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">Error de marco muestral</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:16px;">El marco muestral casi nunca coincide perfectamente con la población. Esta discrepancia produce el <strong>error de marco muestral</strong>, que tiene tres formas:</p>
+  <div class="tec-grid">
+    <div style="background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#8b2218;text-transform:uppercase;margin-bottom:8px;">Subcobertura</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Elementos de la población que no están en el marco. Ej.: padrón electoral que excluye a extranjeros residentes sin ciudadanía.</p>
+    </div>
+    <div style="background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#8b2218;text-transform:uppercase;margin-bottom:8px;">Sobrecobertura</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">El marco incluye elementos ajenos a la población objetivo. Ej.: clientes inactivos en una base de "clientes activos".</p>
+    </div>
+    <div style="background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#8b2218;text-transform:uppercase;margin-bottom:8px;">Duplicación</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Un elemento aparece más de una vez. Ej.: usuarios con dos cuentas en la misma plataforma.</p>
+    </div>
+    <div style="background:#e8f0f8;border:1px solid #b8d0e8;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#1a3a5c;text-transform:uppercase;margin-bottom:8px;">Consecuencia</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">La calidad del marco es el techo de la calidad del estudio. Ningún procedimiento de selección compensa un marco con errores graves.</p>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('apertura')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('proceso')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<div id="proceso" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 02</div>
+    <h2>El proceso de diseño muestral</h2>
+    <p class="section-intro">Ocho pasos interrelacionados — una decisión temprana mal tomada invalida los pasos posteriores.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Figura 9.2</div>
+    <p>El diseño muestral sigue <strong>ocho pasos interrelacionados</strong>. Los primeros cuatro son decisiones de diseño previas al campo; los últimos cuatro son decisiones de implementación.</p>
+  </div>
+
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">1</div><div class="step-title">Definir la población objetivo</div></div>
+    <div class="step-body"><p>Especificar las cuatro dimensiones: elemento, unidad de muestreo, extensión y tiempo. Es la decisión más crítica — define qué datos serán relevantes y a qué universo podrán generalizarse.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">2</div><div class="step-title">Determinar el marco muestral</div></div>
+    <div class="step-body"><p>Identificar o construir la lista, base de datos o mapa del que se extraerá la muestra. Verificar subcobertura, sobrecobertura y duplicación. La calidad del marco determina el techo de la calidad del estudio.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">3</div><div class="step-title">Seleccionar la técnica de muestreo</div></div>
+    <div class="step-body"><p>Elegir entre técnicas probabilísticas y no probabilísticas según el objetivo del estudio, la disponibilidad del marco y las restricciones de costo y tiempo. Ver Secciones 03–05 de esta guía.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">4</div><div class="step-title">Determinar el tamaño de muestra</div></div>
+    <div class="step-body"><p>Calcular el n necesario para cumplir los requisitos de precisión (error máximo aceptable y nivel de confianza). Las fórmulas específicas se desarrollan en el Capítulo 10.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">5</div><div class="step-title">Ejecutar el proceso de muestreo</div></div>
+    <div class="step-body"><p>Aplicar la técnica seleccionada para obtener la muestra efectiva. Documentar el proceso para garantizar su replicabilidad y auditabilidad.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">6</div><div class="step-title">Validar la muestra obtenida</div></div>
+    <div class="step-body"><p>Comparar el perfil de la muestra con el perfil conocido de la población en variables clave. Si hay desviaciones significativas, aplicar ponderaciones post-estratificación. Si la desviación es muy grande, revisar si el diseño o el campo introdujeron sesgo sistemático.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">7</div><div class="step-title">Reemplazar los no respondientes</div></div>
+    <div class="step-body">
+      <p>El no respondiente es el elemento seleccionado que no participa. El <strong>sesgo de no respuesta</strong> ocurre cuando quienes no responden son sistemáticamente distintos de quienes sí responden. Estrategias:</p>
+      <ul>
+        <li><strong>Sustitución:</strong> reemplazar por elemento similar del marco.</li>
+        <li><strong>Incentivos:</strong> reducir el rechazo activo.</li>
+        <li><strong>Seguimiento:</strong> reintentar en horarios distintos.</li>
+        <li><strong>Ponderación:</strong> ajustar si el rechazo no es aleatorio.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">8</div><div class="step-title">Evaluar la calidad del muestreo</div></div>
+    <div class="step-body"><p>Calcular el error muestral real, la tasa de respuesta efectiva y comparar con los objetivos del diseño. Esta información debe reportarse en el informe final — sin ella, el lector no puede evaluar la validez de los datos.</p></div>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('conceptos')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('no-prob')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- NO PROBABILÍSTICAS -->
+<div id="no-prob" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 03</div>
+    <h2>Técnicas no probabilísticas</h2>
+    <p class="section-intro">Conveniencia, juicio, cuotas y bola de nieve — cuándo usar cada una y qué limitaciones implican.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Figura 9.3 — Árbol de técnicas</div>
+    <p>En el muestreo <strong>no probabilístico</strong>, la selección depende del juicio del investigador. No hay probabilidad conocida de inclusión. No se puede calcular el error muestral ni hacer inferencias estadísticas formales al universo.</p>
+    <p><strong>Cuándo es apropiado:</strong> investigación exploratoria, pruebas piloto, poblaciones de difícil acceso sin marco muestral disponible, o cuando la restricción de costo y tiempo no admite otro enfoque.</p>
+  </div>
+
+  <table class="compare-table">
+    <thead><tr><th>Técnica</th><th>Descripción</th><th>Usos apropiados</th><th>Limitación principal</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Conveniencia</strong></td><td>Las unidades más fáciles de obtener</td><td>Exploratoria, prueba piloto, grupos de enfoque</td><td>Resultados no generalizables al universo</td></tr>
+      <tr><td><strong>Juicio</strong></td><td>Selección basada en criterios expertos del investigador</td><td>Expertos, usuarios avanzados, casos extremos</td><td>Sesgo del investigador estructural</td></tr>
+      <tr><td><strong>Cuotas</strong></td><td>Cuotas que replican la distribución poblacional; selección interna por conveniencia</td><td>Estudios de mercado estándar con restricción de costo</td><td>No probabilístico dentro de cada cuota</td></tr>
+      <tr><td><strong>Bola de nieve</strong></td><td>Los encuestados refieren a otros con características similares</td><td>Poblaciones ocultas o sin marco disponible</td><td>Sesgo de red — convergencia hacia grupos homogéneos</td></tr>
+    </tbody>
+  </table>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>Conveniencia vs. juicio: una distinción que importa</h3>
+      <div class="tags"><span class="tag tag-bib">Concepto del libro</span></div>
+    </div>
+    <div class="error-pair">
+      <div class="error-bad">
+        <div class="error-label">Conveniencia — sin criterio previo</div>
+        <div class="error-text">"Entrevistamos a los que pasaron por el stand ese sábado." El investigador no controló quién entraba a la muestra.</div>
+      </div>
+      <div class="error-good">
+        <div class="error-label">Juicio — con criterios explícitos</div>
+        <div class="error-text">"Seleccionamos clientes con más de 3 años de antigüedad y compra mensual." Los criterios estaban definidos antes del campo.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="latam-box">
+    <div class="latam-label">🌎 Kantar Ibope Media — muestreo por cuotas como estándar regional</div>
+    <p>Kantar Ibope aplica muestreo por cuotas para estudios de audiencia de TV en Argentina, Brasil, Chile, Colombia, México y Perú. Variables de control: NSE (5 niveles), sexo, edad (6 rangos) y mercado geográfico. La distribución de cuotas se actualiza con datos del Censo y encuestas de hogares de cada país.</p>
+    <p>Resultado: la muestra de cuotas bien calibrada produce resultados operativamente equivalentes a los probabilísticos en las variables controladas, con costos muy inferiores. La diferencia aparece en variables <em>no incluidas</em> en las cuotas.</p>
+  </div>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>Respondent-Driven Sampling (RDS): bola de nieve con control estadístico</h3>
+      <div class="tags"><span class="tag tag-bib">Referencia académica</span><span class="tag tag-lat">LATAM</span></div>
+    </div>
+    <p>El RDS (Heckathorn, 1997) es una variante del snowball que controla el sesgo de referido usando incentivos duales y modelos matemáticos para estimar y corregir el sesgo de red. Produce estimados con propiedades probabilísticas aproximadas en poblaciones sin marco muestral.</p>
+    <p>Es el estándar para estudios de prevalencia en poblaciones clave en LATAM: UNAIDS, OPS y Ministerios de Salud de Brasil, México y Argentina lo usan para estudios sobre VIH y hepatitis donde no existe padrón.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('proceso')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('probabilisticas')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- PROBABILÍSTICAS -->
+<div id="probabilisticas" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 04</div>
+    <h2>Técnicas probabilísticas</h2>
+    <p class="section-intro">MAS, sistemático, estratificado, conglomerados y área — las únicas que permiten inferencia estadística válida al universo.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Principio fundamental</div>
+    <p>En el muestreo probabilístico, cada elemento tiene una <strong>probabilidad conocida y distinta de cero</strong> de ser seleccionado. Esto permite calcular el error muestral y hacer inferencias estadísticas válidas al universo. El MAS es el punto de referencia teórico — las fórmulas del Cap. 10 asumen MAS como base.</p>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">1 — Muestreo aleatorio simple (MAS)</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;">Cada elemento tiene probabilidad igual de selección. Procedimiento: asignar número a cada elemento del marco → seleccionar números al azar → los elementos con esos números forman la muestra.</p>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;"><strong>Muestreo con vs. sin reposición:</strong> en el muestreo sin reposición (estándar en investigación de mercados), el elemento seleccionado se retira del marco. Cuando n/N > 5%, se aplica el factor de corrección para poblaciones finitas.</p>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">2 — Muestreo sistemático</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;">Se selecciona un elemento al azar en los primeros <em>k</em> elementos y luego se toma cada k-ésimo. <strong>k = N/n</strong>. Más fácil de implementar en campo que el MAS; no requiere numerar todos los elementos de antemano.</p>
+  <div class="callout"><strong>Riesgo:</strong> sesgo de periodicidad. Si el marco tiene un patrón periódico que coincide con el intervalo k, el muestreo produce sesgo. Ejemplo: marco ordenado por día de semana y k=7.</div>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">3 — Muestreo estratificado</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;">La población se divide en estratos mutuamente excluyentes y se extrae una MAS de <strong>cada estrato</strong>. Mejora la precisión cuando los estratos son internamente homogéneos y distintos entre sí.</p>
+  <div class="tec-grid">
+    <div style="background:#e8f0f8;border:1px solid #b8d0e8;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#1a3a5c;text-transform:uppercase;margin-bottom:8px;">Proporcional</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Misma fracción de muestreo en todos los estratos. Muestra directamente representativa sin ponderación. Riesgo: estratos pequeños con muy pocas observaciones.</p>
+    </div>
+    <div style="background:#e8f0f8;border:1px solid #b8d0e8;border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#1a3a5c;text-transform:uppercase;margin-bottom:8px;">Desproporcional</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Fracción distinta por estrato — sobredimensiona los pequeños. Requiere ponderación en el análisis para estimados globales válidos.</p>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 INE Uruguay — Encuesta Continua de Hogares</div>
+    <p>La ECH usa muestreo estratificado por departamento y zona (urbana/rural). Muestras departamentales sobredimensionadas respecto a su peso en la población total permiten estimados precisos tanto a nivel nacional como departamental.</p>
+  </div>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">4 — Muestreo por conglomerados</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;">La población se divide en conglomerados mutuamente excluyentes, se selecciona aleatoriamente un subconjunto de conglomerados, y se estudian todos o algunos elementos dentro de los seleccionados.</p>
+  <div class="callout"><strong>Diferencia clave con el estratificado:</strong> en el estratificado se seleccionan elementos de <em>todos</em> los estratos; en el conglomerado se seleccionan <em>algunos</em> conglomerados. La eficiencia estadística es menor pero el costo de campo cae drásticamente.</div>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">5 — Muestreo de área</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:14px;">Variante del conglomerado donde los conglomerados son unidades geográficas: manzanas, zonas censales, barrios, departamentos. La geografía actúa como marco muestral cuando no existe una lista de individuos.</p>
+  <div class="latam-box">
+    <div class="latam-label">🌎 INE Uruguay — muestreo de área bietápico</div>
+    <p>Primer etapa: sorteo de segmentos censales ponderados por densidad de hogares. Segunda etapa: listado y sorteo de hogares dentro de cada segmento. Garantiza cobertura nacional sin un padrón de hogares completo. Es el estándar en encuestas nacionales de hogares en toda LATAM.</p>
+  </div>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>Caso: Endeavor LATAM — muestreo probabilístico con marco imperfecto</h3>
+      <div class="tags"><span class="tag tag-caso">Caso real</span><span class="tag tag-lat">LATAM</span></div>
+    </div>
+    <p>En 2023, Endeavor realizó un estudio sobre startups en 8 países de la región. El universo: empresas fundadas entre 2018 y 2023, con al menos 3 empleados, en ciudades de más de 500.000 habitantes. El marco se construyó combinando cámaras de comercio, bases de aceleradoras y datos de LinkedIn — ninguna fuente cubría el universo completo. Se usó MAS dentro de cada fuente con deduplicación posterior. Tasa de respuesta del 24%, reportada explícitamente.</p>
+    <p><strong>Lección:</strong> el muestreo probabilístico en LATAM raramente tiene un marco perfecto. La solución: combinar fuentes, documentar las limitaciones y reportar la tasa de respuesta.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('no-prob')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('seleccion')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- SELECCIÓN -->
+<div id="seleccion" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 05</div>
+    <h2>Selección entre técnicas</h2>
+    <p class="section-intro">Criterios de comparación y árbol de decisión para elegir la técnica apropiada.</p>
+  </div>
+
+  <table class="compare-table">
+    <thead><tr><th>Criterio</th><th>No probabilístico</th><th>Probabilístico</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Error muestral</strong></td><td>No calculable</td><td>Calculable y controlable</td></tr>
+      <tr><td><strong>Generalización</strong></td><td>No válida estadísticamente</td><td>Válida al universo</td></tr>
+      <tr><td><strong>Costo</strong></td><td>Generalmente menor</td><td>Generalmente mayor</td></tr>
+      <tr><td><strong>Requiere marco muestral</strong></td><td>No siempre</td><td>Sí, siempre</td></tr>
+      <tr><td><strong>Velocidad</strong></td><td>Mayor</td><td>Menor</td></tr>
+      <tr><td><strong>Uso típico</strong></td><td>Exploratoria, piloto, nicho</td><td>Concluyente, descriptiva</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">Árbol de decisión — tres preguntas</h3>
+
+  <div class="decision-box">
+    <div class="decision-q">Pregunta 1</div>
+    <div class="decision-text">¿El estudio requiere inferencia estadística al universo?</div>
+    <div class="decision-opts">NO → técnica no probabilística (exploratoria, piloto) &nbsp;|&nbsp; SÍ → continuar a P2</div>
+  </div>
+  <div class="decision-box">
+    <div class="decision-q">Pregunta 2</div>
+    <div class="decision-text">¿Existe un marco muestral confiable y completo?</div>
+    <div class="decision-opts">NO → muestreo de área o bola de nieve &nbsp;|&nbsp; SÍ → continuar a P3</div>
+  </div>
+  <div class="decision-box">
+    <div class="decision-q">Pregunta 3</div>
+    <div class="decision-text">¿Hay subgrupos de interés analítico específico? ¿El costo de campo es la restricción principal?</div>
+    <div class="decision-opts">Subgrupos → estratificado &nbsp;|&nbsp; Costo de campo → conglomerados &nbsp;|&nbsp; Ninguno → MAS o sistemático</div>
+  </div>
+
+  <div class="callout"><strong>La distinción más frecuentemente confundida:</strong> el estratificado divide para <em>mejorar la precisión</em> (selecciona de todos los estratos); el conglomerado agrupa para <em>ahorrar en campo</em> (selecciona solo algunos conglomerados). Si el subgrupo debe estar representado en la muestra → estratificado. Si el subgrupo es la unidad de campo → conglomerado.</div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('probabilisticas')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('internet')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- INTERNET -->
+<div id="internet" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 06</div>
+    <h2>Muestreo en internet</h2>
+    <p class="section-intro">Problemas de representatividad en encuestas online y técnicas específicas del canal digital.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Muestreo en internet</div>
+    <p>Las encuestas online tienen <strong>tres problemas estructurales de representatividad</strong>: cobertura incompleta (excluyen a personas sin acceso a internet), sesgo de autoselección (responden quienes están motivados, no una muestra aleatoria), y múltiple participación (sin validación de identidad, el mismo usuario puede completar varias veces).</p>
+  </div>
+
+  <table class="compare-table">
+    <thead><tr><th>Técnica digital</th><th>Descripción</th><th>Sesgo típico</th></tr></thead>
+    <tbody>
+      <tr><td><strong>River sampling</strong></td><td>Intercepción de usuarios mientras navegan en sitios asociados</td><td>Depende del perfil de las páginas de intercepción</td></tr>
+      <tr><td><strong>Redes sociales</strong></td><td>Meta, LinkedIn, TikTok como canal de distribución</td><td>Universo = usuarios activos de esa plataforma</td></tr>
+      <tr><td><strong>Base propia (first-party)</strong></td><td>La empresa encuesta a sus clientes desde la app</td><td>Excluye no-clientes y al mercado total</td></tr>
+      <tr><td><strong>RDD / celular</strong></td><td>Generación aleatoria de números dentro de rangos de operadoras</td><td>Excluye números no activos o con portabilidad</td></tr>
+      <tr><td><strong>Panel online</strong></td><td>Panelistas reclutados con perfil verificado + cuotas</td><td>Fatiga de panel en participantes de larga data</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout"><strong>Regla:</strong> ninguna técnica digital es inherentemente probabilística. La representatividad depende de cómo se define el universo y de si el canal cubre ese universo sin sesgo sistemático. Una encuesta online con cuotas bien calibradas es metodológicamente superior a una presencial de conveniencia.</div>
+
+  <div class="latam-box">
+    <div class="latam-label">🌎 Mercado Libre — 220 millones de usuarios, múltiples universos</div>
+    <p>El equipo de Research de ML segmenta su base antes de definir cualquier muestra: frecuencia de compra, categorías activas y antigüedad de último pedido. Para compradores de moda: 8 millones · para compradores recurrentes de electrónica: 4 millones · para vendedores profesionales: 900.000.</p>
+    <p>La decisión de qué parte del marco constituye la población es <strong>anterior</strong> a cualquier decisión sobre técnica de muestreo.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('seleccion')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('latam')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- LATAM -->
+<div id="latam" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 07</div>
+    <h2>Contexto LATAM</h2>
+    <p class="section-intro">Cuatro desafíos de muestreo propios de la región latinoamericana.</p>
+  </div>
+
+  <div class="latam-box">
+    <div class="latam-label">🌎 Marcos muestrales desactualizados</div>
+    <p>Los censos de la región son irregulares. Argentina realizó su censo en 2022 tras un gap de 11 años. Bolivia usa proyecciones desde 2012. Los marcos derivados de esos censos tienen errores de cobertura crecientes en zonas de alta movilidad urbana.</p>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Alta informalidad residencial</div>
+    <p>Las zonas con alta informalidad urbana — asentamientos, villas, comunas populares — son difíciles de cubrir con marcos censales estándar y con encuestadores externos. Producen subcobertura sistemática de los segmentos de menor NSE.</p>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Brecha digital persistente</div>
+    <p>La penetración de internet de alta velocidad en zonas rurales de LATAM es baja. Los estudios exclusivamente digitales sobrerepresentan sistemáticamente a jóvenes urbanos de NSE medio-alto, afectando la validez de estudios que pretenden representar al mercado total.</p>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Altas tasas de rechazo</div>
+    <p>Las tasas de respuesta en encuestas presenciales han caído sostenidamente en LATAM — de 80%+ en los años 90 a menos del 50% en grandes ciudades actuales. El rechazo no es aleatorio: sesga hacia ciertos grupos de manera sistemática.</p>
+  </div>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>Equivalencias internacionales de marcos muestrales</h3>
+      <div class="tags"><span class="tag tag-lat">LATAM</span><span class="tag tag-bib">Comparativo</span></div>
+    </div>
+    <table class="compare-table">
+      <thead><tr><th>País</th><th>Marco más utilizado</th><th>Cobertura / Limitación</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Uruguay</strong></td><td>Padrón Electoral (BPS / Corte Electoral)</td><td>~97% mayores de 18 años. Excluye extranjeros sin ciudadanía.</td></tr>
+        <tr><td><strong>Argentina</strong></td><td>Proyecciones del Censo 2022 (INDEC)</td><td>Actualizado. Limitado en zonas con alta informalidad.</td></tr>
+        <tr><td><strong>Brasil</strong></td><td>Cadastro Único (IBGE) / PNAD Contínua</td><td>Mayor cobertura de NSE bajo. Limitado en favelas no catastradas.</td></tr>
+        <tr><td><strong>Chile</strong></td><td>Registro Social de Hogares (RSH)</td><td>80% de los hogares. Sobrerepresenta segmentos de menor ingreso.</td></tr>
+        <tr><td><strong>México</strong></td><td>Marco geoestadístico nacional (INEGI)</td><td>Cobertura nacional pero heterogénea en zonas rurales.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('internet')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('etica')">Siguiente →</a>
+  </div>
+</div>
+
+<!-- ÉTICA -->
+<div id="etica" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 08</div>
+    <h2>Ética en el diseño muestral</h2>
+    <p class="section-intro">Tres problemas éticos centrales y las obligaciones de reporte y consentimiento.</p>
+  </div>
+
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Ética y muestreo</div>
+    <p>El libro identifica tres problemas éticos centrales en el diseño muestral:</p>
+    <ul>
+      <li><strong>Presentar muestra no probabilística como probabilística:</strong> reportar resultados de conveniencia o cuotas como si tuvieran validez inferencial de muestra aleatoria. El cliente toma decisiones creyendo que los datos son representativos cuando no lo son.</li>
+      <li><strong>Manipulación del marco para obtener resultados deseados:</strong> excluir deliberadamente del marco a segmentos que podrían dar resultados desfavorables al cliente. Es sesgo intencional y metodológicamente fraudulento.</li>
+      <li><strong>Ocultar la tasa de no respuesta:</strong> reportar "n=500" sin mencionar que se contactaron 3.000 personas. La tasa de rechazo del 83% puede introducir sesgo sistemático que invalida los resultados.</li>
+    </ul>
+  </div>
+
+  <div class="callout"><strong>Obligación de reporte:</strong> todo informe de investigación debe declarar la técnica de muestreo usada, el marco muestral, el tamaño de muestra obtenido vs. buscado, y la tasa de respuesta. Sin esta información el lector no puede evaluar la validez de los datos para la decisión que fundamentan.</div>
+
+  <div class="update-card">
+    <div class="update-card-header">
+      <h3>Consentimiento informado y muestreo desde bases de datos</h3>
+      <div class="tags"><span class="tag tag-bib">Regulación · Ética</span></div>
+    </div>
+    <p>Usar una base de datos de clientes como marco muestral sin consentimiento explícito para contacto con fines de investigación viola las regulaciones de protección de datos en la región:</p>
+    <ul>
+      <li><strong>Uruguay — Ley 18.331:</strong> Consentimiento informado y específico para cada finalidad. El consentimiento para comunicaciones comerciales no cubre la participación en investigación.</li>
+      <li><strong>Brasil — LGPD:</strong> Requiere base legal para el tratamiento. Las encuestas pueden ampararse en "legítimo interés" pero deben documentarlo.</li>
+      <li><strong>México — LFPDPPP:</strong> Aviso de privacidad obligatorio antes de recopilar datos.</li>
+      <li><strong>Argentina — Ley 25.326:</strong> Los datos de encuesta no pueden cederse a terceros sin nuevo consentimiento del titular.</li>
+    </ul>
+    <p>La calidad metodológica del muestreo no justifica el uso no ético de datos personales. Validez estadística y cumplimiento legal son condiciones independientes — deben cumplirse ambas.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="nav-btn" onclick="showSection('latam')">← Anterior</a>
+    <a class="nav-btn primary" onclick="showSection('diapositivas')">↑ Volver al inicio</a>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+  });
+}
+document.querySelector('.nav-item').classList.add('active');
+</script>
+</body>
+</html>
