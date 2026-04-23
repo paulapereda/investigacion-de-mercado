@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap. 10 — Recopilación y preparación de los datos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root{--ink:#1a1a1a;--paper:#f7f4ef;--accent:#c0392b;--blue:#2c5f8a;--gold:#b8860b;--muted:#6b6560;--border:#d4cec5;--green:#2d7a3a;--greenbg:#eef6ee;--purple:#6a3ea0;--purplebg:#f5f0ff;}
+.reveal-viewport{background:var(--ink);}
+.reveal .slides{font-family:'DM Sans',sans-serif;}
+.reveal .slides section{text-align:left;padding:0;height:100%;}
+.reveal .progress{color:var(--accent);height:3px;}
+.reveal .controls{color:var(--accent);}
+.reveal .slide-number{font-family:'DM Mono',monospace;font-size:11px;background:transparent;color:rgba(255,255,255,0.25);bottom:14px;right:18px;}
+.slide{width:100%;height:720px;display:flex;flex-direction:column;position:relative;box-sizing:border-box;}
+.s-cover{background:var(--ink);color:var(--paper);justify-content:center;padding:56px 72px;}
+.s-cover::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--blue),var(--gold));}
+.cover-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
+.cover-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,4.4rem);font-weight:900;line-height:1.0;margin-bottom:28px;}
+.cover-title em{color:#d4a0a0;font-style:italic;}
+.cover-chip{font-size:12px;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 14px;display:inline-block;}
+.s-section{background:var(--ink);color:var(--paper);justify-content:center;padding:60px 72px;}
+.s-section::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue));}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:12px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;color:var(--paper);}
+.sec-sub{font-size:15px;color:rgba(255,255,255,0.45);margin-top:14px;font-style:italic;}
+.s-light{background:var(--paper);padding:44px 68px 36px;justify-content:flex-start;}
+.s-light::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue));}
+.s-dark{background:#1e1e1e;padding:44px 68px 36px;justify-content:flex-start;}
+.s-dark::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue));}
+.s-close{background:var(--ink);padding:60px 72px;justify-content:center;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.eyebrow-light{color:rgba(255,255,255,0.35);}
+.slide-h{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:16px;}
+.slide-h-white{color:white;}
+ul.bullets{list-style:none;padding:0;margin:0;}
+ul.bullets li{font-size:clamp(12.5px,1.6vw,14px);line-height:1.55;color:#333;padding:6px 0 6px 22px;border-bottom:1px solid var(--border);position:relative;}
+ul.bullets li:last-child{border-bottom:none;}
+ul.bullets li::before{content:'—';position:absolute;left:0;color:var(--accent);font-weight:700;}
+ul.bullets-white li{color:rgba(255,255,255,0.85);border-color:rgba(255,255,255,0.1);}
+ul.bullets-white li::before{color:var(--accent);}
+.def-block{background:var(--ink);border-radius:8px;padding:13px 18px;margin-bottom:10px;}
+.def-term-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+.def-text{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;}
+.def-text strong{color:#d4a0a0;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:4px;}
+.col-box{background:white;border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.col-box-dark{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px 16px;}
+.col-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:6px;}
+.col-label-blue{color:var(--blue);}
+.col-label-gold{color:var(--gold);}
+.col-label-green{color:var(--green);}
+.col-body{font-size:12.5px;color:#444;line-height:1.55;}
+.col-body-w{font-size:12.5px;color:rgba(255,255,255,0.75);line-height:1.55;}
+.ref-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;}
+.ref-table th{background:var(--ink);color:var(--paper);padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;}
+.ref-table td{padding:7px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.45;font-size:12px;}
+.ref-table tr:nth-child(even) td{background:#faf8f5;}
+.pause-box{background:#fffbec;border-left:5px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 16px;margin-top:12px;}
+.pause-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.pause-q{font-size:13px;color:#4a3a10;line-height:1.5;font-style:italic;}
+.latam-box{background:var(--greenbg);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:10px 16px;margin-top:10px;}
+.latam-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:4px;}
+.latam-text{font-size:12.5px;color:#1a3a1a;line-height:1.5;}
+.callout{border-left:4px solid var(--gold);background:#fffbec;padding:10px 16px;border-radius:0 8px 8px 0;margin-top:10px;font-size:13px;color:#4a3a00;line-height:1.55;}
+.callout-dk{border-left:4px solid var(--gold);background:rgba(184,134,11,0.1);padding:10px 16px;border-radius:0 8px 8px 0;margin-top:10px;font-size:13px;color:#f0d890;line-height:1.55;}
+.pizarron{background:rgba(184,134,11,0.12);border:1px dashed var(--gold);border-radius:8px;padding:8px 14px;margin-top:8px;display:flex;align-items:center;gap:8px;}
+.pizarron-icon{font-size:16px;flex-shrink:0;}
+.pizarron-text{font-size:11.5px;color:#5a4000;font-style:italic;line-height:1.45;}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.chip{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:12px;border:1px solid;}
+.chip-red{background:#fdecea;color:#8b2218;border-color:#f5c6c2;}
+.chip-blue{background:#e8f0f8;color:#1a3a5c;border-color:#b8d0e8;}
+.chip-gold{background:#fff8e1;color:#5a4000;border-color:#ffe082;}
+.chip-green{background:#eef6ee;color:#1b5e20;border-color:#a5d6a7;}
+.agenda-row{display:flex;align-items:center;gap:12px;padding:8px 14px;background:white;border:1px solid var(--border);border-radius:0 8px 8px 0;}
+.agenda-time{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:68px;}
+.agenda-text{font-size:13px;color:var(--ink);}
+.err-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+.err-bad{background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:11px 14px;}
+.err-good{background:#f0fff4;border:1px solid #a5d6a7;border-radius:8px;padding:11px 14px;}
+.err-lab{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.err-bad .err-lab{color:#8b2218;}
+.err-good .err-lab{color:#1b5e20;}
+.err-txt{font-size:12px;color:#333;line-height:1.5;}
+.acro-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:7px;}
+.acro-letter{font-family:'DM Mono',monospace;font-size:18px;font-weight:700;color:var(--accent);width:22px;flex-shrink:0;line-height:1.2;}
+.acro-text{font-size:12.5px;line-height:1.5;color:#333;}
+.acro-text strong{color:var(--ink);}
+.flow-row{display:flex;align-items:stretch;gap:0;margin-top:12px;}
+.flow-step{flex:1;background:white;border:1px solid var(--border);padding:10px 10px;position:relative;text-align:center;}
+.flow-step:not(:last-child)::after{content:'›';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:16px;font-weight:900;z-index:2;}
+.flow-n{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:3px;}
+.flow-t{font-size:11px;color:var(--ink);font-weight:600;line-height:1.3;}
+.obj-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;}
+.obj-card{background:white;border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.obj-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:6px;}
+.obj-card.blue-n .obj-num{color:var(--blue);}
+.obj-card.green-n .obj-num{color:var(--green);}
+.obj-h{font-weight:700;font-size:13px;color:var(--ink);margin-bottom:4px;}
+.obj-t{font-size:11.5px;color:#555;line-height:1.5;}
+.code-block{background:#1e1e2e;border-radius:8px;padding:12px 16px;margin-top:8px;font-family:'DM Mono',monospace;font-size:12px;color:#cdd6f4;line-height:1.7;}
+.code-block .cm{color:#6c7086;}
+.code-block .cv{color:#cba6f7;}
+.code-block .cn{color:#fab387;}
+.code-block .cs{color:#a6e3a1;}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══ PORTADA ══ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Capítulo 10</div>
+  <div class="cover-title">Recopilación y<br><em>preparación</em><br>de los datos</div>
+  <div style="margin-bottom:28px;">
+    <div class="chip-row">
+      <span class="chip chip-red">Malhotra 2016 · Cap. 10</span>
+    </div>
+  </div>
+  <span class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</span>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Hoja de ruta</div>
+  <div class="slide-h">¿Qué vamos a aprender hoy?</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+    <div class="agenda-row" style="border-left:4px solid var(--accent);">
+      <span class="agenda-time">Bloque 1</span>
+      <span class="agenda-text">Naturaleza del trabajo de campo — posición en el proceso</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--accent);">
+      <span class="agenda-time">Bloque 2</span>
+      <span class="agenda-text">El proceso de campo: VESTS — selección, capacitación, supervisión, validación y evaluación</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 3</span>
+      <span class="agenda-text">Preparación de datos: revisión del cuestionario y edición</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 4</span>
+      <span class="agenda-text">Codificación: estructurada, no estructurada y libro de códigos</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--blue);">
+      <span class="agenda-time">Bloque 5</span>
+      <span class="agenda-text">Transcripción, depuración y verificaciones de congruencia</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--gold);">
+      <span class="agenda-time">Bloque 6</span>
+      <span class="agenda-text">Respuestas faltantes · Ajuste estadístico · Estrategia de análisis</span>
+    </div>
+    <div class="agenda-row" style="border-left:4px solid var(--green);">
+      <span class="agenda-time">Cierre</span>
+      <span class="agenda-text">Social media, LATAM, ética y síntesis DATA PREP</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 01</div>
+  <div class="sec-title">Naturaleza del<br>trabajo de campo</div>
+  <div class="sec-sub">Posición en el proceso · Pasos 4 y 5 · Acrónimo VESTS</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso de apertura · Malhotra</div>
+  <div class="slide-h slide-h-white">Häagen-Dazs: cuando el trabajo de campo determina el sabor</div>
+  <ul class="bullets bullets-white">
+    <li>Häagen-Dazs realizó entrevistas personales en centros comerciales para evaluar preferencias por nuevos sabores — el formato de campo determinó qué preguntas eran posibles y cómo se registraban</li>
+    <li>Las entrevistadoras debían presentar muestras físicas, registrar reacciones espontáneas y completar el cuestionario sin interrumpir la experiencia sensorial del encuestado</li>
+    <li>Un error en la temperatura del producto o en el orden de presentación de los sabores invalidaba las respuestas de toda la sesión — el protocolo de campo era tan crítico como el cuestionario</li>
+    <li>Resultado: el proceso de selección y capacitación del equipo de campo consumió el 30% del presupuesto total del estudio</li>
+  </ul>
+  <div class="callout-dk"><strong>"Sin importar qué tan bien se diseñe el proceso de investigación, las personas que realizan el trabajo son quienes controlan la calidad."</strong> — Karen Cravens, vicepresidente de recopilación de datos, Burke Inc.</div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1);border-left-color:var(--gold);margin-top:10px;">
+    <div class="pause-label">⏸ Pregunta de apertura</div>
+    <div class="pause-q" style="color:#f0d890;">¿Por qué el mismo cuestionario puede producir datos de calidad completamente distinta según quién lo aplique y cómo?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figura 10.1 · Malhotra</div>
+  <div class="slide-h">El capítulo 10 cubre los pasos 4 y 5 del proceso</div>
+  <div class="pizarron">
+    <span class="pizarron-icon">✏</span>
+    <span class="pizarron-text">Pizarrón — <strong>Figura 10.1 del libro</strong>: el proceso de investigación de mercados con los Pasos 4 (Trabajo de campo) y 5 (Preparación y análisis de datos) resaltados. Conectar: Cap. 8 diseñó el instrumento, Cap. 9 diseñó quién responde, Cap. 10 cubre cómo se recopilan y preparan los datos.</span>
+  </div>
+  <div class="two-col" style="margin-top:14px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label">Paso 4 — Trabajo de campo</div>
+      <div class="col-body">Contactar a los encuestados, aplicar el cuestionario, registrar los datos y entregar la información para su procesamiento. El equipo de campo es la interfaz entre el diseño y los datos reales.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label col-label-blue">Paso 5 — Preparación de datos</div>
+      <div class="col-body">Transformar los cuestionarios completados en una base de datos analizable. Incluye edición, codificación, transcripción, depuración y ajuste estadístico.</div>
+    </div>
+  </div>
+  <div class="callout">Los errores introducidos en el Paso 4 <strong>no pueden corregirse en el análisis</strong>. La calidad del trabajo de campo es el techo de la calidad de todo el estudio.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Acrónimo VESTS · Malhotra</div>
+  <div class="slide-h">Cinco procesos del trabajo de campo — acrónimo VESTS</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 16px;display:flex;gap:14px;align-items:center;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--accent);min-width:24px;">V</span>
+      <div><strong style="font-size:13px;">Validation</strong> <span style="font-size:12.5px;color:#666;">— Validación del trabajo de campo</span></div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:10px 16px;display:flex;gap:14px;align-items:center;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--blue);min-width:24px;">E</span>
+      <div><strong style="font-size:13px;">Evaluation</strong> <span style="font-size:12.5px;color:#666;">— Evaluación de los trabajadores de campo</span></div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:10px 16px;display:flex;gap:14px;align-items:center;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--green);min-width:24px;">S</span>
+      <div><strong style="font-size:13px;">Selection</strong> <span style="font-size:12.5px;color:#666;">— Selección de los trabajadores de campo</span></div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 16px;display:flex;gap:14px;align-items:center;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--gold);min-width:24px;">T</span>
+      <div><strong style="font-size:13px;">Training</strong> <span style="font-size:12.5px;color:#666;">— Capacitación de los trabajadores de campo</span></div>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--purple);border-radius:0 8px 8px 0;padding:10px 16px;display:flex;gap:14px;align-items:center;">
+      <span style="font-family:'DM Mono',monospace;font-size:22px;font-weight:900;color:var(--purple);min-width:24px;">S</span>
+      <div><strong style="font-size:13px;">Supervision</strong> <span style="font-size:12.5px;color:#666;">— Supervisión de los trabajadores de campo</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 02</div>
+  <div class="sec-title">El proceso<br>de trabajo de campo</div>
+  <div class="sec-sub">Selección · Capacitación (TRAIN) · Supervisión · Validación · Evaluación</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">VESTS — S: Selección · Malhotra</div>
+  <div class="slide-h">Selección de trabajadores de campo</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:12px;">El perfil del entrevistador afecta la calidad del dato. El libro establece que los criterios de selección deben definirse <strong>antes</strong> del reclutamiento, no durante:</p>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Criterios del libro</div>
+      <div class="col-body">
+        <ul style="padding-left:1em;margin-top:4px;">
+          <li style="margin-bottom:5px;font-size:12px;">Habilidades de comunicación claras y empáticas</li>
+          <li style="margin-bottom:5px;font-size:12px;">Apariencia apropiada para el contexto del estudio</li>
+          <li style="margin-bottom:5px;font-size:12px;">Actitud amigable sin ser intrusiva</li>
+          <li style="margin-bottom:5px;font-size:12px;">Honestidad y fiabilidad verificables</li>
+          <li style="font-size:12px;">Experiencia en investigación de mercados (deseable)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Error clásico de selección</div>
+      <div class="col-body">Elegir entrevistadores que se parecen demasiado al investigador (mismo NSE, misma edad, mismo perfil). Produce sesgo sistemático: el encuestado puede ajustar sus respuestas al perfil percibido del entrevistador — el <strong>efecto del entrevistador</strong>.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Contexto LATAM · efectos del entrevistador</div>
+    <div class="latam-text">En contextos con alta distancia al poder (varios países de LATAM), los encuestados tienden a responder de manera más favorable cuando perciben al entrevistador como figura de autoridad o de NSE superior. La selección de entrevistadores con perfil socioeconómico similar al del encuestado reduce este sesgo en estudios de comportamiento sensible.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">VESTS — T: Capacitación · Malhotra</div>
+  <div class="slide-h">Capacitación: acrónimo TRAIN</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:10px;">El libro organiza los cinco contenidos de la capacitación en el acrónimo <strong>TRAIN</strong>:</p>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div class="acro-row"><div class="acro-letter">T</div><div class="acro-text"><strong>Terminating the interview</strong> — cómo cerrar la entrevista de forma cortés cuando el encuestado rechaza, se pone hostil o claramente no pertenece a la muestra objetivo</div></div>
+    <div class="acro-row"><div class="acro-letter">R</div><div class="acro-text"><strong>Recording the answers</strong> — registrar las respuestas textualmente y en tiempo real, sin resumir ni interpretar. En preguntas abiertas: anotar cada palabra, no el resumen del entrevistador</div></div>
+    <div class="acro-row"><div class="acro-letter">A</div><div class="acro-text"><strong>Asking the questions</strong> — leer cada pregunta exactamente como está redactada, en el orden establecido, sin omitir ni reformular</div></div>
+    <div class="acro-row"><div class="acro-letter">I</div><div class="acro-text"><strong>Initial contact development</strong> — el primer contacto determina si el encuestado coopera. Apertura estándar, presentación del propósito, garantía de anonimato</div></div>
+    <div class="acro-row"><div class="acro-letter">N</div><div class="acro-text"><strong>Nosy behavior — probing (sondeo)</strong> — técnicas para obtener respuestas más completas sin sesgar: pausa silenciosa, repetición de la pregunta, sondeo neutral ("¿puede decirme algo más?")</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capacitación · El sondeo (probing)</div>
+  <div class="slide-h">El sondeo: obtener más sin contaminar</div>
+  <div class="def-block">
+    <div class="def-term-label">Sondeo — Malhotra</div>
+    <div class="def-text">Técnica para motivar a los encuestados a elaborar sus respuestas sin introducir sesgo. El sondeo debe ser <strong>neutro</strong>: nunca insinuar una dirección de respuesta.</div>
+  </div>
+  <div class="err-grid" style="margin-top:10px;">
+    <div class="err-bad">
+      <div class="err-lab">❌ Sondeo sesgado</div>
+      <div class="err-txt">"¿No le parece que también podría ser por el precio?" — El entrevistador sugiere una respuesta. El encuestado tiende a confirmar.</div>
+    </div>
+    <div class="err-good">
+      <div class="err-lab">✓ Sondeo neutral</div>
+      <div class="err-txt">"¿Podría explicarme un poco más?" o "¿Qué más?" o simplemente una pausa silenciosa de 3-4 segundos.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;"><strong>Regla de oro del sondeo:</strong> cualquier técnica que lleve al encuestado a decir más sobre lo que <em>él ya dijo</em> es válida. Cualquier técnica que lleve al encuestado hacia lo que <em>el entrevistador cree</em> es sesgo.</div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Pregunta a la clase</div>
+    <div class="pause-q">¿Por qué registrar las respuestas textualmente (sin resumir) es importante para la codificación posterior?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">VESTS — S: Supervisión · Malhotra</div>
+  <div class="slide-h">Supervisión: cuatro dimensiones del control de campo</div>
+  <div class="obj-grid">
+    <div class="obj-card">
+      <div class="obj-num">01</div>
+      <div class="obj-h">Control del muestreo</div>
+      <div class="obj-t">Verificar que los entrevistadores sigan el plan muestral y no sustituyan encuestados por conveniencia propia. La sustitución no autorizada es la violación más frecuente del protocolo de campo.</div>
+    </div>
+    <div class="obj-card blue-n">
+      <div class="obj-num">02</div>
+      <div class="obj-h">Supervisión directa</div>
+      <div class="obj-t">El supervisor observa una fracción de las entrevistas en tiempo real. Detecta desviaciones del protocolo, problemas de comunicación y situaciones no previstas que requieren decisión en campo.</div>
+    </div>
+    <div class="obj-card green-n">
+      <div class="obj-num">03</div>
+      <div class="obj-h">Revisión de cuestionarios</div>
+      <div class="obj-t">El supervisor revisa cada cuestionario al terminar la sesión, antes de que el entrevistador se retire del campo. Permite detectar y corregir omisiones mientras el encuestado aún está accesible.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">La supervisión no es desconfianza — es control de calidad. Un entrevistador experimentado que trabaja sin supervisión produce datos de menor calidad no porque sea deshonesto, sino porque los errores se acumulan sin corrección.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">VESTS — E: Evaluación · Malhotra</div>
+  <div class="slide-h slide-h-white">Evaluación de los trabajadores de campo — cuatro criterios</div>
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:10px;">
+    <thead><tr style="background:rgba(255,255,255,0.1);">
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">CRITERIO</th>
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">QUÉ MIDE</th>
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">SEÑAL DE PROBLEMA</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:rgba(255,255,255,0.85);font-weight:600;">Tasa de respuesta</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Contactos que aceptan participar</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Tasa anormalmente alta: posible selección inadecuada</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:rgba(255,255,255,0.85);font-weight:600;">Tasa de finalización</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Cuestionarios completos vs. iniciados</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Alta tasa de abandono: problemas de rapport</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:rgba(255,255,255,0.85);font-weight:600;">Tiempo promedio</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Duración media por entrevista</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Muy corto: entrevistas saltadas. Muy largo: desvíos.</td></tr>
+      <tr><td style="padding:7px 12px;color:rgba(255,255,255,0.85);font-weight:600;">Calidad abiertas</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Riqueza del registro de respuestas abiertas</td><td style="padding:7px 12px;color:rgba(255,255,255,0.75);">Respuestas de una palabra donde se esperaba detalle</td></tr>
+    </tbody>
+  </table>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1);border-left-color:var(--gold);margin-top:14px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q" style="color:#f0d890;">Un entrevistador entrega 40 cuestionarios en 6 horas de campo. El cuestionario demora 15 minutos en promedio. ¿Qué debería alertar al supervisor?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">VESTS — V: Validación · Malhotra</div>
+  <div class="slide-h">Validación del trabajo de campo — verificar que la entrevista ocurrió</div>
+  <div class="def-block">
+    <div class="def-term-label">Validación — Malhotra</div>
+    <div class="def-text">Proceso de verificar que el trabajo de campo se realizó efectivamente como fue reportado. Implica <strong>recontactar</strong> una fracción de los encuestados para confirmar que la entrevista tuvo lugar.</div>
+  </div>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Procedimiento estándar</div>
+      <div class="col-body">Recontactar entre el <strong>10% y el 25%</strong> de los encuestados por teléfono, email o visita. Verificar: ¿fue entrevistado?, ¿cuánto duró?, ¿recuerda el tema de la encuesta?</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Falsificaciones detectadas</div>
+      <div class="col-body">El entrevistador fabricó entrevistas sin contactar a los encuestados. Señales de alarma: cuestionarios completos en tiempo récord, respuestas demasiado uniformes, ningún rechazo reportado.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Caso LATAM · Ipsos</div>
+    <div class="latam-text">Ipsos LATAM aplica validación al 20% de las entrevistas en sus estudios de campo presencial en la región. La validación se realiza dentro de las 48 horas del campo para garantizar que el encuestado aún recuerda el contacto. En encuestas online con paneles verificados, la validación se reemplaza por controles algorítmicos de tiempo de respuesta y patrones de clicks.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">VESTS — E: Evaluación · Malhotra</div>
+  <div class="slide-h">Evaluación de los trabajadores de campo — cuatro criterios</div>
+  <table class="ref-table">
+    <thead><tr><th>Criterio</th><th>Qué mide</th><th>Señal de problema</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tasa de respuesta</strong></td><td>Proporción de contactos que aceptan participar</td><td>Tasa anormalmente alta puede indicar selección inadecuada de encuestados</td></tr>
+      <tr><td><strong>Tasa de finalización</strong></td><td>Proporción de cuestionarios completados vs. iniciados</td><td>Alta tasa de abandono sugiere problemas de rapport o de protocolo</td></tr>
+      <tr><td><strong>Tiempo promedio</strong></td><td>Duración media de cada entrevista</td><td>Tiempo muy corto indica entrevistas incompletas o saltadas; muy largo, desvíos del protocolo</td></tr>
+      <tr><td><strong>Calidad de respuestas abiertas</strong></td><td>Riqueza y pertinencia de las respuestas registradas</td><td>Respuestas de una sola palabra o genéricas en preguntas que debieran generar detalle</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">La evaluación no es solo diagnóstico — es retroalimentación. Un entrevistador que recibe evaluación continua mejora su desempeño más rápido que uno que solo recibe evaluación al final.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · trabajo de campo digital</div>
+  <div class="slide-h slide-h-white">Encuestas CAPI en campo: experiencia Mercado Libre + Kantar LATAM</div>
+  <ul class="bullets bullets-white">
+    <li>Mercado Libre y Kantar operan encuestas CAPI (computer-assisted personal interview) en puntos de alta afluencia de LATAM — estaciones de metro, centros comerciales, paraderos de transporte</li>
+    <li>Los entrevistadores usan tablets con el cuestionario programado: la lógica de salto es automática, lo que elimina el error humano de seguimiento de rutas de preguntas</li>
+    <li>La validación se realiza en tiempo real: el sistema detecta cuestionarios completados en tiempos estadísticamente imposibles y los marca para revisión del supervisor</li>
+    <li>El protocolo CAPI redujo el tiempo de procesamiento de campo en un <strong>40%</strong> respecto al papel, y los errores de registro cayeron a menos del <strong>2%</strong></li>
+    <li>Desafío LATAM: zonas sin conectividad requieren modo offline — los datos se sincronizan al volver a cobertura</li>
+  </ul>
+  <div class="callout-dk">El CAPI es el estándar actual del trabajo de campo cuantitativo en LATAM urbano. Combina la profundidad del contacto personal con el control de calidad del canal digital.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Supervisión · control del muestreo</div>
+  <div class="slide-h">La tasa de respuesta — métrica clave de calidad de campo</div>
+  <div class="def-block">
+    <div class="def-term-label">Tasa de respuesta — Malhotra</div>
+    <div class="def-text">Proporción de encuestados que completan el cuestionario sobre el total de contactos realizados. Una tasa alta no garantiza ausencia de sesgo — si quienes rechazan son sistemáticamente distintos, hay sesgo de no respuesta.</div>
+  </div>
+  <table class="ref-table" style="margin-top:10px;">
+    <thead><tr><th>Método</th><th>Tasa típica LATAM 2023</th><th>Señal de alerta</th></tr></thead>
+    <tbody>
+      <tr><td>Entrevista personal en hogar</td><td>55–75%</td><td>Menor al 40%</td></tr>
+      <tr><td>CAPI en punto de alta afluencia</td><td>60–80%</td><td>Menor al 50%</td></tr>
+      <tr><td>Encuesta online con panel</td><td>20–45%</td><td>Menor al 15%</td></tr>
+      <tr><td>Encuesta online sin panel</td><td>5–15%</td><td>Menor al 3%</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Obligación de reporte:</strong> el informe final debe declarar la tasa de respuesta y el n de contactos totales, no solo el n de encuestados que completaron. Sin esa información el lector no puede evaluar el sesgo de no respuesta.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 03</div>
+  <div class="sec-title">Preparación<br>de los datos</div>
+  <div class="sec-sub">Acrónimo DATA PREP · Revisión · Edición</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Acrónimo DATA PREP · Malhotra</div>
+  <div class="slide-h">El proceso de preparación — acrónimo DATA PREP</div>
+  <div class="flow-row" style="gap:3px;flex-wrap:wrap;">
+    <div class="flow-step" style="border-left:3px solid var(--accent);min-width:120px;margin-bottom:3px;"><div class="flow-n">D</div><div class="flow-t">Data cleaning<br>Depuración</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--accent);min-width:120px;margin-bottom:3px;"><div class="flow-n">A</div><div class="flow-t">Adjusting<br>Ajuste estadístico</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--blue);min-width:120px;margin-bottom:3px;"><div class="flow-n">T</div><div class="flow-t">Transcribing<br>Transcripción</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--blue);min-width:120px;margin-bottom:3px;"><div class="flow-n">A</div><div class="flow-t">Analysis strategy<br>Estrategia</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--green);min-width:120px;margin-bottom:3px;"><div class="flow-n">P</div><div class="flow-t">Post-field checking<br>Verificación</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--green);min-width:120px;margin-bottom:3px;"><div class="flow-n">R</div><div class="flow-t">Recording<br>Codificación</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--gold);min-width:120px;margin-bottom:3px;"><div class="flow-n">E</div><div class="flow-t">Editing<br>Edición</div></div>
+    <div class="flow-step" style="border-left:3px solid var(--gold);min-width:120px;margin-bottom:3px;"><div class="flow-n">P</div><div class="flow-t">Preliminary plan<br>Plan análisis</div></div>
+  </div>
+  <div class="callout" style="margin-top:14px;">El orden en la práctica no sigue el acrónimo: la secuencia real es <strong>Revisión → Edición → Codificación → Transcripción → Depuración → Ajuste → Estrategia de análisis</strong>. DATA PREP es un recurso mnemotécnico, no una secuencia operativa.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">DATA PREP — Paso 1 · Malhotra</div>
+  <div class="slide-h">Revisión del cuestionario — el primer filtro de calidad</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:12px;">Antes de cualquier procesamiento, cada cuestionario se revisa manualmente para detectar cinco problemas:</p>
+  <ul class="bullets">
+    <li><strong>Incompleto:</strong> preguntas sin respuesta. ¿Es falta de datos o una respuesta válida (ej. "no sabe")? La distinción cambia el tratamiento posterior</li>
+    <li><strong>Ilegible:</strong> respuestas abiertas que no pueden interpretarse con certeza. Si la duda es significativa, el cuestionario se descarta</li>
+    <li><strong>Inconsistente:</strong> respuestas contradictorias dentro del mismo cuestionario. Ejemplo: dice tener 25 años y también que lleva 15 años trabajando en la empresa</li>
+    <li><strong>Ambiguo:</strong> el encuestado marcó más de una opción donde solo se permitía una, o la respuesta no cae en ninguna categoría</li>
+    <li><strong>Insatisfactorio:</strong> respuestas que indican que el encuestado no leyó las preguntas o respondió al azar (patrón de respuesta perfectamente regular)</li>
+  </ul>
+  <div class="callout">Un cuestionario descartado en esta etapa es un dato perdido pero honesto. Un cuestionario aceptado con problemas produce datos que contaminan el análisis sin que el investigador lo sepa.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">DATA PREP — Paso 2 · Malhotra</div>
+  <div class="slide-h">Edición — distinguir campo de oficina</div>
+  <div class="def-block">
+    <div class="def-term-label">Edición — Malhotra</div>
+    <div class="def-text">Proceso de revisar los formularios completados para garantizar la <strong>máxima exactitud y precisión</strong>. Se realiza en dos momentos: en campo (por el supervisor) y en oficina (antes de la codificación).</div>
+  </div>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Edición en campo</div>
+      <div class="col-body">El supervisor revisa cada cuestionario inmediatamente después de la entrevista. Puede recontactar al encuestado para aclarar respuestas ambiguas o completar omisiones detectadas. Esta es la oportunidad de corrección más valiosa y la más escasa.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Edición en oficina</div>
+      <div class="col-body">Revisión sistemática de todos los cuestionarios antes de codificarlos. El editor aplica reglas predefinidas para tratar casos ambiguos de forma consistente. Las decisiones se documentan en el libro de códigos.</div>
+    </div>
+  </div>
+  <div class="callout">La edición en campo tiene una ventaja irreproducible: el encuestado aún está disponible. Una vez que el entrevistador se retira del campo, la edición pasa a ser un ejercicio de interpretación, no de aclaración.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Caso LATAM · campo en condiciones adversas</div>
+  <div class="slide-h slide-h-white">INE Uruguay: campo en asentamientos irregulares</div>
+  <ul class="bullets bullets-white">
+    <li>La ECH incluye segmentos censales en asentamientos irregulares — zonas sin dirección postal formal que requieren protocolos diferenciados</li>
+    <li>Protocolo del INE: entrevistadores locales con conocimiento del territorio, acompañamiento de referentes comunitarios en primera visita, cuestionario en tablet con modo offline</li>
+    <li>Tasa de respuesta en esos segmentos: <strong style="color:#a5d6a7;">55–65%</strong> vs. media nacional de 75% — diferencia reportada explícitamente en los metadatos de la ECH</li>
+    <li>NS/NR en ingresos laborales: <strong style="color:#f5a09a;">30%+</strong> en asentamientos vs. 12% en zonas formales — tratados con imputación por donante (caso similar del mismo segmento)</li>
+    <li>El diferencial de calidad se publica en los metadatos del INE — no se oculta ni se promedía con el resto</li>
+  </ul>
+  <div class="callout-dk"><strong>Principio del libro:</strong> los desafíos de acceso y confianza en LATAM requieren protocolos diferenciados por segmento. El campo no puede abstraerse del contexto social.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 04</div>
+  <div class="sec-title">Codificación</div>
+  <div class="sec-sub">Estructurada · No estructurada · Libro de códigos</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Codificación · Malhotra</div>
+  <div class="slide-h">¿Qué es codificar? — asignar números que el software puede leer</div>
+  <div class="def-block">
+    <div class="def-term-label">Codificación — Malhotra</div>
+    <div class="def-text">Proceso de asignar <strong>valores numéricos o alfanuméricos</strong> para representar cada respuesta a cada pregunta del cuestionario. Transforma el texto del cuestionario en datos procesables por software estadístico.</div>
+  </div>
+  <div class="two-col" style="margin-top:12px;">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Preguntas estructuradas</div>
+      <div class="col-body">Las categorías de respuesta ya tienen códigos asignados en el cuestionario. La codificación es mecánica: transcribir el código marcado. El esquema se define <em>antes</em> del campo.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Preguntas no estructuradas</div>
+      <div class="col-body">Las respuestas abiertas requieren un proceso de codificación <em>posterior</em> al campo: leer una muestra de respuestas, identificar categorías emergentes, codificar todas las respuestas usando esas categorías.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">La codificación de preguntas abiertas es la tarea de preparación más subjetiva y más costosa en tiempo. Dos codificadores distintos deben producir resultados similares — la <strong>confiabilidad entre codificadores</strong> debe verificarse antes de codificar la muestra completa.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Codificación estructurada · ejemplo</div>
+  <div class="slide-h slide-h-white">Cómo se ve un esquema de codificación para preguntas estructuradas</div>
+  <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:10px;">Variable Q3 — "¿Con qué frecuencia usa delivery en una semana normal?"</p>
+  <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:14px;">
+    <thead><tr style="background:rgba(255,255,255,0.1);">
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">CÓDIGO</th>
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">ETIQUETA</th>
+      <th style="padding:7px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">CATEGORÍA EN EL CUESTIONARIO</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">1</td><td style="padding:7px 12px;color:rgba(255,255,255,0.8);">Nunca</td><td style="padding:7px 12px;color:rgba(255,255,255,0.6);">No usé delivery en la última semana</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">2</td><td style="padding:7px 12px;color:rgba(255,255,255,0.8);">Una vez</td><td style="padding:7px 12px;color:rgba(255,255,255,0.6);">1 vez por semana</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">3</td><td style="padding:7px 12px;color:rgba(255,255,255,0.8);">2-3 veces</td><td style="padding:7px 12px;color:rgba(255,255,255,0.6);">2 a 3 veces por semana</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">4</td><td style="padding:7px 12px;color:rgba(255,255,255,0.8);">4+ veces</td><td style="padding:7px 12px;color:rgba(255,255,255,0.6);">4 o más veces por semana</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:7px 12px;color:#f0d890;font-family:'DM Mono',monospace;">9</td><td style="padding:7px 12px;color:rgba(255,255,255,0.8);">NS/NR</td><td style="padding:7px 12px;color:rgba(255,255,255,0.6);">No sabe / No responde</td></tr>
+    </tbody>
+  </table>
+  <div class="callout-dk"><strong>Convención estándar:</strong> los valores 9, 99 o 999 se reservan para NS/NR (No Sabe/No Responde). Deben distinguirse del 0 (que puede ser una respuesta válida). El software estadístico los trata como <em>missing values</em> cuando están correctamente declarados.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Codificación no estructurada · Malhotra</div>
+  <div class="slide-h">Codificar preguntas abiertas — cuatro pasos</div>
+  <ul class="bullets">
+    <li><strong>Paso 1 — Muestra exploratoria:</strong> leer entre 100 y 200 respuestas sin codificar para identificar los temas que emergen naturalmente. Esta etapa no puede automatizarse sin perder matices</li>
+    <li><strong>Paso 2 — Categorías exhaustivas y mutuamente excluyentes:</strong> definir categorías que cubran todas las respuestas posibles (incluir "Otro") y que no se superpongan. Igual que las opciones de opción múltiple</li>
+    <li><strong>Paso 3 — Codificación piloto:</strong> codificar el 10%-15% de la muestra con dos codificadores independientes y calcular el índice de acuerdo entre codificadores. Acuerdo mínimo aceptable: 85%</li>
+    <li><strong>Paso 4 — Codificación completa:</strong> codificar el total de la muestra. Las respuestas ambiguas se resuelven por consenso entre dos codificadores o por protocolo predefinido en el libro de códigos</li>
+  </ul>
+  <div class="latam-box">
+    <div class="latam-label">🌎 IA y codificación automática — 2023-2024</div>
+    <div class="latam-text">Empresas como Qualtrics, SurveyMonkey y startups de TextAnalytics en LATAM ofrecen codificación automática de preguntas abiertas usando NLP. La IA categoriza y asigna sentimiento con 80-90% de precisión en español. Limitación: no detecta ironía, contexto cultural local ni ambigüedad semántica regional. El verificador humano sigue siendo necesario para el 10-20% de casos problemáticos.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Codificación no estructurada · control de calidad</div>
+  <div class="slide-h">Confiabilidad entre codificadores — el esquema es claro si dos personas llegan a lo mismo</div>
+  <div class="def-block">
+    <div class="def-term-label">Confiabilidad entre codificadores</div>
+    <div class="def-text">Grado de acuerdo entre dos o más codificadores independientes. Se mide con el <strong>coeficiente Kappa de Cohen (κ)</strong>. κ ≥ 0.70 = acuerdo sustancial (mínimo aceptable). κ = 1.0 = acuerdo perfecto.</div>
+  </div>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Procedimiento</div>
+      <div class="col-body">Dos codificadores clasifican de forma independiente entre 50 y 100 respuestas. Si κ &lt; 0.70, se revisan las definiciones del esquema, se aclara el libro de códigos y se repite. Nunca resolver discrepancias por votación sin revisar el esquema.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Cuándo falla</div>
+      <div class="col-body">Baja confiabilidad revela que las definiciones de las categorías son ambiguas — el problema es el esquema, no los codificadores. Si dos personas expertas no se ponen de acuerdo, el encuestado tampoco hubiera podido clasificarse a sí mismo.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 IA como segundo codificador en LATAM</div>
+    <div class="latam-text">Modelos NLP en español alcanzan κ ≈ 0.75–0.85 en categorías claras, pero caen a κ ≈ 0.50–0.60 con ironía o modismos regionales. El verificador humano sigue siendo necesario para el 15–20% de respuestas problemáticas.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="slide-h">El libro de códigos — la columna vertebral de la base de datos</div>
+  <div class="def-block">
+    <div class="def-term-label">Libro de códigos — Malhotra</div>
+    <div class="def-text">Documento que contiene las <strong>instrucciones de codificación</strong> y el código asignado a cada respuesta de cada variable. Permite a cualquier persona reconstruir o verificar la base de datos.</div>
+  </div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-top:10px;margin-bottom:10px;">Un libro de códigos completo contiene, para cada variable:</p>
+  <div class="three-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label">Identificación</div>
+      <div class="col-body">Nombre de la variable, número de pregunta en el cuestionario, ubicación en la base de datos (número de columna)</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label col-label-blue">Definición</div>
+      <div class="col-body">Texto exacto de la pregunta, tipo de variable (nominal, ordinal, intervalo), rango de valores válidos</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label col-label-green">Tratamiento</div>
+      <div class="col-body">Código para NS/NR, decisiones sobre respuestas ambiguas, transformaciones aplicadas (recodificaciones, redefiniciones)</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">El libro de códigos es un documento vivo. Se actualiza cada vez que se toma una decisión de codificación durante el procesamiento. Sin él, la base de datos es opaca para cualquier analista que no participó en la codificación.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Archivo de datos · estructura estándar</div>
+  <div class="slide-h slide-h-white">Una fila = un encuestado. Una columna = una variable.</div>
+  <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:10px;">Las variables de opción múltiple "marque todas las que apliquen" se codifican como variables dicotómicas separadas — una por opción de respuesta.</p>
+  <div class="code-block">
+<span class="cm">/* Archivo de datos — delivery Montevideo */</span>
+ID &nbsp;&nbsp; sexo &nbsp; edad &nbsp; frec_uso &nbsp; plataforma &nbsp; sat &nbsp; sat_NS
+001 &nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp; 28 &nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4 &nbsp;&nbsp;&nbsp; <span class="cn">0</span>
+002 &nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp; 35 &nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="cs">9</span> &nbsp;&nbsp;&nbsp; <span class="cv">1</span>
+003 &nbsp;&nbsp; 1 &nbsp;&nbsp;&nbsp;&nbsp; 42 &nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2 &nbsp;&nbsp;&nbsp; <span class="cn">0</span>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;">
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,0.75);"><span style="color:#cba6f7;">9</span> = NS/NR → missing value declarado</div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,0.75);"><span style="color:#fab387;">0</span> = No aplica (respondió "No" en filtro)</div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,0.75);"><span style="color:#a6e3a1;">Flag _NS</span> = 1 si NS/NR, facilita análisis de no respuesta</div>
+  </div>
+  <div class="callout-dk">El libro de códigos declara, para cada variable: nombre, número de pregunta en el cuestionario, tipo de escala, rango de valores válidos, código para NS/NR, y cualquier transformación aplicada.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Transcripción · Malhotra</div>
+  <div class="slide-h">Transcripción — del cuestionario a la base de datos</div>
+  <div class="def-block">
+    <div class="def-term-label">Transcripción — Malhotra</div>
+    <div class="def-text">Proceso de transferir los datos codificados del cuestionario al <strong>soporte digital</strong>. Históricamente: entrada manual. Actualmente: captura directa (CAPI/CAWI) o escaneo óptico (OMR).</div>
+  </div>
+  <div class="two-col" style="margin-top:12px;">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Entrada manual — riesgo</div>
+      <div class="col-body">La doble entrada (dos operadores capturan los mismos datos de forma independiente) detecta discrepancias. Estándar de calidad: tasa de error inferior al <strong>0.1%</strong>. Hoy se usa principalmente en encuestas de papel en zonas sin conectividad.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Captura directa — estándar actual</div>
+      <div class="col-body">CAPI y CAWI eliminan la transcripción: el dato va directo al archivo. El error de transcripción es prácticamente cero. El riesgo se desplaza a la configuración del cuestionario digital y a la lógica de salto.</div>
+    </div>
+  </div>
+  <div class="callout"><strong>Elaboración del archivo de datos:</strong> el archivo debe tener una fila por encuestado y una columna por variable. Las variables múltiples (ej. "marque todas las que apliquen") se codifican como variables dicotómicas separadas — una por opción.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Depuración · Malhotra</div>
+  <div class="slide-h">Depuración de los datos — encontrar errores que la edición no vio</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:12px;">La depuración es la revisión de la base de datos digital para detectar errores que pasaron la edición manual. Dos tipos de verificaciones:</p>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Verificaciones de rango</div>
+      <div class="col-body">Detectar valores fuera del rango válido. Si Q3 tiene códigos 1-4 y 9, un valor de "7" es un error de transcripción.<br><br>Ejemplo: edad con valor 150, ingreso con valor negativo, código 3 en una variable dicotómica 0/1.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Verificaciones de congruencia</div>
+      <div class="col-body">Detectar combinaciones lógicamente imposibles entre variables.<br><br>Ejemplos clásicos:<br>• Tiene hijos = No AND Cantidad de hijos = 3<br>• Edad = 18 AND Años de experiencia laboral = 25<br>• No usa smartphone AND Tiene cuenta en Instagram</div>
+    </div>
+  </div>
+  <div class="callout">Las verificaciones de congruencia son más informativas que las de rango porque detectan errores que son plausibles en cada variable individualmente pero imposibles en combinación.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ejercicio · verificaciones de congruencia</div>
+  <div class="slide-h slide-h-white">¿Cuál de estos pares de respuestas es incongruente?</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:4px;">PAR A</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);">Q5: "¿Tiene teléfono celular?" → No &nbsp;&nbsp; | &nbsp;&nbsp; Q12: "¿En qué aplicaciones pasa más tiempo?" → TikTok, Instagram, WhatsApp</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#8ab4d4;margin-bottom:4px;">PAR B</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);">Q2: "Edad" → 22 años &nbsp;&nbsp; | &nbsp;&nbsp; Q8: "¿Hace cuántos años trabaja?" → 3 años</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#a5d6a7;margin-bottom:4px;">PAR C</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);">Q3: "¿Consume carne?" → No &nbsp;&nbsp; | &nbsp;&nbsp; Q9: "¿Qué corte de carne prefiere?" → Asado de tira</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:11px 16px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:#f0d890;margin-bottom:4px;">PAR D</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);">Q1: "Sexo" → Femenino &nbsp;&nbsp; | &nbsp;&nbsp; Q6: "¿Cuánto gasta por mes en cosméticos?" → $0</div>
+    </div>
+  </div>
+  <div class="pause-box" style="background:rgba(184,134,11,0.1);border-left-color:var(--gold);margin-top:14px;">
+    <div class="pause-label">⏸ Respuestas</div>
+    <div class="pause-q" style="color:#f0d890;">A y C son incongruencias lógicas claras. B y D son combinaciones inusuales pero posibles — no son errores de congruencia. La diferencia importa: solo A y C requieren revisión del cuestionario original.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 06</div>
+  <div class="sec-title">Respuestas faltantes,<br>ajuste y estrategia</div>
+  <div class="sec-sub">Missing values · Ponderación · Redefinición · Recodificación</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Respuestas faltantes · Malhotra</div>
+  <div class="slide-h">Tratamiento de los datos faltantes (missing values)</div>
+  <div class="def-block">
+    <div class="def-term-label">Missing value — Malhotra</div>
+    <div class="def-text">Valor ausente en la base de datos. Puede deberse a: rechazo del encuestado, pregunta no aplicable (lógica de salto), error del entrevistador, o dato genuinamente desconocido por el encuestado.</div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;">
+      <strong style="font-size:13px;">Eliminación por casos (listwise deletion)</strong>
+      <p style="font-size:12.5px;color:#555;margin-top:4px;">Excluir del análisis a todo encuestado con al menos un valor faltante. Simple pero puede reducir dramáticamente el n — y si los faltantes no son aleatorios, introduce sesgo.</p>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;">
+      <strong style="font-size:13px;">Eliminación por pares (pairwise deletion)</strong>
+      <p style="font-size:12.5px;color:#555;margin-top:4px;">Usar todos los casos disponibles para cada par de variables. Conserva más datos pero produce diferentes n según el análisis — complica la interpretación.</p>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);padding:10px 14px;border-radius:0 8px 8px 0;">
+      <strong style="font-size:13px;">Sustitución por la media o la mediana</strong>
+      <p style="font-size:12.5px;color:#555;margin-top:4px;">Reemplazar el faltante con el valor promedio de la variable. Conserva el n pero reduce la varianza — puede distorsionar análisis de correlación.</p>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;">
+      <strong style="font-size:13px;">Imputación múltiple (método moderno)</strong>
+      <p style="font-size:12.5px;color:#555;margin-top:4px;">Estimar el valor faltante usando un modelo estadístico que considera otras variables del caso. Más preciso. Disponible en SPSS, R y Python.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ajuste estadístico · distinción conceptual</div>
+  <div class="slide-h">Redefinición vs. recodificación — dos operaciones distintas</div>
+  <div class="err-grid">
+    <div class="err-good">
+      <div class="err-lab" style="color:#1a3a5c;">Recodificación — reagrupar categorías existentes</div>
+      <div class="err-txt">Las categorías ya existen en la variable original y se combinan en grupos más amplios.<br><br><em>Ejemplo: edad en años → rangos etarios (18-24, 25-34...).<br>La variable original se conserva.</em></div>
+    </div>
+    <div class="err-good" style="background:#f0fff4;">
+      <div class="err-lab" style="color:#1a3a5c;">Redefinición — crear una variable nueva a partir de otras</div>
+      <div class="err-txt">La nueva variable no existía — se construye combinando o transformando variables existentes.<br><br><em>Ejemplo: índice de satisfacción = promedio de Q5a + Q5b + Q5c.<br>Se crean variables que no estaban en el cuestionario.</em></div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;"><strong>En la práctica:</strong> la recodificación simplifica para el análisis; la redefinición enriquece — crea constructos nuevos que el cuestionario medía de forma indirecta a través de múltiples ítems. Ambas se documentan en el libro de códigos con la fórmula exacta aplicada.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ajuste estadístico · Malhotra</div>
+  <div class="slide-h">Ajuste estadístico de los datos — cuatro técnicas</div>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Ponderación</div>
+      <div class="col-body">Asignar un peso a cada caso para corregir desequilibrios entre la muestra obtenida y la población. Si la muestra sobrerepresenta a jóvenes (40% muestra vs. 25% población), los jóvenes reciben un peso menor a 1 y los mayores un peso mayor a 1.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Redefinición de variables</div>
+      <div class="col-body">Crear nuevas variables a partir de las existentes: sumar ítems de una escala para crear un índice, calcular diferencias entre dos mediciones, crear variables de interacción para regresiones.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label col-label-green">Recodificación</div>
+      <div class="col-body">Reagrupar categorías existentes en nuevas categorías más amplias. Ej.: "18-24, 25-34, 35-44" → "Menores de 35, 35 y más". Permite análisis más simples o comparaciones entre grupos.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--gold);">
+      <div class="col-label col-label-gold">Estandarización</div>
+      <div class="col-body">Transformar variables a escala comparable (ej. Z-scores) cuando se combinan escalas con distintos rangos. Necesario antes de construir índices compuestos de variables medidas en distintas unidades.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ajuste estadístico · ponderación aplicada</div>
+  <div class="slide-h slide-h-white">Ponderación: corregir el desequilibrio entre muestra y población</div>
+  <p style="font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:10px;">Ejemplo: estudio sobre consumo de delivery en Montevideo. La muestra sobrerepresenta a jóvenes de 18-24 años (aplicaron encuesta online) respecto a su peso real en la población objetivo:</p>
+  <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:12px;">
+    <thead><tr style="background:rgba(255,255,255,0.1);">
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">GRUPO</th>
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">% EN POBLACIÓN</th>
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">% EN MUESTRA</th>
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);">PONDERADOR</th>
+    </tr></thead>
+    <tbody>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">18–24 años</td><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">20%</td><td style="padding:8px 12px;color:#f5a09a;">38%</td><td style="padding:8px 12px;color:#f5a09a;font-family:'DM Mono',monospace;">0.53</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">25–34 años</td><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">30%</td><td style="padding:8px 12px;color:#a5d6a7;">29%</td><td style="padding:8px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">1.03</td></tr>
+      <tr style="border-bottom:1px solid rgba(255,255,255,0.08);"><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">35–44 años</td><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">25%</td><td style="padding:8px 12px;color:#a5d6a7;">20%</td><td style="padding:8px 12px;color:#a5d6a7;font-family:'DM Mono',monospace;">1.25</td></tr>
+      <tr><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">45+ años</td><td style="padding:8px 12px;color:rgba(255,255,255,0.85);">25%</td><td style="padding:8px 12px;color:#f5a09a;">13%</td><td style="padding:8px 12px;color:#f5a09a;font-family:'DM Mono',monospace;">1.92</td></tr>
+    </tbody>
+  </table>
+  <div class="callout-dk"><strong>Ponderador = % en población / % en muestra.</strong> Ponderador &lt; 1 → el grupo está sobrerepresentado (se le da menos peso). Ponderador &gt; 1 → el grupo está subrepresentado (se le da más peso). La ponderación no corrige el sesgo de no respuesta — solo corrige el desequilibrio de composición.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ajuste estadístico · redefinición de variables</div>
+  <div class="slide-h">Redefinición: crear índices y variables nuevas a partir de las existentes</div>
+  <div class="def-block">
+    <div class="def-term-label">Redefinición de variables — Malhotra</div>
+    <div class="def-text">Proceso de transformar las variables originales en nuevas variables que capturan constructos de mayor nivel o que son necesarias para el análisis. Las variables originales se conservan.</div>
+  </div>
+  <div class="two-col" style="margin-top:10px;">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Índice sumado</div>
+      <div class="col-body">Sumar los ítems de una escala Likert para crear un indicador compuesto. Ejemplo: satisfacción_total = Q5a + Q5b + Q5c + Q5d (suma de 4 ítems de satisfacción). Prerequisito: verificar confiabilidad interna con α de Cronbach ≥ 0.70.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--green);">
+      <div class="col-label col-label-green">Variable de interacción</div>
+      <div class="col-body">Multiplicar dos variables para capturar un efecto combinado. Ejemplo: frecuencia_uso × satisfacción → "valor del cliente". Necesario en regresiones donde el efecto de una variable depende del nivel de otra.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;"><strong>Estandarización:</strong> cuando se combinan ítems medidos en escalas con distintos rangos (ej. una variable 1-5 y otra 1-10), se convierten a Z-scores antes de construir el índice. Fórmula: z = (x - media) / desvío estándar. El resultado es comparable entre variables.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Estrategia de análisis · Malhotra</div>
+  <div class="slide-h">Elegir la estrategia de análisis antes de abrir el software</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:12px;">La estrategia de análisis debe definirse a partir del diseño de investigación y las hipótesis — no a partir de los datos ya procesados. Elegir el análisis después de ver los datos introduce sesgo de confirmación.</p>
+  <table class="ref-table">
+    <thead><tr><th>Objetivo del análisis</th><th>Técnica</th><th>Capítulo Malhotra</th></tr></thead>
+    <tbody>
+      <tr><td>Describir la distribución de variables</td><td>Distribución de frecuencias, estadísticos descriptivos</td><td>Cap. 11</td></tr>
+      <tr><td>Comparar dos grupos o momentos</td><td>Prueba t, ANOVA, pruebas no paramétricas</td><td>Cap. 12</td></tr>
+      <tr><td>Explorar asociación entre variables</td><td>Tabulación cruzada, chi-cuadrado</td><td>Cap. 11</td></tr>
+      <tr><td>Cuantificar relación lineal</td><td>Correlación, regresión simple o múltiple</td><td>Cap. 12</td></tr>
+      <tr><td>Reducir dimensionalidad o segmentar</td><td>Análisis factorial, cluster</td><td>Caps. avanzados</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Regla práctica:</strong> el tipo de escala de la variable determina las técnicas disponibles. Variables nominales → frecuencias y chi-cuadrado. Variables ordinales → medianas y Spearman. Variables de intervalo/razón → medias, correlación y regresión.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Software · Malhotra</div>
+  <div class="slide-h">Herramientas para la preparación y el análisis de datos</div>
+  <table class="ref-table">
+    <thead><tr><th>Herramienta</th><th>Fortalezas para preparación</th><th>Uso típico en LATAM</th></tr></thead>
+    <tbody>
+      <tr><td><strong>SPSS</strong></td><td>Interfaz visual para recodificación, ponderación y depuración. Exporta libro de códigos automáticamente.</td><td>Universidades y consultoras con licencia institucional</td></tr>
+      <tr><td><strong>Excel</strong></td><td>Flexible para datos pequeños. Tablas dinámicas para verificación de congruencia. Sin control de tipos de variable.</td><td>Pymes y proyectos académicos de escala menor</td></tr>
+      <tr><td><strong>R (tidyverse)</strong></td><td>Reproducible, auditable, gratuito. dplyr para filtrado y recodificación, ggplot2 para exploración visual.</td><td>Equipos de datos avanzados, investigación académica</td></tr>
+      <tr><td><strong>Python (pandas)</strong></td><td>Escalable a millones de registros. Integración con pipelines de datos de la empresa. Curva de aprendizaje mayor.</td><td>Fintechs, plataformas y equipos de data science</td></tr>
+      <tr><td><strong>Qualtrics / SurveyMonkey</strong></td><td>Exportan datos ya codificados. Filtros de calidad (tiempo mínimo de respuesta, detección de speeders).</td><td>Encuestas online con panel o base propia</td></tr>
+    </tbody>
+  </table>
+  <div class="callout"><strong>Para el proyecto:</strong> Excel es suficiente para muestras de hasta 400 casos con 30 variables. Para análisis más complejos o muestras mayores, SPSS o R son más robustos.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Sección 07</div>
+  <div class="sec-title">Social media,<br>LATAM y ética</div>
+  <div class="sec-sub">Datos generados por usuarios · Desafíos regionales · Ética del descarte</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Social media · Malhotra</div>
+  <div class="slide-h">La recopilación en social media — el encuestado como co-creador de datos</div>
+  <p style="font-size:13px;color:#333;line-height:1.6;margin-bottom:12px;">El libro señala que los social media transforman el rol del participante: en el trabajo de campo tradicional, los encuestados <em>responden</em> preguntas. En social media, los participantes <em>generan y editan</em> datos a través de su participación cotidiana.</p>
+  <div class="two-col">
+    <div class="col-box" style="border-left:4px solid var(--blue);">
+      <div class="col-label col-label-blue">Datos pasivos (observacionales)</div>
+      <div class="col-body">Posts, comentarios, likes, shares, reviews — generados sin que el investigador los solicite. Ventaja: espontáneos y sin efecto del entrevistador. Desventaja: no representativos, contienen ruido, requieren limpieza intensiva.</div>
+    </div>
+    <div class="col-box" style="border-left:4px solid var(--accent);">
+      <div class="col-label">Datos activos (encuestas en plataforma)</div>
+      <div class="col-body">Encuestas distribuidas via Instagram, LinkedIn, TikTok o WhatsApp. El proceso VESTS aplica igual: selección de la audiencia, supervisión del lanzamiento, validación de respuestas, evaluación de la tasa de completitud.</div>
+    </div>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Social listening en LATAM · Mercado Libre y Rappi</div>
+    <div class="latam-text">Mercado Libre y Rappi monitorizan en tiempo real el sentimiento en Twitter/X, App Store y Google Play en español y portugués. Los datos de reviews requieren preprocesamiento: eliminación de spam, normalización de regionalismos (rioplatense, caribeño, brasileño), y detección de bots. El volumen promedio es 500.000+ menciones/día — el proceso de preparación es tan costoso como la recopilación.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Investigación internacional · Malhotra</div>
+  <div class="slide-h slide-h-white">Cinco desafíos del trabajo de campo en contextos internacionales y LATAM</div>
+  <ul class="bullets bullets-white">
+    <li><strong>Escasez de empresas de campo especializadas</strong> en países con mercados de investigación menos desarrollados — en Bolivia, Paraguay y partes de Centroamérica, el investigador puede necesitar formar su propio equipo desde cero</li>
+    <li><strong>Comparabilidad de unidades de medición</strong> — antes de analizar datos cross-country, verificar que las escalas producen respuestas equivalentes en cada cultura (equivalencia conceptual y de escala del Cap. 9)</li>
+    <li><strong>Efecto del entrevistador amplificado</strong> — en culturas con alta distancia al poder, la presencia del entrevistador sesga más las respuestas que en culturas más igualitarias</li>
+    <li><strong>Regímenes regulatorios distintos</strong> — los protocolos de consentimiento, retención de datos y anonimización varían entre países aunque el estudio sea el mismo</li>
+    <li><strong>Infraestructura variable</strong> — el CAPI que funciona perfectamente en Buenos Aires puede ser inviable en zonas rurales de Bolivia sin energía eléctrica estable</li>
+  </ul>
+  <div class="callout-dk">El libro advierte: en investigación internacional, la estandarización del protocolo de campo es más difícil de lograr que la estandarización del cuestionario.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Ética · Malhotra</div>
+  <div class="slide-h">Ética en el trabajo de campo y la preparación de datos</div>
+  <div class="three-col">
+    <div class="obj-card">
+      <div class="obj-num">01</div>
+      <div class="obj-h">Comodidad del encuestado</div>
+      <div class="obj-t">Hacer todo lo posible para que el proceso de recopilación sea una experiencia positiva. El encuestado debe sentirse respetado, informado y libre de retirarse en cualquier momento sin consecuencias.</div>
+    </div>
+    <div class="obj-card blue-n">
+      <div class="obj-num">02</div>
+      <div class="obj-h">Transparencia sobre el descarte</div>
+      <div class="obj-t">El número y el criterio para descartar cuestionarios insatisfactorios debe reportarse. Ocultar que se descartó el 30% de los cuestionarios distorsiona la interpretación del n reportado.</div>
+    </div>
+    <div class="obj-card green-n">
+      <div class="obj-num">03</div>
+      <div class="obj-h">Responsabilidad del cliente</div>
+      <div class="obj-t">El cliente tiene responsabilidad sobre la selección, capacitación y supervisión del equipo de campo. Delegar en el proveedor sin supervisión no exime de responsabilidad ética por los datos obtenidos.</div>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Dilema ético</div>
+    <div class="pause-q">Al revisar los cuestionarios, encuentran que el 15% tiene respuestas inconsistentes. Descartarlos todos reduciría el n de 400 a 340. El cliente pregunta si pueden "salvar" algunos. ¿Qué pueden hacer? ¿Qué no pueden hacer?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Aplicación al proyecto · pregunta a la clase</div>
+  <div class="slide-h slide-h-white">El proceso completo para su proyecto — de cuestionario a base de datos</div>
+  <p style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;margin-bottom:14px;">Usando lo visto hoy, definan cómo van a ejecutar los pasos de campo y preparación en su proyecto:</p>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div style="background:rgba(255,255,255,0.06);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 16px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);"><strong style="color:#d4a0a0;">01 —</strong> ¿Cómo van a seleccionar y capacitar a los encuestadores de su equipo? ¿Qué protocolo TRAIN van a seguir?</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:10px 16px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);"><strong style="color:#8ab4d4;">02 —</strong> ¿Cómo van a validar que las entrevistas se realizaron efectivamente? ¿Van a recontactar a algún porcentaje de encuestados?</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 16px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);"><strong style="color:#f0d890;">03 —</strong> ¿Ya tienen el libro de códigos preparado? ¿Cómo van a tratar los NS/NR en sus preguntas más sensibles?</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:10px 16px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.85);"><strong style="color:#a5d6a7;">04 —</strong> ¿Qué verificaciones de congruencia van a programar antes de analizar los datos? ¿Qué combinaciones de respuestas serían lógicamente imposibles en su cuestionario?</div>
+    </div>
+  </div>
+  <div class="callout-dk" style="margin-top:12px;">El protocolo de campo y preparación de datos debe estar documentado en la entrega metodológica del proyecto. No es suficiente describir el cuestionario — hay que describir cómo se va a aplicar y procesar.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Cierre</div>
+  <div class="sec-title">Síntesis y conexión<br>con el Cap. 11</div>
+  <div class="sec-sub">VESTS + DATA PREP · Análisis de frecuencias</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Aplicación al proyecto · checklist</div>
+  <div class="slide-h">Lo que deben documentar en la entrega metodológica</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label">Campo — documentar</div>
+      <div class="col-body">
+        <ul style="padding-left:1em;margin-top:4px;">
+          <li style="margin-bottom:5px;font-size:12px;">✓ N de cuestionarios aplicados</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ N de cuestionarios válidos</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ N de cuestionarios descartados y razón</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ Tasa de respuesta calculada</li>
+          <li style="font-size:12px;">✓ Protocolo de sustitución usado</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label col-label-blue">Preparación — documentar</div>
+      <div class="col-body">
+        <ul style="padding-left:1em;margin-top:4px;">
+          <li style="margin-bottom:5px;font-size:12px;">✓ Libro de códigos completo</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ Decisiones de edición tomadas</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ Verificaciones de rango y congruencia</li>
+          <li style="margin-bottom:5px;font-size:12px;">✓ Tratamiento de NS/NR</li>
+          <li style="font-size:12px;">✓ Ajustes estadísticos aplicados (si aplica)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:10px;">Sin esta información documentada, el lector del informe final no puede evaluar si los datos son válidos para las conclusiones que se extraen de ellos.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Mapa del capítulo</div>
+  <div class="slide-h">Todo el capítulo 10 en dos acrónimos</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label">Trabajo de campo — VESTS</div>
+      <div class="col-body">
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;">V</div><div class="acro-text">Validación del trabajo de campo</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;">E</div><div class="acro-text">Evaluación de los trabajadores</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;">S</div><div class="acro-text">Selección del equipo de campo</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;">T</div><div class="acro-text">Capacitación (Training) — TRAIN</div></div>
+        <div class="acro-row"><div class="acro-letter" style="font-size:14px;">S</div><div class="acro-text">Supervisión del campo</div></div>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label col-label-blue">Preparación de datos — DATA PREP</div>
+      <div class="col-body">
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">D</div><div class="acro-text">Depuración (Data cleaning)</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">A</div><div class="acro-text">Ajuste estadístico</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">T</div><div class="acro-text">Transcripción a base de datos</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">A</div><div class="acro-text">Estrategia de análisis</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">P</div><div class="acro-text">Verificación post-campo</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">R</div><div class="acro-text">Codificación (Recording)</div></div>
+        <div class="acro-row" style="margin-bottom:5px;"><div class="acro-letter" style="font-size:14px;color:var(--blue);">E</div><div class="acro-text">Edición del cuestionario</div></div>
+        <div class="acro-row"><div class="acro-letter" style="font-size:14px;color:var(--blue);">P</div><div class="acro-text">Plan preliminar de análisis</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-close" style="color:var(--paper);">
+  <div style="max-width:720px;">
+    <div class="cover-eyebrow">Tres ideas para llevarse del Capítulo 10</div>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:14px;color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:6px;">01</p>
+      <p style="font-family:'Playfair Display',serif;font-size:1.05rem;color:white;line-height:1.4;">El trabajo de campo no es la ejecución mecánica del diseño — es donde el diseño se convierte en datos. Los errores que no se detectan aquí no pueden corregirse después. La selección, capacitación y supervisión del equipo de campo no son costos operativos: son inversiones en la calidad del dato.</p>
+    </div>
+    <div style="margin-bottom:20px;">
+      <p style="font-size:14px;color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:6px;">02</p>
+      <p style="font-family:'Playfair Display',serif;font-size:1.05rem;color:white;line-height:1.4;">La preparación de datos no es limpieza — es <em>traducción</em>. Codificar, editar y depurar son decisiones metodológicas que afectan los resultados del análisis. Cada decisión debe documentarse en el libro de códigos para que el análisis sea auditable y reproducible.</p>
+    </div>
+    <div>
+      <p style="font-size:14px;color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace;letter-spacing:1px;margin-bottom:6px;">03</p>
+      <p style="font-family:'Playfair Display',serif;font-size:1.05rem;color:white;line-height:1.4;">El tratamiento de los datos faltantes y el descarte de cuestionarios deben reportarse con transparencia. El n que aparece en el informe final debe explicar de dónde viene: cuántos cuestionarios se iniciaron, cuántos se completaron, cuántos se descartaron y por qué.</p>
+    </div>
+    <div style="margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:rgba(255,255,255,0.35);">Próxima clase — Capítulo 11 · <strong>Análisis de datos: distribución de frecuencias, prueba de hipótesis y tabulación cruzada.</strong> Ya tenemos los datos preparados — ahora los analizamos.</div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash:true, slideNumber:true, progress:true, controls:true,
+  center:false, transition:'fade', transitionSpeed:'fast',
+  width:1280, height:720,
+});
+</script>
+</body>
+</html>

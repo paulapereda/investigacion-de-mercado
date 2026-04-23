@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercado — Capítulo 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1a1a1a;--paper:#f7f4ef;--cream:#ede9e1;--accent:#c0392b;--accent2:#2c5f8a;--gold:#b8860b;--muted:#6b6560;--border:#d4cec5;--lat-bg:#eef6ee;--lat-border:#2d7a3a;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden;}
+  header{background:var(--ink);color:var(--paper);position:relative;overflow:hidden;}
+  .header-inner{max-width:1100px;margin:0 auto;padding:56px 40px 44px;position:relative;z-index:1;}
+  .header-label{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+  header h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5rem);font-weight:900;line-height:1.05;max-width:720px;margin-bottom:24px;}
+  header h1 em{font-style:italic;color:#d4a0a0;}
+  .header-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;}
+  .meta-chip{font-size:12px;font-weight:500;padding:5px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:20px;color:rgba(255,255,255,0.75);letter-spacing:0.5px;}
+  .header-bg{position:absolute;top:0;right:0;width:420px;height:100%;background:linear-gradient(135deg,transparent 40%,rgba(192,57,43,0.08) 100%);pointer-events:none;}
+  .header-rule{height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));}
+  .layout{display:grid;grid-template-columns:260px 1fr;max-width:1100px;margin:0 auto;gap:0;min-height:100vh;}
+  aside{position:sticky;top:0;height:100vh;overflow-y:auto;padding:32px 24px;border-right:1px solid var(--border);background:var(--cream);}
+  aside::-webkit-scrollbar{width:4px;}
+  aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+  .nav-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .nav-item{display:block;padding:9px 12px;margin-bottom:2px;border-radius:6px;font-size:13px;color:var(--muted);text-decoration:none;cursor:pointer;transition:all 0.2s;border-left:3px solid transparent;}
+  .nav-item:hover{background:var(--paper);color:var(--ink);}
+  .nav-item.active{background:var(--paper);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+  .nav-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--border);padding:14px 12px 4px;font-family:'DM Mono',monospace;}
+  .legend{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);margin-bottom:7px;}
+  .legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+  main{padding:40px 48px 80px;max-width:820px;}
+  .section{display:none;animation:fadeIn 0.3s ease;}
+  .section.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .section-header{margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+  .section-number{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+  .section-header h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:12px;}
+  .section-intro{font-size:15px;color:var(--muted);line-height:1.8;max-width:620px;}
+  .concept-box{background:#fafafa;border:1px solid var(--border);border-left:4px solid var(--ink);border-radius:8px;padding:22px 26px;margin-bottom:28px;}
+  .concept-box-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--ink);text-transform:uppercase;margin-bottom:10px;opacity:0.6;}
+  .concept-box p,.concept-box ul li{font-size:14.5px;color:#333;line-height:1.8;margin-bottom:8px;}
+  .concept-box ul{padding-left:1.3em;margin-top:8px;}
+  .concept-box strong{color:var(--ink);}
+  .update-card{background:white;border:1px solid var(--border);border-radius:10px;padding:28px 30px;margin-bottom:24px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+  .update-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:12px;}
+  .update-card h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.3;}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;}
+  .tag{font-size:10.5px;font-weight:500;padding:3px 9px;border-radius:12px;letter-spacing:0.3px;white-space:nowrap;}
+  .tag-caso{background:#fdecea;color:#8b2218;border:1px solid #f5c6c2;}
+  .tag-bib{background:#e8f0f8;color:#1a3a5c;border:1px solid #b8d0e8;}
+  .tag-tool{background:#e8f5e9;color:#1b5e20;border:1px solid #a5d6a7;}
+  .tag-lat{background:#fff8e1;color:#795548;border:1px solid #ffe082;}
+  .update-card p,.update-card li{font-size:14.5px;line-height:1.8;color:#333;margin-bottom:10px;}
+  .update-card ul{padding-left:1.3em;}
+  .case-highlight{background:linear-gradient(135deg,#1a1a1a,#2c2c2c);border-radius:10px;padding:28px 30px;margin:20px 0;color:white;position:relative;overflow:hidden;}
+  .case-highlight::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(192,57,43,0.15),transparent 70%);pointer-events:none;}
+  .case-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+  .case-highlight h4{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:12px;}
+  .case-highlight p{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.75;margin-bottom:12px;}
+  .latam-box{background:var(--lat-bg);border:1px solid var(--lat-border);border-left:4px solid var(--lat-border);border-radius:8px;padding:20px 24px;margin:20px 0;}
+  .latam-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--lat-border);text-transform:uppercase;margin-bottom:10px;}
+  .latam-box p,.latam-box li{font-size:14px;color:#1a3a1a;line-height:1.75;margin-bottom:8px;}
+  .latam-box ul{padding-left:1.3em;}
+  .callout{border-left:4px solid var(--gold);background:#fffbec;padding:16px 20px;border-radius:0 8px 8px 0;margin:20px 0;font-size:14px;color:#4a3a10;line-height:1.75;}
+  .callout strong{color:var(--gold);}
+  .compare-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0;}
+  .compare-table th{background:var(--ink);color:var(--paper);padding:10px 16px;text-align:left;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
+  .compare-table td{padding:10px 16px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.6;}
+  .compare-table tr:nth-child(even) td{background:#faf8f5;}
+  .step-block{border:1px solid var(--border);border-radius:8px;margin-bottom:16px;overflow:hidden;}
+  .step-header{background:var(--cream);padding:12px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);}
+  .step-num{background:var(--ink);color:white;font-family:'DM Mono',monospace;font-size:11px;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-title{font-weight:600;font-size:14px;color:var(--ink);}
+  .step-body{padding:16px 20px;font-size:14px;color:#333;line-height:1.75;}
+  .step-body ul{padding-left:1.2em;margin-top:8px;}
+  .step-body ul li{margin-bottom:4px;line-height:1.7;}
+  .acro-grid{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
+  .acro-row{display:flex;align-items:flex-start;gap:12px;background:white;border:1px solid var(--border);border-radius:6px;padding:10px 14px;}
+  .acro-letter{font-family:'DM Mono',monospace;font-size:20px;font-weight:900;color:var(--accent);min-width:22px;line-height:1.2;}
+  .acro-text{font-size:13.5px;color:#333;line-height:1.6;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+  .col-card{background:white;border:1px solid var(--border);border-radius:8px;padding:18px 20px;}
+  .col-card-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+  .err-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .err-bad{background:#fff5f5;border:1px solid #f5c6c2;border-radius:8px;padding:14px 16px;}
+  .err-good{background:#f0fff4;border:1px solid #a5d6a7;border-radius:8px;padding:14px 16px;}
+  .err-label{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
+  .err-bad .err-label{color:#8b2218;}
+  .err-good .err-label{color:#1b5e20;}
+  .err-text{font-size:13px;color:#333;line-height:1.6;}
+  hr.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+  .footer-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);}
+  .nav-btn{display:flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid var(--border);border-radius:8px;background:white;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);transition:all 0.2s;text-decoration:none;}
+  .nav-btn:hover{background:var(--ink);color:white;border-color:var(--ink);}
+  .nav-btn.primary{background:var(--ink);color:white;border-color:var(--ink);}
+  .nav-btn.primary:hover{background:var(--accent);border-color:var(--accent);}
+  @media(max-width:768px){.layout{grid-template-columns:1fr;}aside{position:static;height:auto;}main{padding:24px 20px 60px;}.two-col,.err-pair{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Investigación de Mercado · Capítulo 10</div>
+    <h1>Recopilación y<br><em>preparación</em><br>de los datos</h1>
+    <div class="header-meta">
+      <span class="meta-chip">Paula Pereda · Universidad de Montevideo</span>
+      <span class="meta-chip">Malhotra Cap. 10 · Actualizado 2024</span>
+    </div>
+  </div>
+  <div class="header-rule"></div>
+</header>
+
+<div class="layout">
+<aside>
+  <div class="nav-title">Secciones del Capítulo</div>
+  <a class="nav-item active" onclick="showSection('diapositivas')">▶ Diapositivas</a>
+  <a class="nav-item" onclick="showSection('apertura')">Caso de apertura</a>
+  <div class="nav-section-label">Trabajo de campo</div>
+  <a class="nav-item" onclick="showSection('vests')">Proceso VESTS</a>
+  <a class="nav-item" onclick="showSection('train')">Capacitación — TRAIN</a>
+  <a class="nav-item" onclick="showSection('supervision')">Supervisión y validación</a>
+  <div class="nav-section-label">Preparación de datos</div>
+  <a class="nav-item" onclick="showSection('dataprep')">Proceso DATA PREP</a>
+  <a class="nav-item" onclick="showSection('codificacion')">Codificación y libro de códigos</a>
+  <a class="nav-item" onclick="showSection('depuracion')">Depuración y congruencia</a>
+  <a class="nav-item" onclick="showSection('faltantes')">Respuestas faltantes</a>
+  <a class="nav-item" onclick="showSection('ajuste')">Ajuste estadístico</a>
+  <div class="nav-section-label">Contexto y ética</div>
+  <a class="nav-item" onclick="showSection('social')">Social media y LATAM</a>
+  <a class="nav-item" onclick="showSection('etica')">Ética</a>
+  <div class="legend">
+    <div class="nav-title">Leyenda</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a1a1a;"></div> Concepto del libro (vigente)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f5c6c2;border:1px solid #e88;"></div> Caso real actualizado</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#b8d0e8;border:1px solid #89b;"></div> Referencia académica</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a5d6a7;border:1px solid #6a6;"></div> Herramienta / tecnología</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffe082;border:1px solid #ca6;"></div> Contexto latinoamericano</div>
+  </div>
+</aside>
+
+<main>
+
+<!-- DIAPOSITIVAS -->
+<div id="diapositivas" class="section active">
+  <div class="section-header">
+    <div class="section-number">Diapositivas</div>
+    <h2>Diapositivas de referencia</h2>
+    <p class="section-intro">Presentación de la clase. Usá las flechas del teclado o los controles para navegar.</p>
+  </div>
+  <div style="width:100%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:32px;">
+    <iframe src="capitulo_10_slides.html" style="width:100%;height:100%;border:none;display:block;" allowfullscreen title="Diapositivas Capítulo 10"></iframe>
+  </div>
+  <div class="footer-nav"><span></span><a class="nav-btn primary" onclick="showSection('apertura')">Ir al contenido →</a></div>
+</div>
+
+<!-- APERTURA -->
+<div id="apertura" class="section">
+  <div class="section-header">
+    <div class="section-number">Introducción</div>
+    <h2>Caso de apertura</h2>
+    <p class="section-intro">El trabajo de campo convierte el diseño en datos. La calidad del campo es el techo de la calidad del estudio.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Cita de apertura</div>
+    <p><em>"Sin importar qué tan bien se diseñe el proceso de investigación, las personas que realizan el trabajo son quienes controlan la calidad. La clave para una buena recopilación de datos se basa en una selección cuidadosa, una capacitación rigurosa y una evaluación continua… siempre poniendo atención a la calidad."</em></p>
+    <p>— Karen Cravens, vicepresidente de recopilación de datos, Burke Inc.</p>
+  </div>
+  <div class="case-highlight">
+    <div class="case-label">Caso · Malhotra</div>
+    <h4>Häagen-Dazs: el protocolo de campo determina la validez del dato sensorial</h4>
+    <p>Häagen-Dazs realizó entrevistas personales en centros comerciales para evaluar preferencias por nuevos sabores. Las entrevistadoras debían presentar muestras a temperatura controlada, registrar reacciones espontáneas y completar el cuestionario sin interrumpir la experiencia sensorial del encuestado.</p>
+    <p>Un error en la temperatura del producto o en el orden de presentación de los sabores invalidaba las respuestas de toda la sesión. El protocolo de campo era tan crítico como el cuestionario mismo. El proceso de selección y capacitación del equipo consumió el 30% del presupuesto del estudio.</p>
+  </div>
+  <div class="callout"><strong>Posición en el proceso:</strong> el Cap. 10 cubre los Pasos 4 (Trabajo de campo) y 5 (Preparación de datos) del proceso de investigación de mercados. Los errores introducidos en estos pasos no pueden corregirse en el análisis posterior.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('diapositivas')">← Diapositivas</a><a class="nav-btn primary" onclick="showSection('vests')">Siguiente →</a></div>
+</div>
+
+<!-- VESTS -->
+<div id="vests" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 01</div>
+    <h2>El proceso de trabajo de campo — VESTS</h2>
+    <p class="section-intro">Cinco procesos que garantizan la calidad del dato antes de que llegue al analista.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Acrónimo VESTS</div>
+    <p>El proceso de trabajo de campo se organiza en cinco actividades. El libro las presenta bajo el acrónimo <strong>VESTS (CHALECOS)</strong>: Validation, Evaluation, Selection, Training, Supervision.</p>
+  </div>
+  <div class="acro-grid">
+    <div class="acro-row"><div class="acro-letter">V</div><div class="acro-text"><strong>Validación</strong> del trabajo de campo — verificar que la entrevista ocurrió efectivamente</div></div>
+    <div class="acro-row"><div class="acro-letter">E</div><div class="acro-text"><strong>Evaluación</strong> de los trabajadores — tasa de respuesta, finalización, tiempo promedio y calidad de abiertas</div></div>
+    <div class="acro-row"><div class="acro-letter">S</div><div class="acro-text"><strong>Selección</strong> del equipo — criterios de perfil, comunicación, apariencia y fiabilidad</div></div>
+    <div class="acro-row"><div class="acro-letter">T</div><div class="acro-text"><strong>Capacitación</strong> (Training) — protocolo TRAIN: Terminating, Recording, Asking, Initial contact, Nosy behavior</div></div>
+    <div class="acro-row"><div class="acro-letter">S</div><div class="acro-text"><strong>Supervisión</strong> — control del muestreo, supervisión directa y revisión de cuestionarios en campo</div></div>
+  </div>
+  <div class="callout">La validación del campo implica recontactar entre el 10% y el 25% de los encuestados para confirmar que la entrevista tuvo lugar. Las falsificaciones se detectan por cuestionarios completados en tiempo récord, respuestas demasiado uniformes o ningún rechazo reportado.</div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 CAPI en campo LATAM · Mercado Libre + Kantar</div>
+    <p>Las encuestas CAPI (computer-assisted personal interview) en puntos de alta afluencia de LATAM eliminan el error de seguimiento de rutas de preguntas — la lógica de salto es automática. La validación se realiza en tiempo real: el sistema detecta cuestionarios completados en tiempos estadísticamente imposibles y los marca para revisión del supervisor. El CAPI redujo el tiempo de procesamiento en un 40% y los errores de registro a menos del 2%.</p>
+  </div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('apertura')">← Anterior</a><a class="nav-btn primary" onclick="showSection('train')">Siguiente →</a></div>
+</div>
+
+<!-- TRAIN -->
+<div id="train" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 02</div>
+    <h2>Capacitación — acrónimo TRAIN</h2>
+    <p class="section-intro">Los cinco contenidos de la capacitación y el arte del sondeo neutro.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Acrónimo TRAIN</div>
+    <p>El libro organiza los cinco contenidos de la capacitación en el acrónimo <strong>TRAIN (ENTRENAR)</strong>:</p>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">T</div><div class="step-title">Terminating the interview — cierre de la entrevista</div></div>
+    <div class="step-body"><p>Cómo cerrar cortésmente cuando el encuestado rechaza, se pone hostil, o claramente no pertenece a la muestra objetivo. El cierre deficiente puede generar información falsa de último momento.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">R</div><div class="step-title">Recording the answers — registro textual</div></div>
+    <div class="step-body"><p>Registrar las respuestas textualmente y en tiempo real, sin resumir ni interpretar. En preguntas abiertas: anotar cada palabra, no el resumen del entrevistador. El resumen introduce sesgo interpretativo antes de la codificación.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">A</div><div class="step-title">Asking the questions — lectura exacta</div></div>
+    <div class="step-body"><p>Leer cada pregunta exactamente como está redactada, en el orden establecido, sin omitir ni reformular. Cualquier paráfrasis cambia la pregunta y puede alterar la respuesta.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">I</div><div class="step-title">Initial contact development — primer contacto</div></div>
+    <div class="step-body"><p>El primer contacto determina si el encuestado coopera. Apertura estándar, presentación del propósito del estudio, garantía de anonimato. El script de apertura debe ensayarse hasta ser natural.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">N</div><div class="step-title">Nosy behavior — sondeo (probing)</div></div>
+    <div class="step-body">
+      <p>Técnicas para obtener respuestas más completas sin sesgar: pausa silenciosa, repetición de la pregunta, sondeo neutral ("¿puede decirme algo más?", "¿alguna otra razón?").</p>
+      <div class="err-pair">
+        <div class="err-bad"><div class="err-label">❌ Sondeo sesgado</div><div class="err-text">"¿No le parece que también podría ser por el precio?" — insinúa la respuesta esperada.</div></div>
+        <div class="err-good"><div class="err-label">✓ Sondeo neutral</div><div class="err-text">"¿Podría explicarme un poco más?" o una pausa silenciosa de 3-4 segundos.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('vests')">← Anterior</a><a class="nav-btn primary" onclick="showSection('supervision')">Siguiente →</a></div>
+</div>
+
+<!-- SUPERVISIÓN -->
+<div id="supervision" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 03</div>
+    <h2>Supervisión y validación</h2>
+    <p class="section-intro">Control de calidad en tiempo real y verificación posterior al campo.</p>
+  </div>
+  <div class="two-col">
+    <div class="col-card" style="border-left:4px solid var(--accent);">
+      <div class="col-card-label" style="color:var(--accent);">Supervisión directa</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">El supervisor observa una fracción de las entrevistas en tiempo real. Detecta desviaciones del protocolo, problemas de comunicación y situaciones no previstas.</p>
+    </div>
+    <div class="col-card" style="border-left:4px solid var(--accent2);">
+      <div class="col-card-label" style="color:var(--accent2);">Control del muestreo</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Verificar que los entrevistadores sigan el plan muestral y no sustituyan encuestados por conveniencia propia. Es la violación más frecuente del protocolo de campo.</p>
+    </div>
+  </div>
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">Validación del trabajo de campo</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:16px;">Recontactar entre el <strong>10% y el 25%</strong> de los encuestados para confirmar que la entrevista tuvo lugar. Verificar: ¿fue entrevistado?, ¿cuánto duró?, ¿recuerda el tema?</p>
+  <div class="update-card">
+    <div class="update-card-header"><h3>Señales de falsificación de entrevistas</h3><div class="tags"><span class="tag tag-bib">Concepto del libro</span></div></div>
+    <ul>
+      <li>Cuestionarios completados en tiempo récord (tiempo imposible para ese cuestionario)</li>
+      <li>Respuestas demasiado uniformes entre encuestados del mismo entrevistador</li>
+      <li>Ningún rechazo reportado en una sesión de campo completa</li>
+      <li>Al recontactar, el encuestado no recuerda la entrevista o niega haberla realizado</li>
+    </ul>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Ipsos LATAM — protocolo de validación</div>
+    <p>Ipsos LATAM aplica validación al 20% de las entrevistas en sus estudios de campo presencial. La validación se realiza dentro de las 48 horas del campo. En encuestas online con paneles verificados, la validación se reemplaza por controles algorítmicos de tiempo de respuesta y patrones de clicks.</p>
+  </div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('train')">← Anterior</a><a class="nav-btn primary" onclick="showSection('dataprep')">Siguiente →</a></div>
+</div>
+
+<!-- DATA PREP -->
+<div id="dataprep" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 04</div>
+    <h2>El proceso de preparación — DATA PREP</h2>
+    <p class="section-intro">Revisión, edición y la secuencia real de preparación antes del análisis.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Acrónimo DATA PREP</div>
+    <p>El libro organiza la preparación de datos en el acrónimo DATA PREP: <strong>D</strong>ata cleaning · <strong>A</strong>djusting · <strong>T</strong>ranscribing · <strong>A</strong>nalysis strategy · <strong>P</strong>ost-field checking · <strong>R</strong>ecording (coding) · <strong>E</strong>diting · <strong>P</strong>reliminary plan.</p>
+    <p>La secuencia operativa real es: revisión → edición → codificación → transcripción → depuración → ajuste → estrategia de análisis.</p>
+  </div>
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">Revisión del cuestionario — cinco problemas a detectar</h3>
+  <div class="compare-table" style="display:table;width:100%;">
+    <table class="compare-table">
+      <thead><tr><th>Problema</th><th>Descripción</th><th>Tratamiento</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Incompleto</strong></td><td>Preguntas sin respuesta</td><td>Distinguir: ¿es falta de dato o NS/NR válido?</td></tr>
+        <tr><td><strong>Ilegible</strong></td><td>Respuesta abierta ininterpretable</td><td>Descartar si la duda es significativa</td></tr>
+        <tr><td><strong>Inconsistente</strong></td><td>Respuestas contradictorias internas</td><td>Verificar con el cuestionario original</td></tr>
+        <tr><td><strong>Ambiguo</strong></td><td>Marcó más de una opción donde solo se permitía una</td><td>Aplicar regla predefinida en libro de códigos</td></tr>
+        <tr><td><strong>Insatisfactorio</strong></td><td>Patrón de respuesta completamente regular (respondió al azar)</td><td>Descartar y reportar el criterio</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">La edición en campo tiene una ventaja irreproducible: el encuestado aún está disponible para aclarar. Una vez que el entrevistador se retira, la edición pasa a ser un ejercicio de interpretación, no de aclaración.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('supervision')">← Anterior</a><a class="nav-btn primary" onclick="showSection('codificacion')">Siguiente →</a></div>
+</div>
+
+<!-- CODIFICACIÓN -->
+<div id="codificacion" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 05</div>
+    <h2>Codificación y libro de códigos</h2>
+    <p class="section-intro">Transformar el texto del cuestionario en datos procesables por software estadístico.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Codificación</div>
+    <p><strong>Codificación:</strong> asignar valores numéricos o alfanuméricos para representar cada respuesta. Las preguntas estructuradas tienen códigos asignados de antemano. Las preguntas no estructuradas (abiertas) requieren un proceso posterior de categorización.</p>
+  </div>
+  <div class="two-col">
+    <div class="col-card" style="border-left:4px solid var(--accent2);">
+      <div class="col-card-label" style="color:var(--accent2);">Preguntas estructuradas</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Los códigos están definidos antes del campo. La codificación es mecánica: transcribir el código marcado. Convención: 9, 99 o 999 para NS/NR — nunca usar 0 si 0 puede ser una respuesta válida.</p>
+    </div>
+    <div class="col-card" style="border-left:4px solid var(--accent);">
+      <div class="col-card-label" style="color:var(--accent);">Preguntas no estructuradas</div>
+      <p style="font-size:13.5px;color:#333;line-height:1.75;">Leer muestra → identificar categorías → codificar → verificar confiabilidad entre codificadores (κ ≥ 0.70). La IA en español alcanza κ ≈ 0.75-0.85 en categorías claras; cae con ironía o modismos regionales.</p>
+    </div>
+  </div>
+  <hr class="divider">
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;color:var(--ink);">El libro de códigos</h3>
+  <p style="font-size:14.5px;color:#333;line-height:1.8;margin-bottom:16px;">Documento que contiene las instrucciones de codificación y el código asignado a cada respuesta. Para cada variable incluye: nombre, número de pregunta, tipo de escala, rango de valores válidos, código para NS/NR, y cualquier transformación aplicada. Sin él, la base de datos es opaca.</p>
+  <div class="latam-box">
+    <div class="latam-label">🌎 IA y codificación automática en LATAM</div>
+    <p>Plataformas como Qualtrics y startups de TextAnalytics en la región ofrecen codificación automática de preguntas abiertas con NLP. Precisión: 80–90% en español estándar. Limitación: no detecta ironía, contexto cultural local ni ambigüedad semántica regional. El verificador humano sigue siendo necesario para el 10–20% de casos problemáticos.</p>
+  </div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('dataprep')">← Anterior</a><a class="nav-btn primary" onclick="showSection('depuracion')">Siguiente →</a></div>
+</div>
+
+<!-- DEPURACIÓN -->
+<div id="depuracion" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 06</div>
+    <h2>Depuración y verificaciones de congruencia</h2>
+    <p class="section-intro">Encontrar en la base digital los errores que la edición manual no vio.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Dos tipos de verificación</div>
+    <p><strong>Verificaciones de rango:</strong> detectar valores fuera del rango válido. Si Q3 tiene códigos 1–4 y 9, un valor de "7" es un error de transcripción.</p>
+    <p><strong>Verificaciones de congruencia:</strong> detectar combinaciones lógicamente imposibles entre variables. Son más informativas que las de rango porque detectan errores plausibles en cada variable individualmente pero imposibles en combinación.</p>
+  </div>
+  <div class="update-card">
+    <div class="update-card-header"><h3>Ejemplos de incongruencias lógicas</h3><div class="tags"><span class="tag tag-bib">Ejercicio</span></div></div>
+    <div class="err-pair">
+      <div class="err-bad"><div class="err-label">❌ Incongruencia</div><div class="err-text">"¿Tiene celular?" → No &nbsp;|&nbsp; "¿Qué apps usa?" → TikTok, Instagram</div></div>
+      <div class="err-bad"><div class="err-label">❌ Incongruencia</div><div class="err-text">"¿Consume carne?" → No &nbsp;|&nbsp; "¿Qué corte prefiere?" → Asado de tira</div></div>
+      <div class="err-good"><div class="err-label">✓ Plausible (no incongruente)</div><div class="err-text">Edad: 22 | Años trabajando: 3 — posible, no es error de congruencia.</div></div>
+      <div class="err-good"><div class="err-label">✓ Plausible</div><div class="err-text">Sexo: Femenino | Gasto en cosméticos: $0 — inusual pero posible.</div></div>
+    </div>
+  </div>
+  <div class="callout"><strong>Regla:</strong> solo son incongruencias lógicas las combinaciones <em>imposibles</em>, no las <em>inusuales</em>. Tratar las inusuales como errores introduce sesgo en la depuración.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('codificacion')">← Anterior</a><a class="nav-btn primary" onclick="showSection('faltantes')">Siguiente →</a></div>
+</div>
+
+<!-- FALTANTES -->
+<div id="faltantes" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 07</div>
+    <h2>Respuestas faltantes (missing values)</h2>
+    <p class="section-intro">Cuatro opciones de tratamiento — ninguna es neutral respecto al sesgo.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Missing values</div>
+    <p>Valor ausente en la base de datos. Puede deberse a: rechazo del encuestado, pregunta no aplicable (lógica de salto), error del entrevistador, o dato genuinamente desconocido.</p>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">1</div><div class="step-title">Eliminación por casos (listwise deletion)</div></div>
+    <div class="step-body"><p>Excluir del análisis a todo encuestado con al menos un valor faltante. Simple pero puede reducir dramáticamente el n — y si los faltantes no son aleatorios, introduce sesgo.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">2</div><div class="step-title">Eliminación por pares (pairwise deletion)</div></div>
+    <div class="step-body"><p>Usar todos los casos disponibles para cada par de variables. Conserva más datos pero produce diferentes n según el análisis — complica la interpretación y la comparación entre resultados.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">3</div><div class="step-title">Sustitución por la media o la mediana</div></div>
+    <div class="step-body"><p>Reemplazar el faltante con el valor promedio de la variable. Conserva el n pero reduce la varianza — puede distorsionar análisis de correlación y regresión.</p></div>
+  </div>
+  <div class="step-block">
+    <div class="step-header"><div class="step-num">4</div><div class="step-title">Imputación múltiple (método moderno)</div></div>
+    <div class="step-body"><p>Estimar el valor faltante usando un modelo estadístico que considera otras variables del caso. Más preciso. Disponible en SPSS, R (mice) y Python (scikit-learn). Estándar recomendado cuando la tasa de faltantes supera el 5%.</p></div>
+  </div>
+  <div class="callout"><strong>Regla práctica:</strong> si la tasa de faltantes es menor al 5% y son aleatorios (MCAR), la eliminación por casos es aceptable. Si es mayor al 5% o no son aleatorios (MAR o MNAR), usar imputación múltiple.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('depuracion')">← Anterior</a><a class="nav-btn primary" onclick="showSection('ajuste')">Siguiente →</a></div>
+</div>
+
+<!-- AJUSTE -->
+<div id="ajuste" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 08</div>
+    <h2>Ajuste estadístico de los datos</h2>
+    <p class="section-intro">Ponderación, redefinición, recodificación y estandarización — cuatro herramientas de transformación.</p>
+  </div>
+  <div class="compare-table" style="display:table;width:100%;">
+    <table class="compare-table">
+      <thead><tr><th>Técnica</th><th>Qué hace</th><th>Cuándo se usa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ponderación</strong></td><td>Asigna un peso a cada caso para corregir desequilibrios entre muestra y población</td><td>La muestra sobrerepresenta o subrepresenta sistemáticamente algún segmento</td></tr>
+        <tr><td><strong>Redefinición</strong></td><td>Crea variables nuevas combinando o transformando las existentes (índices, interacciones)</td><td>Se necesita un constructo que el cuestionario medía indirectamente</td></tr>
+        <tr><td><strong>Recodificación</strong></td><td>Reagrupa categorías existentes en grupos más amplios</td><td>Simplificar para el análisis o comparar grupos</td></tr>
+        <tr><td><strong>Estandarización</strong></td><td>Convierte variables a escala comparable (Z-scores)</td><td>Combinar ítems con distintos rangos en un índice compuesto</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="update-card">
+    <div class="update-card-header"><h3>Recodificación estándar de Malhotra — escala de compra a grupos</h3><div class="tags"><span class="tag tag-bib">Ejemplo del libro</span></div></div>
+    <p>La recodificación de la escala de probabilidad de compra (1–5) en tres grupos es el ejemplo canónico del libro: códigos 1+2 → "Comprador probable", código 3 → "Indeciso", códigos 4+5 → "No comprador". Esta recodificación facilita la tabulación cruzada y la segmentación en el análisis posterior.</p>
+  </div>
+  <div class="callout"><strong>Estrategia de análisis:</strong> debe definirse a partir del diseño de investigación y las hipótesis — no a partir de los datos ya procesados. Elegir el análisis después de ver los datos introduce sesgo de confirmación.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('faltantes')">← Anterior</a><a class="nav-btn primary" onclick="showSection('social')">Siguiente →</a></div>
+</div>
+
+<!-- SOCIAL -->
+<div id="social" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 09</div>
+    <h2>Social media y contexto LATAM</h2>
+    <p class="section-intro">El encuestado como co-creador de datos y los desafíos de campo en la región.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Social media y recopilación</div>
+    <p>A diferencia de la recopilación tradicional, los participantes en social media no solo responden preguntas — generan y editan datos a través de su participación cotidiana. El proceso VESTS aplica igualmente: selección de la audiencia, supervisión del lanzamiento, validación de respuestas, evaluación de la tasa de completitud.</p>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 Social listening · Mercado Libre y Rappi</div>
+    <p>Mercado Libre y Rappi monitorizan en tiempo real el sentimiento en Twitter/X, App Store y Google Play. Los datos de reviews requieren preprocesamiento: eliminación de spam, normalización de regionalismos y detección de bots. Volumen promedio: 500.000+ menciones/día. El proceso de preparación es tan costoso como la recopilación.</p>
+  </div>
+  <div class="latam-box">
+    <div class="latam-label">🌎 INE Uruguay — campo en asentamientos irregulares</div>
+    <p>La ECH incluye segmentos en asentamientos irregulares con entrevistadores locales y modo offline. Tasa de respuesta: 55–65% vs. 75% en zonas formales. NS/NR en ingresos: 30%+ vs. 12% en zonas formales — tratados con imputación por donante. El diferencial se publica explícitamente en los metadatos.</p>
+  </div>
+  <div class="update-card">
+    <div class="update-card-header"><h3>Investigación internacional — comparabilidad de unidades</h3><div class="tags"><span class="tag tag-bib">Malhotra</span></div></div>
+    <p>Antes de analizar datos cross-country, el investigador debe asegurarse de que las unidades de medición son comparables entre países o culturas. El efecto del entrevistador es más pronunciado en culturas con alta distancia al poder. Los protocolos de consentimiento varían entre países aunque el estudio sea el mismo.</p>
+  </div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('ajuste')">← Anterior</a><a class="nav-btn primary" onclick="showSection('etica')">Siguiente →</a></div>
+</div>
+
+<!-- ÉTICA -->
+<div id="etica" class="section">
+  <div class="section-header">
+    <div class="section-number">Sección 10</div>
+    <h2>Ética en el trabajo de campo y la preparación</h2>
+    <p class="section-intro">Tres problemas éticos centrales y las obligaciones de transparencia.</p>
+  </div>
+  <div class="concept-box">
+    <div class="concept-box-label">Malhotra — Ética en el campo</div>
+    <p>Hacer todo lo posible para que el encuestado tenga una experiencia positiva en el proceso de recopilación de datos. Los problemas éticos durante la preparación de datos atañen principalmente al investigador — especialmente cuando se descartan participantes por respuestas insatisfactorias.</p>
+  </div>
+  <div class="update-card">
+    <div class="update-card-header"><h3>Tres problemas éticos centrales</h3><div class="tags"><span class="tag tag-bib">Malhotra</span></div></div>
+    <ul>
+      <li><strong>Comodidad del encuestado:</strong> el proceso de recopilación debe ser una experiencia positiva y respetuosa. El encuestado debe sentirse libre de retirarse sin consecuencias.</li>
+      <li><strong>Transparencia sobre el descarte:</strong> el número y el criterio para descartar cuestionarios insatisfactorios deben reportarse. Ocultar que se descartó el 30% de los cuestionarios distorsiona la interpretación del n reportado.</li>
+      <li><strong>Responsabilidad del cliente:</strong> el cliente tiene responsabilidad sobre VESTS. Delegar sin supervisión no exime de responsabilidad ética por los datos obtenidos.</li>
+    </ul>
+  </div>
+  <div class="callout"><strong>Obligación de reporte:</strong> declarar n de cuestionarios aplicados, n válidos, n descartados y criterio del descarte, y la tasa de respuesta calculada. Sin esta información el lector no puede evaluar la validez de los datos.</div>
+  <div class="footer-nav"><a class="nav-btn" onclick="showSection('social')">← Anterior</a><a class="nav-btn primary" onclick="showSection('diapositivas')">↑ Volver al inicio</a></div>
+</div>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+  });
+}
+document.querySelector('.nav-item').classList.add('active');
+</script>
+</body>
+</html>
