@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso Pre-Parcial — Caps. 2, 3 y 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+/* PORTADA */
+.s-cover { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold)); }
+.cover-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 900; line-height: 1.0; margin-bottom: 28px; }
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip { font-size: 12px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; display: inline-block; letter-spacing: 0.5px; }
+
+/* SECCIÓN OSCURA */
+.s-section { background: var(--ink); color: var(--paper); justify-content: center; padding: 60px 72px; }
+.s-section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.sec-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--paper); }
+.sec-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-top: 14px; font-style: italic; }
+
+/* CLARO */
+.s-light { background: var(--paper); padding: 48px 72px; justify-content: flex-start; }
+.s-light::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+/* OSCURO CONTENIDO */
+.s-dark { background: #1e1e1e; padding: 48px 72px; justify-content: flex-start; }
+.s-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 22px; }
+.slide-h-white { color: white; }
+
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.65; color: #333; padding: 7px 0 7px 22px; border-bottom: 1px solid var(--border); position: relative; }
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+.def-block { background: var(--ink); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+.def-term-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 7px; }
+.def-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.65; }
+.def-text strong { color: #d4a0a0; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+.col-box-dark { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 16px 18px; }
+.col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 7px; }
+.col-body { font-size: 13px; color: #444; line-height: 1.6; }
+.col-body-w { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 12px; }
+.ref-table th { background: var(--ink); color: var(--paper); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; color: var(--ink); }
+.ref-table tr:nth-child(even) td { background: #faf8f5; }
+
+.ref-table-dark th { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table-dark td { padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 12.5px; }
+
+.pause-box { background: #fffbec; border-left: 5px solid var(--gold); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 16px; }
+.pause-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+.pause-q { font-size: 13.5px; font-style: italic; color: #4a3a00; line-height: 1.6; }
+
+.callout { border-left: 4px solid var(--gold); background: #fffbec; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 14px; font-size: 14px; color: #4a3a00; line-height: 1.7; }
+
+.piz { border-left: 4px solid var(--muted); background: #f0ede8; padding: 10px 16px; border-radius: 0 6px 6px 0; margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* FLOW */
+.flow-step { display: flex; align-items: flex-start; gap: 14px; padding: 10px 14px; background: white; border: 1px solid var(--border); border-radius: 0 6px 6px 0; margin-bottom: 8px; }
+.flow-step-dark { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+.flow-label { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; flex-shrink: 0; padding-top: 2px; min-width: 72px; }
+.flow-text { font-size: 13.5px; color: #333; line-height: 1.5; }
+.flow-text-w { font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+/* three col */
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px; }
+
+/* SEOANC grid */
+.seoanc-grid { display: grid; grid-template-columns: 36px 1fr; gap: 0; margin-top: 10px; }
+.s-letter { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--accent); padding: 6px 0; line-height: 1; }
+.s-text { font-size: 12.5px; color: #333; padding: 6px 0 6px 10px; border-bottom: 1px solid var(--border); line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Repaso Pre-Parcial</div>
+  <div class="cover-title">Planteo de la<br>investigación:<br><em>caps. 2, 3 y 4</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     HOJA DE RUTA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Plan de la clase</div>
+  <div class="slide-h">Qué vamos a hacer hoy — dos bloques</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Bloque 1 · Cap. 2</div>
+      <div class="col-body">
+        <strong>1.</strong> Repaso: PDA vs PIM, componentes, PI vs H<br>
+        <strong>2.</strong> Ejercicio: Caso Itaú — formulan PDA, PIM, componentes<br>
+        <strong>3.</strong> Kahoot 1 — verificación
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Bloque 2 · Caps. 3 y 4</div>
+      <div class="col-body">
+        <strong>4.</strong> Repaso: diseño, SEOANC, cualitativa<br>
+        <strong>5.</strong> Ejercicio: mismo caso — diseño + fuentes + técnica cualitativa<br>
+        <strong>6.</strong> Kahoot 2 — verificación
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Objetivo:</strong> que salgan de acá pudiendo formular un PDA, un PIM con componentes, elegir un diseño de investigación, evaluar una fuente secundaria con SEOANC, y distinguir cuándo usar cada técnica cualitativa.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 1 — CAP. 2
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 1 · Capítulo 2</div>
+  <div class="sec-title">PDA vs. PIM<br>y componentes<br>del enfoque</div>
+  <div class="sec-sub">El corazón del proceso de investigación de mercados</div>
+</div>
+</section>
+
+<!-- PDA vs PIM: definiciones -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capítulo 2 — Tabla 2.2 · Malhotra</div>
+  <div class="slide-h">Dos preguntas que parecen iguales y no lo son</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">PDA — Problema de Decisión Administrativa</div>
+      <div class="col-body">
+        Pregunta <strong>qué debe hacer</strong> el gerente<br><br>
+        Orientado a la <strong>acción</strong><br>
+        Se enfoca en los <strong>síntomas</strong><br><br>
+        Ej: "¿Debemos lanzar la billetera digital?"
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">PIM — Problema de Investigación de Mercados</div>
+      <div class="col-body">
+        Pregunta <strong>qué información se necesita</strong><br><br>
+        Orientado a la <strong>información</strong><br>
+        Se enfoca en las <strong>causas subyacentes</strong><br><br>
+        Ej: "Determinar qué barreras de adopción enfrentan los jóvenes..."
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>El error más frecuente:</strong> "Determinar si debemos bajar el precio" es un <strong>PDA disfrazado de PIM</strong>. No es una pregunta de información — es una pregunta de acción.
+  </div>
+</div>
+</section>
+
+<!-- Lo que tienen en común las buenas formulaciones -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Patrón común en todas las formulaciones correctas</div>
+  <div class="slide-h">Qué tienen en común los PIM bien formulados</div>
+  <ul class="bullets">
+    <li>Empiezan con verbos de información: <strong>"determinar", "identificar", "evaluar", "explorar"</strong> — nunca con verbos de acción como "lanzar", "cambiar", "implementar"</li>
+    <li>Definen <strong>qué variables medir</strong>, <strong>en qué población</strong>, y <strong>en qué contexto</strong></li>
+    <li>Tienen un <strong>planteamiento general</strong> (salvaguarda contra la estrechez) y <strong>componentes específicos</strong> (salvaguarda contra la amplitud)</li>
+    <li>Cada componente genera al menos una <strong>Pregunta de Investigación</strong> (pregunta abierta) y puede generar una <strong>Hipótesis</strong> (afirmación testeable)</li>
+  </ul>
+  <div class="piz">
+    ✏ Pizarrón: dibujar el flujo PDA → PIM (general) → Componentes → PI → H. Es una cascada donde cada nivel es más específico.
+  </div>
+</div>
+</section>
+
+<!-- Dos errores -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figuras 2.5 y 2.6 — Malhotra</div>
+  <div class="slide-h">Los dos errores al definir el PIM — y la solución</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Error 1 · Demasiado amplio</div>
+      <div class="col-body">No ofrece directrices para el diseño.<br><br>❌ "Mejorar la imagen de la compañía"<br>❌ "Determinar por qué los usuarios no están satisfechos"</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Error 2 · Demasiado estrecho</div>
+      <div class="col-body">Presupone la causa, cierra opciones.<br><br>❌ "¿Cambiar el botón de verde a azul?"<br>❌ "Competir en precio con Netflix"</div>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:14px; background:#1a2a1a;">
+    <div class="def-term-label" style="color:#6db86d;">Solución — Figura 2.6</div>
+    <div class="def-text"><strong>Planteamiento general</strong> (salvaguarda vs. estrechez) + <strong>componentes específicos</strong> (salvaguarda vs. amplitud). Los dos niveles actúan como checks mutuos.</div>
+  </div>
+</div>
+</section>
+
+<!-- Ejemplo comparativo PDA→PIM -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Tabla 2.3 actualizada — Casos LATAM</div>
+  <div class="slide-h slide-h-white">Del PDA al PIM — el puente</div>
+  <table class="ref-table-dark" style="width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px;">
+    <tr><th>Empresa</th><th>PDA (acción)</th><th>PIM (información)</th></tr>
+    <tr>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;"><strong style="color:#d4a0a0;">Netflix</strong></td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;">¿Mantener precio diferenciado por país?</td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;">Determinar elasticidad-precio por segmento y su impacto en cancelación</td>
+    </tr>
+    <tr>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;background:rgba(255,255,255,0.04);"><strong style="color:#d4a0a0;">Mercado Libre</strong></td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;background:rgba(255,255,255,0.04);">¿Expandir Mercado Pago a zonas rurales?</td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.08);vertical-align:top;line-height:1.5;background:rgba(255,255,255,0.04);">Determinar barreras de adopción de servicios financieros digitales en segmentos no bancarizados</td>
+    </tr>
+    <tr>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;vertical-align:top;line-height:1.5;"><strong style="color:#d4a0a0;">Rappi</strong></td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;vertical-align:top;line-height:1.5;">¿Lanzar kits de cocina?</td>
+      <td style="color:rgba(255,255,255,0.9);padding:9px 14px;vertical-align:top;line-height:1.5;">Identificar qué factores del uso frecuente de delivery generan fatiga de conveniencia y qué alternativas valora el consumidor</td>
+    </tr>
+  </table>
+  <div class="pause-box" style="margin-top:14px;">
+    <div class="pause-label">⏸ Patrón</div>
+    <div class="pause-q">En todos los casos: el PDA tiene un verbo de acción (mantener, expandir, lanzar) y el PIM tiene un verbo de información (determinar, identificar). Esa es la prueba rápida.</div>
+  </div>
+</div>
+</section>
+
+<!-- PI vs H -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Componentes del enfoque — Malhotra</div>
+  <div class="slide-h">Pregunta de investigación ≠ Hipótesis</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Pregunta de Investigación (PI)</div>
+      <div class="col-body">
+        <strong>Pregunta abierta</strong> — se responde<br><br>
+        "¿Cuáles son las barreras que impiden a los jóvenes abrir una cuenta bancaria?"<br><br>
+        No presupone la respuesta.
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Hipótesis (H)</div>
+      <div class="col-body">
+        <strong>Afirmación testeable</strong> — se pone a prueba<br><br>
+        "La principal barrera percibida es la burocracia del proceso de apertura, no el costo de mantenimiento."<br><br>
+        Es falsificable empíricamente.
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>La relación:</strong> cada componente del PIM genera PI. Las PI generan H. Las H definen qué variables medir y cómo.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 2 — CAP. 3
+══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════
+     TRANSICIÓN A EJERCICIO
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Ejercicio práctico</div>
+  <div class="sec-title">Caso Banco Itaú<br>Uruguay</div>
+  <div class="sec-sub">Ahora lo aplican ustedes — en grupos de 3 a 4</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Instrucciones del ejercicio · Parte A + B</div>
+  <div class="slide-h">Qué tienen que entregar</div>
+  <div class="flow-step" style="border-left: 4px solid var(--accent);">
+    <div class="flow-label" style="color:var(--accent);">Parte A</div>
+    <div class="flow-text"><strong>PDA + PIM + 4 componentes + PI + H</strong> para cada componente</div>
+  </div>
+  <div class="flow-step" style="border-left: 4px solid var(--gold);">
+    <div class="flow-label" style="color:var(--gold);">Parte B</div>
+    <div class="flow-text"><strong>Intercambio:</strong> otro grupo lee su PIM e intenta reconstruir el PDA. ¿Coincide?</div>
+  </div>
+  <div class="callout">
+    <strong>Puesta en común:</strong> 2-3 grupos exponen. Vamos a marcar errores típicos juntos. Después hacemos una ronda de preguntas para verificar.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     KAHOOT 1
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Verificación de conceptos</div>
+  <div class="sec-title">PDA, PIM<br>y componentes</div>
+  <div class="sec-sub">5 preguntas · sin nota</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 1 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">El gerente de Rappi pregunta: «¿Debemos expandirnos a farmacias?» ¿Eso es un PDA o un PIM?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PDA</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PIM</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Componente del PIM</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Pregunta de investigación</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 1 — Respuesta correcta: <strong style="color:var(--accent)">A</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">El gerente de Rappi pregunta: «¿Debemos expandirnos a farmacias?» ¿Eso es un PDA o un PIM?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">A ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">PDA</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">PIM</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Componente del PIM</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Pregunta de investigación</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Es una pregunta de <strong>acción</strong> (¿qué debo hacer?). Prueba rápida: verbo de acción → PDA. Verbo de información (determinar, identificar) → PIM.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 2 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">«Determinar qué barreras enfrentan los usuarios no bancarizados en zonas rurales de Uruguay» es un...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PDA</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PIM bien formulado</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PIM demasiado amplio</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">PIM demasiado estrecho</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 2 — Respuesta correcta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">«Determinar qué barreras enfrentan los usuarios no bancarizados en zonas rurales de Uruguay» es un...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">PDA</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">B ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">PIM bien formulado</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">PIM demasiado amplio</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">PIM demasiado estrecho</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Tiene verbo de información (<em>determinar</em>), define población (no bancarizados), contexto (zonas rurales) y variable (barreras). Ni demasiado amplio ni estrecho.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 3 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">«Mejorar la imagen de la compañía» como PIM es un error de tipo...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Demasiado estrecho</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Confusión PDA/PIM</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Demasiado amplio</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Falta de componentes</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 3 — Respuesta correcta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">«Mejorar la imagen de la compañía» como PIM es un error de tipo...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Demasiado estrecho</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Confusión PDA/PIM</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">C ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">Demasiado amplio</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Falta de componentes</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Error de amplitud (Fig. 2.5). No ofrece directrices: ¿qué se mide? ¿a quién? ¿con qué instrumento? Un PIM así puede ir en diez direcciones distintas.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 4 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">Los componentes específicos del PIM sirven como salvaguarda contra...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La amplitud excesiva</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La estrechez excesiva</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La confusión con el PDA</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">El error de muestreo</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 4 — Respuesta correcta: <strong style="color:var(--accent)">A</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">Los componentes específicos del PIM sirven como salvaguarda contra...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">A ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">La amplitud excesiva</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">La estrechez excesiva</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">La confusión con el PDA</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">El error de muestreo</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Fig. 2.6: el planteamiento general salvaguarda contra la <strong>estrechez</strong>. Los componentes específicos salvaguardan contra la <strong>amplitud</strong>. Actúan como checks mutuos.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 5 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">¿Cuál es la diferencia entre una Pregunta de Investigación (PI) y una Hipótesis (H)?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Son sinónimos</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La PI es más amplia que la H</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La PI pregunta; la H afirma una relación testeable</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La H viene antes que la PI</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 5 — Respuesta correcta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">¿Cuál es la diferencia entre una Pregunta de Investigación (PI) y una Hipótesis (H)?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Son sinónimos</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">La PI es más amplia que la H</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">C ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">La PI pregunta; la H afirma una relación testeable</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">La H viene antes que la PI</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    La PI es una pregunta abierta que se <em>responde</em>. La H es una afirmación sobre una relación esperada que se <em>pone a prueba</em> empíricamente. La H es falsificable.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 2 — REPASO CAPS 3+4
+══════════════════════════════════════ -->
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 2 · Capítulo 3</div>
+  <div class="sec-title">Diseño de<br>investigación<br>y datos secundarios</div>
+  <div class="sec-sub">Tres tipos de diseño · Primarios vs. secundarios · SEOANC</div>
+</div>
+</section>
+
+<!-- Tres tipos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Figura 3.2 · Vigente</div>
+  <div class="slide-h">Tres tipos de diseño — la clasificación que organiza el campo</div>
+  <div class="three-col">
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Exploratoria</div>
+      <div class="col-body">
+        <strong>Entender</strong> el problema<br>
+        Muestra: pequeña<br>
+        Proceso: flexible<br>
+        Análisis: cualitativo<br>
+        Resultado: <strong>hipótesis</strong><br><br>
+        Métodos: datos secundarios, focus groups, entrevistas
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Descriptiva</div>
+      <div class="col-body">
+        <strong>Cuantificar</strong> hallazgos<br>
+        Muestra: grande, representativa<br>
+        Proceso: estructurado<br>
+        Análisis: estadístico<br>
+        Resultado: <strong>datos concluyentes</strong><br><br>
+        Transversal o longitudinal
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Causal</div>
+      <div class="col-body">
+        <strong>Causa y efecto</strong><br>
+        Requiere: experimento<br>
+        Manipulación de VI<br>
+        Asignación aleatoria<br>
+        Resultado: <strong>X causa Y</strong><br><br>
+        ≠ correlación
+      </div>
+    </div>
+  </div>
+  <div class="piz" style="margin-top:12px;">
+    ✏ Pizarrón: dibujar el árbol — Exploratoria → Concluyente → Descriptiva (transversal / longitudinal) y Causal.
+  </div>
+</div>
+</section>
+
+<!-- Diferencia clave descriptiva vs causal -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Figura 3.5 — Malhotra</div>
+  <div class="slide-h slide-h-white">Descriptiva vs. Causal — la diferencia que más confunde</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box-dark" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Investigación Descriptiva</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#d4a0a0;margin:10px 0;">X e Y varían juntas</div>
+      <div class="col-body-w">Correlación. Muestra que dos cosas se mueven juntas.<br><br>Ej: los clientes que usan más la app también compran más. ¿Pero el uso <em>causa</em> la compra?</div>
+    </div>
+    <div class="col-box-dark" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Investigación Causal</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#d4a0a0;margin:10px 0;">X causa Y</div>
+      <div class="col-body-w">Causalidad. Requiere manipulación + aleatorización.<br><br>Ej: asignar aleatoriamente usuarios a ver/no ver recomendaciones → medir si compran más.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Primarios vs Secundarios + SEOANC -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra 2016 — Regla absoluta</div>
+  <div class="slide-h">Datos secundarios primero — siempre</div>
+  <div class="def-block">
+    <div class="def-term-label">Regla de oro</div>
+    <div class="def-text"><strong>Datos primarios</strong>: originados por el investigador para este problema específico. Costosos, lentos, máximo control.<br><strong>Datos secundarios</strong>: reunidos antes para otros propósitos. Rápidos, baratos, pero pueden no ajustarse.<br><br><strong>Siempre se examinan los secundarios primero.</strong> No se invierte en primarios sin haberlos agotado antes.</div>
+  </div>
+</div>
+</section>
+
+<!-- SEOANC -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Criterios SEOANC — Malhotra 2016</div>
+  <div class="slide-h">Seis preguntas antes de usar cualquier fuente secundaria</div>
+  <div class="seoanc-grid">
+    <div class="s-letter">S</div>
+    <div class="s-text"><strong>Especificaciones</strong> — ¿Cómo se recopilaron? Metodología, muestra, tasa de respuesta. Revisar la fuente original.</div>
+    <div class="s-letter">E</div>
+    <div class="s-text"><strong>Error</strong> — ¿Qué tan exactos son? Comparar múltiples fuentes independientes.</div>
+    <div class="s-letter">O</div>
+    <div class="s-text"><strong>Objetivo</strong> — ¿Para qué y para quién se recopilaron? El propósito original sesga los resultados.</div>
+    <div class="s-letter">A</div>
+    <div class="s-text"><strong>Actualidad</strong> — ¿Cuándo se recopilaron? En mercados dinámicos, 2 años pueden ser obsoletos.</div>
+    <div class="s-letter">N</div>
+    <div class="s-text"><strong>Naturaleza</strong> — ¿Las definiciones y categorías coinciden con las del PIM?</div>
+    <div class="s-letter">C</div>
+    <div class="s-text"><strong>Confiabilidad</strong> — ¿Reputación y transparencia de la fuente?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 3 — CAP. 4
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3 · Capítulo 4</div>
+  <div class="sec-title">Investigación<br>cualitativa</div>
+  <div class="sec-sub">Focus groups · Entrevistas en profundidad · Técnicas proyectivas</div>
+</div>
+</section>
+
+<!-- Tres técnicas -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Figura 4.3 — Malhotra 2016</div>
+  <div class="slide-h">Tres técnicas, dos enfoques</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Enfoque directo (objetivo no encubierto)</div>
+      <div class="col-body">
+        <strong>Focus group:</strong> 8-12 personas, moderador, interacción grupal. Lo más usado.<br><br>
+        <strong>Entrevista en profundidad:</strong> individual, permite sondear motivaciones profundas. Para temas sensibles o perfiles difíciles de reunir.
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Enfoque indirecto (objetivo encubierto)</div>
+      <div class="col-body">
+        <strong>Técnicas proyectivas:</strong> el participante proyecta sus motivaciones en situaciones ambiguas.<br><br>
+        Útiles cuando la pregunta directa produce respuestas socialmente deseables.<br><br>
+        Tipos: asociación de palabras, frases incompletas, tercera persona, caricaturas.
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Regla:</strong> los hallazgos cualitativos son <strong>exploratorios y tentativos</strong>. 8 personas no representan ningún mercado. Orientan hipótesis para la cuantitativa — no las reemplazan.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TRANSICIÓN A EJERCICIO C+D
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Ejercicio práctico · Parte C + D</div>
+  <div class="sec-title">Caso Banco Itaú<br>Diseño + SEOANC<br>+ Cualitativa</div>
+  <div class="sec-sub">Mismo caso — ahora avanzan al diseño de la investigación</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Instrucciones del ejercicio · Parte C + D</div>
+  <div class="slide-h">Qué tienen que entregar</div>
+  <div class="flow-step" style="border-left: 4px solid var(--blue);">
+    <div class="flow-label" style="color:var(--blue);">Parte C</div>
+    <div class="flow-text"><strong>Diseño de investigación:</strong> ¿exploratorio, descriptivo, causal, o combinación? Justifiquen. Evalúen 2 fuentes secundarias con SEOANC.</div>
+  </div>
+  <div class="flow-step" style="border-left: 4px solid var(--green);">
+    <div class="flow-label" style="color:var(--green);">Parte D</div>
+    <div class="flow-text"><strong>Técnica cualitativa:</strong> ¿focus group, entrevista en profundidad o proyectiva? ¿Por qué? (oral)</div>
+  </div>
+  <div class="callout">
+    Usen el mismo caso del brief de Itaú. Las fuentes secundarias están listadas en el brief: BCU, INE, Euromonitor, datos internos del banco.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     KAHOOT 2
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Verificación de conceptos</div>
+  <div class="sec-title">Diseño, SEOANC<br>y cualitativa</div>
+  <div class="sec-sub">5 preguntas · sin nota</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 1 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">Una investigación que busca entender por qué caen las ventas sin hipótesis previa es de tipo...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Concluyente descriptiva</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Concluyente causal</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Exploratoria</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Longitudinal</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 1 — Respuesta correcta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">Una investigación que busca entender por qué caen las ventas sin hipótesis previa es de tipo...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Concluyente descriptiva</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Concluyente causal</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">C ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">Exploratoria</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Longitudinal</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Exploratoria: información vaga, proceso flexible, muestra pequeña, hallazgos tentativos. <strong>Genera hipótesis</strong> para la siguiente etapa concluyente.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 2 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">¿Cuál es la diferencia clave entre investigación descriptiva y causal?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Tamaño de muestra</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La descriptiva muestra correlación; la causal establece causa-efecto</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">La causal usa encuestas</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">No hay diferencia real</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 2 — Respuesta correcta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">¿Cuál es la diferencia clave entre investigación descriptiva y causal?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Tamaño de muestra</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">B ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">La descriptiva muestra correlación; la causal establece causa-efecto</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">La causal usa encuestas</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">No hay diferencia real</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Descriptiva: X e Y varían juntas (correlación). Causal: X <strong>causa</strong> Y (requiere experimento con manipulación + asignación aleatoria). Fig. 3.5.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 3 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">La «O» del acrónimo SEOANC se refiere a...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Orden de los datos</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Operacionalización</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Objetivo: por qué y para quién se recopilaron</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Observación</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 3 — Respuesta correcta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">La «O» del acrónimo SEOANC se refiere a...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Orden de los datos</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Operacionalización</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">C ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">Objetivo: por qué y para quién se recopilaron</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Observación</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    O = Objetivo: ¿para quién y por qué se recopilaron? Un estudio encargado por Red Bull sesga distinto a uno académico independiente. Es el criterio que detecta <strong>conflictos de interés</strong>.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 4 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">Las técnicas proyectivas pertenecen al enfoque...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Directo de la investigación cualitativa</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Indirecto de la investigación cualitativa</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Cuantitativo concluyente</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Causal experimental</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 4 — Respuesta correcta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">Las técnicas proyectivas pertenecen al enfoque...</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Directo de la investigación cualitativa</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">B ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">Indirecto de la investigación cualitativa</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Cuantitativo concluyente</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Causal experimental</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Las proyectivas son <strong>indirectas</strong>: el objetivo está encubierto. Se usan cuando la pregunta directa produce respuestas socialmente deseables. Fig. 4.3.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 5 de 5</div>
+    
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:24px;">Un focus group con 8 personas dice que les gusta el producto. ¿Eso significa que va a vender bien?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Sí, si todos coinciden</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">Sí, si el moderador es bueno</span>
+        </div>
+        <div style="background:#2d7a3a1a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2d7a3a;flex-shrink:0;">C</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">No: hallazgos cualitativos son tentativos y la muestra no es representativa</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;">No, porque faltaron proyectivas</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;">
+    <div class="eyebrow">Pregunta 5 — Respuesta correcta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:20px;">Un focus group con 8 personas dice que les gusta el producto. ¿Eso significa que va a vender bien?</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    
+        <div style="background:#2c5f8a1a;border:2px solid #2c5f8a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#2c5f8a;flex-shrink:0;">A</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Sí, si todos coinciden</span>
+        </div>
+        <div style="background:#b8860b1a;border:2px solid #b8860b;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#b8860b;flex-shrink:0;">B</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">Sí, si el moderador es bueno</span>
+        </div>
+        <div style="background:#2d7a3a;border:2px solid #2d7a3a;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:white;flex-shrink:0;">C ✓</span>
+          <span style="font-size:14px;color:white;line-height:1.4;font-weight:700;">No: hallazgos cualitativos son tentativos y la muestra no es representativa</span>
+        </div>
+        <div style="background:#8b45131a;border:2px solid #8b4513;border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+          <span style="font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:#8b4513;flex-shrink:0;">D</span>
+          <span style="font-size:14px;color:#1a1a1a;line-height:1.4;font-weight:400;">No, porque faltaron proyectivas</span>
+        </div>
+  </div>
+  <div style="background:#f0f7f1;border-left:4px solid #2d7a3a;padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:#1a1a1a;line-height:1.6;">
+    Los hallazgos cualitativos son <strong>exploratorios y tentativos</strong>. 8 personas no representan estadísticamente ningún mercado. Orientan hipótesis para la cuantitativa; no las reemplazan.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Cierre · Errores típicos del parcial</div>
+  <div class="slide-h slide-h-white">Lo que NO hay que hacer en el parcial</div>
+  <ul class="bullets bullets-white">
+    <li><strong style="color:white;">Confundir PDA con PIM:</strong> si tiene un verbo de acción ("¿debemos lanzar...?"), es PDA, no PIM</li>
+    <li><strong style="color:white;">PIM sin componentes:</strong> un PIM general sin componentes específicos es demasiado amplio — no ofrece directrices</li>
+    <li><strong style="color:white;">Confundir PI con H:</strong> la PI pregunta, la H afirma. La PI se responde, la H se pone a prueba</li>
+    <li><strong style="color:white;">Decir "investigación causal" cuando es descriptiva:</strong> si no hay manipulación + aleatorización, no es causal</li>
+    <li><strong style="color:white;">SEOANC aplicado a datos primarios:</strong> SEOANC es exclusivamente para evaluar datos secundarios</li>
+    <li><strong style="color:white;">Tratar hallazgos del focus group como concluyentes:</strong> un focus group genera hipótesis, no las confirma</li>
+  </ul>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
