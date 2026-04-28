@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso Pre-Parcial — Caps. 5, 6, 7 y 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+.s-cover { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold)); }
+.cover-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 900; line-height: 1.0; margin-bottom: 28px; }
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip { font-size: 12px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; display: inline-block; letter-spacing: 0.5px; }
+
+.s-section { background: var(--ink); color: var(--paper); justify-content: center; padding: 60px 72px; }
+.s-section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.sec-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--paper); }
+.sec-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-top: 14px; font-style: italic; }
+
+.s-light { background: var(--paper); padding: 48px 72px; justify-content: flex-start; }
+.s-light::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.s-dark { background: #1e1e1e; padding: 48px 72px; justify-content: flex-start; }
+.s-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 22px; }
+.slide-h-white { color: white; }
+.slide-h-sm { font-family: 'Playfair Display', serif; font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li { font-size: clamp(12px, 1.6vw, 14px); line-height: 1.65; color: #333; padding: 6px 0 6px 22px; border-bottom: 1px solid var(--border); position: relative; }
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+.col-box-dark { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 16px 18px; }
+.col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 7px; }
+.col-body { font-size: 13px; color: #444; line-height: 1.6; }
+.col-body-w { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px; }
+.four-col { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 8px; }
+
+.callout { border-left: 4px solid var(--gold); background: #fffbec; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 14px; font-size: 14px; color: #4a3a00; line-height: 1.7; }
+.callout-red { border-left: 4px solid var(--accent); background: #fef0ee; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 12px; font-size: 13px; color: #5a1010; line-height: 1.65; }
+.callout-green { border-left: 4px solid var(--green); background: var(--greenbg); padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 12px; font-size: 13px; color: #1a3a22; line-height: 1.65; }
+.callout-blue { border-left: 4px solid var(--blue); background: #e8f0f8; padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 12px; font-size: 13px; color: #1a2a3a; line-height: 1.65; }
+
+.piz { border-left: 4px solid var(--muted); background: #f0ede8; padding: 10px 16px; border-radius: 0 6px 6px 0; margin-top: 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px; }
+.badge-ok  { background: #e8f5e9; color: #2d7a3a; border: 1px solid #2d7a3a; }
+.badge-bad { background: #fdecea; color: #c0392b; border: 1px solid #c0392b; }
+.badge-mid { background: #fff8e1; color: #b8860b; border: 1px solid #b8860b; }
+
+/* Verificación slides */
+.ver-q { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; }
+.ver-q-text { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; color: var(--ink); margin-bottom: 12px; line-height: 1.35; }
+.ver-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ver-opt { padding: 9px 14px; border-radius: 6px; font-size: 13px; display: flex; align-items: center; gap: 8px; border: 1.5px solid; }
+.ver-opt-letter { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.opt-a { background: #eaf1f8; border-color: var(--blue); color: #1a2a3a; }
+.opt-a .ver-opt-letter { color: var(--blue); }
+.opt-b { background: #f5ede8; border-color: #8b4513; color: #3a1a0a; }
+.opt-b .ver-opt-letter { color: #8b4513; }
+.opt-c { background: #eef6ee; border-color: var(--green); color: #1a3a22; }
+.opt-c .ver-opt-letter { color: var(--green); }
+.opt-d { background: #f5f5e8; border-color: #6b6b00; color: #2a2a00; }
+.opt-d .ver-opt-letter { color: #6b6b00; }
+.opt-correct { background: #2d7a3a !important; border-color: #2d7a3a !important; color: white !important; }
+.opt-correct .ver-opt-letter { color: white !important; }
+.ver-exp { background: #eef6ee; border-left: 4px solid var(--green); padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13px; color: #1a3a22; line-height: 1.6; margin-top: 12px; }
+
+/* Scale visual */
+.scale-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+.scale-label { width: 130px; color: #555; font-size: 12px; text-align: right; flex-shrink: 0; }
+.scale-label-r { width: 130px; color: #555; font-size: 12px; text-align: left; flex-shrink: 0; }
+.scale-boxes { display: flex; gap: 4px; }
+.scale-box { width: 30px; height: 30px; border: 1.5px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); background: white; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Repaso Pre-Parcial</div>
+  <div class="cover-title">Ejecución y<br>medición:<br><em>caps. 5, 6, 7 y 8</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Plan de la clase</div>
+  <div class="slide-h">Qué vamos a hacer hoy — tres bloques</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Bloque 1 · Cap. 6</div>
+      <div class="col-body">
+        <strong>1.</strong> Repaso: causalidad, VI/VD, variables extrañas, validez<br>
+        <strong>2.</strong> Ejercicio: 3 mini-casos LATAM<br>
+        <strong>3.</strong> Verificación
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Bloque 2 · Cap. 7</div>
+      <div class="col-body">
+        <strong>4.</strong> Repaso: escalas de medición, confiabilidad vs. validez<br>
+        <strong>5.</strong> Ejercicio: construir ítems con escala asignada<br>
+        <strong>6.</strong> Verificación
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Bloque 3 · Caps. 5 y 8</div>
+      <div class="col-body">
+        <strong>7.</strong> Repaso: encuestas (cap. 5) y diseño de cuestionarios (WORDS)<br>
+        <strong>8.</strong> Actividad WORDS<br>
+        <strong>9.</strong> Verificación + cierre
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>Objetivo:</strong> poder diagnosticar si un experimento permite inferir causalidad, construir y comparar escalas de medición, y detectar y corregir errores de redacción en cuestionarios.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 1 · Capítulo 6</div>
+  <div class="sec-title">Experimentación<br>y causalidad</div>
+  <div class="sec-sub">Las tres condiciones · VI / VD / extrañas · validez interna vs. externa</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:44px 64px;">
+  <div class="eyebrow">Capítulo 6 — Malhotra · Concepto central</div>
+  <div class="slide-h" style="margin-bottom:14px;">¿Cuándo podemos decir que X <em>causa</em> Y?</div>
+  <div class="callout" style="margin-bottom:16px;margin-top:0;"><strong>Correlación ≠ causalidad.</strong> En Brasil, los clientes de Nubank que reciben emails de retención cancelan menos. ¿El email <em>causa</em> la retención, o los que igual pensaban quedarse son los que responden al email? Solo el experimento con aleatorización puede responder eso.</div>
+  <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:10px;align-items:stretch;">
+    <div style="display:flex;align-items:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);padding-right:4px;">CASO NUBANK</div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">1 · Variación concomitante</div>
+      <div class="col-body" style="font-size:12.5px;">X e Y varían <strong>juntas</strong>.<br><br>Nubank envía el email → la tasa de cancelación baja. Quienes no reciben el email → cancelan más.<br><br><em>Necesaria, pero no suficiente sola.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">2 · Orden temporal</div>
+      <div class="col-body" style="font-size:12.5px;">X ocurre <strong>antes</strong> que Y.<br><br>El email se envía <em>antes</em> de que el cliente tome la decisión de cancelar o no. La causa precede al efecto.<br><br><em>Necesaria, pero no suficiente sola.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">3 · Eliminación de alternativas</div>
+      <div class="col-body" style="font-size:12.5px;">No hay <strong>otra explicación</strong> posible.<br><br>100.000 personas por grupo, asignadas <em>aleatoriamente</em>. Perfil de clientes, antigüedad y motivos de cancelación se distribuyen por igual entre grupos.<br><br><em>La que distingue correlación de causalidad.</em></div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capítulo 6 — Variables en el experimento</div>
+  <div class="slide-h">VI, VD y variables extrañas</div>
+  <div class="two-col">
+    <div>
+      <div class="col-box" style="border-top:3px solid var(--accent);margin-bottom:12px;">
+        <div class="col-label" style="color:var(--accent);">Variable Independiente (VI)</div>
+        <div class="col-body">La que el investigador <strong>manipula</strong>.<br>Ej: precio, diseño de pantalla, tipo de email.<br><em>Es la "causa" que se está testeando.</em></div>
+      </div>
+      <div class="col-box" style="border-top:3px solid var(--blue);">
+        <div class="col-label" style="color:var(--blue);">Variable Dependiente (VD)</div>
+        <div class="col-body">La que el investigador <strong>mide</strong> como resultado.<br>Ej: ventas, tasa de conversión, cancelación.<br><em>Es el "efecto" que se quiere producir.</em></div>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Variables Extrañas</div>
+      <div class="col-body">Todo lo que puede afectar la VD <strong>sin ser la VI</strong>.<br><br>Las 6 variables extrañas de Malhotra:<br><br>
+      <strong>Historia:</strong> evento externo durante el experimento<br>
+      <strong>Maduración:</strong> cambio natural con el tiempo<br>
+      <strong>Administración de pruebas:</strong> el pretest afecta el postest<br>
+      <strong>Sesgo de selección:</strong> grupos no equivalentes al inicio<br>
+      <strong>Mortalidad:</strong> abandono diferencial entre grupos<br>
+      <strong>Regresión estadística:</strong> valores extremos regresan a la media</div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Capítulo 6 — Las 6 variables extrañas · Malhotra</div>
+  <div class="slide-h-sm" style="margin-bottom:14px;">Todo lo que puede afectar la VD sin ser la VI</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Historia</div>
+      <div class="col-body" style="font-size:12px;">Evento externo que ocurre <strong>durante</strong> el experimento.<br><br><em>Ej: en el A/B test de Mercado Libre, Mercado Libre lanza una promoción de envío gratis en la semana 3. Afecta a ambos grupos por igual, oscureciendo el efecto de las reseñas.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Maduración</div>
+      <div class="col-body" style="font-size:12px;">Los sujetos cambian naturalmente <strong>con el tiempo</strong>, independientemente del tratamiento.<br><br><em>Ej: un estudio de 6 meses sobre lealtad de marca no sabe si el cambio se debe a la campaña o a que los clientes simplemente maduraron sus preferencias.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">Administración de pruebas</div>
+      <div class="col-body" style="font-size:12px;">El <strong>pretest</strong> afecta las respuestas del postest.<br><br><em>Ej: si antes de mostrar un anuncio se pregunta a los consumidores qué valoran en un producto, esa pregunta activa criterios que de otro modo no habrían usado al evaluar el anuncio.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Sesgo de selección</div>
+      <div class="col-body" style="font-size:12px;">Los grupos difieren <strong>antes</strong> del tratamiento por cómo fueron formados.<br><br><em>Ej: Falabella elige como grupo experimental las tiendas con peores ventas. Esas tiendas ya eran distintas al grupo control antes de instalar las pantallas.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--muted);">
+      <div class="col-label">Mortalidad</div>
+      <div class="col-body" style="font-size:12px;"><strong>Abandono diferencial</strong> entre grupos durante el experimento.<br><br><em>Ej: en un panel longitudinal de compradores de suplementos, si los menos comprometidos abandonan más el grupo experimental que el control, los que quedan son sistemáticamente distintos.</em></div>
+    </div>
+    <div class="col-box" style="border-top:3px solid #8b4513;">
+      <div class="col-label" style="color:#8b4513;">Regresión estadística</div>
+      <div class="col-body" style="font-size:12px;">Los valores <strong>extremos</strong> tienden a regresar al promedio en la siguiente medición.<br><br><em>Ej: Falabella selecciona las tiendas con las ventas más bajas. Es probable que mejoren en el siguiente período simplemente por regresión a la media, con o sin pantallas.</em></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Capítulo 6 — Caso práctico · identificación de variables</div>
+  <div class="slide-h-sm" style="margin-bottom:16px;">Rappi lanza un programa de fidelidad para sus mejores clientes</div>
+  <div style="background:#1e1e1e;border-radius:8px;padding:14px 20px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">
+    Rappi quiere saber si ofrecer <strong style="color:#d4a0a0;">cashback del 10%</strong> a sus clientes más activos aumenta la frecuencia de pedidos. Seleccionan a los 50.000 usuarios que más pidieron en el último mes y les activan el cashback. Los demás usuarios siguen con el programa estándar. Miden la frecuencia de pedidos durante 8 semanas.
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Variable Independiente (VI)</div>
+      <div class="col-body" style="font-size:13px;">Cashback del 10% (presente / ausente).<br><br>Es la variable que Rappi <strong>manipula</strong> deliberadamente.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Variable Dependiente (VD)</div>
+      <div class="col-body" style="font-size:13px;">Frecuencia de pedidos por semana.<br><br>Es lo que Rappi <strong>mide</strong> para ver si el tratamiento funcionó.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Variables Extrañas</div>
+      <div class="col-body" style="font-size:13px;"><strong>Sesgo de selección:</strong> el grupo experimental son los más activos — ya pedían más antes del cashback.<br><strong>Historia:</strong> si un competidor lanza promoción durante las 8 semanas, afecta el comportamiento de forma externa.</div>
+    </div>
+  </div>
+  <div class="callout-red" style="margin-top:12px;"><strong>¿Se puede inferir causalidad?</strong> No — sin asignación aleatoria, el sesgo de selección es fatal. Los mejores clientes habrían seguido pidiendo más de todas formas.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Capítulo 6 — La tensión fundamental</div>
+  <div class="slide-h slide-h-white">Validez interna vs. externa</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box-dark" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Validez Interna</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#d4a0a0;margin:10px 0;">¿El efecto es real?</div>
+      <div class="col-body-w">¿La VI realmente causó el cambio en la VD, o fue alguna variable extraña?<br><br>Alta validez interna = alto control de extrañas.<br><br><em>Ej: el A/B test de Nubank tiene alta validez interna porque la aleatorización hace que ambos grupos sean equivalentes en todo salvo en el tipo de email.</em></div>
+    </div>
+    <div class="col-box-dark" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Validez Externa</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#d4a0a0;margin:10px 0;">¿El efecto se generaliza?</div>
+      <div class="col-body-w">¿Los resultados aplican a otros mercados, poblaciones, contextos?<br><br>Alta validez externa = condiciones realistas.<br><br><em>Ej: el resultado del A/B test de Nubank aplica a clientes que solicitan cancelación en Brasil en marzo — pero ¿aplica en diciembre, en Argentina, o a clientes que nunca amenazaron cancelar?</em></div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 18px;margin-top:12px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
+    <strong style="color:white;">Tradeoff central:</strong> más control = menos realismo. El experimento de laboratorio maximiza la interna; el experimento de campo maximiza la externa. El A/B test digital busca equilibrar ambas.
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Ejercicio · Bloque 1</div>
+  <div class="sec-title">Tres mini-casos<br>LATAM</div>
+  <div class="sec-sub">Mercado Libre · Falabella · Nubank — uno está trampeado</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark" style="justify-content:center;padding:60px 72px;">
+  <div class="sec-num">Ejercicio en grupos</div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:700;color:var(--paper);line-height:1.2;margin-bottom:20px;">
+    Lean el brief de cada caso.<br>Completen la tabla de análisis.
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso A · Mercado Libre</span>
+    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso B · Falabella</span>
+    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso C · Nubank</span>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Verificación de conceptos</div>
+  <div class="sec-title">Cap. 6 — Causalidad y experimentación</div>
+  <div class="sec-sub">Preguntas · sin nota</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 1 de 4</div>
+  </div>
+  <div class="ver-q-text">Las 3 condiciones para inferir causalidad son: variación concomitante, orden temporal y...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Muestra representativa</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Eliminación de otros factores causales</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Correlación positiva</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Validez de constructo</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 1 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">Las 3 condiciones para inferir causalidad son: variación concomitante, orden temporal y...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Muestra representativa</span>
+        </div>
+        <div class="ver-opt opt-b opt-correct">
+          <span class="ver-opt-letter">B ✓</span>
+          <span>Eliminación de otros factores causales</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Correlación positiva</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Validez de constructo</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Variación concomitante:</strong> X e Y varían juntas. <strong>Orden temporal:</strong> X precede a Y. <strong>Eliminación de explicaciones alternativas:</strong> la más difícil — exige experimento con aleatorización.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 2 de 4</div>
+  </div>
+  <div class="ver-q-text">Rappi asigna envío gratis solo a sus mejores clientes y mide si compran más. ¿Qué variable extraña amenaza la validez interna?</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Historia</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Maduración</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Sesgo de selección</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Mortalidad</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 3 de 4</div>
+  </div>
+  <div class="ver-q-text">Un experimento de laboratorio tiene alta validez ___ pero puede tener baja validez ___.</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>externa / interna</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>interna / externa</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>de constructo / de contenido</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>predictiva / concurrente</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 3 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">Un experimento de laboratorio tiene alta validez ___ pero puede tener baja validez ___.</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>externa / interna</span>
+        </div>
+        <div class="ver-opt opt-b opt-correct">
+          <span class="ver-opt-letter">B ✓</span>
+          <span>interna / externa</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>de constructo / de contenido</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>predictiva / concurrente</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Laboratorio:</strong> alto control de variables extrañas = alta <em>validez interna</em>. Pero las condiciones artificiales no representan el mercado real = baja <em>validez externa</em>. Es la tensión central del diseño experimental.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 4 de 4</div>
+  </div>
+  <div class="ver-q-text">La variable que el investigador MANIPULA en un experimento es la...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Variable dependiente</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Variable extraña</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Variable independiente</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Variable de confusión</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 4 — Respuesta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">La variable que el investigador MANIPULA en un experimento es la...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Variable dependiente</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Variable extraña</span>
+        </div>
+        <div class="ver-opt opt-c opt-correct">
+          <span class="ver-opt-letter">C ✓</span>
+          <span>Variable independiente</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Variable de confusión</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>VI:</strong> la que se manipula (ej: precio, diseño de pantalla). <strong>VD:</strong> la que se mide como resultado (ej: ventas, conversión). <strong>Extraña:</strong> la que puede afectar la VD pero no es el tratamiento.</div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 2 · Capítulo 7</div>
+  <div class="sec-title">Escalas de<br>medición</div>
+  <div class="sec-sub">Likert · Diferencial semántico · Stapel · Comparación pareada · Confiabilidad vs. Validez</div>
+</div>
+</section>
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capítulo 7 — Las 4 escalas básicas · Malhotra</div>
+  <div class="slide-h-sm">Nominal → Ordinal → Intervalo → Razón: cada nivel agrega propiedades</div>
+  <div class="four-col" style="margin-top:6px;">
+    <div class="col-box" style="border-top:3px solid var(--muted);">
+      <div class="col-label">Nominal</div>
+      <div class="col-body" style="font-size:12px;">Solo <strong>clasifica</strong>.<br>No hay orden, ni distancias, ni cero real.<br><br>Ej: género, marca elegida, región.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Ordinal</div>
+      <div class="col-body" style="font-size:12px;">Clasifica + <strong>ordena</strong>.<br>Las distancias entre posiciones no son iguales.<br><br>Ej: ranking de marcas, nivel socioeconómico.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Intervalo</div>
+      <div class="col-body" style="font-size:12px;">Clasifica + ordena + <strong>distancias iguales</strong>. Cero arbitrario.<br><br>Ej: Likert, diferencial semántico, temperatura en °C.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Razón</div>
+      <div class="col-body" style="font-size:12px;">Todo lo anterior + <strong>cero absoluto</strong>.<br>Permite decir «el doble de».<br><br>Ej: ingresos, peso, edad, número de compras.</div>
+    </div>
+  </div>
+  <div class="callout"><strong>Dato práctico:</strong> las escalas Likert se tratan por convención como datos de intervalo, aunque técnicamente son ordinales. Esto permite calcular medias y usar estadísticas paramétricas.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Capítulo 7 — Las cuatro escalas que más se usan</div>
+  <div class="slide-h-sm">Constructo: «Experiencia del usuario en la app de Mercado Pago»</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;">
+
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Likert (5 o 7 puntos)</div>
+      <div class="col-body" style="font-size:12px;"><em>«La app de Mercado Pago es fácil de usar.»</em><br>
+      <div class="scale-row" style="margin-top:6px;">
+        <span style="font-size:11px;color:#999;width:80px;text-align:right;flex-shrink:0;">Totalmente<br>en desacuerdo</span>
+        <div class="scale-boxes">
+          <div class="scale-box">1</div><div class="scale-box">2</div><div class="scale-box">3</div><div class="scale-box">4</div><div class="scale-box">5</div><div class="scale-box">6</div><div class="scale-box">7</div>
+        </div>
+        <span style="font-size:11px;color:#999;width:60px;flex-shrink:0;">Totalmente<br>de acuerdo</span>
+      </div>
+      Se suman ítems → puntuación total.</div>
+    </div>
+
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Diferencial Semántico (7 puntos)</div>
+      <div class="col-body" style="font-size:12px;">
+      <div class="scale-row" style="margin-top:4px;">
+        <span class="scale-label">Lenta</span>
+        <div class="scale-boxes"><div class="scale-box">1</div><div class="scale-box">2</div><div class="scale-box">3</div><div class="scale-box">4</div><div class="scale-box">5</div><div class="scale-box">6</div><div class="scale-box">7</div></div>
+        <span class="scale-label-r">Rápida</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-label">Moderna</span>
+        <div class="scale-boxes"><div class="scale-box">1</div><div class="scale-box">2</div><div class="scale-box">3</div><div class="scale-box">4</div><div class="scale-box">5</div><div class="scale-box">6</div><div class="scale-box">7</div></div>
+        <span class="scale-label-r">Anticuada ←(negativo a la derecha)</span>
+      </div>
+      Ideal para comparar imágenes de marca.</div>
+    </div>
+
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Stapel (–5 a +5)</div>
+      <div class="col-body" style="font-size:12px;"><em>«¿Qué tan precisa es esta descripción de Mercado Pago?»</em><br><br>
+      Adjetivo: <strong>Rápida</strong><br>
+      <div class="scale-boxes" style="margin-top:4px;flex-wrap:wrap;gap:3px;">
+        <div class="scale-box" style="background:#fdecea;">-5</div><div class="scale-box" style="background:#fde8e5;">-4</div><div class="scale-box" style="background:#fdf0ee;">-3</div><div class="scale-box" style="background:#fdf5f4;">-2</div><div class="scale-box" style="background:#fffafa;">-1</div>
+        <div class="scale-box" style="background:#eef6ee;">+1</div><div class="scale-box" style="background:#e8f5e9;">+2</div><div class="scale-box" style="background:#ddf3de;">+3</div><div class="scale-box" style="background:#c8eeca;">+4</div><div class="scale-box" style="background:#b0e5b3;">+5</div>
+      </div>
+      Unipolar — no necesita adjetivo opuesto. Se puede aplicar por audio.</div>
+    </div>
+
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">Comparación Pareada</div>
+      <div class="col-body" style="font-size:12px;"><em>«De cada par, marque el MEJOR en facilidad de uso»</em><br><br>
+      Mercado Pago vs. Prex → ___<br>
+      Mercado Pago vs. OCA Blue → ___<br>
+      Prex vs. OCA Blue → ___<br><br>
+      Produce datos <strong>ordinales</strong>. Con 3 objetos: n(n-1)/2 = 3 pares. Útil cuando hay pocos objetos.</div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Capítulo 7 — La distinción que más confunde</div>
+  <div class="slide-h slide-h-white">Confiabilidad ≠ Validez</div>
+  <div class="two-col" style="margin-top:12px;">
+    <div class="col-box-dark" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Confiabilidad</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#d4a0a0;margin:8px 0;">Libre de error aleatorio</div>
+      <div class="col-body-w">El instrumento mide <strong>consistentemente</strong> — da los mismos resultados si se aplica de nuevo en las mismas condiciones.<br><br>Es necesaria para la validez, pero no suficiente.<br><br><em>Analogía: una balanza que siempre da 2 kg de más. Es confiable (consistente), pero no válida.</em></div>
+    </div>
+    <div class="col-box-dark" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:rgba(255,255,255,0.5);">Validez</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#d4a0a0;margin:8px 0;">Mide lo que dice medir</div>
+      <div class="col-body-w">El instrumento mide <strong>el constructo correcto</strong> — libre de error aleatorio Y error sistemático.<br><br>Puede haber confiabilidad sin validez. Nunca puede haber validez sin confiabilidad.<br><br><em>Una balanza bien calibrada: confiable Y válida.</em></div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Ejercicio · Bloque 2</div>
+  <div class="sec-title">Construcción<br>de escalas</div>
+  <div class="sec-sub">Constructo: «Experiencia del usuario en la app de Mercado Pago»</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark" style="justify-content:center;padding:60px 72px;">
+  <div class="sec-num">Ejercicio en grupos</div>
+  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:700;color:var(--paper);line-height:1.2;margin-bottom:20px;">
+    Construyan 3 ítems para medir la experiencia en Mercado Pago con la escala asignada a su grupo.
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(192,57,43,0.4);border-top:3px solid var(--accent);border-radius:6px;padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;">GRUPO A</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Likert<br>7 puntos</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(44,95,138,0.4);border-top:3px solid var(--blue);border-radius:6px;padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:6px;">GRUPO B</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Diferencial<br>semántico</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(184,134,11,0.4);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">GRUPO C</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Stapel<br>–5 a +5</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(45,122,58,0.4);border-top:3px solid var(--green);border-radius:6px;padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:6px;">GRUPO D</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Comparación<br>pareada</div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Verificación de conceptos</div>
+  <div class="sec-title">Cap. 7 — Escalas de medición</div>
+  <div class="sec-sub">Preguntas · sin nota</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 1 de 3</div>
+  </div>
+  <div class="ver-q-text">La escala de Likert tiene típicamente ___ puntos y mide...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>7 puntos / comparaciones entre objetos</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>5 o 7 puntos / grado de acuerdo o desacuerdo</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>10 puntos / precisión de adjetivos</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>4 puntos / preferencia forzada</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 1 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">La escala de Likert tiene típicamente ___ puntos y mide...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>7 puntos / comparaciones entre objetos</span>
+        </div>
+        <div class="ver-opt opt-b opt-correct">
+          <span class="ver-opt-letter">B ✓</span>
+          <span>5 o 7 puntos / grado de acuerdo o desacuerdo</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>10 puntos / precisión de adjetivos</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>4 puntos / preferencia forzada</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Likert:</strong> la más usada. 5 o 7 categorías de acuerdo/desacuerdo. Se asume que produce datos de intervalo. Las puntuaciones se suman para obtener una medición total del constructo.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 2 de 3</div>
+  </div>
+  <div class="ver-q-text">La escala de diferencial semántico se diferencia de Likert porque usa...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Solo 5 puntos</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Adjetivos bipolares en los extremos</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Números negativos</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Preguntas abiertas</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 2 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">La escala de diferencial semántico se diferencia de Likert porque usa...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Solo 5 puntos</span>
+        </div>
+        <div class="ver-opt opt-b opt-correct">
+          <span class="ver-opt-letter">B ✓</span>
+          <span>Adjetivos bipolares en los extremos</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Números negativos</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Preguntas abiertas</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Diferencial semántico:</strong> 7 puntos con adjetivos bipolares opuestos (ej: Moderno — Anticuado). Ideal para comparar imágenes de marca (análisis de perfil). Los adjetivos negativos se alternan de lado para controlar sesgo de posición.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 3 de 3</div>
+  </div>
+  <div class="ver-q-text">Un instrumento mide siempre lo mismo pero no mide lo correcto. Tiene alta ___ pero baja ___.</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Validez / confiabilidad</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Confiabilidad / validez</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Precisión / exactitud</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Sensibilidad / especificidad</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Cap. 7 — Escalas de medición · Pregunta 3 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">Un instrumento mide siempre lo mismo pero no mide lo correcto. Tiene alta ___ pero baja ___.</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Validez / confiabilidad</span>
+        </div>
+        <div class="ver-opt opt-b opt-correct">
+          <span class="ver-opt-letter">B ✓</span>
+          <span>Confiabilidad / validez</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Precisión / exactitud</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Sensibilidad / especificidad</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Confiabilidad</strong> = libre de error aleatorio (consistencia). <strong>Validez</strong> = libre de error aleatorio + sistemático (mide lo que dice medir). Puede haber confiabilidad sin validez, pero NUNCA validez sin confiabilidad.</div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3 · Capítulos 5 y 8</div>
+  <div class="sec-title">Encuestas y<br>cuestionarios</div>
+  <div class="sec-sub">Métodos de encuesta · WORDS · Errores de redacción</div>
+</div>
+</section>
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capítulo 5 — Métodos de obtención de datos</div>
+  <div class="slide-h-sm">Encuestas: cómo elegir el método según el contexto</div>
+  <div class="three-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Entrevista personal</div>
+      <div class="col-body" style="font-size:12px;"><strong>+ Mayor tasa de respuesta</strong><br><strong>+ Permite preguntas complejas</strong><br><strong>+ Observar al respondente</strong><br><br>– Cara / tiempo<br>– Sesgo del entrevistador<br><br>Ej: interceptación en mall, entrevista cara a cara asistida por computadora</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Encuesta telefónica / por internet</div>
+      <div class="col-body" style="font-size:12px;"><strong>+ Rápida y económica</strong><br><strong>+ Amplia cobertura geográfica</strong><br><br>– Menor tasa de respuesta online<br>– No permite preguntas largas<br>– Sesgo de cobertura digital<br><br>Ej: encuesta telefónica asistida por computadora, encuestas web, WhatsApp</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Encuesta por correo / autoadministrada</div>
+      <div class="col-body" style="font-size:12px;"><strong>+ Elimina sesgo del entrevistador</strong><br><strong>+ El respondente elige el momento</strong><br><br>– Tasa de respuesta muy baja<br>– No se puede aclarar preguntas<br><br>Ej: cuestionarios en papel, kioscos</div>
+    </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Capítulo 8 — Diseño de cuestionarios</div>
+  <div class="slide-h">El acrónimo WORDS: seis errores que invalidan una pregunta</div>
+  <div class="seoanc-grid" style="display:grid;grid-template-columns:30px 1fr;gap:0;margin-top:10px;">
+    <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--accent);padding:6px 0;">W</div>
+    <div style="font-size:13px;color:#333;padding:6px 0 6px 12px;border-bottom:1px solid var(--border);"><strong>Wording:</strong> palabras con significado diferente para distintas personas. Ej: «¿Usa el producto regularmente?» — ¿qué significa «regularmente»?</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--accent);padding:6px 0;">O</div>
+    <div style="font-size:13px;color:#333;padding:6px 0 6px 12px;border-bottom:1px solid var(--border);"><strong>Objectivity:</strong> preguntas inductoras que sugieren la respuesta. Ej: «¿No cree usted que...?»</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--accent);padding:6px 0;">R</div>
+    <div style="font-size:13px;color:#333;padding:6px 0 6px 12px;border-bottom:1px solid var(--border);"><strong>Regularly/Usually/Normally:</strong> palabras ambiguas de frecuencia. Reemplazar con rangos numéricos concretos.</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--accent);padding:6px 0;">D</div>
+    <div style="font-size:13px;color:#333;padding:6px 0 6px 12px;border-bottom:1px solid var(--border);"><strong>Double-barreled:</strong> dos preguntas en una. Ej: «¿Está satisfecho con el precio y la calidad?» — ¿con cuál de los dos?</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--accent);padding:6px 0;">S</div>
+    <div style="font-size:13px;color:#333;padding:6px 0 6px 12px;border-bottom:1px solid var(--border);"><strong>Specificity:</strong> preguntas demasiado vagas. Ej: «¿Usted compra champú?» — ¿para quién, cuándo, dónde?</div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Actividad · Bloque 3</div>
+  <div class="sec-title">WORDS en acción</div>
+  <div class="sec-sub">5 preguntas mal redactadas — identifiquen el error y corríjanlo</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Verificación de conceptos</div>
+  <div class="sec-title">Caps. 5 y 8 — Encuestas y cuestionarios</div>
+  <div class="sec-sub">Preguntas · sin nota</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Caps. 5 y 8 — Encuestas y cuestionarios · Pregunta 1 de 2</div>
+  </div>
+  <div class="ver-q-text">«¿Qué tan satisfecho está con el precio Y la calidad?» es un error de...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Pregunta inductora</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Palabra ambigua</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Pregunta doble cañón</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Sesgo de aquiescencia</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Caps. 5 y 8 — Encuestas y cuestionarios · Pregunta 1 — Respuesta: <strong style="color:var(--accent)">C</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">«¿Qué tan satisfecho está con el precio Y la calidad?» es un error de...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Pregunta inductora</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Palabra ambigua</span>
+        </div>
+        <div class="ver-opt opt-c opt-correct">
+          <span class="ver-opt-letter">C ✓</span>
+          <span>Pregunta doble cañón</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Sesgo de aquiescencia</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>Doble cañón (D):</strong> una sola pregunta sobre dos dimensiones distintas. El encuestado puede estar satisfecho con el precio pero no con la calidad. Solución: separar en dos preguntas independientes.</div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
+    <div class="eyebrow">Caps. 5 y 8 — Encuestas y cuestionarios · Pregunta 2 de 2</div>
+  </div>
+  <div class="ver-q-text">La «R» de WORDS nos dice que debemos evitar palabras como...</div>
+  <div class="ver-opts">
+        <div class="ver-opt opt-a">
+          <span class="ver-opt-letter">A</span>
+          <span>Regularmente, normalmente, a menudo</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Recordar, responder, resolver</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Rango, razón, resultado</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Respeto, responsabilidad, reciprocidad</span>
+        </div>
+  </div>
+</div>
+</section>
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+    <div class="eyebrow">Caps. 5 y 8 — Encuestas y cuestionarios · Pregunta 2 — Respuesta: <strong style="color:var(--accent)">A</strong></div>
+  </div>
+  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">La «R» de WORDS nos dice que debemos evitar palabras como...</div>
+  <div class="ver-opts" style="margin-bottom:10px;">
+        <div class="ver-opt opt-a opt-correct">
+          <span class="ver-opt-letter">A ✓</span>
+          <span>Regularmente, normalmente, a menudo</span>
+        </div>
+        <div class="ver-opt opt-b">
+          <span class="ver-opt-letter">B</span>
+          <span>Recordar, responder, resolver</span>
+        </div>
+        <div class="ver-opt opt-c">
+          <span class="ver-opt-letter">C</span>
+          <span>Rango, razón, resultado</span>
+        </div>
+        <div class="ver-opt opt-d">
+          <span class="ver-opt-letter">D</span>
+          <span>Respeto, responsabilidad, reciprocidad</span>
+        </div>
+  </div>
+  <div class="ver-exp"><strong>R = Regularly:</strong> palabras ambiguas cuyo significado varía entre personas. Solución: rangos numéricos objetivos. Ej: en vez de «con frecuencia», usar «Menos de 1 vez / 1-2 veces / 3-4 veces / Más de 4 veces al mes».</div>
+</div>
+</section>
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Cierre · Errores típicos del parcial</div>
+  <div class="slide-h slide-h-white">Lo que NO hay que hacer en el parcial</div>
+  <ul class="bullets bullets-white">
+    <li><strong style="color:white;">Cap. 6 — Confundir VI con VD:</strong> la VI es lo que se <em>manipula</em>; la VD es lo que se <em>mide</em>. Las ventas son VD, no VI.</li>
+    <li><strong style="color:white;">Cap. 6 — Asumir correlación = causalidad:</strong> sin manipulación + aleatorización, solo hay correlación.</li>
+    <li><strong style="color:white;">Cap. 6 — Confundir validez interna con externa:</strong> interna = el efecto es real; externa = el efecto se generaliza.</li>
+    <li><strong style="color:white;">Cap. 7 — Confundir confiabilidad con validez:</strong> puede haber confiabilidad sin validez. Nunca validez sin confiabilidad.</li>
+    <li><strong style="color:white;">Cap. 7 — Decir que Likert produce datos ordinales:</strong> por convención se tratan como datos de intervalo en investigación de mercados.</li>
+    <li><strong style="color:white;">Cap. 8 — Preguntas doble cañón:</strong> si una pregunta incluye «y», revisar si está preguntando dos cosas a la vez.</li>
+    <li><strong style="color:white;">Cap. 8 — Olvidar hacer la prueba piloto:</strong> Malhotra es categórico: siempre se hace prueba piloto antes de aplicar el cuestionario.</li>
+  </ul>
+</div>
+</section>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
