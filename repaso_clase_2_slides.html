@@ -162,25 +162,24 @@ ul.bullets-white li::before { color: var(--accent); }
 </div>
 </section>
 <section>
-<div class="slide s-light" style="padding:44px 64px;">
+<div class="slide s-light">
   <div class="eyebrow">Capítulo 6 — Malhotra · Concepto central</div>
-  <div class="slide-h" style="margin-bottom:14px;">¿Cuándo podemos decir que X <em>causa</em> Y?</div>
-  <div class="callout" style="margin-bottom:16px;margin-top:0;"><strong>Correlación ≠ causalidad.</strong> En Brasil, los clientes de Nubank que reciben emails de retención cancelan menos. ¿El email <em>causa</em> la retención, o los que igual pensaban quedarse son los que responden al email? Solo el experimento con aleatorización puede responder eso.</div>
-  <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:10px;align-items:stretch;">
-    <div style="display:flex;align-items:center;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);padding-right:4px;">CASO NUBANK</div>
+  <div class="slide-h">¿Cuándo podemos decir que X <em>causa</em> Y?</div>
+  <div class="three-col">
     <div class="col-box" style="border-top:3px solid var(--accent);">
       <div class="col-label" style="color:var(--accent);">1 · Variación concomitante</div>
-      <div class="col-body" style="font-size:12.5px;">X e Y varían <strong>juntas</strong>.<br><br>Nubank envía el email → la tasa de cancelación baja. Quienes no reciben el email → cancelan más.<br><br><em>Necesaria, pero no suficiente sola.</em></div>
+      <div class="col-body">X e Y varían <strong>juntas</strong>.<br><br>Si X sube, Y sube (o baja). Si X no cambia, Y tampoco cambia.<br><br><em>Es necesaria, pero NO suficiente.</em></div>
     </div>
     <div class="col-box" style="border-top:3px solid var(--blue);">
       <div class="col-label" style="color:var(--blue);">2 · Orden temporal</div>
-      <div class="col-body" style="font-size:12.5px;">X ocurre <strong>antes</strong> que Y.<br><br>El email se envía <em>antes</em> de que el cliente tome la decisión de cancelar o no. La causa precede al efecto.<br><br><em>Necesaria, pero no suficiente sola.</em></div>
+      <div class="col-body">X ocurre <strong>antes</strong> que Y.<br><br>La causa siempre precede al efecto. Si X e Y son simultáneas, no se puede determinar dirección.<br><br><em>Necesaria, pero no suficiente.</em></div>
     </div>
     <div class="col-box" style="border-top:3px solid var(--green);">
       <div class="col-label" style="color:var(--green);">3 · Eliminación de alternativas</div>
-      <div class="col-body" style="font-size:12.5px;">No hay <strong>otra explicación</strong> posible.<br><br>100.000 personas por grupo, asignadas <em>aleatoriamente</em>. Perfil de clientes, antigüedad y motivos de cancelación se distribuyen por igual entre grupos.<br><br><em>La que distingue correlación de causalidad.</em></div>
+      <div class="col-body">No hay <strong>otra explicación</strong> posible para el cambio en Y.<br><br>La más difícil de lograr. Por eso se necesita experimentación con aleatorización.<br><br><em>La que distingue correlación de causalidad.</em></div>
     </div>
   </div>
+  <div class="callout"><strong>Correlación ≠ causalidad — caso Nubank.</strong> Nubank detecta que los clientes que usan su función de inversión dentro de la app también tienen tasas de cancelación mucho más bajas. Conclusión apresurada: «invertir en la app <em>fideliza</em>». Pero ¿es eso lo que está pasando? Puede ser al revés: los clientes que ya están satisfechos y comprometidos con Nubank son los que <em>además</em> usan la inversión. Si Nubank fuerza a todos los usuarios a ver la función de inversión y la tasa de cancelación no baja, la correlación no era causalidad — era un perfil de cliente. Para saberlo con certeza, hay que asignar aleatoriamente un grupo a la función de inversión y medir la cancelación en ambos grupos. Solo así se elimina la explicación alternativa.</div>
 </div>
 </section>
 <section>
@@ -200,75 +199,45 @@ ul.bullets-white li::before { color: var(--accent); }
     </div>
     <div class="col-box" style="border-top:3px solid var(--gold);">
       <div class="col-label" style="color:var(--gold);">Variables Extrañas</div>
-      <div class="col-body">Todo lo que puede afectar la VD <strong>sin ser la VI</strong>.<br><br>Las 6 variables extrañas de Malhotra:<br><br>
+      <div class="col-body">Todo lo que puede afectar la VD <strong>sin ser la VI</strong>.<br><br>Las 5 variables extrañas de Malhotra:<br><br>
       <strong>Historia:</strong> evento externo durante el experimento<br>
       <strong>Maduración:</strong> cambio natural con el tiempo<br>
       <strong>Administración de pruebas:</strong> el pretest afecta el postest<br>
       <strong>Sesgo de selección:</strong> grupos no equivalentes al inicio<br>
-      <strong>Mortalidad:</strong> abandono diferencial entre grupos<br>
-      <strong>Regresión estadística:</strong> valores extremos regresan a la media</div>
+      <strong>Mortalidad:</strong> abandono diferencial entre grupos</div>
     </div>
   </div>
+  <div class="piz">✏ Pizarrón: dibujar un experimento simple con VI → VD → flecha de extraña que entra lateralmente.</div>
 </div>
 </section>
 <section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div class="eyebrow">Capítulo 6 — Las 6 variables extrañas · Malhotra</div>
-  <div class="slide-h-sm" style="margin-bottom:14px;">Todo lo que puede afectar la VD sin ser la VI</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;">
-    <div class="col-box" style="border-top:3px solid var(--accent);">
+<div class="slide s-light" style="padding:44px 64px;">
+  <div class="eyebrow">Capítulo 6 — Variables extrañas · En la práctica</div>
+  <div class="slide-h-sm">¿Qué puede contaminar un experimento? Cinco amenazas con ejemplos cotidianos</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);padding:12px 14px;">
       <div class="col-label" style="color:var(--accent);">Historia</div>
-      <div class="col-body" style="font-size:12px;">Evento externo que ocurre <strong>durante</strong> el experimento.<br><br><em>Ej: en el A/B test de Mercado Libre, Mercado Libre lanza una promoción de envío gratis en la semana 3. Afecta a ambos grupos por igual, oscureciendo el efecto de las reseñas.</em></div>
+      <div class="col-body" style="font-size:12px;">Un hecho externo ocurre <em>mientras</em> el experimento está corriendo y afecta los resultados.<br><br>Una empresa de bebidas prueba un nuevo envase durante 4 semanas. En la semana 3, un influencer con millones de seguidores menciona la marca en redes. Las ventas suben — pero ¿fue el envase o el influencer? No se puede saber. Ese evento externo es la variable de historia.</div>
     </div>
-    <div class="col-box" style="border-top:3px solid var(--blue);">
+    <div class="col-box" style="border-top:3px solid var(--blue);padding:12px 14px;">
       <div class="col-label" style="color:var(--blue);">Maduración</div>
-      <div class="col-body" style="font-size:12px;">Los sujetos cambian naturalmente <strong>con el tiempo</strong>, independientemente del tratamiento.<br><br><em>Ej: un estudio de 6 meses sobre lealtad de marca no sabe si el cambio se debe a la campaña o a que los clientes simplemente maduraron sus preferencias.</em></div>
+      <div class="col-body" style="font-size:12px;">Los participantes cambian con el paso del tiempo, independientemente del tratamiento.<br><br>Un banco prueba un nuevo onboarding digital durante 2 meses. Los usuarios nuevos van aprendiendo a usar la app simplemente con el tiempo: navegan mejor, se frustran menos. ¿Mejoró la experiencia por el nuevo onboarding, o porque los usuarios ya se acostumbraron solos?</div>
     </div>
-    <div class="col-box" style="border-top:3px solid var(--green);">
-      <div class="col-label" style="color:var(--green);">Administración de pruebas</div>
-      <div class="col-body" style="font-size:12px;">El <strong>pretest</strong> afecta las respuestas del postest.<br><br><em>Ej: si antes de mostrar un anuncio se pregunta a los consumidores qué valoran en un producto, esa pregunta activa criterios que de otro modo no habrían usado al evaluar el anuncio.</em></div>
+    <div class="col-box" style="border-top:3px solid var(--gold);padding:12px 14px;">
+      <div class="col-label" style="color:var(--gold);">Administración de pruebas</div>
+      <div class="col-body" style="font-size:12px;">El hecho de haber respondido una encuesta inicial cambia cómo se responde la final.<br><br>Una cadena de supermercados hace un pretest sobre percepción de precios, interviene con señalética nueva y hace un postest. Pero los clientes que ya respondieron la primera encuesta ahora prestan más atención a los precios al comprar. Su respuesta en el postest está influida por haber contestado el pretest, no solo por la señalética.</div>
     </div>
-    <div class="col-box" style="border-top:3px solid var(--gold);">
-      <div class="col-label" style="color:var(--gold);">Sesgo de selección</div>
-      <div class="col-body" style="font-size:12px;">Los grupos difieren <strong>antes</strong> del tratamiento por cómo fueron formados.<br><br><em>Ej: Falabella elige como grupo experimental las tiendas con peores ventas. Esas tiendas ya eran distintas al grupo control antes de instalar las pantallas.</em></div>
+    <div class="col-box" style="border-top:3px solid var(--green);padding:12px 14px;">
+      <div class="col-label" style="color:var(--green);">Sesgo de selección</div>
+      <div class="col-body" style="font-size:12px;">Los grupos experimental y control ya eran distintos <em>antes</em> de empezar.<br><br>Una app de delivery quiere probar si las notificaciones push aumentan los pedidos. Asigna las notificaciones a usuarios que ya tienen habilitadas las notificaciones del celular. Ese grupo ya es más propenso a interactuar digitalmente. La diferencia en pedidos no se puede atribuir al tratamiento.</div>
     </div>
-    <div class="col-box" style="border-top:3px solid var(--muted);">
+    <div class="col-box" style="border-top:3px solid var(--muted);padding:12px 14px;grid-column:1/-1;">
       <div class="col-label">Mortalidad</div>
-      <div class="col-body" style="font-size:12px;"><strong>Abandono diferencial</strong> entre grupos durante el experimento.<br><br><em>Ej: en un panel longitudinal de compradores de suplementos, si los menos comprometidos abandonan más el grupo experimental que el control, los que quedan son sistemáticamente distintos.</em></div>
-    </div>
-    <div class="col-box" style="border-top:3px solid #8b4513;">
-      <div class="col-label" style="color:#8b4513;">Regresión estadística</div>
-      <div class="col-body" style="font-size:12px;">Los valores <strong>extremos</strong> tienden a regresar al promedio en la siguiente medición.<br><br><em>Ej: Falabella selecciona las tiendas con las ventas más bajas. Es probable que mejoren en el siguiente período simplemente por regresión a la media, con o sin pantallas.</em></div>
+      <div class="col-body" style="font-size:12px;">Más personas abandonan el experimento en un grupo que en el otro, y los que se quedan no son representativos.<br><br>Una empresa de streaming prueba un nuevo flujo de pago. El grupo experimental tiene más pasos → los usuarios más impacientes lo abandonan. Al final, solo quedan en ese grupo los más motivados. El postest compara usuarios motivados (experimental) con usuarios promedio (control) — la comparación ya no es justa.</div>
     </div>
   </div>
 </div>
 </section>
-
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div class="eyebrow">Capítulo 6 — Caso práctico · identificación de variables</div>
-  <div class="slide-h-sm" style="margin-bottom:16px;">Rappi lanza un programa de fidelidad para sus mejores clientes</div>
-  <div style="background:#1e1e1e;border-radius:8px;padding:14px 20px;margin-bottom:14px;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">
-    Rappi quiere saber si ofrecer <strong style="color:#d4a0a0;">cashback del 10%</strong> a sus clientes más activos aumenta la frecuencia de pedidos. Seleccionan a los 50.000 usuarios que más pidieron en el último mes y les activan el cashback. Los demás usuarios siguen con el programa estándar. Miden la frecuencia de pedidos durante 8 semanas.
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-    <div class="col-box" style="border-top:3px solid var(--accent);">
-      <div class="col-label" style="color:var(--accent);">Variable Independiente (VI)</div>
-      <div class="col-body" style="font-size:13px;">Cashback del 10% (presente / ausente).<br><br>Es la variable que Rappi <strong>manipula</strong> deliberadamente.</div>
-    </div>
-    <div class="col-box" style="border-top:3px solid var(--blue);">
-      <div class="col-label" style="color:var(--blue);">Variable Dependiente (VD)</div>
-      <div class="col-body" style="font-size:13px;">Frecuencia de pedidos por semana.<br><br>Es lo que Rappi <strong>mide</strong> para ver si el tratamiento funcionó.</div>
-    </div>
-    <div class="col-box" style="border-top:3px solid var(--gold);">
-      <div class="col-label" style="color:var(--gold);">Variables Extrañas</div>
-      <div class="col-body" style="font-size:13px;"><strong>Sesgo de selección:</strong> el grupo experimental son los más activos — ya pedían más antes del cashback.<br><strong>Historia:</strong> si un competidor lanza promoción durante las 8 semanas, afecta el comportamiento de forma externa.</div>
-    </div>
-  </div>
-  <div class="callout-red" style="margin-top:12px;"><strong>¿Se puede inferir causalidad?</strong> No — sin asignación aleatoria, el sesgo de selección es fatal. Los mejores clientes habrían seguido pidiendo más de todas formas.</div>
-</div>
-</section>
-
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Capítulo 6 — La tensión fundamental</div>
@@ -277,19 +246,17 @@ ul.bullets-white li::before { color: var(--accent); }
     <div class="col-box-dark" style="border-top:3px solid var(--accent);">
       <div class="col-label" style="color:rgba(255,255,255,0.5);">Validez Interna</div>
       <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#d4a0a0;margin:10px 0;">¿El efecto es real?</div>
-      <div class="col-body-w">¿La VI realmente causó el cambio en la VD, o fue alguna variable extraña?<br><br>Alta validez interna = alto control de extrañas.<br><br><em>Ej: el A/B test de Nubank tiene alta validez interna porque la aleatorización hace que ambos grupos sean equivalentes en todo salvo en el tipo de email.</em></div>
+      <div class="col-body-w">¿La VI realmente causó el cambio en la VD, o fue alguna variable extraña?<br><br>Alta validez interna = alto control de extrañas.<br>Laboratorio → alta interna.<br><br><strong>Amenazas:</strong> historia, maduración, sesgo de selección.</div>
     </div>
     <div class="col-box-dark" style="border-top:3px solid var(--blue);">
       <div class="col-label" style="color:rgba(255,255,255,0.5);">Validez Externa</div>
       <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#d4a0a0;margin:10px 0;">¿El efecto se generaliza?</div>
-      <div class="col-body-w">¿Los resultados aplican a otros mercados, poblaciones, contextos?<br><br>Alta validez externa = condiciones realistas.<br><br><em>Ej: el resultado del A/B test de Nubank aplica a clientes que solicitan cancelación en Brasil en marzo — pero ¿aplica en diciembre, en Argentina, o a clientes que nunca amenazaron cancelar?</em></div>
+      <div class="col-body-w">¿Los resultados aplican a otros mercados, poblaciones, contextos?<br><br>Alta validez externa = condiciones realistas.<br>Campo → alta externa.<br><br><strong>Tradeoff:</strong> más control = menos realismo. El A/B test digital busca equilibrar ambas.</div>
     </div>
-  </div>
-  <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:12px 18px;margin-top:12px;font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
-    <strong style="color:white;">Tradeoff central:</strong> más control = menos realismo. El experimento de laboratorio maximiza la interna; el experimento de campo maximiza la externa. El A/B test digital busca equilibrar ambas.
   </div>
 </div>
 </section>
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Ejercicio · Bloque 1</div>
@@ -299,211 +266,64 @@ ul.bullets-white li::before { color: var(--accent); }
 </section>
 
 <section>
-<div class="slide s-dark" style="justify-content:center;padding:60px 72px;">
-  <div class="sec-num">Ejercicio en grupos</div>
-  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:700;color:var(--paper);line-height:1.2;margin-bottom:20px;">
-    Lean el brief de cada caso.<br>Completen la tabla de análisis.
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Instrucciones del ejercicio</div>
+  <div class="slide-h-sm">Para cada caso, completen la tabla de análisis</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+    <div style="font-size:13px;color:#333;">
+      <div style="font-weight:700;color:var(--accent);margin-bottom:6px;">Identificar</div>
+      Variable independiente (VI)<br>
+      Variable dependiente (VD)<br>
+      Variables extrañas (al menos 2)<br>
+      Unidades de prueba<br>
+      Grupos experimental / control
+    </div>
+    <div style="font-size:13px;color:#333;">
+      <div style="font-weight:700;color:var(--blue);margin-bottom:6px;">Evaluar</div>
+      ¿Se cumple variación concomitante?<br>
+      ¿Se cumple orden temporal?<br>
+      ¿Se eliminan explicaciones alternativas?<br>
+      ¿Validez interna? ¿Por qué?<br>
+      ¿Validez externa? ¿Por qué?
+    </div>
   </div>
-  <div style="display:flex;gap:12px;flex-wrap:wrap;">
-    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso A · Mercado Libre</span>
-    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso B · Falabella</span>
-    <span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 16px;font-size:13px;color:rgba(255,255,255,0.6);">Caso C · Nubank</span>
+  <div class="callout"><strong>Pregunta final:</strong> ¿Cuál de los tres casos permite inferir causalidad de forma más sólida? ¿Cuál es el más débil? Uno de los casos tiene un error de diseño que hace imposible inferir causalidad — encuéntrenlo.</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Caso A — Mercado Libre</div>
+  <div class="slide-h-sm">¿Las reseñas de vendedores aumentan la conversión?</div>
+  <ul class="bullets">
+    <li>500.000 usuarios activos en Argentina asignados <strong>aleatoriamente</strong> a dos grupos</li>
+    <li>Grupo experimental: ve reseñas del vendedor en checkout · Grupo control: checkout estándar</li>
+    <li>Variable medida: tasa de conversión (compras completadas / visitas al checkout)</li>
+    <li>Duración: 4 semanas</li>
+    <li style="color:var(--accent);"><strong>Evento:</strong> durante la semana 3, Mercado Libre lanza una promoción nacional de envío gratis</li>
+  </ul>
+  <div class="badge-container" style="margin-top:12px;">
+    <span class="badge badge-ok">Aleatorización ✓</span>&nbsp;
+    <span class="badge badge-bad">Variable de historia !</span>
   </div>
 </div>
 </section>
 
 <section>
-<div class="slide s-section">
-  <div class="sec-num">Verificación de conceptos</div>
-  <div class="sec-title">Cap. 6 — Causalidad y experimentación</div>
-  <div class="sec-sub">Preguntas · sin nota</div>
-</div>
-</section>
-<section>
 <div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 1 de 4</div>
-  </div>
-  <div class="ver-q-text">Las 3 condiciones para inferir causalidad son: variación concomitante, orden temporal y...</div>
-  <div class="ver-opts">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>Muestra representativa</span>
-        </div>
-        <div class="ver-opt opt-b">
-          <span class="ver-opt-letter">B</span>
-          <span>Eliminación de otros factores causales</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>Correlación positiva</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>Validez de constructo</span>
-        </div>
-  </div>
+  <div class="eyebrow">Caso B — Falabella</div>
+  <div class="slide-h-sm">¿Las pantallas interactivas aumentan las ventas de electrónica?</div>
+  <ul class="bullets">
+    <li>10 tiendas con <strong>las ventas más bajas</strong> de electrónica → grupo experimental (con pantallas)</li>
+    <li>10 tiendas control sin pantallas — todas en <strong>Santiago</strong></li>
+    <li>Las tiendas experimentales son todas del <strong>sur de Chile</strong></li>
+    <li><strong>Sin asignación aleatoria</strong> — criterio: «las que más necesitan ayuda»</li>
+    <li>Se miden ventas por m² durante 8 semanas</li>
+  </ul>
+  <div class="callout-red"><strong>Señales de alerta:</strong> sin aleatorización + sesgo de selección + grupos en regiones distintas. ¿Pueden inferir causalidad?</div>
 </div>
 </section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 1 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
-  </div>
-  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">Las 3 condiciones para inferir causalidad son: variación concomitante, orden temporal y...</div>
-  <div class="ver-opts" style="margin-bottom:10px;">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>Muestra representativa</span>
-        </div>
-        <div class="ver-opt opt-b opt-correct">
-          <span class="ver-opt-letter">B ✓</span>
-          <span>Eliminación de otros factores causales</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>Correlación positiva</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>Validez de constructo</span>
-        </div>
-  </div>
-  <div class="ver-exp"><strong>Variación concomitante:</strong> X e Y varían juntas. <strong>Orden temporal:</strong> X precede a Y. <strong>Eliminación de explicaciones alternativas:</strong> la más difícil — exige experimento con aleatorización.</div>
-</div>
-</section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 2 de 4</div>
-  </div>
-  <div class="ver-q-text">Rappi asigna envío gratis solo a sus mejores clientes y mide si compran más. ¿Qué variable extraña amenaza la validez interna?</div>
-  <div class="ver-opts">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>Historia</span>
-        </div>
-        <div class="ver-opt opt-b">
-          <span class="ver-opt-letter">B</span>
-          <span>Maduración</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>Sesgo de selección</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>Mortalidad</span>
-        </div>
-  </div>
-</div>
-</section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 3 de 4</div>
-  </div>
-  <div class="ver-q-text">Un experimento de laboratorio tiene alta validez ___ pero puede tener baja validez ___.</div>
-  <div class="ver-opts">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>externa / interna</span>
-        </div>
-        <div class="ver-opt opt-b">
-          <span class="ver-opt-letter">B</span>
-          <span>interna / externa</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>de constructo / de contenido</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>predictiva / concurrente</span>
-        </div>
-  </div>
-</div>
-</section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 3 — Respuesta: <strong style="color:var(--accent)">B</strong></div>
-  </div>
-  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">Un experimento de laboratorio tiene alta validez ___ pero puede tener baja validez ___.</div>
-  <div class="ver-opts" style="margin-bottom:10px;">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>externa / interna</span>
-        </div>
-        <div class="ver-opt opt-b opt-correct">
-          <span class="ver-opt-letter">B ✓</span>
-          <span>interna / externa</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>de constructo / de contenido</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>predictiva / concurrente</span>
-        </div>
-  </div>
-  <div class="ver-exp"><strong>Laboratorio:</strong> alto control de variables extrañas = alta <em>validez interna</em>. Pero las condiciones artificiales no representan el mercado real = baja <em>validez externa</em>. Es la tensión central del diseño experimental.</div>
-</div>
-</section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 4 de 4</div>
-  </div>
-  <div class="ver-q-text">La variable que el investigador MANIPULA en un experimento es la...</div>
-  <div class="ver-opts">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>Variable dependiente</span>
-        </div>
-        <div class="ver-opt opt-b">
-          <span class="ver-opt-letter">B</span>
-          <span>Variable extraña</span>
-        </div>
-        <div class="ver-opt opt-c">
-          <span class="ver-opt-letter">C</span>
-          <span>Variable independiente</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>Variable de confusión</span>
-        </div>
-  </div>
-</div>
-</section>
-<section>
-<div class="slide s-light" style="padding:40px 64px;">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
-    <div class="eyebrow">Cap. 6 — Causalidad y experimentación · Pregunta 4 — Respuesta: <strong style="color:var(--accent)">C</strong></div>
-  </div>
-  <div class="ver-q-text" style="font-size:clamp(0.9rem,1.8vw,1.1rem);margin-bottom:10px;">La variable que el investigador MANIPULA en un experimento es la...</div>
-  <div class="ver-opts" style="margin-bottom:10px;">
-        <div class="ver-opt opt-a">
-          <span class="ver-opt-letter">A</span>
-          <span>Variable dependiente</span>
-        </div>
-        <div class="ver-opt opt-b">
-          <span class="ver-opt-letter">B</span>
-          <span>Variable extraña</span>
-        </div>
-        <div class="ver-opt opt-c opt-correct">
-          <span class="ver-opt-letter">C ✓</span>
-          <span>Variable independiente</span>
-        </div>
-        <div class="ver-opt opt-d">
-          <span class="ver-opt-letter">D</span>
-          <span>Variable de confusión</span>
-        </div>
-  </div>
-  <div class="ver-exp"><strong>VI:</strong> la que se manipula (ej: precio, diseño de pantalla). <strong>VD:</strong> la que se mide como resultado (ej: ventas, conversión). <strong>Extraña:</strong> la que puede afectar la VD pero no es el tratamiento.</div>
-</div>
-</section>
+
 <section>
 <div class="slide s-section">
   <div class="sec-num">Bloque 2 · Capítulo 7</div>
@@ -588,7 +408,7 @@ ul.bullets-white li::before { color: var(--accent); }
       Mercado Pago vs. Prex → ___<br>
       Mercado Pago vs. OCA Blue → ___<br>
       Prex vs. OCA Blue → ___<br><br>
-      Produce datos <strong>ordinales</strong>. Con 3 objetos: n(n-1)/2 = 3 pares. Útil cuando hay pocos objetos.</div>
+      Produce datos <strong>ordinales</strong>. Útil cuando hay pocos objetos.</div>
     </div>
   </div>
 </div>
@@ -609,39 +429,41 @@ ul.bullets-white li::before { color: var(--accent); }
       <div class="col-body-w">El instrumento mide <strong>el constructo correcto</strong> — libre de error aleatorio Y error sistemático.<br><br>Puede haber confiabilidad sin validez. Nunca puede haber validez sin confiabilidad.<br><br><em>Una balanza bien calibrada: confiable Y válida.</em></div>
     </div>
   </div>
+  <div class="callout-blue" style="margin-top:14px;font-size:12.5px;"><strong>¿Qué es el error sistemático?</strong> Es un sesgo constante que desplaza todas las mediciones en la misma dirección — no varía al azar, siempre suma o siempre resta. Ejemplo: si una encuesta de satisfacción se aplica solo en días soleados, los resultados serán consistentemente más positivos de lo real (las personas están de mejor humor). El instrumento es <em>confiable</em> — da resultados parecidos cada vez — pero no <em>válido</em>: está midiendo «satisfacción en buen clima», no satisfacción real. La <strong>validez externa</strong> exige que el instrumento esté libre de este tipo de sesgo.</div>
 </div>
 </section>
 <section>
 <div class="slide s-section">
   <div class="sec-num">Ejercicio · Bloque 2</div>
   <div class="sec-title">Construcción<br>de escalas</div>
-  <div class="sec-sub">Constructo: «Experiencia del usuario en la app de Mercado Pago»</div>
+  <div class="sec-sub">Cada grupo construye 3 ítems con su escala asignada</div>
 </div>
 </section>
 
 <section>
-<div class="slide s-dark" style="justify-content:center;padding:60px 72px;">
-  <div class="sec-num">Ejercicio en grupos</div>
-  <div style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:700;color:var(--paper);line-height:1.2;margin-bottom:20px;">
-    Construyan 3 ítems para medir la experiencia en Mercado Pago con la escala asignada a su grupo.
+<div class="slide s-light" style="padding:40px 64px;">
+  <div class="eyebrow">Instrucciones del ejercicio</div>
+  <div class="slide-h-sm">Constructo a medir: «Experiencia del usuario en la app de Mercado Pago»</div>
+  <div class="four-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Grupo A</div>
+      <div class="col-body" style="font-size:12px;"><strong>Likert 7 puntos</strong><br><br>3 afirmaciones. Al menos 1 en sentido negativo. Definan las anclas.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Grupo B</div>
+      <div class="col-body" style="font-size:12px;"><strong>Diferencial semántico</strong><br><br>3 pares bipolares. Alternen la posición del adjetivo negativo. Dibujen la escala.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--gold);">
+      <div class="col-label" style="color:var(--gold);">Grupo C</div>
+      <div class="col-body" style="font-size:12px;"><strong>Stapel (–5 a +5)</strong><br><br>3 adjetivos unipolares. Redacten la instrucción para el encuestado.</div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">Grupo D</div>
+      <div class="col-body" style="font-size:12px;"><strong>Comparación pareada</strong><br><br>Mercado Pago vs. Prex vs. OCA Blue en 3 atributos. Dibujen la matriz.</div>
+    </div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
-    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(192,57,43,0.4);border-top:3px solid var(--accent);border-radius:6px;padding:12px 14px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:6px;">GRUPO A</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Likert<br>7 puntos</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(44,95,138,0.4);border-top:3px solid var(--blue);border-radius:6px;padding:12px 14px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:6px;">GRUPO B</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Diferencial<br>semántico</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(184,134,11,0.4);border-top:3px solid var(--gold);border-radius:6px;padding:12px 14px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">GRUPO C</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Stapel<br>–5 a +5</div>
-    </div>
-    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(45,122,58,0.4);border-top:3px solid var(--green);border-radius:6px;padding:12px 14px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:6px;">GRUPO D</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.8);">Comparación<br>pareada</div>
-    </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>Plenario:</strong> ¿Qué escala produce datos más ricos para comparar imágenes de marca? ¿Cuál sería más fácil de aplicar por WhatsApp en zonas rurales? ¿Cuál elegirían para una encuesta masiva?
   </div>
 </div>
 </section>
@@ -825,17 +647,18 @@ ul.bullets-white li::before { color: var(--accent); }
   <div class="three-col" style="margin-top:8px;">
     <div class="col-box" style="border-top:3px solid var(--accent);">
       <div class="col-label" style="color:var(--accent);">Entrevista personal</div>
-      <div class="col-body" style="font-size:12px;"><strong>+ Mayor tasa de respuesta</strong><br><strong>+ Permite preguntas complejas</strong><br><strong>+ Observar al respondente</strong><br><br>– Cara / tiempo<br>– Sesgo del entrevistador<br><br>Ej: interceptación en mall, entrevista cara a cara asistida por computadora</div>
+      <div class="col-body" style="font-size:12px;"><strong>+ Mayor tasa de respuesta</strong><br><strong>+ Permite preguntas complejas</strong><br><strong>+ Observar al respondente</strong><br><br>– Cara / tiempo<br>– Sesgo del entrevistador<br><br>Ej: interceptación en mall, CAPI</div>
     </div>
     <div class="col-box" style="border-top:3px solid var(--blue);">
       <div class="col-label" style="color:var(--blue);">Encuesta telefónica / por internet</div>
-      <div class="col-body" style="font-size:12px;"><strong>+ Rápida y económica</strong><br><strong>+ Amplia cobertura geográfica</strong><br><br>– Menor tasa de respuesta online<br>– No permite preguntas largas<br>– Sesgo de cobertura digital<br><br>Ej: encuesta telefónica asistida por computadora, encuestas web, WhatsApp</div>
+      <div class="col-body" style="font-size:12px;"><strong>+ Rápida y económica</strong><br><strong>+ Amplia cobertura geográfica</strong><br><br>– Menor tasa de respuesta online<br>– No permite preguntas largas<br>– Sesgo de cobertura digital<br><br>Ej: CATI, encuestas web, WhatsApp</div>
     </div>
     <div class="col-box" style="border-top:3px solid var(--gold);">
       <div class="col-label" style="color:var(--gold);">Encuesta por correo / autoadministrada</div>
       <div class="col-body" style="font-size:12px;"><strong>+ Elimina sesgo del entrevistador</strong><br><strong>+ El respondente elige el momento</strong><br><br>– Tasa de respuesta muy baja<br>– No se puede aclarar preguntas<br><br>Ej: cuestionarios en papel, kioscos</div>
     </div>
   </div>
+  <div class="callout-blue" style="margin-top:10px;"><strong>Contexto LATAM:</strong> la brecha digital rural implica que las encuestas online sobrerrepresentan a urbanos conectados. En mercados con baja bancarización, las encuestas por WhatsApp o voz pueden ser más representativas que las web.</div>
 </div>
 </section>
 <section>
@@ -864,6 +687,24 @@ ul.bullets-white li::before { color: var(--accent); }
 </div>
 </section>
 
+<section>
+<div class="slide s-light" style="padding:36px 64px;">
+  <div class="eyebrow">Actividad WORDS</div>
+  <div class="slide-h-sm">Para cada pregunta: (1) identifiquen qué letra viola, (2) expliquen el problema, (3) reescríbanla</div>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:10px;">
+    <tr style="background:var(--ink);color:white;">
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;width:40px;">Nº</th>
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;">Pregunta con error</th>
+      <th style="padding:8px 12px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;width:80px;">Letra WORDS</th>
+    </tr>
+    <tr style="background:white;"><td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--accent);">1</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--ink);">«¿Usted compra champú?»</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);"></td></tr>
+    <tr style="background:#faf8f5;"><td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--accent);">2</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--ink);">«¿Con qué frecuencia va al supermercado? Nunca / Ocasionalmente / A veces / A menudo / Siempre»</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);"></td></tr>
+    <tr style="background:white;"><td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--accent);">3</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--ink);">«¿No cree usted que las empresas deberían dejar de contaminar el medio ambiente?»</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);"></td></tr>
+    <tr style="background:#faf8f5;"><td style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--accent);">4</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--ink);">«¿Qué tan satisfecho está con el servicio al cliente y la velocidad de entrega de PedidosYa?»</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);"></td></tr>
+    <tr style="background:white;"><td style="padding:8px 12px;font-weight:700;color:var(--accent);">5</td><td style="padding:8px 12px;color:var(--ink);">«¿Está de acuerdo en que la app de Mercado Libre es la mejor del mercado?»</td><td style="padding:8px 12px;"></td></tr>
+  </table>
+</div>
+</section>
 <section>
 <div class="slide s-section">
   <div class="sec-num">Verificación de conceptos</div>
