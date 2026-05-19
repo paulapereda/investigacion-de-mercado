@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escritura Académica I — Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+  --violet: #6b3fa0;
+  --violetbg: #f3eeff;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+/* PORTADA */
+.s-cover { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold)); }
+.cover-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 900; line-height: 1.0; margin-bottom: 28px; }
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip { font-size: 12px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; display: inline-block; letter-spacing: 0.5px; }
+
+/* SECCIÓN OSCURA */
+.s-section { background: var(--ink); color: var(--paper); justify-content: center; padding: 60px 72px; }
+.s-section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.sec-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--paper); }
+.sec-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-top: 14px; font-style: italic; }
+
+/* CLARO */
+.s-light { background: var(--paper); padding: 48px 72px; justify-content: flex-start; }
+.s-light::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+/* OSCURO CONTENIDO */
+.s-dark { background: #1e1e1e; padding: 48px 72px; justify-content: flex-start; }
+.s-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+/* CIERRE */
+.s-close { background: var(--ink); padding: 60px 72px; justify-content: center; }
+
+/* EYEBROW + TÍTULO */
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 22px; }
+.slide-h-white { color: white; }
+
+/* BULLETS */
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.65; color: #333; padding: 7px 0 7px 22px; border-bottom: 1px solid var(--border); position: relative; }
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+/* DEFINICIÓN */
+.def-block { background: var(--ink); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+.def-term-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 7px; }
+.def-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.65; }
+.def-text strong { color: #d4a0a0; }
+
+/* DOS COLUMNAS */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+.col-box-dark { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 16px 18px; }
+.col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 7px; }
+.col-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 7px; color: var(--ink); }
+.col-title-w { color: white; }
+.col-body { font-size: 13px; color: #444; line-height: 1.6; }
+.col-body-w { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* TABLAS */
+.ref-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 12px; }
+.ref-table th { background: var(--ink); color: var(--paper); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.ref-table tr:nth-child(even) td { background: #faf8f5; }
+.ref-table-dark th { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); padding: 8px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+.ref-table-dark td { padding: 8px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; line-height: 1.5; color: rgba(255,255,255,0.8); font-size: 12.5px; }
+.ref-table-dark tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+
+/* PAUSA */
+.pause-box { background: #fffbec; border-left: 5px solid var(--gold); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 16px; }
+.pause-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
+.pause-q { font-size: 13.5px; font-style: italic; color: #4a3a00; line-height: 1.6; }
+
+/* LATAM */
+.latam-box { background: var(--greenbg); border-left: 5px solid var(--green); border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 14px; }
+.latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--green); text-transform: uppercase; margin-bottom: 6px; }
+.latam-text { font-size: 13px; color: #1a3a1a; line-height: 1.6; }
+
+/* CALLOUT */
+.callout { border-left: 4px solid var(--gold); background: #fffbec; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-top: 14px; font-size: 14px; color: #4a3a00; line-height: 1.7; }
+
+/* CÓDIGO / MONO */
+.code-block { background: #1a1a2e; border-radius: 8px; padding: 16px 20px; margin-top: 14px; font-family: 'DM Mono', monospace; font-size: 12px; color: #a8d8ea; line-height: 1.7; }
+.code-good { color: #90ee90; }
+.code-bad { color: #ff9999; }
+
+/* CASCADA PDA→PIM→PI→H */
+.cascade { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.cascade-row { display: flex; align-items: flex-start; gap: 14px; }
+.cascade-arrow { font-size: 18px; color: var(--muted); margin-left: 36px; line-height: 1; }
+.cascade-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-radius: 4px; padding: 4px 10px; flex-shrink: 0; min-width: 52px; text-align: center; margin-top: 2px; }
+.tag-pda { background: #fde8e8; color: var(--accent); }
+.tag-pim { background: #e8f0fd; color: var(--blue); }
+.tag-pi  { background: #e8fde8; color: var(--green); }
+.tag-h   { background: var(--violetbg); color: var(--violet); }
+.cascade-content { font-size: 13.5px; color: #333; line-height: 1.6; flex: 1; }
+.cascade-content-dark { font-size: 13.5px; color: rgba(255,255,255,0.85); line-height: 1.6; flex: 1; }
+
+/* STAT BIG */
+.stat-row { display: flex; gap: 40px; margin: 18px 0; flex-wrap: wrap; }
+.stat-item { text-align: left; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: #d4a0a0; line-height: 1; }
+.stat-label { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+.stat-label-dark { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+/* CHECK / REGLA */
+.rule-row { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; color: #333; line-height: 1.5; }
+.rule-row:last-child { border-bottom: none; }
+.rule-icon { flex-shrink: 0; width: 20px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Habilidades transversales</div>
+  <div class="cover-title">Cómo escribir<br>documentos<br><em>académicos I</em></div>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+<!-- Mapa de la clase -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Estructura de la clase · 150 minutos</div>
+  <div class="slide-h">Dos bloques, un hilo conductor</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:4px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Parte 1 · Escritura académica</div>
+      <div class="col-body">
+        Qué hace académico a un texto<br>
+        El párrafo: conclusión al principio, una idea<br>
+        Voz activa: qué es y por qué importa<br>
+        Presente académico · brevedad<br>
+        Citas APA · el archivo .bib<br>
+        Fuentes confiables · IA: qué funciona y qué no<br>
+        Ejemplo en vivo: "Contexto del problema"
+      </div>
+    </div>
+    <div class="col-box" style="border-top:4px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Parte 2 · Malhotra</div>
+      <div class="col-body">
+        La cascada PDA → PIM → PI → H<br>
+        Trucos para identificar cada nivel<br>
+        Los errores más costosos<br>
+        Ejemplo completo: cafetería Café del Sur<br>
+        Checklist de autoevaluación Entrega 2
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:20px;">
+    <strong>Hilo conductor:</strong> "Clarito y sin alucinar" — claridad en la prosa y verificación de toda fuente que sugiera una IA.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PARTE 1 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Parte 1</div>
+  <div class="sec-title">Escritura<br>académica</div>
+  <div class="sec-sub">Párrafo · citas · .bib · fuentes · IA</div>
+</div>
+</section>
+
+<!-- ── BLOQUE 1: Tres registros ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 1</div>
+  <div class="sec-title">¿Qué hace<br>académico<br>a un texto?</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tres registros, una misma idea</div>
+  <div class="slide-h">No es escribir complicado — es escribir con evidencia trazable</div>
+  <table class="ref-table" style="margin-top:8px;">
+    <tr><th>Registro</th><th>Ejemplo</th><th>Función</th></tr>
+    <tr>
+      <td><strong>Redes sociales</strong></td>
+      <td>"Re fuerte: el café subió 30 % 😱"</td>
+      <td>Reaccionar / emocionar</td>
+    </tr>
+    <tr>
+      <td><strong>Periodístico</strong></td>
+      <td>"El precio del café trepó 30 % en marzo, según el INE."</td>
+      <td>Informar al público general</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--blue);">Académico</strong></td>
+      <td>"El precio del café arábica aumentó un 30,2 % entre enero y marzo de 2025 (INE, 2025), lo que sugiere presión sobre el costo de insumos en cafeterías uruguayas."</td>
+      <td><strong>Argumentar con evidencia trazable</strong></td>
+    </tr>
+  </table>
+  <div class="callout" style="margin-top:16px;">
+    <strong>Tres marcas del texto académico:</strong> (1) toda afirmación no trivial tiene una fuente; (2) el lenguaje es preciso, no decorativo; (3) la estructura es explícita — el lector no adivina qué viene.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">La trampa del "español académico pomposo"</div>
+  <div class="slide-h">Claridad ≠ simplicidad. Claridad = precisión.</div>
+  <div class="def-block">
+    <div class="def-term-label">Nikolov (2023, p. 3) — traducido al español</div>
+    <div class="def-text">"Apuntá a la claridad en tu escritura. Evitá la repetición y las palabras innecesarias. Si es posible eliminar una palabra, oración o párrafo sin perder claridad o contenido, hacelo. Tu objetivo de escritura es ser <strong>lo más claro posible con la menor cantidad de palabras posible</strong>."</div>
+  </div>
+  <div class="pause-box" style="margin-top:18px;">
+    <div class="pause-label">⏸ ¿Cuál es más académica?</div>
+    <div class="pause-q">
+      (A) "Se podría considerar que, en cierta medida, los consumidores podrían tender a preferir productos con un cierto grado de sostenibilidad ambiental."<br><br>
+      (B) "El 62 % de los consumidores uruguayos de 18–29 años prioriza la sostenibilidad al elegir cafeterías (Equipos Consultores, 2024)."
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 2: Párrafo BLUF ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 2</div>
+  <div class="sec-title">El párrafo<br>académico:<br><em>conclusión al principio</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Conclusión al principio — BLUF</div>
+  <div class="slide-h">Lo más importante en la primera oración, el sostén después</div>
+  <div class="def-block">
+    <div class="def-term-label">Nikolov (2023, p. 3) — traducido al español</div>
+    <div class="def-text">"Adoptá el estilo de conclusión al principio: cada párrafo debe arrancar con una oración resumen que encapsula todos los detalles que siguen. Pensá en esa oración como un <strong>paraguas</strong> que cubre todos los puntos que vienen después. Luego organizá el resto de más a menos importante."</div>
+  </div>
+  <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13.5px;">
+      <strong style="color:var(--accent);">[1] Oración tema (BLUF)</strong> — la idea del párrafo, completa. Funciona como "umbrella" de lo que sigue.
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--muted);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13.5px;">
+      <strong>[2–3–4] Evidencia</strong> — dato, cita, ejemplo que sostiene la oración tema.
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13.5px;">
+      <strong style="color:var(--blue);">[5] Cierre / puente</strong> — conecta con el párrafo siguiente. Opcional pero recomendado.
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    <strong>Extensión:</strong> 3 a 5 oraciones por párrafo. <strong>Una sola idea</strong>. Si tenés dos ideas: dos párrafos. BLUF = Bottom Line Up Front (conclusión al principio).
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Una idea por párrafo — literalmente</div>
+  <div class="slide-h">Ejercicio en vivo: ¿qué está mal acá?</div>
+  <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:16px 20px;font-size:14px;color:#333;line-height:1.8;margin-bottom:14px;">
+    "La cafetería en cuestión, que está ubicada en el barrio Pocitos de la ciudad de Montevideo, ha experimentado, en los últimos meses, una serie de fluctuaciones bastante notorias en lo que respecta a su nivel de ventas mensuales, las cuales han venido siendo objeto de preocupación por parte de la gerencia. Por otra parte, el competidor más cercano, una franquicia internacional, abrió una sucursal a tres cuadras."
+  </div>
+  <div style="background:#f0fff4;border:1px solid #a0d8b0;border-radius:8px;padding:16px 20px;font-size:14px;color:#333;line-height:1.8;">
+    <strong style="color:var(--green);">Versión corregida:</strong><br>
+    "Las ventas mensuales de Café del Sur (Pocitos, Montevideo) cayeron 18 % entre marzo y mayo de 2026, según registros internos. La apertura de una sucursal de Starbucks a tres cuadras, en febrero de 2026, coincide temporalmente con el inicio de la caída."
+  </div>
+  <div class="pause-box" style="margin-top:12px;">
+    <div class="pause-label">⏸ ¿Qué cambió?</div>
+    <div class="pause-q">67 palabras → 38 palabras. Conclusión al principio (BLUF). Una idea por párrafo. Muletillas eliminadas. Datos con fuente. Voz activa.</div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 3: Voz, tiempo, brevedad ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3</div>
+  <div class="sec-title">Voz activa ·<br>presente académico ·<br><em>brevedad</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Voz activa — qué es y por qué importa</div>
+  <div class="slide-h">El sujeto hace la acción — no la recibe ni desaparece</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Voz activa</div>
+      <div class="col-body">
+        El <strong>sujeto realiza</strong> la acción.<br><br>
+        ❌ Pasiva: "Una encuesta fue realizada a 150 consumidores." <em>(¿quién? ¿cuándo?)</em><br><br>
+        ✅ Activa: "Encuestamos a 150 consumidores entre el 1 y el 15 de marzo de 2026."<br><br>
+        <em>Nikolov (2023, p. 4): "La voz activa es en general más directa y vigorosa que la pasiva."</em>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">¿Cuándo la pasiva está bien?</div>
+      <div class="col-body">
+        Cuando el agente <strong>no importa</strong>: "Los datos fueron recolectados entre mayo y junio."<br><br>
+        La pasiva está <strong>mal</strong> cuando oculta quién hizo qué o busca sonar "más científico".<br><br>
+        <em>APA 7 permite ambas voces. Preferir activa cuando hay agente claro.</em>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Presente académico y brevedad</div>
+  <div class="slide-h">Presente para autores · pasado para tu propio trabajo de campo</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Presente académico</div>
+      <div class="col-body">
+        ❌ "Malhotra (2016) <em>sostuvo</em> que el PIM debía ser específico."<br><br>
+        ✅ "Malhotra (2016) <strong>sostiene</strong> que el PIM debe ser específico."<br><br>
+        <em>Los resultados publicados son hechos vigentes, no eventos del pasado. El pasado se reserva para lo que vos hiciste en campo.</em>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--muted);">
+      <div class="col-label">Brevedad</div>
+      <div class="col-body">
+        Si podés sacar una palabra sin perder sentido → sacala.<br><br>
+        "Con el fin de" → "Para"<br>
+        "Es importante destacar que" → (eliminar)<br>
+        "Hoy en día" → "En 2026" o nada<br>
+        "Una serie de factores" → nombrar los factores
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Muletillas a eliminar</div>
+  <div class="slide-h slide-h-white">Si lo podés sacar sin perder sentido, sacalo</div>
+  <table class="ref-table ref-table-dark" style="margin-top:10px;">
+    <tr><th>Muletilla</th><th>Reemplazo</th></tr>
+    <tr><td>"En base a / en función de"</td><td>"Según"</td></tr>
+    <tr><td>"Es importante destacar que"</td><td>(eliminar — ir al punto)</td></tr>
+    <tr><td>"Hoy en día" / "actualmente"</td><td>"En 2026" o nada</td></tr>
+    <tr><td>"Una serie de factores"</td><td>Nombrar los factores</td></tr>
+    <tr><td>"Bastante notorio" / "muy significativo"</td><td>Dar el número exacto</td></tr>
+    <tr><td>"Podría considerarse que"</td><td>(eliminar la cobardía retórica)</td></tr>
+    <tr><td>"Con el fin de / con el objetivo de"</td><td>"Para"</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ── BLOQUE 4: Citas APA ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 4</div>
+  <div class="sec-title">Citas APA:<br>cómo integrar<br><em>la voz de otros</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">La regla de oro — APA Style (apastyle.apa.org)</div>
+  <div class="slide-h">Parafrasear más que citar textualmente</div>
+  <div class="def-block">
+    <div class="def-term-label">APA (2020, secc. 8.23) — traducido al español</div>
+    <div class="def-text">"Los autores publicados parafrasean sus fuentes la mayor parte del tiempo, en lugar de citarlos directamente; los estudiantes deberían emular esa práctica <strong>parafraseando más de lo que citan directamente</strong>."</div>
+  </div>
+  <div style="margin-top:16px;display:flex;gap:16px;align-items:center;justify-content:center;">
+    <div style="text-align:center;padding:16px 28px;background:white;border:2px solid var(--green);border-radius:8px;">
+      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--green);">≥ 80 %</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">paráfrasis</div>
+    </div>
+    <div style="font-size:24px;color:var(--muted);">+</div>
+    <div style="text-align:center;padding:16px 28px;background:white;border:2px solid var(--gold);border-radius:8px;">
+      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);">≤ 20 %</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px;">cita textual</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    La paráfrasis demuestra que <strong>entendiste</strong> la fuente. La cita textual solo demuestra que la encontraste.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Cuatro formatos APA 7 — los que tienen que dominar</div>
+  <div class="slide-h">Paráfrasis narrativa · parentética · cita textual</div>
+  <table class="ref-table" style="margin-top:6px;">
+    <tr><th>Tipo</th><th>Formato</th><th>Ejemplo</th></tr>
+    <tr>
+      <td>Paráfrasis parentética</td>
+      <td>(Autor, año)</td>
+      <td>"El PIM debe ser específico (Malhotra, 2016)."</td>
+    </tr>
+    <tr>
+      <td>Paráfrasis narrativa</td>
+      <td>Autor (año) + verbo</td>
+      <td>"Malhotra (2016) sostiene que el PIM debe ser específico."</td>
+    </tr>
+    <tr>
+      <td>Cita textual corta (&lt;40 palabras)</td>
+      <td>"..." (Autor, año, p. X)</td>
+      <td>"El PIM 'debe permitir que el investigador obtenga toda la información que se requiere' (Malhotra, 2016, p. 38)."</td>
+    </tr>
+    <tr>
+      <td>Cita textual larga (≥40 palabras)</td>
+      <td>Bloque con sangría 1,27 cm, sin comillas</td>
+      <td>(Ver ejemplo en Neugeboren &amp; Jacobson, 2005, cap. 4)</td>
+    </tr>
+  </table>
+  <div class="callout" style="margin-top:12px;">
+    <strong>APA 7:</strong> tres autores o más → usar <em>et al.</em> desde la primera mención. Es el cambio clave respecto a APA 6.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">La trampa del "está solo en bibliografía"</div>
+  <div class="slide-h slide-h-white">Correspondencia uno a uno: texto ↔ referencias</div>
+  <div style="display:flex;gap:24px;margin-top:16px;align-items:stretch;">
+    <div style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Regla</div>
+      <ul class="bullets bullets-white">
+        <li>Toda fuente citada en el <strong style="color:white;">texto</strong> → debe estar en la <strong style="color:white;">bibliografía</strong></li>
+        <li>Toda fuente en la <strong style="color:white;">bibliografía</strong> → debe estar citada al menos una vez en el <strong style="color:white;">texto</strong></li>
+        <li>Si solo aparece en la lista final: <strong style="color:#ff9999;">mal</strong></li>
+        <li>Si aparece en el cuerpo pero no en la lista: <strong style="color:#ff9999;">también mal</strong></li>
+      </ul>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:16px;">
+    <div class="pause-label">⏸ Pregunta a la clase</div>
+    <div class="pause-q">"Según diferentes autores, el café es importante en Uruguay." — ¿Está bien o está mal? ¿Por qué?</div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 4B: .bib y APA ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 4B</div>
+  <div class="sec-title">El archivo .bib<br>y la lógica<br><em>de APA</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">¿Qué es un archivo .bib y cómo se conecta con APA 7?</div>
+  <div class="slide-h">BibTeX: la base de datos de referencias del proyecto</div>
+  <div class="def-block">
+    <div class="def-term-label">Qué es</div>
+    <div class="def-text">Un archivo <strong>.bib</strong> es una base de datos de referencias en formato BibTeX. LaTeX/Overleaf lo lee automáticamente para formatear citas y bibliografías según APA 7. La línea <strong>\usepackage[style=apa,backend=biber]{biblatex}</strong> hace toda la magia: las citas en el texto y la lista de referencias se generan solas a partir del .bib.</div>
+  </div>
+  <div style="margin-top:14px;background:#1a1a2e;border-radius:8px;padding:14px 18px;font-family:'DM Mono',monospace;font-size:11.5px;color:#a8d8ea;line-height:1.8;">
+    @article{walters2023,<br>
+    &nbsp;&nbsp;author  = {Walters, William H. and Wilder, Esther I.},<br>
+    &nbsp;&nbsp;title   = {Fabricación y errores en las citas generadas por ChatGPT},<br>
+    &nbsp;&nbsp;journal = {Scientific Reports},<br>
+    &nbsp;&nbsp;year    = {2023},<br>
+    &nbsp;&nbsp;doi     = {10.1038/s41598-023-41032-5}<br>
+    }
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>En el texto:</strong> \cite{walters2023} → LaTeX inserta (Walters y Wilder, 2023) en formato APA automáticamente.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Cómo agregar fuentes al .bib correctamente</div>
+  <div class="slide-h">Google Scholar → BibTeX → verificar DOI</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);min-width:20px;font-weight:700;">1</div>
+      <div>Buscar el paper en <strong>Google Scholar</strong></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);min-width:20px;font-weight:700;">2</div>
+      <div>Clic en el ícono de comillas → seleccionar <strong>BibTeX</strong></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);min-width:20px;font-weight:700;">3</div>
+      <div>Copiar la entrada y pegarla en el <strong>.bib</strong></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);min-width:20px;font-weight:700;">4</div>
+      <div>Verificar el DOI en <strong>doi.org</strong> — si no resuelve, la cita es dudosa</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:#fff0f0;border:1px solid #f0c0c0;border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);min-width:20px;font-weight:700;">⚠</div>
+      <div>La IA puede generar entradas .bib con <strong>formato perfecto pero paper inexistente</strong>. Siempre verificar antes de agregar al .bib.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 5: Fuentes e IA ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 5</div>
+  <div class="sec-title">Fuentes confiables<br>y uso<br><em>de IA</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Test CRAAP — evaluación de fuentes</div>
+  <div class="slide-h">Cinco criterios para juzgar si una fuente sirve</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+    <div class="rule-row"><div class="rule-icon" style="color:var(--accent);font-weight:700;">C</div><div><strong>Currency (vigencia)</strong> — ¿De qué año es? ¿Sigue vigente para el tema?</div></div>
+    <div class="rule-row"><div class="rule-icon" style="color:var(--accent);font-weight:700;">R</div><div><strong>Relevance (relevancia)</strong> — ¿Responde a <em>mi</em> pregunta o es tangencial?</div></div>
+    <div class="rule-row"><div class="rule-icon" style="color:var(--accent);font-weight:700;">A</div><div><strong>Authority (autoridad)</strong> — ¿Quién es el autor? ¿Institución? ¿Credenciales verificables?</div></div>
+    <div class="rule-row"><div class="rule-icon" style="color:var(--accent);font-weight:700;">A</div><div><strong>Accuracy (precisión)</strong> — ¿Cita sus propias fuentes? ¿Es verificable?</div></div>
+    <div class="rule-row"><div class="rule-icon" style="color:var(--accent);font-weight:700;">P</div><div><strong>Purpose (propósito)</strong> — ¿Informa, vende, persuade?</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Jerarquía de fuentes para la Entrega 2</div>
+  <div class="slide-h">De más a menos confiable para investigación de mercado</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px;">
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);min-width:20px;font-weight:700;">1</div>
+      <div><strong>Papers peer-reviewed</strong> — Journal of Marketing Research, Revista Latinoamericana de Administración. Vía Google Scholar o Timbó (portal ANII para estudiantes uruguayos).</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);min-width:20px;font-weight:700;">2</div>
+      <div><strong>Libros académicos</strong> — Malhotra, Hernández Sampieri, Kotler.</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);min-width:20px;font-weight:700;">3</div>
+      <div><strong>Informes institucionales</strong> — INE Uruguay, Equipos Consultores, Cifra, CEPAL, BID, Cámara de Comercio.</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--muted);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:20px;font-weight:700;">4</div>
+      <div><strong>Prensa económica seria</strong> — El Observador Economía, Búsqueda, El País Economía. Solo para datos coyunturales.</div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center;padding:10px 14px;background:#fff0f0;border:1px solid #f0c0c0;border-left:4px solid var(--accent);border-radius:0 6px 6px 0;font-size:13.5px;">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);min-width:20px;font-weight:700;">✕</div>
+      <div><strong>Wikipedia:</strong> no se cita. Sirve para entender un tema y ver la bibliografía al pie.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">El problema de las alucinaciones</div>
+  <div class="slide-h slide-h-white">ChatGPT y Claude fabrican citas verosímiles pero inexistentes</div>
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-num">55 %</div>
+      <div class="stat-label">citas fabricadas · GPT-3.5<br>Walters & Wilder, <em>Sci. Reports</em>, 2023</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">18 %</div>
+      <div class="stat-label">citas fabricadas · GPT-4<br>mismo estudio · 636 citas · 42 temas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">56 %</div>
+      <div class="stat-label">fabricadas o erróneas · GPT-4o<br>Linardon et al., <em>JMIR</em>, 2025</div>
+    </div>
+  </div>
+  <div class="def-block">
+    <div class="def-term-label">Por qué pasa</div>
+    <div class="def-text">Un LLM no consulta una base de datos. <strong>Predice texto plausible</strong>. Una cita académica es un patrón de texto (Apellido, Año. Revista, vol(núm), pp.). El modelo genera patrones que <em>parecen</em> citas — pero el paper puede no existir, el autor puede no haber escrito eso, y el DOI puede tener formato correcto y no resolver a nada.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">La excepción: modos de investigación avanzada</div>
+  <div class="slide-h">Investigación profunda (ChatGPT) · Investigación (Claude)</div>
+  <div class="def-block">
+    <div class="def-term-label">Por qué son distintos al chat básico</div>
+    <div class="def-text">Estos modos <strong>hacen búsquedas reales</strong> en la web y citan con URLs verificables. No predicen texto: leen fuentes. La tasa de error es significativamente menor — pero <strong>no es cero</strong>. El protocolo de verificación sigue siendo obligatorio.</div>
+  </div>
+  <div style="margin-top:14px;background:#0d1a2e;border-radius:8px;padding:14px 18px;font-family:'DM Mono',monospace;font-size:12px;color:#a8d8ea;line-height:1.9;">
+    "Buscá artículos académicos peer-reviewed sobre lealtad<br>
+    de marca en cafeterías de especialidad en América Latina<br>
+    o Uruguay, publicados entre 2015 y 2026.<br>
+    Para cada artículo: título completo, autores, revista,<br>
+    año y DOI. No incluyas blogs ni sitios comerciales."
+  </div>
+  <div class="latam-box" style="margin-top:12px;">
+    <div class="latam-label">🌎 Diferencia clave</div>
+    <div class="latam-text"><strong>Chat básico</strong> → predice texto → alta tasa de fabricación. <strong>Investigación profunda / Claude Investigación</strong> → búsquedas reales → menor error, pero verificar igual.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">IA para bibliografía — qué funciona y qué no</div>
+  <div class="slide-h">Chat básico vs. Investigación profunda · protocolo de verificación</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">✅ Sí funciona</div>
+      <div class="col-body">
+        Pedir que <strong>explique</strong> un concepto<br>
+        Sugerir <strong>keywords</strong> para Google Scholar<br>
+        <strong>Mejorar redacción</strong> de un párrafo propio<br>
+        <strong>Investigación profunda</strong> (ChatGPT) o <strong>Investigación</strong> (Claude) + prompt adecuado → bibliografía peer-reviewed con DOI verificable<br>
+        Elicit · Consensus · Semantic Scholar · Scite.ai
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">❌ Chat básico: tasa de error inaceptable</div>
+      <div class="col-body">
+        "Dame 5 papers en APA sobre X"<br>
+        Copiar una cita sin abrir el paper<br>
+        Confiar en el DOI sin verificar en doi.org<br>
+        Pedir que <strong>haga el PIM</strong> por vos
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:14px;background:#1a2a1a;border-radius:8px;padding:14px 18px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Protocolo de verificación — siempre, sin excepción</div>
+    <div style="font-size:13.5px;color:rgba(255,255,255,0.85);line-height:1.8;">
+      <span style="color:var(--green);font-weight:700;">1.</span> Buscá el título exacto en Google Scholar.<br>
+      <span style="color:var(--green);font-weight:700;">2.</span> Si aparece → abrí el paper → verificá que la afirmación está ahí.<br>
+      <span style="color:var(--green);font-weight:700;">3.</span> Pegá el DOI en doi.org — si no resuelve → descartar.<br>
+      <span style="color:rgba(255,255,255,0.5);font-size:12px;">Aplica para chat básico Y para Investigación profunda / Claude Investigación.</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 6: Ejemplo en vivo ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 6</div>
+  <div class="sec-title">Ejemplo en vivo:<br><em>"Contexto del problema"</em></div>
+  <div class="sec-sub">Versión mala → versión corregida · Caso Café del Sur</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Versión 1 — ¿qué está mal? (identificar con la clase)</div>
+  <div class="slide-h">Contexto del problema — primer borrador</div>
+  <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:18px 22px;font-size:14px;color:#333;line-height:1.9;margin-bottom:14px;">
+    "Hoy en día, el mercado de las cafeterías de especialidad en Uruguay ha venido experimentando un crecimiento muy importante. Muchas personas toman café. Según diferentes estudios, los millennials prefieren cafeterías que sean modernas. Café del Sur es una cafetería que está ubicada en Pocitos y que ha venido teniendo problemas con sus ventas en los últimos tiempos."
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Marcar errores</div>
+    <div class="pause-q">"Hoy en día" · "muy importante" sin número · "Muchas personas toman café" (trivial) · "diferentes estudios" sin cita · "modernas" sin definición · "ha venido teniendo problemas" sin dato</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Versión 2 — construida con la clase</div>
+  <div class="slide-h">Contexto del problema — versión corregida</div>
+  <div style="background:#f0fff4;border:1px solid #a0d8b0;border-radius:8px;padding:18px 22px;font-size:14px;color:#1a1a1a;line-height:1.9;">
+    <p style="margin:0 0 14px 0;">El mercado de cafeterías de especialidad en Montevideo creció un 47 % entre 2020 y 2024, pasando de 38 a 56 locales activos (Cámara de Comercio del Uruguay, 2025). Este crecimiento responde, en parte, al cambio en el patrón de consumo de los adultos jóvenes uruguayos: el 62 % de los consumidores entre 18 y 35 años declara consumir café fuera del hogar al menos tres veces por semana (Equipos Consultores, 2024).</p>
+    <p style="margin:0 0 14px 0;">En este contexto, Café del Sur, una cafetería de especialidad ubicada en el barrio Pocitos, registra una caída del 18 % en sus ventas mensuales entre marzo y mayo de 2026 (registros internos). La caída coincide temporalmente con la apertura, en febrero de 2026, de una sucursal de una cadena internacional a tres cuadras del local.</p>
+    <p style="margin:0;">Resolver esta incertidumbre requiere información sistemática sobre el comportamiento de los clientes actuales y potenciales de Café del Sur, lo que motiva el presente proyecto de investigación de mercado.</p>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RECESO
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Receso · 10 minutos</div>
+  <div class="sec-title" style="font-size:2.5rem;">☕</div>
+  <div class="sec-sub">Vuelven en 10 minutos para la Parte 2</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PARTE 2 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Parte 2</div>
+  <div class="sec-title">PDA · PIM · PI · H</div>
+  <div class="sec-sub">La cascada de Malhotra para la Entrega 2</div>
+</div>
+</section>
+
+<!-- ── BLOQUE 7: La cascada ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 7</div>
+  <div class="sec-title">La cascada:<br><em>PDA → PIM<br>→ PI → H</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Cuatro niveles, dos actores</div>
+  <div class="slide-h">Cada nivel responde una pregunta diferente</div>
+  <div class="cascade" style="margin-top:10px;">
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pda">PDA</div>
+      <div class="cascade-content"><strong>¿Qué debe hacer el gerente?</strong> — Lo formula quien decide. Orientado a la acción. Pregunta sobre síntomas.</div>
+    </div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pim">PIM</div>
+      <div class="cascade-content"><strong>¿Qué información se necesita?</strong> — Lo formula el investigador. Orientado a la información. Busca causas subyacentes.</div>
+    </div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pi">PI</div>
+      <div class="cascade-content"><strong>¿Qué componentes específicos del PIM necesito responder?</strong> — Preguntas interrogativas, medibles, no superpuestas.</div>
+    </div>
+    <div class="cascade-arrow">↓</div>
+    <div class="cascade-row">
+      <div class="cascade-tag tag-h">H</div>
+      <div class="cascade-content"><strong>¿Cuál es mi respuesta tentativa a cada PI?</strong> — Afirmaciones declarativas, con dos variables, testables con los datos.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">El error más caro en investigación de mercado</div>
+  <div class="slide-h slide-h-white">Investigar algo que al gerente no le sirve</div>
+  <ul class="bullets bullets-white" style="margin-top:8px;">
+    <li>Si arrancás por la <strong style="color:white;">hipótesis</strong>, no sabés qué estás investigando</li>
+    <li>Si arrancás por el <strong style="color:white;">PIM</strong> sin haber identificado el PDA, investigás algo que no responde la decisión real</li>
+    <li>La cascada tiene que bajar en orden, y cada nivel tiene que estar <strong style="color:white;">anclado</strong> al de arriba</li>
+  </ul>
+  <div class="latam-box" style="margin-top:20px;">
+    <div class="latam-label">🌎 Contexto Uruguay / LATAM</div>
+    <div class="latam-text">La causa N° 1 de proyectos de investigación rechazados: equipos que entregan un informe técnicamente impecable pero que <strong>no responde la pregunta que el cliente necesitaba responder</strong>. No es un problema de metodología — es un problema de definición del problema.</div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 8: PDA ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 8</div>
+  <div class="sec-title">El PDA:<br>Problema de<br><em>Decisión Administrativa</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra (2016), Cap. 2</div>
+  <div class="slide-h">El PDA es la pregunta del gerente sobre qué hacer</div>
+  <div class="def-block">
+    <div class="def-term-label">Definición — Malhotra</div>
+    <div class="def-text">El PDA es el problema que enfrenta la persona que toma las decisiones. Se centra en <strong>síntomas</strong>. Está orientado a la <strong>acción</strong>.</div>
+  </div>
+  <div style="margin-top:16px;background:#1a2a38;border-radius:8px;padding:14px 18px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Truco mnemotécnico — Las 4 D</div>
+    <div style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;color:rgba(255,255,255,0.85);line-height:1.6;">
+      <div><strong style="color:#a0c8e8;">D</strong>ecisión concreta sobre la mesa</div>
+      <div><strong style="color:#a0c8e8;">D</strong>ueño identificado (gerente, comité)</div>
+      <div><strong style="color:#a0c8e8;">D</strong>isyuntiva (al menos dos cursos de acción posibles)</div>
+      <div><strong style="color:#a0c8e8;">D</strong>ilación con costo (no decidir también es costoso)</div>
+    </div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:10px;">Si las cuatro son "sí" → es un PDA.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">PDA — ejemplos buenos y malos</div>
+  <div class="slide-h slide-h-white">El PDA se redacta con verbo de acción</div>
+  <table class="ref-table ref-table-dark">
+    <tr><th>❌ No es un PDA</th><th>✅ Sí es un PDA</th></tr>
+    <tr>
+      <td>"Estudiar el mercado del café."</td>
+      <td>"¿Debe Café del Sur lanzar una línea de café frío embotellado en el verano 2026-2027?"</td>
+    </tr>
+    <tr>
+      <td>"Conocer al consumidor."</td>
+      <td>"¿Conviene mantener el precio actual o bajarlo 15 % para enfrentar al nuevo competidor?"</td>
+    </tr>
+    <tr>
+      <td>"Mejorar las ventas."</td>
+      <td>"¿Debe invertirse en una campaña digital en Instagram o en remodelar el local?"</td>
+    </tr>
+  </table>
+  <div class="pause-box" style="margin-top:14px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿"Mejorar la imagen de la marca" es un PDA? Aplicar las 4 D.</div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 9: PIM ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 9</div>
+  <div class="sec-title">El PIM:<br>Problema de<br><em>Investigación de Mercados</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">PDA vs. PIM — la distinción más importante</div>
+  <div class="slide-h">Dos preguntas que parecen iguales y no lo son</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">PDA</div>
+      <div class="col-body">
+        Orientado a la <strong>acción</strong><br>
+        Se centra en <strong>síntomas</strong><br>
+        Lo formula el <strong>gerente</strong><br>
+        Verbos: lanzar, invertir, abrir, bajar el precio<br><br>
+        <em>"¿Debo lanzar el café frío?"</em>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">PIM</div>
+      <div class="col-body">
+        Orientado a la <strong>información</strong><br>
+        Se centra en <strong>causas</strong><br>
+        Lo formula el <strong>investigador</strong><br>
+        Verbos: determinar, evaluar, medir, identificar<br><br>
+        <em>"Determinar el nivel de interés y la disposición a pagar por un café frío embotellado."</em>
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    <strong>Truco:</strong> si tu PIM contiene "decidir", "elegir", "lanzar" o "fijar el precio" → lo estás confundiendo con el PDA.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra — los dos errores clásicos al definir el PIM</div>
+  <div class="slide-h">Demasiado amplio o demasiado estrecho: ambos son fatales</div>
+  <div class="two-col">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">Error 1 · Demasiado amplio</div>
+      <div class="col-body">
+        No ofrece directrices para el diseño de investigación.<br><br>
+        ❌ "Mejorar la imagen de la compañía"<br>
+        ❌ "Determinar por qué los usuarios no están satisfechos"<br><br>
+        <em>Malhotra (2016): "No son lo bastante específicas para sugerir una forma de abordar el problema."</em>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Error 2 · Demasiado estrecho</div>
+      <div class="col-body">
+        Presupone la causa, cierra opciones no obvias.<br><br>
+        ❌ "Determinar si cambiar el botón de verde a azul"<br>
+        ❌ "Estudiar la reacción al descuento del 10 %"<br><br>
+        <em>Malhotra (2016): "Impediría la consideración de cursos de acción innovadores."</em>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 10: PI ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 10</div>
+  <div class="sec-title">Preguntas de<br>investigación:<br><em>PI</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra (2016), Cap. 2 — componentes del PIM</div>
+  <div class="slide-h">Las PI son los subcomponentes específicos del PIM</div>
+  <div class="def-block">
+    <div class="def-term-label">Definición — Malhotra</div>
+    <div class="def-text">"Las preguntas de investigación preguntan qué <strong>información específica</strong> se requiere con respecto a los componentes del problema."</div>
+  </div>
+  <div style="margin-top:16px;background:#1a2a38;border-radius:8px;padding:14px 18px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Criterios SMART para PI</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:rgba(255,255,255,0.85);">
+      <div><strong style="color:#a0c8e8;">S</strong>pecific — objeto, población, lugar, tiempo claros</div>
+      <div><strong style="color:#a0c8e8;">M</strong>easurable — respuesta medible o categorizable</div>
+      <div><strong style="color:#a0c8e8;">A</strong>ttainable — factible con los recursos del semestre</div>
+      <div><strong style="color:#a0c8e8;">R</strong>elevant — aporta al PIM (si no aporta, no va)</div>
+      <div><strong style="color:#a0c8e8;">T</strong>ime-bound — horizonte temporal definido</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">Entre 3 y 5 PI por PIM. No deben superponerse. Cada PI debe poder mapearse a una técnica de relevamiento.</div>
+</div>
+</section>
+
+<!-- ── BLOQUE 11: H ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 11</div>
+  <div class="sec-title">Hipótesis:<br><em>H</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Malhotra (2016) — definición de hipótesis</div>
+  <div class="slide-h">Las H afirman una respuesta tentativa a cada PI</div>
+  <div class="def-block">
+    <div class="def-term-label">Definición — Malhotra</div>
+    <div class="def-text">"Las hipótesis son afirmaciones sobre las relaciones o proposiciones, más que meras preguntas para las cuales se buscan respuestas. Son <strong>declarativas y susceptibles de someterse a prueba empírica</strong>."</div>
+  </div>
+  <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;">
+    <div class="rule-row"><div class="rule-icon">1.</div><div>Es una <strong>afirmación declarativa</strong> (no termina en "?")</div></div>
+    <div class="rule-row"><div class="rule-icon">2.</div><div>Establece una <strong>relación entre al menos dos variables</strong> (independiente + dependiente)</div></div>
+    <div class="rule-row"><div class="rule-icon">3.</div><div>Es <strong>testable</strong>: puede ser falsada con los datos que vas a recolectar</div></div>
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>Patrón de redacción:</strong> "[Variable independiente] se relaciona [positiva/negativamente] con [variable dependiente] en [población] en [contexto]."
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">H — ejemplos buenos y malos</div>
+  <div class="slide-h slide-h-white">Una H bien formulada puede ser falsada</div>
+  <table class="ref-table ref-table-dark">
+    <tr><th>❌ No es una H</th><th>✅ Sí es una H</th></tr>
+    <tr>
+      <td>"¿El café frío gustará?" (pregunta)</td>
+      <td>"Más del 35 % de los adultos jóvenes declarará intención de compra semanal."</td>
+    </tr>
+    <tr>
+      <td>"El café frío es bueno." (no testable)</td>
+      <td>"La satisfacción promedio será ≥ 4 sobre 5 en escala Likert."</td>
+    </tr>
+    <tr>
+      <td>"Habrá una relación entre algo y otra cosa." (vago)</td>
+      <td>"El precio se relaciona negativamente con la intención de compra en el segmento 18–35."</td>
+    </tr>
+    <tr>
+      <td>"El 100 % comprará café frío." (irreal)</td>
+      <td>Hipótesis ancladas en lógica de mercado o evidencia previa.</td>
+    </tr>
+  </table>
+</div>
+</section>
+
+<!-- ── Ejemplo completo ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Ejemplo integrador</div>
+  <div class="sec-title">La cascada completa:<br><em>Café del Sur</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Caso Café del Sur — PDA y PIM</div>
+  <div class="slide-h">Del problema de negocio al problema de investigación</div>
+  <div class="cascade">
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pda">PDA</div>
+      <div class="cascade-content">¿Debe Café del Sur lanzar una línea de café frío embotellado en el verano 2026-2027?</div>
+    </div>
+    <div class="cascade-arrow">↓ traducción</div>
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pim">PIM</div>
+      <div class="cascade-content">Determinar el nivel de interés, la disposición a pagar y los atributos preferidos por los consumidores actuales y potenciales de café frío embotellado en el segmento de adultos jóvenes (18–35 años) de Montevideo.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:20px;">
+    Noten que el PIM usa "Determinar" (verbo de información), no "lanzar" (verbo de acción). El PIM es amplio pero específico: delimita segmento, ciudad y variables clave.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Caso Café del Sur — Preguntas de investigación</div>
+  <div class="slide-h">Tres PI que despliegan el PIM sin superponerse</div>
+  <div class="cascade">
+    <div class="cascade-row">
+      <div class="cascade-tag tag-pi">PI₁</div>
+      <div class="cascade-content">¿Qué porcentaje de adultos jóvenes (18–35) de Montevideo declara intención de compra semanal de café frío embotellado de marca local en verano?</div>
+    </div>
+    <div class="cascade-row" style="margin-top:10px;">
+      <div class="cascade-tag tag-pi">PI₂</div>
+      <div class="cascade-content">¿Cuál es la disposición a pagar (en pesos uruguayos) por una botella de 330 ml de café frío de especialidad, según rango de ingreso del consumidor?</div>
+    </div>
+    <div class="cascade-row" style="margin-top:10px;">
+      <div class="cascade-tag tag-pi">PI₃</div>
+      <div class="cascade-content">¿Qué atributos del producto (sabor base, contenido de azúcar, formato de envase, presencia de leche vegetal) son los más valorados por el segmento objetivo?</div>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:14px;">
+    <div class="pause-label">⏸ Pregunta</div>
+    <div class="pause-q">¿"¿El café frío es bueno?" cumple SMART? ¿Qué criterio falla primero?</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Caso Café del Sur — Hipótesis</div>
+  <div class="slide-h">Tres H que responden a las tres PI</div>
+  <div class="cascade">
+    <div class="cascade-row">
+      <div class="cascade-tag tag-h">H₁</div>
+      <div class="cascade-content">Más del 35 % de los adultos jóvenes (18–35) de Montevideo declarará intención de compra semanal de café frío embotellado de marca local en verano 2026-2027.</div>
+    </div>
+    <div class="cascade-row" style="margin-top:10px;">
+      <div class="cascade-tag tag-h">H₂</div>
+      <div class="cascade-content">La disposición a pagar promedio por una botella de 330 ml se ubicará entre 180 y 240 pesos uruguayos, y crecerá con el nivel de ingreso del consumidor.</div>
+    </div>
+    <div class="cascade-row" style="margin-top:10px;">
+      <div class="cascade-tag tag-h">H₃</div>
+      <div class="cascade-content">El atributo "bajo contenido de azúcar" será el segundo más valorado por el segmento, después del sabor base, y superará en valoración al formato de envase.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    Si la encuesta arroja 12 % de intención de compra semanal → <strong>H₁ se rechaza</strong>. Esa es la prueba de que es una hipótesis real.
+  </div>
+</div>
+</section>
+
+<!-- ── BLOQUE 12: Checklist ─── -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 12</div>
+  <div class="sec-title">Checklist:<br><em>Entrega 2</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Checklist de autoevaluación — antes de entregar</div>
+  <div class="slide-h">Sobre el PDA, el PIM, las PI y las H</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">PDA</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Hay una decisión concreta sobre la mesa?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Está redactado con verbo de acción?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Hay al menos dos cursos de acción posibles?</div></div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-top:14px;margin-bottom:8px;">PIM</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Usa verbos de información (determinar, evaluar)?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Ni demasiado amplio ni demasiado estrecho?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Mapea claramente al PDA?</div></div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">PI</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Tengo entre 3 y 5 PI?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Cada PI cumple SMART?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿No se superponen entre sí?</div></div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--violet);letter-spacing:2px;text-transform:uppercase;margin-top:14px;margin-bottom:8px;">H</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Cada H responde a una PI?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Cada H es declarativa, con dos variables?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Es falsable con los datos que voy a recolectar?</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Checklist de autoevaluación — escritura y fuentes</div>
+  <div class="slide-h">Sobre la redacción de los documentos</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Escritura</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Cada párrafo tiene una sola idea y arranca con BLUF?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Eliminé muletillas ("hoy en día", "una serie de")?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Usé voz activa donde había agente claro?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Presente académico ("Malhotra sostiene")?</div></div>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Fuentes</div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Toda afirmación no trivial tiene cita?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Verifiqué cada cita que sugirió la IA en Google Scholar?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Texto ↔ bibliografía: correspondencia uno a uno?</div></div>
+      <div class="rule-row"><div class="rule-icon">□</div><div>¿Predomina la paráfrasis (≥80 %) sobre la cita textual?</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CIERRE -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Cierre</div>
+  <div class="sec-title" style="font-size:2.1rem;margin-bottom:26px;color:var(--paper);">Una idea por párrafo.<br>BLUF al principio.<br><em style="color:#d4a0a0;">PDA → PIM → PI → H.</em></div>
+  <ul class="bullets bullets-white" style="max-width:620px;margin-bottom:28px;">
+    <li>Voz activa · presente académico · sin muletillas</li>
+    <li>Toda fuente citada en el texto → en la bibliografía. Y al revés.</li>
+    <li>Las citas que te sugirió la IA: verificar en Google Scholar antes de usarlas</li>
+    <li>El PIM no decide — informa. Si tiene "lanzar" adentro, es un PDA disfrazado.</li>
+  </ul>
+  <div class="cover-chip">Próxima clase: Escritura Académica II — citas, referencias y uso de fuentes en su propio proyecto</div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
