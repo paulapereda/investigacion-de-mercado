@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escritura Académica II — Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --cream:  #ede9e1;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+  --violet: #6b3fa0;
+  --violetbg: #f3eeff;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number { font-family: 'DM Mono', monospace; font-size: 11px; background: transparent; color: rgba(255,255,255,0.25); bottom: 14px; right: 18px; }
+
+.slide { width: 100%; height: 100vh; display: flex; flex-direction: column; position: relative; overflow: hidden; box-sizing: border-box; }
+
+.s-cover { background: var(--ink); color: var(--paper); justify-content: center; padding: 56px 72px; }
+.s-cover::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold)); }
+.cover-eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.cover-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 900; line-height: 1.0; margin-bottom: 28px; }
+.cover-title em { color: #d4a0a0; font-style: italic; }
+.cover-chip { font-size: 12px; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; display: inline-block; letter-spacing: 0.5px; }
+
+.s-section { background: var(--ink); color: var(--paper); justify-content: center; padding: 60px 72px; }
+.s-section::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+.sec-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--paper); }
+.sec-sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-top: 14px; font-style: italic; }
+
+.s-light { background: var(--paper); padding: 48px 72px; justify-content: flex-start; }
+.s-light::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.s-dark { background: #1e1e1e; padding: 48px 72px; justify-content: flex-start; }
+.s-dark::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+.s-close { background: var(--ink); padding: 60px 72px; justify-content: center; }
+
+.eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.eyebrow-light { color: rgba(255,255,255,0.35); }
+.slide-h { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.8vw, 1.9rem); font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 22px; }
+.slide-h-white { color: white; }
+
+ul.bullets { list-style: none; padding: 0; margin: 0; }
+ul.bullets li { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.65; color: #333; padding: 7px 0 7px 22px; border-bottom: 1px solid var(--border); position: relative; }
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+ul.bullets-white li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color: var(--accent); }
+
+.def-block { background: var(--ink); border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; }
+.def-term-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 7px; }
+.def-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.65; }
+.def-text strong { color: #d4a0a0; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.col-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; }
+.col-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.col-body { font-size: 13.5px; color: #333; line-height: 1.7; }
+
+.callout { background: white; border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 13.5px; color: #333; line-height: 1.65; }
+.callout strong { color: var(--gold); }
+
+.pause-box { background: #fffbec; border-left: 5px solid var(--gold); border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 14px; }
+.pause-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 5px; }
+.pause-q { font-size: 13px; font-style: italic; color: #4a3a00; line-height: 1.6; }
+
+.latam-box { background: var(--greenbg); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 14px; }
+.latam-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--green); text-transform: uppercase; margin-bottom: 5px; }
+.latam-text { font-size: 13px; color: #1a3a1a; line-height: 1.6; }
+
+.rule-row { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; color: #333; line-height: 1.6; }
+.rule-row:last-child { border-bottom: none; }
+.rule-icon { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); min-width: 22px; font-weight: 700; padding-top: 2px; }
+
+.ref-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.ref-table th { background: var(--ink); color: var(--paper); padding: 8px 12px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 400; }
+.ref-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; color: #333; }
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table-dark th { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+.ref-table-dark td { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.08); }
+
+/* ── Bloques de texto "antes/después" ── */
+.text-bad { background: #fff8f8; border: 1px solid #f0c0c0; border-left: 4px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 13.5px; color: #333; line-height: 1.8; margin-bottom: 10px; }
+.text-good { background: #f0fff4; border: 1px solid #a0d8b0; border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 13.5px; color: #1a1a1a; line-height: 1.8; }
+.badge-bad { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.badge-good { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); margin-bottom: 6px; }
+
+/* ── Estructura del informe ── */
+.seccion-row { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.seccion-row:last-child { border-bottom: none; }
+.seccion-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--blue); min-width: 28px; font-weight: 700; padding-top: 2px; }
+.seccion-content { font-size: 13.5px; color: #333; line-height: 1.6; }
+.seccion-tag { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); background: var(--cream); border-radius: 4px; padding: 1px 7px; margin-left: 8px; vertical-align: middle; }
+
+/* ── Transiciones ── */
+.trans-block { display: flex; flex-direction: column; gap: 4px; margin: 6px 0; }
+.trans-arrow { text-align: center; color: var(--muted); font-size: 18px; margin: 2px 0; }
+.trans-card { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #333; line-height: 1.6; }
+.trans-card-em { background: #edf4fc; border: 1px solid #b5d4f4; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #0c447c; line-height: 1.6; font-style: italic; }
+.trans-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 4px; }
+
+/* ── Checklist ── */
+.check-row { display: flex; gap: 10px; align-items: flex-start; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; color: #333; line-height: 1.55; }
+.check-row:last-child { border-bottom: none; }
+.check-icon { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted); min-width: 18px; padding-top: 1px; }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Escritura Académica II</div>
+  <div class="cover-title">Del bloque<br>al <em>informe</em>:<br>integrar, conectar,<br>sostener</div>
+  <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+    <div class="cover-chip">Transiciones · Estructura · Jerarquía de títulos</div>
+    <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     INTRODUCCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Dónde estamos parados</div>
+  <div class="slide-h">En la clase anterior aprendieron a escribir <em>bloques</em>. Hoy aprenden a escribir un <em>informe</em>.</div>
+  <div class="ref-table" style="margin-top:4px;">
+    <table class="ref-table">
+      <tr><th>Escritura Académica I</th><th>Escritura Académica II (hoy)</th></tr>
+      <tr>
+        <td>El párrafo académico (BLUF)</td>
+        <td>La transición entre secciones</td>
+      </tr>
+      <tr>
+        <td>Voz activa, presente académico, brevedad</td>
+        <td>Cuándo poner un título y cuándo no</td>
+      </tr>
+      <tr>
+        <td>Fuentes, citas, .bib</td>
+        <td>La columna vertebral: el resumen ejecutivo como prueba</td>
+      </tr>
+      <tr>
+        <td>PDA → PIM → PI → H</td>
+        <td>Integrar Entregas 1 + 2 + 3 en un documento que fluye</td>
+      </tr>
+    </table>
+  </div>
+  <div class="callout" style="margin-top:16px;">
+    <strong>El gap:</strong> saber escribir buenos párrafos y saber ensamblarlos en un informe cohesivo son habilidades distintas. La segunda es la que falta.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 1: Entrega vs. Informe
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 1</div>
+  <div class="sec-title">Entrega vs. Informe:<br><em>no es la misma cosa</em></div>
+  <div class="sec-sub">Neugeboren & Jacobson (2014) · Nikolov (2023) · Turabian et al. (2018)</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">La diferencia estructural</div>
+  <div class="slide-h">Una entrega responde a una consigna. Un informe sostiene un argumento.</div>
+  <div class="two-col" style="margin-top:6px;">
+    <div class="col-box" style="border-top:3px solid var(--muted);">
+      <div class="col-label">Entrega (lo que hicieron)</div>
+      <div class="col-body">
+        Responde ítems de una rúbrica<br>
+        Puede tener secciones independientes<br>
+        El lector sabe que hay bloques separados<br>
+        Los "saltos" entre secciones son tolerados<br><br>
+        <em>Analogía: conjunto de respuestas a un cuestionario.</em>
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--blue);">
+      <div class="col-label" style="color:var(--blue);">Informe (lo que entregan el 14)</div>
+      <div class="col-body">
+        Sostiene un argumento de principio a fin<br>
+        Las secciones se <strong>construyen</strong> una sobre otra<br>
+        El lector no debería sentir costuras<br>
+        Los saltos entre secciones son fallas<br><br>
+        <em>Analogía: un caso bien construido ante un cliente.</em>
+      </div>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:16px;">
+    <div class="def-term-label">Neugeboren & Jacobson (2014, p. 21) — traducido</div>
+    <div class="def-text">"Tenés ideas, tomaste notas y ahora tenés que escribir. Necesitás enfocarte en tu pregunta y ensamblar las piezas en una estructura que construya un <strong>argumento sólido, interesante y convincente</strong>."</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">El síntoma más frecuente</div>
+  <div class="slide-h slide-h-white">El lector tropieza — y no sabe por qué</div>
+  <ul class="bullets bullets-white" style="margin-top:8px;">
+    <li>Cada sección <strong style="color:white;">empieza de cero</strong> en lugar de continuar desde donde terminó la anterior</li>
+    <li>Los títulos funcionan como <strong style="color:white;">puertas cerradas</strong>: hay que entrar, salir, volver a orientarse</li>
+    <li>No hay oración que diga al lector "lo que describimos antes nos lleva a lo siguiente"</li>
+    <li>El informe se puede leer en <strong style="color:white;">cualquier orden</strong> sin perder sentido — señal de que no tiene columna vertebral</li>
+  </ul>
+  <div class="latam-box" style="margin-top:20px;">
+    <div class="latam-label">Nikolov (2023, p. 5) — traducido</div>
+    <div class="latam-text">"Mantené cada oración y párrafo <strong>construyendo progresivamente sobre el anterior</strong>. Agrupá ideas relacionadas para evitar redundancias."</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 2: Estructura del informe
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 2</div>
+  <div class="sec-title">La arquitectura<br>del informe<br><em>final</em></div>
+  <div class="sec-sub">Cuántas secciones, qué van en cada una, en qué orden</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Estructura recomendada — informe de investigación de mercado</div>
+  <div class="slide-h">Cinco secciones principales. No más.</div>
+  <div style="margin-top:8px; display:flex; flex-direction:column; gap:0;">
+    <div class="seccion-row">
+      <div class="seccion-num">1</div>
+      <div class="seccion-content"><strong>Introducción</strong> — Contexto del problema, empresa, decisión de negocio en juego, pregunta objetivo.</div>
+    </div>
+    <div class="seccion-row">
+      <div class="seccion-num">2</div>
+      <div class="seccion-content"><strong>Definición del problema</strong> — PDA, PIM, componentes específicos, modelo gráfico.</div>
+    </div>
+    <div class="seccion-row">
+      <div class="seccion-num">3</div>
+      <div class="seccion-content"><strong>Enfoque de la investigación</strong> — Marco teórico, PI, H, fuentes secundarias relevantes.</div>
+    </div>
+    <div class="seccion-row">
+      <div class="seccion-num">4</div>
+      <div class="seccion-content"><strong>Diseño de la investigación</strong> <em>(lo que llevan hasta ahora)</em> — Tipo de diseño, instrumento, muestra, campo.</div>
+    </div>
+    <div class="seccion-row">
+      <div class="seccion-num">5</div>
+      <div class="seccion-content"><strong>Conclusiones parciales y próximos pasos</strong> — Qué saben hasta ahora, qué falta, cronograma.</div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    <strong>Regla de oro:</strong> si no podés decir en una oración para qué sirve esa sección, no debería existir como sección separada.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">La regla de los títulos — cuándo poner uno y cuándo no</div>
+  <div class="slide-h">Un título es una puerta. Abrirla tiene un costo para el lector.</div>
+  <div class="ref-table" style="margin-top:4px;">
+    <table class="ref-table">
+      <tr><th>Señal</th><th>¿Poner título?</th></tr>
+      <tr>
+        <td>El contenido dura menos de dos párrafos completos</td>
+        <td style="color:var(--accent);font-weight:700;">No — integrarlo a la sección anterior</td>
+      </tr>
+      <tr>
+        <td>El lector genuinamente necesita saber que empieza algo nuevo</td>
+        <td style="color:var(--green);font-weight:700;">Sí</td>
+      </tr>
+      <tr>
+        <td>Tenés subtítulos dentro de subtítulos (tres niveles de heading)</td>
+        <td style="color:var(--accent);font-weight:700;">No — están atomizando en exceso</td>
+      </tr>
+      <tr>
+        <td>El título solo repite el nombre de un elemento del PIM (ej. "Hipótesis")</td>
+        <td style="color:var(--accent);font-weight:700;">No — mejor integrar en el flujo</td>
+      </tr>
+      <tr>
+        <td>El contenido cambia de tema substantivamente y tiene ≥ 2 párrafos</td>
+        <td style="color:var(--green);font-weight:700;">Sí</td>
+      </tr>
+    </table>
+  </div>
+  <div class="pause-box" style="margin-top:14px;">
+    <div class="pause-label">⏸ Prueba rápida</div>
+    <div class="pause-q">Abran su entrega más reciente y cuenten cuántos títulos y subtítulos tiene. ¿Cuántos podrían eliminarse sin que el lector se pierda?</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 3: Transiciones
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 3</div>
+  <div class="sec-title">Transiciones:<br><em>la costura invisible</em></div>
+  <div class="sec-sub">Cómo pasar de una sección a la siguiente sin que el lector tropiece</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Qué es una transición — y qué no es</div>
+  <div class="slide-h">Una transición no es un conector. Es una oración que <em>lleva al lector</em>.</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">❌ Falsa transición</div>
+      <div class="col-body">
+        "Además, cabe destacar que…"<br>
+        "A continuación se presentará…"<br>
+        "Por otro lado, es importante mencionar…"<br>
+        "En esta sección se verá…"<br><br>
+        Son marcadores de posición, no conexiones. Anuncian que viene algo pero no explican <em>por qué</em> viene.
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">✅ Transición real</div>
+      <div class="col-body">
+        Retoma algo del párrafo anterior<br>
+        Lo conecta con lo que viene<br>
+        Puede ser la <strong>última oración</strong> de una sección o la <strong>primera oración</strong> de la siguiente<br><br>
+        Hace que el lector sienta que la lectura <em>avanza</em> en lugar de <em>saltar</em>.
+      </div>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:14px;">
+    <div class="def-term-label">Turabian et al. (2018) — traducido</div>
+    <div class="def-text">El lector necesita sentir que va de un lugar a otro con propósito. <strong>"Las transiciones son el pegamento que une los argumentos."</strong> Sin ellas, el lector tiene que hacer solo el trabajo de conectar — y muchas veces no lo hace.</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Anatomía de una buena transición</div>
+  <div class="slide-h">Tres movimientos: anclar, conectar, anticipar</div>
+  <div class="trans-block" style="margin-top:10px;">
+    <div>
+      <div class="trans-label">Final de la sección anterior — cierre que ancla</div>
+      <div class="trans-card">
+        "El análisis de las fuentes secundarias disponibles muestra que <strong>no existe información sistemática sobre el comportamiento del consumidor joven de café de especialidad en Montevideo</strong>, lo que justifica la necesidad de recolectar datos primarios."
+      </div>
+    </div>
+    <div class="trans-arrow">↓ la primera oración de la siguiente sección retoma lo subrayado</div>
+    <div>
+      <div class="trans-label">Primera oración de la sección siguiente — conecta y avanza</div>
+      <div class="trans-card-em">
+        "Para cubrir esa brecha, esta investigación adopta un diseño descriptivo con encuesta estructurada dirigida a adultos jóvenes de 18 a 35 años en Montevideo."
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:12px;">
+    <strong>La prueba:</strong> si tapás el título de sección y solo leés las últimas dos oraciones de una sección y las primeras dos de la siguiente, ¿la conexión es clara? Si no: falta transición.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Ejemplo en vivo — Caso Café del Sur</div>
+  <div class="slide-h slide-h-white">Sin transición vs. con transición</div>
+  <div style="margin-top:10px;">
+    <div class="badge-bad" style="color:#f0a0a0;">❌ Sin transición — el lector tropieza</div>
+    <div class="text-bad" style="background:#2a1a1a;border-color:#6a3030;border-left-color:var(--accent);color:rgba(255,255,255,0.8);">
+      [Fin de sección 2 — PIM] "…el problema de investigación se centra en determinar los factores que explican la caída de ventas de Café del Sur."<br><br>
+      <strong style="color:#d4a0a0;">3. Enfoque de la investigación</strong><br>
+      "El marco teórico de esta investigación se basa en el modelo del Consumer Decision Journey…"
+    </div>
+  </div>
+  <div style="margin-top:12px;">
+    <div class="badge-good" style="color:#80c880;">✅ Con transición — el lector avanza</div>
+    <div class="text-good" style="background:#1a2a1a;border-color:#406040;border-left-color:var(--green);color:rgba(255,255,255,0.85);">
+      [Fin de sección 2 — PIM] "…el problema de investigación se centra en determinar los factores que explican la caída de ventas de Café del Sur. <strong style="color:#80d880;">Para responder ese problema, es necesario apoyarse en un marco conceptual que explique cómo los consumidores toman decisiones en mercados de café de especialidad.</strong>"<br><br>
+      <strong style="color:#80d880;">3. Enfoque de la investigación</strong><br>
+      "El Consumer Decision Journey (McKinsey, 2009) ofrece ese marco…"
+    </div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Tres patrones de transición que funcionan — con ejemplos del informe</div>
+  <div class="slide-h">No inventar la rueda: hay patrones probados</div>
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;">
+      <strong style="color:var(--blue);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">Patrón 1 — Consecuencia lógica</strong><br>
+      "Dado que [resumen de lo anterior], el paso siguiente es [lo que viene]."<br>
+      <span style="color:var(--muted);font-style:italic;">Ej: "Dado que las fuentes secundarias no responden las PI, el diseño de investigación requiere recolección de datos primarios."</span>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;">
+      <strong style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">Patrón 2 — Brecha que se cierra</strong><br>
+      "[Lo que se sabe] no alcanza para [lo que se necesita]. Por eso [lo que sigue]."<br>
+      <span style="color:var(--muted);font-style:italic;">Ej: "El análisis del contexto revela el problema pero no sus causas. El PIM orienta la investigación hacia esas causas."</span>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--green);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;">
+      <strong style="color:var(--green);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;">Patrón 3 — Especificación progresiva</strong><br>
+      "[Lo anterior] planteó el marco general. A continuación se especifica [el aspecto concreto]."<br>
+      <span style="color:var(--muted);font-style:italic;">Ej: "El PIM definió qué información se necesita. Las preguntas de investigación desagregan esa necesidad en componentes medibles."</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 4: Columna vertebral
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 4</div>
+  <div class="sec-title">La columna<br>vertebral:<br><em>el resumen ejecutivo</em></div>
+  <div class="sec-sub">Si no podés resumirlo, el informe no tiene argumento</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">El resumen ejecutivo como prueba diagnóstica</div>
+  <div class="slide-h">Antes de entregar: resumilo en tres párrafos. Si no podés, el informe no está listo.</div>
+  <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;">
+      <strong style="color:var(--accent);">Párrafo 1 — El problema</strong><br>
+      ¿Qué está pasando? ¿Quién toma la decisión? ¿Qué decisión? <em>(contexto + PDA)</em>
+    </div>
+    <div style="background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;">
+      <strong style="color:var(--blue);">Párrafo 2 — La investigación</strong><br>
+      ¿Qué información se busca? ¿Cómo? ¿Sobre quién? <em>(PIM + diseño)</em>
+    </div>
+    <div style="background:white;border:1px solid var(--green);border-radius:0 6px 6px 0;padding:12px 16px;font-size:13.5px;color:#333;line-height:1.6;border:1px solid var(--border);border-left:4px solid var(--green);">
+      <strong style="color:var(--green);">Párrafo 3 — Lo que se sabe hasta ahora y qué falta</strong><br>
+      ¿Qué respondieron ya las fuentes secundarias? ¿Qué responderá el trabajo de campo? <em>(avance + próximos pasos)</em>
+    </div>
+  </div>
+  <div class="def-block" style="margin-top:14px;">
+    <div class="def-term-label">Nikolov (2023, p. 14) — traducido</div>
+    <div class="def-text">"Identificá la contribución más importante de tu trabajo y capturala en <strong>un párrafo conciso al principio</strong>. Una vez que lo lográs, el foco de tu trabajo queda más claro y la narrativa más sólida."</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">El resumen como detector de problemas</div>
+  <div class="slide-h">Tres síntomas que el resumen ejecutivo hace visibles</div>
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+    <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:13px 16px;font-size:13.5px;color:#333;line-height:1.65;">
+      <strong style="color:var(--accent);">Síntoma 1 — No podés escribir el párrafo 1 en menos de 5 oraciones</strong><br>
+      El contexto del problema está sobredescrito en el informe pero no tiene un argumento central. Solución: identificar la oración BLUF del contexto y reestructurar alrededor de ella.
+    </div>
+    <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:13px 16px;font-size:13.5px;color:#333;line-height:1.65;">
+      <strong style="color:var(--accent);">Síntoma 2 — El párrafo 2 repite el párrafo 1 con otras palabras</strong><br>
+      El PIM no está bien diferenciado del contexto. Las secciones 1 y 2 del informe se superponen. Solución: revisar que el PDA y el PIM sean conceptualmente distintos y estén en secciones distintas.
+    </div>
+    <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:13px 16px;font-size:13.5px;color:#333;line-height:1.65;">
+      <strong style="color:var(--accent);">Síntoma 3 — El párrafo 3 no existe</strong><br>
+      El informe no tiene conclusiones parciales ni próximos pasos. La entrega preliminar parece una suma de bloques sin cierre.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RECESO
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Receso · 10 minutos</div>
+  <div class="sec-title" style="font-size:2.5rem;">☕</div>
+  <div class="sec-sub">Vuelven en 10 minutos para el ejercicio en vivo</div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 5: Ejercicio en vivo
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 5</div>
+  <div class="sec-title">Ejercicio en vivo:<br><em>diagnosticar y reparar</em></div>
+  <div class="sec-sub">Un informe fragmentado → un informe integrado</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Versión con problemas — identificar con la clase</div>
+  <div class="slide-h">¿Dónde tropieza el lector y por qué?</div>
+  <div style="background:#fff8f8;border:1px solid #f0c0c0;border-radius:8px;padding:16px 20px;font-size:13.5px;color:#333;line-height:1.9;margin-bottom:12px;">
+    <strong>2. Definición del problema</strong><br>
+    "El problema de investigación es determinar qué quieren los consumidores de Café del Sur."<br><br>
+    <strong>2.1. Problema de Decisión Administrativa</strong><br>
+    "El PDA es si el gerente debe lanzar café frío."<br><br>
+    <strong>2.2. Problema de Investigación de Mercados</strong><br>
+    "El PIM es determinar la demanda de café frío."<br><br>
+    <strong>2.3. Preguntas de Investigación</strong><br>
+    "PI1: ¿Les gusta el café frío? PI2: ¿Cuánto pagarían?"<br><br>
+    <strong>3. Marco Teórico</strong><br>
+    "Según Kotler (2016), el comportamiento del consumidor es…"
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">⏸ Identificar al menos cuatro problemas</div>
+    <div class="pause-q">Demasiados títulos · PIM demasiado estrecho · PI mal formuladas · sin transición al marco teórico · sección 2 sin columna vertebral</div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Versión reparada — construida con la clase</div>
+  <div class="slide-h">Menos títulos, más argumento, transición explícita</div>
+  <div style="background:#f0fff4;border:1px solid #a0d8b0;border-radius:8px;padding:16px 20px;font-size:13.5px;color:#1a1a1a;line-height:1.9;">
+    <strong>2. Definición del problema</strong><br><br>
+    Café del Sur enfrenta una caída sostenida en ventas desde febrero de 2026, coincidente con la apertura de un competidor internacional. El gerente necesita decidir si lanzar una línea de café frío embotellado como estrategia de diferenciación. Esta decisión —el <em>problema de decisión administrativa</em>— no puede tomarse sin información sistemática sobre el comportamiento del consumidor objetivo.<br><br>
+    El <em>problema de investigación de mercados</em> consiste en determinar el nivel de interés, la disposición a pagar y los atributos preferidos por adultos jóvenes (18–35 años) de Montevideo frente a un café frío de marca local. Para operacionalizar ese problema, se formularon tres preguntas de investigación: (PI₁) ¿Qué porcentaje del segmento declara intención de compra semanal?; (PI₂) ¿Cuál es la disposición a pagar por botella de 330 ml según nivel de ingreso?; (PI₃) ¿Qué atributos del producto son más valorados?<br><br>
+    Responder estas preguntas requiere un marco conceptual que explique cómo los consumidores jóvenes evalúan opciones en mercados de especialidad.
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Qué cambió — análisis comparativo</div>
+  <div class="slide-h slide-h-white">Cuatro movimientos que transforman el fragmento en argumento</div>
+  <div class="ref-table" style="margin-top:10px;">
+    <table class="ref-table ref-table-dark">
+      <tr><th>Problema original</th><th>Solución aplicada</th></tr>
+      <tr>
+        <td>Cuatro subtítulos en media página</td>
+        <td>Eliminados. El texto fluye con marcadores en cursiva (PDA, PIM)</td>
+      </tr>
+      <tr>
+        <td>PIM demasiado estrecho ("la demanda de café frío")</td>
+        <td>PIM reformulado con tres dimensiones: interés, disposición a pagar, atributos</td>
+      </tr>
+      <tr>
+        <td>PI mal formuladas, sin SMART</td>
+        <td>PI reescritas con objeto, población, unidad de medida y tiempo implícito</td>
+      </tr>
+      <tr>
+        <td>Sin transición al marco teórico</td>
+        <td>Última oración de sección 2 anticipa y justifica la sección 3</td>
+      </tr>
+    </table>
+  </div>
+  <div class="latam-box" style="margin-top:14px;">
+    <div class="latam-label">Neugeboren & Jacobson (2014, p. 5)</div>
+    <div class="latam-text">"La claridad raramente aparece sin esfuerzo considerable y voluntad de revisar y reescribir."</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 6: La integración de las entregas
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 6</div>
+  <div class="sec-title">Integrar sin<br>copiar y pegar:<br><em>la reescritura</em></div>
+  <div class="sec-sub">Cómo pasar de tres entregas a un informe que no parece ensamblado</div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">El error más frecuente en la entrega preliminar</div>
+  <div class="slide-h">Copiar y pegar las entregas no produce un informe. Produce un collage.</div>
+  <div class="two-col" style="margin-top:8px;">
+    <div class="col-box" style="border-top:3px solid var(--accent);">
+      <div class="col-label" style="color:var(--accent);">❌ Collage</div>
+      <div class="col-body">
+        Cada entrega se pega en su sección<br>
+        Los tiempos verbales cambian de sección en sección<br>
+        Hay repeticiones de información entre secciones<br>
+        Las referencias al "trabajo futuro" de E1 quedaron en E3<br>
+        El lector nota que hay tres "momentos" distintos de escritura
+      </div>
+    </div>
+    <div class="col-box" style="border-top:3px solid var(--green);">
+      <div class="col-label" style="color:var(--green);">✅ Informe integrado</div>
+      <div class="col-body">
+        El material de las entregas se <strong>reescribe</strong> en función del argumento del informe<br>
+        Tiempo verbal uniforme en todo el documento<br>
+        Cada dato aparece una sola vez, en el lugar correcto<br>
+        Las transiciones conectan lo que en las entregas eran documentos separados
+      </div>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:14px;">
+    <strong>Nikolov (2023, p. 9):</strong> "Tu primer borrador nunca va a ser perfecto. Estén listos para escribir, revisar y reescribir hasta que el trabajo esté pulido."
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Protocolo de integración — cinco pasos para la entrega del 14</div>
+  <div class="slide-h">En ese orden. No hay atajo.</div>
+  <div style="display:flex; flex-direction:column; gap:0; margin-top:8px;">
+    <div class="rule-row">
+      <div class="rule-icon">1.</div>
+      <div><strong>Escribir primero el resumen ejecutivo</strong> (tres párrafos). Esto fuerza a identificar el argumento central antes de tocar el texto de las entregas.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">2.</div>
+      <div><strong>Definir las cinco secciones y su extensión estimada</strong>. No empezar a pegar texto hasta tener el esqueleto.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">3.</div>
+      <div><strong>Clasificar el contenido de cada entrega</strong> en la sección correspondiente. Identificar qué sobra, qué falta, qué se repite.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">4.</div>
+      <div><strong>Reescribir cada sección</strong> (no copiar) con tiempo verbal uniforme y con las transiciones al inicio y al final.</div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">5.</div>
+      <div><strong>Leer el informe completo en voz alta</strong>. Si hay que pausar para orientarse: falta transición. Si hay un párrafo redundante: eliminarlo.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOQUE 7: Lo que no debe pasar
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque 7</div>
+  <div class="sec-title">Lista de lo que<br>no debe pasar<br><em>en el informe</em></div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Errores estructurales — los más frecuentes en informes de primer año</div>
+  <div class="slide-h">Si alguno aparece antes del 14, corregirlo antes de entregar</div>
+  <div style="display:flex; flex-direction:column; gap:0; margin-top:4px;">
+    <div class="check-row"><div class="check-icon">□</div><div>Tres o más niveles de encabezado (sección / subsección / subsubsección)</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Subtítulo para un bloque de menos de dos párrafos</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Sección que empieza sin conectar con la anterior</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Información que aparece dos veces en el documento</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Cambio de tiempo verbal entre secciones (pasado en E1, futuro en E2)</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Párrafos de más de seis oraciones sin oración tema clara</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>Uso de "En la siguiente sección se verá" como reemplazo de una transición real</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>El informe no tiene conclusiones parciales — termina con el diseño metodológico</div></div>
+    <div class="check-row"><div class="check-icon">□</div><div>El resumen ejecutivo (si existe) describe la estructura en vez de resumir el argumento</div></div>
+  </div>
+</div>
+</section>
+
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Errores de escritura — heredados de las entregas</div>
+  <div class="slide-h">El informe amplifica los problemas de escritura que las entregas ocultaban</div>
+  <div class="ref-table" style="margin-top:4px;">
+    <table class="ref-table">
+      <tr><th>Problema</th><th>Cómo detectarlo</th><th>Corrección</th></tr>
+      <tr>
+        <td>Párrafos sin oración tema (BLUF)</td>
+        <td>Leer solo la primera oración de cada párrafo: ¿dice de qué trata?</td>
+        <td>Reescribir la primera oración como resumen del párrafo</td>
+      </tr>
+      <tr>
+        <td>Voz pasiva sin agente claro</td>
+        <td>"Se realizó", "fue identificado", "se determinó"</td>
+        <td>Agregar agente: "El equipo realizó", "El análisis identificó"</td>
+      </tr>
+      <tr>
+        <td>Muletillas de transición vacías</td>
+        <td>"Además, cabe destacar que" · "Por otro lado" · "Es importante mencionar"</td>
+        <td>Eliminar y reemplazar por la conexión real entre las ideas</td>
+      </tr>
+      <tr>
+        <td>Afirmaciones sin fuente</td>
+        <td>Cualquier dato de contexto sin paréntesis de cita</td>
+        <td>Citar o eliminar</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Cierre</div>
+  <div class="sec-title" style="font-size:1.9rem;margin-bottom:26px;color:var(--paper);">Un informe no es la suma<br>de sus partes.<br><em style="color:#d4a0a0;">Es el argumento que las une.</em></div>
+  <ul class="bullets bullets-white" style="max-width:640px;margin-bottom:28px;">
+    <li>Cinco secciones máximo. Si tenés más, uní o eliminá.</li>
+    <li>Un título solo si el bloque tiene dos párrafos o más. Si no: integrarlo.</li>
+    <li>Cada sección termina llevando al lector a la siguiente — o falta transición.</li>
+    <li>El resumen ejecutivo es la prueba: si no podés escribirlo, el informe no está listo.</li>
+    <li>Antes de entregar: leer en voz alta. Todo tropiezo es una falla que corregir.</li>
+  </ul>
+  <div class="cover-chip">Entrega preliminar: hasta el domingo 14 · Informe final integrado: Entregas 1 + 2 + 3 en avance</div>
+</div>
+</section>
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
