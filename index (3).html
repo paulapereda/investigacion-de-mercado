@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investigación de Mercados — Paula Pereda Suárez</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23d4a0a0'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f7f4ef;
+    --cream: #ede9e1;
+    --accent: #c0392b;
+    --accent2: #2c5f8a;
+    --gold: #b8860b;
+    --muted: #6b6560;
+    --border: #d4cec5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ───────────────────────────────────── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 40px 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    max-width: 760px;
+    margin-bottom: 20px;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #d4a0a0;
+  }
+  .header-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.5px;
+    margin-top: 12px;
+  }
+  .header-bg {
+    position: absolute;
+    top: 0; right: 0;
+    width: 420px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(192,57,43,0.08) 100%);
+    pointer-events: none;
+  }
+  .header-rule {
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%);
+  }
+
+  /* ── MAIN CONTENT ─────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 40px 80px;
+    flex: 1;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── CHAPTER GRID ─────────────────────────────── */
+  .chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .chapter-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 28px;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .chapter-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent2) 100%);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+  }
+  .chapter-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(26,26,26,0.1);
+    border-color: rgba(192,57,43,0.3);
+  }
+  .chapter-card:hover::before {
+    transform: scaleY(1);
+  }
+
+  .card-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .card-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card-arrow {
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s ease;
+  }
+  .chapter-card:hover .card-arrow {
+    gap: 14px;
+  }
+  .card-arrow::after {
+    content: '→';
+    font-size: 14px;
+  }
+
+  .card-links {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .card-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+    text-decoration: none;
+  }
+  .card-link-primary {
+    color: var(--accent2);
+  }
+  .card-link-secondary {
+    color: var(--gold);
+  }
+  .card-link::after {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+  }
+  .card-link-primary::after { content: '→'; }
+  .card-link-secondary::after { content: '⧉'; }
+  .chapter-card:hover .card-link { gap: 10px; }
+
+  /* ── FOOTER ───────────────────────────────────── */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    text-align: center;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+  }
+  .footer-rule {
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 50%, var(--gold) 100%);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-bg"></div>
+  <div class="header-inner">
+    <div class="header-label">Universidad de Montevideo · Curso</div>
+    <h1>¡Bienvenidos/as a<br><em>Investigación</em><br>de Mercado!</h1>
+    <p class="header-subtitle">Paula Pereda Suárez &nbsp;·&nbsp; Universidad de Montevideo</p>
+  </div>
+</header>
+<div class="header-rule"></div>
+
+<main>
+  <div class="section-label">Contenidos del curso</div>
+
+  <div class="chapters-grid">
+
+    <a href="intro_curso.html" class="chapter-card">
+      <div class="card-number">Introducción al curso</div>
+      <div class="card-title">Bienvenida, programa y metodología</div>
+      <div class="card-desc">Horarios, objetivos, estructura del curso y descripción del proyecto de investigación semestral.</div>
+      <div class="card-arrow">Ver introducción</div>
+    </a>
+
+    <a href="proyecto.html" class="chapter-card">
+      <div class="card-number">Proyecto del curso</div>
+      <div class="card-title">Investigación de mercado con empresa real</div>
+      <div class="card-desc">Entregas, criterios, estructura del trabajo semestral y herramientas que se usarán a lo largo del curso.</div>
+      <div class="card-arrow">Ver proyecto</div>
+    </a>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 01</div>
+      <div class="card-title">Introducción a la Investigación de Mercado</div>
+      <div class="card-desc">Definición, alcance y rol de la investigación de mercado en la toma de decisiones estratégicas.</div>
+      <div class="card-links">
+        <a href="capitulo_1.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_1_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 02</div>
+      <div class="card-title">Definición del problema y desarrollo del enfoque</div>
+      <div class="card-desc">Proceso de definición del problema, PDA vs. PIM, contexto ambiental, componentes del enfoque e investigación cualitativa.</div>
+      <div class="card-links">
+        <a href="capitulo_2.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_2_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Taller 01</div>
+      <div class="card-title">Casos prácticos: identificar PDA, PIM, PI e Hipótesis</div>
+      <div class="card-desc">Diez casos con empresas latinoamericanas reales para practicar la definición del problema de investigación.</div>
+      <div class="card-links">
+        <a href="taller_1.html" class="card-link card-link-primary">Ver taller</a>
+        <a href="casos_practicos_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <a href="capitulo_3.html" class="chapter-card">
+      <div class="card-number">Capítulo 03</div>
+      <div class="card-title">Diseño de la investigación, datos secundarios y sindicados</div>
+      <div class="card-desc">Tipos de diseño, criterios SEOANC, fuentes secundarias en LATAM, datos sindicados, paneles y escaneo electrónico.</div>
+      <div class="card-arrow">Ver capítulo</div>
+    </a>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 04</div>
+      <div class="card-title">Investigación cualitativa</div>
+      <div class="card-desc">Diseños cualitativos, técnicas de recolección, grupos focales, entrevistas en profundidad y análisis de datos cualitativos.</div>
+      <div class="card-links">
+        <a href="capitulo_4.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_4_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 05</div>
+      <div class="card-title">Investigación descriptiva: encuestas y observación</div>
+      <div class="card-desc">Tipos de encuestas, métodos de observación, ventajas y limitaciones de cada enfoque, errores de medición y selección del método.</div>
+      <div class="card-links">
+        <a href="capitulo_5.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_5_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 06</div>
+      <div class="card-title">Diseño causal: investigación experimental</div>
+      <div class="card-desc">Causalidad, validez interna y externa, diseños pre-experimentales, verdaderos experimentos y cuasi-experimentos. Test de mercado.</div>
+      <div class="card-links">
+        <a href="capitulo_6.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_6_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 07</div>
+      <div class="card-title">Medición y escalamiento</div>
+      <div class="card-desc">Escalas nominales, ordinales, de intervalo y de razón. Escalas comparativas y no comparativas. Escalas Likert, diferencial semántico y Stapel.</div>
+      <div class="card-links">
+        <a href="capitulo_7.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_7_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 08</div>
+      <div class="card-title">Diseño de cuestionarios y formularios</div>
+      <div class="card-desc">Los 10 pasos del proceso de diseño. Tipos de preguntas, acrónimo WORDS, orden, formato, prueba piloto y ética en el diseño.</div>
+      <div class="card-links">
+        <a href="capitulo_8.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_8_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 09</div>
+      <div class="card-title">Muestreo: diseño y procedimientos</div>
+      <div class="card-desc">Población, marco muestral y proceso de 8 pasos. Técnicas no probabilísticas y probabilísticas. Muestreo digital, contexto LATAM y ética.</div>
+      <div class="card-links">
+        <a href="capitulo_9.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_9_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Capítulo 10</div>
+      <div class="card-title">Recopilación y preparación de los datos</div>
+      <div class="card-desc">Trabajo de campo (VESTS), capacitación (TRAIN), codificación, depuración, respuestas faltantes, ajuste estadístico y ética en el campo.</div>
+      <div class="card-links">
+        <a href="capitulo_10.html" class="card-link card-link-primary">Ver capítulo</a>
+        <a href="capitulo_10_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number" style="color:var(--accent);">Repaso Pre-Parcial · Clase 1</div>
+      <div class="card-title">Planteo de la investigación</div>
+      <div class="card-desc">Caps. 2, 3 y 4 — PDA/PIM, tipos de diseño, SEOANC y técnicas cualitativas.</div>
+      <div class="card-links">
+        <a href="repaso_clase_1_slides.html" class="card-link card-link-primary">Ver repaso</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number" style="color:var(--accent);">Repaso Pre-Parcial · Clase 2</div>
+      <div class="card-title">Ejecución y medición</div>
+      <div class="card-desc">Caps. 5, 6, 7 y 8 — Encuestas, causalidad, escalas de medición y diseño de cuestionarios.</div>
+      <div class="card-links">
+        <a href="repaso_clase_2_slides.html" class="card-link card-link-primary">Ver repaso</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Habilidades transversales</div>
+      <div class="card-title">Cómo escribir documentos académicos I</div>
+      <div class="card-desc">Párrafo académico, voz activa, citas APA, archivo .bib, evaluación de fuentes y uso responsable de IA. Cascada PDA → PIM → PI → H para la Entrega 2.</div>
+      <div class="card-links">
+        <a href="escritura_academica_1_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+    <div class="chapter-card" style="cursor:default;">
+      <div class="card-number">Habilidades transversales</div>
+      <div class="card-title">Cómo escribir documentos académicos II</div>
+      <div class="card-desc">Integración entre secciones, transiciones, resumen ejecutivo como herramienta diagnóstica y distinción entregable vs. informe.</div>
+      <div class="card-links">
+        <a href="escritura_academica_2_slides.html" class="card-link card-link-secondary">Diapositivas</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="footer-rule"></div>
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">Paula Pereda Suárez</span>
+    <span class="footer-text">Universidad de Montevideo</span>
+    <span class="footer-text">Investigación de Mercado</span>
+  </div>
+</footer>
+
+</body>
+</html>
