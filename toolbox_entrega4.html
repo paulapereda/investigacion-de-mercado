@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toolbox Entrega 4 — Investigación de Mercado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+  --purple: #6d3d8a;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  background: transparent; color: rgba(255,255,255,0.25);
+  bottom: 14px; right: 18px;
+}
+
+.slide {
+  width: 100%; height: 100vh;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── PORTADA ─── */
+.s-cover {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 56px 72px;
+}
+.s-cover::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:4px;
+  background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold));
+}
+.cover-eyebrow {
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--accent); margin-bottom:18px;
+}
+.cover-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,6vw,4.5rem);
+  font-weight:900; line-height:1.0; margin-bottom:28px;
+}
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip {
+  font-size:12px; color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:5px 14px;
+  display:inline-block; letter-spacing:0.5px; margin-right:8px;
+}
+
+/* ── SECCIÓN OSCURA ─── */
+.s-section {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 60px 72px;
+}
+.s-section::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+.sec-num {
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:3px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:12px;
+}
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:700; line-height:1.1; color:var(--paper);
+}
+.sec-sub {
+  font-size:14px; color:rgba(255,255,255,0.45);
+  margin-top:12px; font-style:italic;
+}
+
+/* ── CLARO ─── */
+.s-light {
+  background: var(--paper); padding: 40px 60px;
+  justify-content: flex-start;
+}
+.s-light::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── OSCURO CONTENIDO ─── */
+.s-dark {
+  background: #1e1e1e; padding: 40px 60px;
+  justify-content: flex-start;
+}
+.s-dark::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── EYEBROW + TÍTULO ─── */
+.eyebrow {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px;
+}
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.25rem,2.3vw,1.7rem);
+  font-weight:700; line-height:1.2;
+  color:var(--ink); margin-bottom:16px;
+}
+.slide-h-white { color:white; }
+
+/* ── BULLETS ─── */
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li {
+  font-size:clamp(12px,1.5vw,14px); line-height:1.65;
+  color:#333; padding:6px 0 6px 22px;
+  border-bottom:1px solid var(--border); position:relative;
+}
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+/* ── EJEMPLO ─── */
+.ejemplo-box {
+  background: #edf4fc;
+  border-left:4px solid var(--blue);
+  border-radius:0 6px 6px 0;
+  padding:10px 16px; margin-top:6px; margin-bottom:6px;
+}
+.ejemplo-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--blue);
+  text-transform:uppercase; margin-bottom:4px;
+}
+.ejemplo-text { font-size:13px; color:#1a3a5c; line-height:1.55; font-style:italic; }
+
+/* ── PAUSA / ALERTA ─── */
+.pause-box {
+  background:#fffbec; border-left:5px solid var(--gold);
+  border-radius:0 8px 8px 0; padding:12px 16px; margin-top:12px;
+}
+.pause-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px;
+}
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.6; }
+
+/* ── ERROR BOX ─── */
+.error-box {
+  background:#fdf0ee; border-left:5px solid var(--accent);
+  border-radius:0 8px 8px 0; padding:12px 16px; margin-top:8px;
+}
+.error-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:5px;
+}
+.error-text { font-size:13px; color:#5a1a10; line-height:1.6; }
+
+/* ── TIP CARD ─── */
+.tip-grid { display:grid; gap:10px; margin-top:10px; }
+.tip-grid-2 { grid-template-columns:1fr 1fr; }
+.tip-grid-3 { grid-template-columns:1fr 1fr 1fr; }
+.tip-card {
+  background:white; border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px;
+  display:flex; flex-direction:column; gap:5px;
+}
+.tip-num {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:2px;
+}
+.tip-title {
+  font-family:'Playfair Display',serif;
+  font-size:0.95rem; font-weight:700; line-height:1.2;
+}
+.tip-text { font-size:12.5px; color:var(--muted); line-height:1.5; }
+
+/* ── NOTA DARK ─── */
+.nota-dark {
+  background:rgba(255,255,255,0.06);
+  border-left:4px solid var(--muted);
+  border-radius:0 6px 6px 0; padding:10px 16px; margin-top:10px;
+}
+.nota-dark-text { font-size:12.5px; color:rgba(255,255,255,0.55); line-height:1.55; font-style:italic; }
+
+/* ── FUENTE BADGE ─── */
+.fuente-badge {
+  display:inline-block;
+  font-family:'DM Mono',monospace; font-size:9.5px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--border);
+  border-radius:12px; padding:2px 10px; margin-top:2px;
+}
+
+/* ── CONTRASTE TABLA ─── */
+.contrast-table { width:100%; border-collapse:collapse; margin-top:10px; font-size:12.5px; }
+.contrast-table th {
+  background:var(--blue); color:white;
+  font-family:'DM Mono',monospace; font-size:9.5px;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:8px 12px; text-align:left;
+}
+.contrast-table td { padding:7px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+.contrast-table tr:last-child td { border-bottom:none; }
+.contrast-table tr:nth-child(even) td { background:rgba(44,95,138,0.05); }
+.bad-col { color:#c0392b; }
+.good-col { color:#2d7a3a; }
+
+/* ── CIERRE ─── */
+.s-close {
+  background: var(--ink); padding: 60px 72px; justify-content: center;
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Universidad de Montevideo · Entrega 4</div>
+  <div class="cover-title">Toolbox:<br>analizar <em>&amp; presentar</em></div>
+  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+    <div class="cover-chip">Análisis de datos</div>
+    <div class="cover-chip">Presentación oral</div>
+    <div class="cover-chip">Informe escrito</div>
+    <div class="cover-chip">Paula Pereda Suárez</div>
+  </div>
+  <div style="margin-top:32px; font-size:13px; color:rgba(255,255,255,0.35); max-width:560px; line-height:1.7;">
+    Habilidades transversales para comunicar lo que encontraron — con rigor, con claridad, con sentido.
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     MAPA DEL DECK
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Este material</div>
+  <div class="slide-h slide-h-white">Dos bloques, una sola pregunta de fondo</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+    <div style="background:rgba(192,57,43,0.15); border:1px solid rgba(192,57,43,0.4); border-radius:8px; padding:18px 20px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Bloque A</div>
+      <div style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:white; margin-bottom:8px;">Analizar bien</div>
+      <div style="font-size:12.5px; color:rgba(255,255,255,0.6); line-height:1.6;">De los datos crudos a hallazgos que responden las PI y evalúan las H. Qué mostrar, cómo elegir el gráfico correcto, cómo evitar el ruido visual.</div>
+    </div>
+    <div style="background:rgba(44,95,138,0.15); border:1px solid rgba(44,95,138,0.4); border-radius:8px; padding:18px 20px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:#7ab3d4; text-transform:uppercase; margin-bottom:8px;">Bloque B</div>
+      <div style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:white; margin-bottom:8px;">Presentar bien</div>
+      <div style="font-size:12.5px; color:rgba(255,255,255,0.6); line-height:1.6;">De la presentación oral al informe escrito. Estructura, slides como apoyo (no muleta), gestión del tiempo, comunicación en equipo.</div>
+    </div>
+  </div>
+  <div class="nota-dark" style="margin-top:16px;">
+    <div class="nota-dark-text">La pregunta de fondo es siempre la misma: <em>¿qué necesita saber el tomador de decisiones para actuar?</em> Todo lo que no responde esa pregunta es ruido.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECCIÓN A — ANÁLISIS
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Bloque A</div>
+  <div class="sec-title">Analizar <em style="color:#d4a0a0;">bien</em></div>
+  <div class="sec-sub">De los datos crudos a hallazgos que responden las preguntas de investigación</div>
+</div>
+</section>
+
+
+<!-- A1 — Exploratorio vs. Explicativo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 1</div>
+  <div class="slide-h">Primero explorás — después explicás</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:4px;">
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--muted); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:8px;">Análisis exploratorio</div>
+      <div style="font-size:13px; color:#333; line-height:1.6;">Lo que hacés <em>en privado</em>: cruzar variables, ver distribuciones, buscar patrones inesperados. Es como abrir 100 ostras para encontrar 2 perlas.</div>
+      <div style="margin-top:8px; font-size:12px; color:var(--muted); font-style:italic;">No va a la presentación ni al informe tal cual.</div>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--blue); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">Análisis explicativo</div>
+      <div style="font-size:13px; color:#333; line-height:1.6;">Lo que mostrás al decisor: las <strong>2 perlas</strong>. Un mensaje claro por gráfico. Cada visual responde una pregunta de investigación (PI) o evalúa una hipótesis (H).</div>
+      <div style="margin-top:8px; font-size:12px; color:var(--muted); font-style:italic;">Esto es lo que va a la E4.</div>
+    </div>
+  </div>
+  <div class="error-box">
+    <div class="error-label">Error frecuente</div>
+    <div class="error-text">Mostrar <em>todo</em> el análisis al decisor como evidencia del trabajo realizado. Eso obliga a la audiencia a reabrir las 100 ostras. Concentrarse en las perlas.</div>
+  </div>
+  <div class="fuente-badge" style="margin-top:10px;">Knaflic (2015), cap. 1 — Exploratory vs. explanatory analysis</div>
+</div>
+</section>
+
+
+<!-- A2 — Quién, qué, cómo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 2</div>
+  <div class="slide-h">Antes de hacer cualquier gráfico: ¿para quién, para qué?</div>
+  <div class="tip-grid tip-grid-3" style="margin-top:6px;">
+    <div class="tip-card" style="border-top:3px solid var(--accent);">
+      <div class="tip-num" style="color:var(--accent);">¿Quién?</div>
+      <div class="tip-title">La audiencia específica</div>
+      <div class="tip-text">No "todos los interesados" — el tomador de decisiones de tu empresa. Cuanto más específica la audiencia, más efectiva la comunicación.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--blue);">
+      <div class="tip-num" style="color:var(--blue);">¿Qué?</div>
+      <div class="tip-title">La acción esperada</div>
+      <div class="tip-text">¿Qué querés que <em>haga</em> o <em>decida</em> el decisor a partir de tus hallazgos? Si no podés responder esto, revisá el análisis.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--gold);">
+      <div class="tip-num" style="color:var(--gold);">¿Cómo?</div>
+      <div class="tip-title">El dato como evidencia</div>
+      <div class="tip-text">Recién después de tener claro el quién y el qué: ¿qué dato de tu encuesta respalda ese mensaje?</div>
+    </div>
+  </div>
+  <div class="ejemplo-box">
+    <div class="ejemplo-label">Aplicado al proyecto</div>
+    <div class="ejemplo-text">¿Quién? → Propietaria de Cafetería Amelia. ¿Qué? → Decidir si ampliar el horario del mediodía. ¿Cómo? → El 68 % de quienes visitaron solo una vez lo hicieron a la tarde; el análisis de PI3 muestra que el horario es la principal barrera de revisita.</div>
+  </div>
+  <div class="fuente-badge">Knaflic (2015), cap. 1 — Who, what, and how</div>
+</div>
+</section>
+
+
+<!-- A3 — El gráfico correcto -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 3</div>
+  <div class="slide-h">Elegir el gráfico correcto según qué querés mostrar</div>
+  <table class="contrast-table">
+    <thead>
+      <tr>
+        <th>Quiero mostrar…</th>
+        <th>Usá esto</th>
+        <th>Evitá esto</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Un porcentaje único, muy elocuente</td>
+        <td class="good-col"><strong>Texto grande</strong> (ej. "72 %")</td>
+        <td class="bad-col">Torta de dos segmentos</td>
+      </tr>
+      <tr>
+        <td>Comparar categorías (sin orden temporal)</td>
+        <td class="good-col"><strong>Barras horizontales</strong></td>
+        <td class="bad-col">Barras 3D, torta con muchas rodajas</td>
+      </tr>
+      <tr>
+        <td>Comparar categorías con muchas etiquetas largas</td>
+        <td class="good-col"><strong>Barras horizontales</strong></td>
+        <td class="bad-col">Barras verticales con etiquetas rotadas</td>
+      </tr>
+      <tr>
+        <td>Evolución en el tiempo</td>
+        <td class="good-col"><strong>Líneas</strong></td>
+        <td class="bad-col">Barras por período cuando hay muchos puntos</td>
+      </tr>
+      <tr>
+        <td>Distribución de Likert (muy de acuerdo → muy en desacuerdo)</td>
+        <td class="good-col"><strong>Barras horizontales apiladas divergentes</strong></td>
+        <td class="bad-col">Torta, stacked bar genérico</td>
+      </tr>
+      <tr>
+        <td>Relación entre dos variables numéricas</td>
+        <td class="good-col"><strong>Dispersión (scatter)</strong></td>
+        <td class="bad-col">Líneas conectando puntos no ordenados</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="fuente-badge" style="margin-top:10px;">Knaflic (2015), cap. 2 — Choosing an effective visual</div>
+</div>
+</section>
+
+
+<!-- A4 — Eliminar el ruido visual -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 4</div>
+  <div class="slide-h">El clutter es tu enemigo: cada elemento que agregás tiene un costo cognitivo</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Eliminar siempre</div>
+      <ul class="bullets">
+        <li>Bordes de gráfico (el marco)</li>
+        <li>Grillas pesadas (si las necesitás, que sean grises claras)</li>
+        <li>Leyendas cuando podés etiquetar directamente la línea o barra</li>
+        <li>Títulos de ejes cuando el título del gráfico lo dice todo</li>
+        <li>Decimales innecesarios (37,42 % → 37 %)</li>
+        <li>3D, sombras, degradados</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">El espacio en blanco es información</div>
+      <div style="font-size:13px; color:#333; line-height:1.6; margin-bottom:10px;">El espacio vacío en una slide funciona igual que la pausa en un discurso oral — da tiempo a procesar. No hay que "llenarlo".</div>
+      <div class="pause-box" style="margin-top:0;">
+        <div class="pause-label">Regla práctica</div>
+        <div class="pause-q">Maximizá la relación señal/ruido: ¿puede el gráfico decir lo mismo con menos elementos? Si sí, sacalos.</div>
+      </div>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:10px;">Knaflic (2015), cap. 3 — Clutter is your enemy · Álvarez Marañón (2012), cap. Diseño — Simplicidad</div>
+</div>
+</section>
+
+
+<!-- A5 — Color para dirigir atención -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 5</div>
+  <div class="slide-h">El color es una herramienta de atención, no de decoración</div>
+  <div class="tip-grid tip-grid-2" style="margin-top:8px;">
+    <div>
+      <ul class="bullets">
+        <li><strong>Un solo color de énfasis</strong> por gráfico. Lo que querés que el decisor vea primero va en ese color; todo lo demás, en gris.</li>
+        <li><strong>Mínimo contraste:</strong> si todo es colorido, nada destaca. El hawk (el dato clave) se pierde entre los pigeons (el resto).</li>
+        <li><strong>No uses color para distinguir categorías</strong> si podés etiquetar directamente. El lector no debería volver a la leyenda.</li>
+        <li><strong>Consistencia:</strong> si "satisfecho" es verde en el slide 3, tiene que ser verde en el slide 7.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="ejemplo-box" style="margin-bottom:10px;">
+        <div class="ejemplo-label">Aplicado a una Likert</div>
+        <div class="ejemplo-text">Grises para "ni de acuerdo ni en desacuerdo", azul para las respuestas favorables, rojo para las desfavorables. El decisor ve el patrón en 3 segundos.</div>
+      </div>
+      <div class="error-box">
+        <div class="error-label">Error frecuente</div>
+        <div class="error-text">Usar los colores por defecto de Excel o Google Sheets: arco iris donde cada barra tiene un color diferente. Eso hace que todo valga lo mismo visualmente.</div>
+      </div>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:8px;">Knaflic (2015), cap. 4 — Focus your audience's attention</div>
+</div>
+</section>
+
+
+<!-- A6 — Título como afirmación -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 6</div>
+  <div class="slide-h">El título del gráfico es una afirmación, no una etiqueta</div>
+  <table class="contrast-table" style="margin-top:8px;">
+    <thead>
+      <tr>
+        <th>Título-etiqueta (evitar)</th>
+        <th>Título-afirmación (usar)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="bad-col">"Frecuencia de visita por rango etario"</td>
+        <td class="good-col">"Los clientes de 25–35 años visitan con mayor frecuencia que cualquier otro segmento"</td>
+      </tr>
+      <tr>
+        <td class="bad-col">"Motivos de elección"</td>
+        <td class="good-col">"El precio es el factor decisivo para 6 de cada 10 encuestados"</td>
+      </tr>
+      <tr>
+        <td class="bad-col">"Satisfacción general"</td>
+        <td class="good-col">"El 71 % está satisfecho, pero la rapidez del servicio concentra el 80 % de las críticas"</td>
+      </tr>
+      <tr>
+        <td class="bad-col">"Resultado H1"</td>
+        <td class="good-col">"H1 se confirma: la percepción de calidad disminuye cuando el tiempo de espera supera 15 min"</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="nota-dark" style="background:#eef6ee; border-left-color:var(--green); margin-top:10px;">
+    <div class="nota-dark-text" style="color:#1a3a10;">El título-afirmación hace innecesario que la audiencia interprete el gráfico por sí misma. Vos sos el experto en esos datos — ejercé esa autoridad.</div>
+  </div>
+  <div class="fuente-badge">Knaflic (2015), cap. 1 — The Big Idea · Álvarez Marañón (2012), cap. Diseño — Títulos</div>
+</div>
+</section>
+
+
+<!-- A7 — Trazar el hilo PI → H → hallazgo -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque A · Tip 7</div>
+  <div class="slide-h slide-h-white">Cada resultado tiene que responder algo: trazá el hilo PI → H → hallazgo</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:16px 18px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Estructura recomendada por resultado</div>
+      <ul class="bullets bullets-white" style="margin:0;">
+        <li><strong style="color:white;">PI</strong> — la pregunta de investigación que este bloque responde</li>
+        <li><strong style="color:white;">H</strong> — lo que habían hipotetizado antes del trabajo de campo</li>
+        <li><strong style="color:white;">Dato</strong> — qué encontraron en la encuesta (gráfico + número clave)</li>
+        <li><strong style="color:white;">Veredicto</strong> — ¿la H se confirma, se rechaza, o es más compleja?</li>
+        <li><strong style="color:white;">Implicación</strong> — qué le dice esto al tomador de decisiones</li>
+      </ul>
+    </div>
+    <div>
+      <div class="ejemplo-box" style="background:rgba(44,95,138,0.15); border-left-color:#7ab3d4;">
+        <div class="ejemplo-label" style="color:#7ab3d4;">Ejemplo aplicado</div>
+        <div class="ejemplo-text" style="color:rgba(255,255,255,0.75);">PI2: ¿Qué factores llevan a los clientes a no regresar?<br>H2: Hipotetizamos que el precio es la principal barrera.<br>Dato: El 54 % mencionó el precio; pero el 61 % mencionó la distancia.<br>Veredicto: H2 se rechaza parcialmente — la distancia supera al precio.<br>Implicación: Una estrategia de delivery puede ser más efectiva que un descuento de precios.</div>
+      </div>
+      <div class="nota-dark" style="margin-top:10px;">
+        <div class="nota-dark-text">Un resultado sin PI de referencia es un dato flotando en el aire. No hay análisis sin ancla.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- A8 — El análisis dice lo mismo en el informe y en la presentación -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque A · Tip 8</div>
+  <div class="slide-h">La presentación y el informe no son lo mismo — aunque analizan los mismos datos</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;">
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--accent); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Presentación oral</div>
+      <ul class="bullets">
+        <li>Slides <em>apoyan</em> tu voz, no la reemplazan</li>
+        <li>Un hallazgo por slide, con el gráfico + título-afirmación</li>
+        <li>Vos controlás el ritmo — podés expandir o comprimir según las preguntas del decisor</li>
+        <li>Las notas del orador son tuyas, no de la audiencia</li>
+      </ul>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--blue); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">Informe escrito</div>
+      <ul class="bullets">
+        <li>Tiene que ser auto-suficiente: el lector no está presente para preguntar</li>
+        <li>Cada gráfico va acompañado de párrafo explicativo</li>
+        <li>Mayor nivel de detalle: metodología, limitaciones, fuentes</li>
+        <li>Estructura BLUF: lo más importante al principio de cada sección</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:10px;">Knaflic (2015), cap. 1 — Communication mechanism continuum · Álvarez Marañón (2012) — Documentos</div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     SECCIÓN B — PRESENTACIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section" style="background: #0f1a24;">
+  <div class="sec-num" style="color:#7ab3d4;">Bloque B</div>
+  <div class="sec-title">Presentar <em style="color:#7ab3d4;">bien</em></div>
+  <div class="sec-sub">Estructura, slides, voz, tiempo y trabajo en equipo</div>
+</div>
+</section>
+
+
+<!-- B1 — Un mensaje, una presentación -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque B · Tip 1</div>
+  <div class="slide-h">La Big Idea: un mensaje principal que lo engloba todo</div>
+  <div style="font-size:13.5px; color:#333; line-height:1.7; margin-bottom:12px;">
+    Antes de armar un solo slide, respondé esta pregunta en <strong>una sola oración</strong>:
+  </div>
+  <div style="background: var(--ink); border-radius:8px; padding:20px 24px; margin-bottom:14px;">
+    <div style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--paper); line-height:1.6; font-style:italic; text-align:center;">
+      "¿Qué queremos que el tomador de decisiones <em style="color:#d4a0a0;">sepa</em> o <em style="color:#d4a0a0;">haga</em> al terminar de escucharnos?"
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div class="error-box">
+      <div class="error-label">Sin Big Idea</div>
+      <div class="error-text">"Analizamos los datos de nuestra encuesta sobre hábitos de consumo en Cafetería Amelia."<br><br>→ Describe el proceso. No dice nada accionable.</div>
+    </div>
+    <div class="ejemplo-box" style="background:#eef6ee; border-left-color:var(--green);">
+      <div class="ejemplo-label" style="color:var(--green);">Con Big Idea</div>
+      <div class="ejemplo-text" style="color:#1a3a10;">"La pérdida de clientes en Cafetería Amelia se explica por la distancia y el horario — no por el precio — y ambas barreras pueden resolverse con un servicio de delivery focalizado."<br><br>→ Da la conclusión + la acción implícita.</div>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:10px;">Knaflic (2015), cap. 1 — The Big Idea · Álvarez Marañón (2012) — Mensaje</div>
+</div>
+</section>
+
+
+<!-- B2 — Estructura narrativa -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque B · Tip 2</div>
+  <div class="slide-h slide-h-white">Estructura narrativa: inicio, desarrollo, cierre — no índice</div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px;">
+    <div style="background:rgba(192,57,43,0.12); border:1px solid rgba(192,57,43,0.35); border-radius:8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Inicio</div>
+      <div style="font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:white; margin-bottom:6px;">El gancho</div>
+      <ul class="bullets bullets-white" style="margin:0;">
+        <li>¿Quiénes somos y qué empresa investigamos?</li>
+        <li>¿Cuál era el problema del decisor? (PDA)</li>
+        <li>¿Por qué importa? La audiencia tiene 8 segundos para decidir si prestar atención.</li>
+      </ul>
+    </div>
+    <div style="background:rgba(44,95,138,0.12); border:1px solid rgba(44,95,138,0.35); border-radius:8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:#7ab3d4; text-transform:uppercase; margin-bottom:6px;">Desarrollo</div>
+      <div style="font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:white; margin-bottom:6px;">Los hallazgos</div>
+      <ul class="bullets bullets-white" style="margin:0;">
+        <li>Un bloque por PI / H</li>
+        <li>Gráfico + título-afirmación + veredicto</li>
+        <li>Señalizar bien las transiciones entre bloques</li>
+        <li>Máx. 3 ideas principales</li>
+      </ul>
+    </div>
+    <div style="background:rgba(184,134,11,0.12); border:1px solid rgba(184,134,11,0.35); border-radius:8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:6px;">Cierre</div>
+      <div style="font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:white; margin-bottom:6px;">La respuesta al decisor</div>
+      <ul class="bullets bullets-white" style="margin:0;">
+        <li>Respuesta directa a la PDA original</li>
+        <li>Implicaciones y recomendaciones</li>
+        <li>Una sola frase concluyente — firme y memorable</li>
+        <li>"Gracias" — y callarse.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="nota-dark" style="margin-top:12px;">
+    <div class="nota-dark-text">La conclusión de la presentación es su momento culminante. Memorizarla es tan importante como memorizar el inicio. — Álvarez Marañón (2012)</div>
+  </div>
+</div>
+</section>
+
+
+<!-- B3 — El slide no es el orador -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque B · Tip 3</div>
+  <div class="slide-h">Las slides amplifican tu voz — no la reemplazan</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+    <div>
+      <ul class="bullets">
+        <li><strong>Una idea por slide.</strong> Si tenés dos ideas, tenés dos slides.</li>
+        <li><strong>Sin viñetas de texto completo.</strong> Si lees la slide, la audiencia no necesita escucharte. Y vos parecés poco preparado.</li>
+        <li><strong>El título de la slide es la afirmación</strong> — el gráfico o imagen es la evidencia. No al revés.</li>
+        <li><strong>Sin decoración que no comunique.</strong> Imágenes de banco, clipart, degradados y sombras son clutter visual.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="pause-box" style="margin-bottom:10px;">
+        <div class="pause-label">Pregunta de control</div>
+        <div class="pause-q">¿Tiene sentido la slide sin que estés vos explicándola? Si la respuesta es "sí", entonces ¿para qué estás vos?</div>
+      </div>
+      <div class="ejemplo-box">
+        <div class="ejemplo-label">Regla práctica (80 %)</div>
+        <div class="ejemplo-text">Dimensioná la presentación para usar el 80 % del tiempo asignado. El tiempo que sobra es para preguntas — y nadie se quejó nunca de que una presentación fuera corta.</div>
+      </div>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:8px;">Álvarez Marañón (2012) — Listas de viñetas, Tiempo · Knaflic (2015), cap. 1 — Live presentation</div>
+</div>
+</section>
+
+
+<!-- B4 — El inicio que captura -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque B · Tip 4</div>
+  <div class="slide-h slide-h-white">El inicio: 8 segundos para capturar la atención</div>
+  <div style="font-size:13px; color:rgba(255,255,255,0.65); line-height:1.7; margin-bottom:12px;">La audiencia decide en los primeros 8 segundos si le importa lo que van a decir. El inicio tiene que responder cuatro preguntas de inmediato:</div>
+  <div class="tip-grid tip-grid-2">
+    <div class="tip-card" style="border-top:3px solid var(--accent); background:#1e1e1e; border-color:rgba(255,255,255,0.1);">
+      <div class="tip-num" style="color:var(--accent);">1.</div>
+      <div class="tip-title" style="color:white;">¿Quiénes son?</div>
+      <div class="tip-text">Nombre del grupo, empresa, sector. Credibilidad inicial.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid #7ab3d4; background:#1e1e1e; border-color:rgba(255,255,255,0.1);">
+      <div class="tip-num" style="color:#7ab3d4;">2.</div>
+      <div class="tip-title" style="color:white;">¿Qué investigaron?</div>
+      <div class="tip-text">La PDA del decisor en una oración. El problema, no el proceso.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--gold); background:#1e1e1e; border-color:rgba(255,255,255,0.1);">
+      <div class="tip-num" style="color:var(--gold);">3.</div>
+      <div class="tip-title" style="color:white;">¿Por qué importa?</div>
+      <div class="tip-text">El contexto que hace que la pregunta sea relevante para la empresa hoy.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid #6db86d; background:#1e1e1e; border-color:rgba(255,255,255,0.1);">
+      <div class="tip-num" style="color:#6db86d;">4.</div>
+      <div class="tip-title" style="color:white;">¿Cómo está organizado?</div>
+      <div class="tip-text">Un mapa de ruta de 30 segundos. La audiencia necesita saber dónde está en todo momento.</div>
+    </div>
+  </div>
+  <div class="nota-dark" style="margin-top:10px;">
+    <div class="nota-dark-text">Memorizá el inicio y el cierre. El resto puede ser más flexible. — Álvarez Marañón (2012)</div>
+  </div>
+</div>
+</section>
+
+
+<!-- B5 — Voz, cuerpo, ritmo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque B · Tip 5</div>
+  <div class="slide-h">Voz, cuerpo y ritmo: lo que la audiencia recuerda primero</div>
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;">
+    <div class="tip-card" style="border-top:3px solid var(--accent);">
+      <div class="tip-title">Volumen y claridad</div>
+      <div class="tip-text">Hablar para la persona de la última fila. Si tenés que leer las slides, es porque no ensayaste suficiente. La voz sola tiene que poder sostener el mensaje.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--blue);">
+      <div class="tip-title">Pausas</div>
+      <div class="tip-text">Una pausa de 3 segundos después de un hallazgo clave hace que el dato aterrice. No es silencio incómodo — es énfasis. Usarla deliberadamente.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--gold);">
+      <div class="tip-title">Contacto visual</div>
+      <div class="tip-text">No hablarle a la pantalla ni al piso. Distribuir la mirada por la audiencia. Incluir al tomador de decisiones que esté presente.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--green);">
+      <div class="tip-title">Velocidad</div>
+      <div class="tip-text">Los nervios aceleran. Ensayar en voz alta — ignita una parte del cerebro diferente a leer en silencio — y medir el tiempo real.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--purple);">
+      <div class="tip-title">Transiciones</div>
+      <div class="tip-text">Señalizar cada cambio de bloque: "Pasamos ahora de los resultados de PI1 a los de PI2…". La audiencia necesita saber dónde está en todo momento.</div>
+    </div>
+    <div class="tip-card" style="border-top:3px solid var(--muted);">
+      <div class="tip-title">Cierre firme</div>
+      <div class="tip-text">La última oración es la más importante. Terminar a tiempo, con nota clara y positiva. "Gracias" — y callarse.</div>
+    </div>
+  </div>
+  <div class="fuente-badge" style="margin-top:8px;">Álvarez Marañón (2012) — Exposición · Montes &amp; Navarro (2019) — Ensayar y presentar</div>
+</div>
+</section>
+
+
+<!-- B6 — Presentación en equipo -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque B · Tip 6</div>
+  <div class="slide-h">Presentación en equipo: coordinación visible e invisible</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">Visible para la audiencia</div>
+      <ul class="bullets">
+        <li>Definir quién habla en cada sección y ensayarlo — las transiciones entre integrantes tienen que ser naturales, con frase de paso ("le paso a X quien va a presentar los resultados de PI2…")</li>
+        <li>Quienes no están hablando: atentos, no mirando el celular ni la laptop</li>
+        <li>Una voz por vez. Nadie interrumpe ni completa la oración del otro.</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Invisible (preparación)</div>
+      <ul class="bullets">
+        <li>Ensayo completo en voz alta al menos una vez — medir el tiempo real</li>
+        <li>Quién avanza las slides, quién responde preguntas técnicas del instrumento</li>
+        <li>Tener preparada una versión de 5 min si el tiempo se achica</li>
+        <li>Un integrante cronometra durante el ensayo</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pause-box">
+    <div class="pause-label">Aplicado a la E4</div>
+    <div class="pause-q">La distribución natural: E1+E2 (problema y propuesta) → E3 (instrumento y trabajo de campo) → E4 (análisis y hallazgos) → Conclusión y PDA. Ensayen esa secuencia, no los bloques por separado.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- B7 — La audiencia es el decisor -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Bloque B · Tip 7</div>
+  <div class="slide-h slide-h-white">La audiencia del proyecto no es la clase — es el tomador de decisiones</div>
+  <div style="font-size:13.5px; color:rgba(255,255,255,0.7); line-height:1.7; margin-bottom:14px;">
+    La presentación de Entrega 4 tiene dos audiencias simultáneas: la clase y el docente (que evalúan el proceso académico), y el tomador de decisiones (al que se dirigen los hallazgos). Hay que servir a las dos — pero el contenido está dirigido al decisor.
+  </div>
+  <div class="tip-grid tip-grid-2">
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:8px;">Lo que le importa al docente</div>
+      <ul class="bullets bullets-white">
+        <li>Trazabilidad PDA → PIM → CE → PI → H → instrumento → análisis</li>
+        <li>Rigor metodológico: muestra, escala, análisis correcto</li>
+        <li>Gestión del proceso completo a lo largo del semestre</li>
+      </ul>
+    </div>
+    <div style="background:rgba(44,95,138,0.12); border:1px solid rgba(44,95,138,0.35); border-radius:8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:#7ab3d4; text-transform:uppercase; margin-bottom:8px;">Lo que le importa al decisor</div>
+      <ul class="bullets bullets-white">
+        <li>¿Qué encontraron? (conclusión antes que proceso)</li>
+        <li>¿Qué debería hacer con esta información?</li>
+        <li>¿Puedo confiar en estos datos? (credibilidad y transparencia)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="nota-dark" style="margin-top:12px;">
+    <div class="nota-dark-text">El conocimiento del proceso metodológico no es para el decisor — pero aparece si se lo preguntan. Ensayar cómo explicar el instrumento y la muestra en 60 segundos.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- B8 — Checklist pre-presentación -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Bloque B · Tip 8</div>
+  <div class="slide-h">Checklist: lo que revisás la noche antes</div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Slides</div>
+      <ul class="bullets" style="font-size:13px;">
+        <li>¿Cada gráfico tiene título-afirmación (no etiqueta)?</li>
+        <li>¿Todo el texto es legible desde el fondo de la sala?</li>
+        <li>¿Las fuentes y escalas están indicadas?</li>
+        <li>¿No hay viñetas de párrafo completo?</li>
+        <li>¿La secuencia de slides cuenta una historia coherente?</li>
+        <li>¿La conclusión responde la PDA original?</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">Equipo</div>
+      <ul class="bullets" style="font-size:13px;">
+        <li>¿Ensayamos en voz alta con el tiempo medido?</li>
+        <li>¿Están coordinadas las transiciones entre integrantes?</li>
+        <li>¿Sabemos quién responde qué tipo de pregunta?</li>
+        <li>¿Tenemos versión acortada lista si nos piden reducir el tiempo?</li>
+        <li>¿El archivo funciona en la computadora de la sala (o tenemos backup)?</li>
+      </ul>
+    </div>
+  </div>
+  <div class="pause-box" style="margin-top:10px;">
+    <div class="pause-label">El ensayo es la inversión más rentable</div>
+    <div class="pause-q">Hablar en voz alta activa una parte del cerebro diferente a leer en silencio. El ensayo revela los tropiezos en las transiciones que nunca aparecen cuando se ensaya mentalmente.</div>
+  </div>
+  <div class="fuente-badge" style="margin-top:8px;">Knaflic (2015), cap. 1 — Practice makes perfect · Álvarez Marañón (2012) — Tiempo, Ensayo</div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">Toolbox — En una frase</div>
+  <div class="sec-title" style="font-size:1.9rem; margin-bottom:28px; color:var(--paper);">Los datos sin historia<br>son solo números.<br><em style="color:#d4a0a0;">La historia sin datos<br>es solo opinión.</em></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px;">
+    <div style="background:rgba(192,57,43,0.12); border:1px solid rgba(192,57,43,0.3); border-radius:8px; padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">Bloque A · Analizar bien</div>
+      <ul class="bullets bullets-white" style="margin:0; font-size:12px;">
+        <li>Exploratorio vs. explicativo</li>
+        <li>Quién, qué, cómo — antes del gráfico</li>
+        <li>Gráfico correcto para cada mensaje</li>
+        <li>Eliminar clutter; título-afirmación</li>
+        <li>PI → H → hallazgo → implicación</li>
+      </ul>
+    </div>
+    <div style="background:rgba(44,95,138,0.12); border:1px solid rgba(44,95,138,0.3); border-radius:8px; padding:12px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:2px; color:#7ab3d4; text-transform:uppercase; margin-bottom:6px;">Bloque B · Presentar bien</div>
+      <ul class="bullets bullets-white" style="margin:0; font-size:12px;">
+        <li>Big Idea antes de armar slides</li>
+        <li>Inicio → hallazgos → cierre firme</li>
+        <li>Slides que amplifican, no reemplazan</li>
+        <li>Ensayo en voz alta, tiempo medido</li>
+        <li>El decisor como audiencia real</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cover-chip">Knaflic (2015) · Álvarez Marañón (2012) · Montes &amp; Navarro (2019)</div>
+  <div class="cover-chip" style="margin-top:8px;">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
