@@ -299,6 +299,43 @@ strong.kw { color: white; }
   padding: 60px 72px;
   justify-content: center;
 }
+
+/* ── DEFINICIÓN BOX ───────────────────── */
+.def-box {
+  background: white;
+  border: 1.5px solid var(--accent);
+  border-left: 5px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 20px;
+  margin-bottom: 18px;
+}
+.def-box-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.def-box-text {
+  font-size: 14px; color: var(--ink);
+  line-height: 1.65; font-style: italic;
+}
+
+/* ── PIZARRÓN ─────────────────────────── */
+.pizarron-box {
+  background: #f0f4f8;
+  border-left: 5px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 18px; margin-top: 16px;
+}
+.pizarron-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--blue); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.pizarron-text {
+  font-size: 13px; color: #1a3a5c; line-height: 1.55;
+}
 </style>
 </head>
 <body>
@@ -331,12 +368,16 @@ strong.kw { color: white; }
 <div class="slide s-light">
   <div class="eyebrow">Malhotra, 2016</div>
   <div class="slide-h">La definición y sus palabras clave</div>
+  <div class="def-box">
+    <div class="def-box-label">Definición · Malhotra (2016)</div>
+    <div class="def-box-text">"La investigación de mercados es el proceso de identificación, recopilación, análisis, difusión y uso <strong style="font-style:normal;">sistemáticos y objetivos</strong> de la información, con el propósito de mejorar la toma de <strong style="font-style:normal;">decisiones</strong> relacionadas con la identificación y solución de problemas y oportunidades de <strong style="font-style:normal;">marketing</strong>."</div>
+  </div>
   <ul class="bullets">
-    <li><strong class="k">Sistemático</strong> — tiene método, etapas, no es improvisado</li>
-    <li><strong class="k">Objetivo</strong> — libre de sesgos personales (en la medida de lo posible)</li>
-    <li><strong class="k">Información</strong> — numérica, textual, conductual, audiovisual</li>
-    <li><strong class="k">Decisiones</strong> — sin uso, la investigación es inútil</li>
-    <li><strong class="k">Marketing</strong> — producto, precio, distribución, comunicación, clientes, competidores</li>
+    <li><strong class="k">Sistemático:</strong> tiene método, etapas, no es improvisado</li>
+    <li><strong class="k">Objetivo:</strong> libre de sesgos personales (en la medida de lo posible)</li>
+    <li><strong class="k">Información:</strong> numérica, textual, conductual, audiovisual</li>
+    <li><strong class="k">Decisiones:</strong> sin uso, la investigación es inútil</li>
+    <li><strong class="k">Marketing:</strong> producto, precio, distribución, comunicación, clientes, competidores</li>
   </ul>
 </div>
 </section>
@@ -350,7 +391,7 @@ strong.kw { color: white; }
     <div class="col-box">
       <div class="col-label">Dimensión 1</div>
       <div class="col-title">Datos no estructurados en tiempo real</div>
-      <div class="col-body">Redes sociales, reseñas, comportamiento en apps. No son encuestas — son señales pasivas y continuas.</div>
+      <div class="col-body">Redes sociales, reseñas, comportamiento en apps. No son encuestas, son señales pasivas y continuas.</div>
     </div>
     <div class="col-box">
       <div class="col-label">Dimensión 2</div>
@@ -395,7 +436,7 @@ strong.kw { color: white; }
   <div class="slide-h">El Amazon de América Latina</div>
   <div class="latam-box">
     <div class="latam-label">🌎 Mercado Libre + AMVO</div>
-    <div class="latam-text"><strong>Mercado Libre</strong> opera en 18 países y publica reportes de comportamiento de consumidor (Mercado Libre Data) — fuente secundaria gratuita para proyectos del curso.<br><br>Para México: <strong>Estudio de Venta Online AMVO</strong> (anual, gratuito). amvo.org.mx</div>
+    <div class="latam-text"><strong>Mercado Libre</strong> opera en 18 países y publica reportes de comportamiento de consumidor (Mercado Libre Data), fuente secundaria gratuita para proyectos del curso.<br><br>Para México: <strong>Estudio de Venta Online AMVO</strong> (anual, gratuito). amvo.org.mx</div>
   </div>
 </div>
 </section>
@@ -415,11 +456,15 @@ strong.kw { color: white; }
 <div class="slide s-light">
   <div class="eyebrow">Figura 1.2 — Malhotra</div>
   <div class="slide-h">Dos tipos de investigación</div>
+  <div class="pizarron-box">
+    <div class="pizarron-label">🖊 Pizarrón</div>
+    <div class="pizarron-text">Dibujar el árbol de la Figura 1.2: "Investigación de mercado" como raíz, dos ramas (identificar / resolver), con ejemplos de cada tipo en hojas.</div>
+  </div>
   <div class="two-col">
     <div class="col-box">
       <div class="col-label">Tipo 1</div>
       <div class="col-title">Identificar problemas</div>
-      <div class="col-body">No sabés qué está pasando. El síntoma existe — ventas bajan, clientes se van — pero no sabés por qué.</div>
+      <div class="col-body">No sabés qué está pasando. El síntoma existe, ventas bajan, clientes se van, pero no sabés por qué.</div>
     </div>
     <div class="col-box">
       <div class="col-label">Tipo 2</div>
@@ -552,12 +597,12 @@ strong.kw { color: white; }
   <div class="slide-h">¿Proceso clásico o investigación ágil?</div>
   <div class="two-col">
     <div class="col-box">
-      <div class="col-label">Clásico — Malhotra</div>
+      <div class="col-label">Clásico · Malhotra</div>
       <div class="col-title">3–6 meses</div>
       <div class="col-body">Representativo · Rigor estadístico · Documentado · Grandes empresas, decisiones estratégicas</div>
     </div>
     <div class="col-box">
-      <div class="col-label">Ágil — Agile Research</div>
+      <div class="col-label">Ágil · Agile Research</div>
       <div class="col-title">1–2 semanas</div>
       <div class="col-body">Ciclos cortos · Validación continua · Menos exhaustivo · Startups, equipos de producto</div>
     </div>
@@ -575,8 +620,8 @@ strong.kw { color: white; }
   <div class="eyebrow">Contexto latinoamericano · Paso 4</div>
   <div class="slide-h">Desafíos del trabajo de campo en LatAm</div>
   <ul class="bullets">
-    <li><strong class="k">37%</strong> de hogares rurales sin internet en América Latina (CEPAL, 2023) — encuestas online sobrerepresentan al consumidor urbano</li>
-    <li><strong class="k">Sesgo de aquiescencia</strong> — tendencia a responder positivamente; afecta diseño de escalas e interpretación</li>
+    <li><strong class="k">37%</strong> de hogares rurales sin internet en América Latina (CEPAL, 2023): las encuestas online sobrerepresentan al consumidor urbano</li>
+    <li><strong class="k">Sesgo de aquiescencia:</strong> tendencia a responder positivamente; afecta diseño de escalas e interpretación</li>
     <li>Solución: combinar métodos digitales con presenciales en estudios de consumo masivo</li>
   </ul>
 </div>
@@ -597,14 +642,18 @@ strong.kw { color: white; }
 <div class="slide s-light">
   <div class="eyebrow">Figura 1.4 — Malhotra</div>
   <div class="slide-h">Variables controlables y no controlables</div>
+  <div class="pizarron-box">
+    <div class="pizarron-label">🖊 Pizarrón</div>
+    <div class="pizarron-text">Dibujar el esquema de la Figura 1.4: "Consumidor" en el centro, las 4P como variables controlables entrando desde un lado, y economía / competencia / regulación / tecnología como no controlables desde el otro.</div>
+  </div>
   <div class="two-col">
     <div class="col-box">
-      <div class="col-label">Controlables — las 4P</div>
+      <div class="col-label">Controlables · las 4P</div>
       <ul class="bullets" style="margin-top:8px;">
         <li>Producto</li>
         <li>Precio</li>
         <li>Promoción</li>
-        <li>Distribución</li>
+        <li>Distribución (Plaza)</li>
       </ul>
     </div>
     <div class="col-box">
@@ -629,9 +678,9 @@ strong.kw { color: white; }
   <div class="eyebrow eyebrow-light">Caso · Sección 04</div>
   <div class="slide-h slide-h-white">Spotify: decisiones basadas en datos</div>
   <ul class="bullets bullets-white">
-    <li><strong class="kw">Discover Weekly</strong> — investigación cualitativa mostró que los usuarios querían descubrir música sin buscarla; el insight definió el producto</li>
-    <li><strong class="kw">Precio en India</strong> — 3× más bajo que EE.UU. tras estudio de disposición a pagar en economías emergentes</li>
-    <li><strong class="kw">Apple Music / YouTube Music</strong> — monitoreo de competidores (variable no controlable)</li>
+    <li><strong class="kw">Discover Weekly:</strong> investigación cualitativa mostró que los usuarios querían descubrir música sin buscarla; el insight definió el producto</li>
+    <li><strong class="kw">Precio en India:</strong> 3× más bajo que EE.UU. tras estudio de disposición a pagar en economías emergentes</li>
+    <li><strong class="kw">Apple Music / YouTube Music:</strong> monitoreo de competidores (variable no controlable)</li>
   </ul>
   <div class="pause-box" style="margin-top:20px;">
     <div class="pause-label">⏸ Pregunta</div>
@@ -654,12 +703,12 @@ strong.kw { color: white; }
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Tabla 1.1 actualizada · ESOMAR 2023</div>
-  <div class="slide-h">Top proveedores globales — qué cambió</div>
+  <div class="slide-h">Top proveedores globales: qué cambió</div>
   <table class="ref-table">
     <tr><th>Antes (2012)</th><th>Hoy (2023)</th></tr>
     <tr>
       <td>Nielsen #1</td>
-      <td class="new">NielsenIQ (consumo) + Nielsen (audiencias) — empresas separadas desde 2023</td>
+      <td class="new">NielsenIQ (consumo) + Nielsen (audiencias), empresas separadas desde 2023</td>
     </tr>
     <tr>
       <td>Kantar #2</td>
@@ -675,7 +724,7 @@ strong.kw { color: white; }
     </tr>
     <tr>
       <td>—</td>
-      <td class="new"><strong>Qualtrics · Dynata</strong> <span class="badge">NUEVOS</span> — no existían en la lista de 2012</td>
+      <td class="new"><strong>Qualtrics · Dynata</strong> <span class="badge">NUEVOS</span>, no existían en la lista de 2012</td>
     </tr>
   </table>
 </div>
@@ -685,7 +734,7 @@ strong.kw { color: white; }
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Nueva categoría · Figura 1.5</div>
-  <div class="slide-h">Proveedores con IA — no contemplados en el libro</div>
+  <div class="slide-h">Proveedores con IA: no contemplados en el libro</div>
   <div class="tool-grid">
     <div class="tool-item">
       <div class="tool-name">Yabble</div>
@@ -834,9 +883,9 @@ strong.kw { color: white; }
   <div class="eyebrow">Ética · Lo que el libro no podía anticipar</div>
   <div class="slide-h">Tres temas nuevos desde 2016</div>
   <ul class="bullets">
-    <li><strong class="k">① Privacidad de datos</strong> — GDPR (2018) + LFPDPPP México. Derecho a saber, revocar y eliminar. Afecta directamente el Paso 4.</li>
-    <li><strong class="k">② Sesgo algorítmico</strong> — Modelos entrenados en inglés pueden malinterpretar ironía en español latinoamericano. El sesgo del modelo = error de investigación.</li>
-    <li><strong class="k">③ Dark patterns</strong> — Diseños que inducen a aceptar recopilación de datos sin entenderlo. Investigación encubierta.</li>
+    <li><strong class="k">① Privacidad de datos:</strong> GDPR (2018) + LFPDPPP México. Derecho a saber, revocar y eliminar. Afecta directamente el Paso 4.</li>
+    <li><strong class="k">② Sesgo algorítmico:</strong> modelos entrenados en inglés pueden malinterpretar ironía en español latinoamericano. El sesgo del modelo = error de investigación.</li>
+    <li><strong class="k">③ Dark patterns:</strong> diseños que inducen a aceptar recopilación de datos sin entenderlo. Investigación encubierta.</li>
   </ul>
 </div>
 </section>
