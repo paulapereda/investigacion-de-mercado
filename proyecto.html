@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyecto del curso — Investigación de Mercado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+<style>
+:root {
+  --ink:    #1a1a1a;
+  --paper:  #f7f4ef;
+  --accent: #c0392b;
+  --blue:   #2c5f8a;
+  --gold:   #b8860b;
+  --muted:  #6b6560;
+  --border: #d4cec5;
+  --green:  #2d7a3a;
+  --greenbg:#eef6ee;
+  --purple: #6d3d8a;
+}
+.reveal-viewport { background: var(--ink); }
+.reveal .slides { font-family: 'DM Sans', sans-serif; }
+.reveal .slides section { text-align: left; padding: 0; }
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--accent); }
+.reveal .slide-number {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  background: transparent; color: rgba(255,255,255,0.25);
+  bottom: 14px; right: 18px;
+}
+
+.slide {
+  width: 100%; height: 100vh;
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ── PORTADA ─── */
+.s-cover {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 56px 72px;
+}
+.s-cover::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:4px;
+  background: linear-gradient(90deg, var(--accent), var(--blue), var(--gold));
+}
+.cover-eyebrow {
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--accent); margin-bottom:18px;
+}
+.cover-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,6vw,5rem);
+  font-weight:900; line-height:1.0; margin-bottom:28px;
+}
+.cover-title em { color:#d4a0a0; font-style:italic; }
+.cover-chip {
+  font-size:12px; color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:5px 14px;
+  display:inline-block; letter-spacing:0.5px; margin-right:8px;
+}
+
+/* ── SECCIÓN OSCURA ─── */
+.s-section {
+  background: var(--ink); color: var(--paper);
+  justify-content: center; padding: 60px 72px;
+}
+.s-section::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+.sec-num {
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:3px; color:var(--accent);
+  text-transform:uppercase; margin-bottom:12px;
+}
+.sec-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:700; line-height:1.1; color:var(--paper);
+}
+.sec-sub {
+  font-size:14px; color:rgba(255,255,255,0.45);
+  margin-top:12px; font-style:italic;
+}
+
+/* ── CLARO ─── */
+.s-light {
+  background: var(--paper); padding: 44px 64px;
+  justify-content: flex-start;
+}
+.s-light::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── OSCURO CONTENIDO ─── */
+.s-dark {
+  background: #1e1e1e; padding: 44px 64px;
+  justify-content: flex-start;
+}
+.s-dark::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:100%; height:3px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+
+/* ── EYEBROW + TÍTULO ─── */
+.eyebrow {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px;
+}
+.eyebrow-light { color:rgba(255,255,255,0.35); }
+.slide-h {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.3rem,2.5vw,1.8rem);
+  font-weight:700; line-height:1.2;
+  color:var(--ink); margin-bottom:18px;
+}
+.slide-h-white { color:white; }
+
+/* ── BULLETS ─── */
+ul.bullets { list-style:none; padding:0; margin:0; }
+ul.bullets li {
+  font-size:clamp(12.5px,1.6vw,14.5px); line-height:1.65;
+  color:#333; padding:7px 0 7px 22px;
+  border-bottom:1px solid var(--border); position:relative;
+}
+ul.bullets li:last-child { border-bottom:none; }
+ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
+ul.bullets-white li::before { color:var(--accent); }
+
+/* ── ENTREGABLE CARD ─── */
+.entregable {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:14px 18px; border-radius:8px;
+  margin-bottom:10px;
+}
+.e-num {
+  font-family:'Playfair Display',serif;
+  font-size:2rem; font-weight:900; line-height:1;
+  flex-shrink:0; width:36px;
+}
+.e-body {}
+.e-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:4px;
+}
+.e-title {
+  font-family:'Playfair Display',serif;
+  font-size:1rem; font-weight:700; line-height:1.2;
+}
+.e-sub { font-size:12.5px; margin-top:3px; line-height:1.5; }
+
+/* ── CAJA DE SECCIÓN ─── */
+.section-box {
+  border-radius:8px; padding:14px 18px; margin-bottom:10px;
+}
+.section-box-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;
+}
+.section-box-title {
+  font-family:'Playfair Display',serif;
+  font-size:1rem; font-weight:700; margin-bottom:6px;
+}
+.section-box-text { font-size:13px; line-height:1.6; }
+
+/* ── EJEMPLO ─── */
+.ejemplo-box {
+  background: #f0f4f8;
+  border-left:4px solid var(--blue);
+  border-radius:0 6px 6px 0;
+  padding:10px 16px; margin-top:4px; margin-bottom:4px;
+}
+.ejemplo-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--blue);
+  text-transform:uppercase; margin-bottom:4px;
+}
+.ejemplo-text { font-size:13px; color:#1a3a5c; line-height:1.55; font-style:italic; }
+
+/* ── PAUSA ─── */
+.pause-box {
+  background:#fffbec; border-left:5px solid var(--gold);
+  border-radius:0 8px 8px 0; padding:12px 16px; margin-top:14px;
+}
+.pause-label {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px;
+}
+.pause-q { font-size:13px; font-style:italic; color:#4a3a00; line-height:1.6; }
+
+/* ── TOOLS GRID ─── */
+.tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+.tool-item { background:white; border:1px solid var(--border); border-radius:6px; padding:12px 14px; }
+.tool-name { font-weight:600; font-size:13px; color:var(--blue); margin-bottom:3px; }
+.tool-use { font-size:11.5px; color:var(--muted); line-height:1.4; }
+
+/* ── TIMELINE ─── */
+.timeline { display:flex; flex-direction:column; gap:0; margin-top:8px; }
+.tl-item { display:flex; align-items:flex-start; gap:0; }
+.tl-left { display:flex; flex-direction:column; align-items:center; width:48px; flex-shrink:0; }
+.tl-dot {
+  width:14px; height:14px; border-radius:50%; flex-shrink:0; margin-top:3px;
+  border:2px solid;
+}
+.tl-line { width:2px; flex:1; min-height:24px; }
+.tl-content { padding:2px 0 20px 14px; flex:1; }
+.tl-n {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:1.5px; text-transform:uppercase; margin-bottom:3px;
+}
+.tl-title {
+  font-family:'Playfair Display',serif;
+  font-size:1rem; font-weight:700; margin-bottom:3px;
+}
+.tl-desc { font-size:13px; line-height:1.5; }
+
+/* ── NOTA DARK ─── */
+.nota-dark {
+  background:rgba(255,255,255,0.06);
+  border-left:4px solid var(--muted);
+  border-radius:0 6px 6px 0; padding:10px 16px; margin-top:12px;
+}
+.nota-dark-text { font-size:12.5px; color:rgba(255,255,255,0.55); line-height:1.55; font-style:italic; }
+
+/* ── PREGUNTA CARD ─── */
+.q-card {
+  background:white; border:1px solid var(--border);
+  border-left:4px solid var(--gold);
+  border-radius:0 8px 8px 0; padding:10px 16px; margin-bottom:8px;
+}
+.q-num {
+  font-family:'DM Mono',monospace; font-size:10px;
+  letter-spacing:1.5px; color:var(--gold);
+  text-transform:uppercase; margin-bottom:3px;
+}
+.q-text { font-size:13.5px; color:var(--ink); line-height:1.5; font-weight:500; }
+
+/* ── CIERRE ─── */
+.s-close {
+  background: var(--ink); padding: 60px 72px; justify-content: center;
+}
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+
+<!-- ══════════════════════════════════════
+     PORTADA
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-cover">
+  <div class="cover-eyebrow">Investigación de Mercado · Universidad de Montevideo</div>
+  <div class="cover-title">Proyecto<br>del <em>curso</em></div>
+  <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+    <div class="cover-chip">4 entregas</div>
+    <div class="cover-chip">Caso real con empresa</div>
+    <div class="cover-chip">Paula Pereda Suárez</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     QUÉ ES EL PROYECTO
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">El proyecto</div>
+  <div class="slide-h">Una investigación de mercado real, de principio a fin</div>
+  <ul class="bullets">
+    <li>El proyecto integra los contenidos del curso aplicándolos a <strong>un problema real de una empresa o negocio</strong> que el equipo elige y visita. No cualquier empresa: una donde puedan acceder al tomador de decisiones y a los consumidores</li>
+    <li>Hay que <strong>programar una cita</strong> con el tomador de decisiones, entrevistarlo en profundidad y mantener contacto a lo largo del semestre. La entrevista inicial es la materia prima del PIM: sin esa conversación, el problema de investigación se construye sobre supuestos</li>
+    <li>El objetivo: identificar un <strong>problema de investigación de mercados</strong> (PIM) que pueda abordarse con éxito, ni tan amplio que no tenga diseño posible, ni tan estrecho que la respuesta ya estaba dada antes de preguntar</li>
+    <li>Al finalizar el curso: <strong>presentación de resultados</strong> ante la clase más carpeta completa con todos los documentos generados durante el proceso</li>
+  </ul>
+  <div class="pause-box">
+    <div class="pause-label">La pregunta que guía todo el proyecto</div>
+    <div class="pause-q">¿Puede identificar un problema de investigación de mercados en esta empresa que podría abordarse con éxito?</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     RESUMEN DE ENTREGABLES
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Las cuatro entregas</div>
+  <div class="slide-h slide-h-white">Entregables del semestre</div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:var(--accent);border-color:var(--accent);"></div>
+        <div class="tl-line" style="background:rgba(255,255,255,0.12);"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-n" style="color:var(--accent);">Entrega 1 · 27/8</div>
+        <div class="tl-title" style="color:white;">Definición del problema</div>
+        <div class="tl-desc" style="color:rgba(255,255,255,0.6);">Presentación del equipo y la empresa, contexto, pregunta objetivo, preguntas específicas, justificación</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:var(--blue);border-color:var(--blue);"></div>
+        <div class="tl-line" style="background:rgba(255,255,255,0.12);"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-n" style="color:var(--blue);">Entrega 2 · setiembre (TBD)</div>
+        <div class="tl-title" style="color:white;">Propuesta de investigación</div>
+        <div class="tl-desc" style="color:rgba(255,255,255,0.6);">PIM, preguntas de investigación, hipótesis, fuentes de información</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:var(--gold);border-color:var(--gold);"></div>
+        <div class="tl-line" style="background:rgba(255,255,255,0.12);"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-n" style="color:var(--gold);">Entrega 3 · octubre (TBD)</div>
+        <div class="tl-title" style="color:white;">Trabajo de campo: instrumento y primeros datos</div>
+        <div class="tl-desc" style="color:rgba(255,255,255,0.6);">Instrumento de recolección, primeros datos recolectados</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:var(--green);border-color:var(--green);"></div>
+        <div class="tl-line" style="background:transparent;"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-n" style="color:#6db86d;">Entrega 4 · 19/11</div>
+        <div class="tl-title" style="color:white;">Análisis primario, resultados, informe y presentación</div>
+        <div class="tl-desc" style="color:rgba(255,255,255,0.6);">Análisis de datos, resultados, informe escrito, presentación oral, carpeta con todos los documentos</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     EJEMPLOS DE PROYECTOS
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Del semestre pasado</div>
+  <div class="slide-h">Estos son algunos de los proyectos que hicieron los grupos del año pasado</div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px;">
+
+    <div style="background:white; border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:0 6px 6px 0; padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--accent); text-transform:uppercase; margin-bottom:4px;">La 2000 Pizzería · Salto</div>
+      <div style="font-size:12.5px; color:var(--ink); line-height:1.5; margin-bottom:5px;"><strong>PDA:</strong> ¿Cómo puede la pizzería aumentar la demanda de lunes a miércoles?</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.45;"><strong>PIM:</strong> Determinar por qué los clientes concentran sus visitas en el fin de semana y qué atributos de la propuesta valoran más para decidir ir entre semana</div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--border); border-left:4px solid var(--blue); border-radius:0 6px 6px 0; padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--blue); text-transform:uppercase; margin-bottom:4px;">PAMER · Montevideo</div>
+      <div style="font-size:12.5px; color:var(--ink); line-height:1.5; margin-bottom:5px;"><strong>PDA:</strong> ¿Debe PAMER ingresar al mercado de bolsas de papel para comercios minoristas?</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.45;"><strong>PIM:</strong> Determinar la disposición de los comercios minoristas a sustituir bolsas plásticas por papel y qué atributos (precio, resistencia, marca) son determinantes en esa decisión</div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--border); border-left:4px solid var(--gold); border-radius:0 6px 6px 0; padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--gold); text-transform:uppercase; margin-bottom:4px;">Vincent Café · Montevideo</div>
+      <div style="font-size:12.5px; color:var(--ink); line-height:1.5; margin-bottom:5px;"><strong>PDA:</strong> ¿Debe Vincent abrir un segundo local o reforzar la propuesta en el local actual?</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.45;"><strong>PIM:</strong> Determinar qué perfil de cliente frecuenta el local, qué lo fideliza y si existe demanda insatisfecha en otras zonas de Montevideo</div>
+    </div>
+
+    <div style="background:white; border:1px solid var(--border); border-left:4px solid var(--green); border-radius:0 6px 6px 0; padding:12px 14px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--green); text-transform:uppercase; margin-bottom:4px;">Häven · Montevideo</div>
+      <div style="font-size:12.5px; color:var(--ink); line-height:1.5; margin-bottom:5px;"><strong>PDA:</strong> ¿Cómo puede Häven captar clientes de segmentos más jóvenes sin perder su posicionamiento actual?</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.45;"><strong>PIM:</strong> Determinar cómo perciben los consumidores menores de 35 años la marca y qué barreras de acceso o imagen limitan su adopción</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:10px; padding:9px 14px; background:#f7f4ef; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:12px; color:var(--muted); line-height:1.5; font-style:italic;">
+    Sectores del semestre pasado: gastronomía, industria B2B, retail, servicios, entretenimiento, inmobiliario, plataformas digitales, agencia de viajes, estética
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ENTREGA 1 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Entrega 1</div>
+  <div class="sec-title">Definición<br>del problema</div>
+  <div class="sec-sub">Presentación del equipo y la empresa · Avance inicial</div>
+</div>
+</section>
+
+<!-- Entrega 1: qué es y portada -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 1: estructura del documento</div>
+  <div class="slide-h">Es un avance: no se exige trabajo terminado sino planteo</div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:4px;">
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--accent); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:8px;">Portada</div>
+      <ul class="bullets" style="margin:0;">
+        <li>Título del proyecto</li>
+        <li>Integrantes del grupo</li>
+        <li>Fecha · Curso · Docente</li>
+      </ul>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-top:3px solid var(--blue); border-radius:0 0 8px 8px; padding:14px 16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">Secciones</div>
+      <ul class="bullets" style="margin:0;">
+        <li>1. Contexto del problema</li>
+        <li>2. Pregunta objetivo</li>
+        <li>3. Preguntas específicas</li>
+        <li>4. Justificación y público objetivo</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:14px; padding:10px 16px; background:#f0f4f8; border-radius:6px; font-size:13px; color:#2c5f8a; line-height:1.6;">
+    <strong>Empresa:</strong> nombre del proyecto/equipo, área/industria/sector, problema de investigación que les gustaría estudiar. Si la empresa cambia entre E1 y E2, el contexto se rehace: el PIM tiene que fluir del problema real de ese tomador de decisiones.
+  </div>
+</div>
+</section>
+
+<!-- Entrega 1: sección 1 y 2 -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 1: secciones 1 y 2</div>
+  <div class="slide-h">Contexto del problema y pregunta objetivo</div>
+
+  <div style="background:white; border:1px solid var(--border); border-left:5px solid var(--accent); border-radius:0 8px 8px 0; padding:14px 18px; margin-bottom:12px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">1 · Contexto del problema</div>
+    <ul class="bullets">
+      <li>Breve introducción al tema elegido (economía, salud, medio ambiente, deporte, etc.)</li>
+      <li>Explicar la situación actual en Uruguay o a nivel global</li>
+      <li>Señalar una oportunidad innovadora, una problemática o una tendencia a investigar</li>
+    </ul>
+  </div>
+
+  <div class="ejemplo-box">
+    <div class="ejemplo-label">Ejemplo de contexto bien construido</div>
+    <div class="ejemplo-text">El grupo de PAMER abrió con datos del mercado uruguayo de embalajes, citó la normativa ambiental vigente y la presión que ejerce sobre los comercios, y situó el problema de la empresa dentro de ese contexto. El tomador de decisiones dijo "los comercios nos preguntan si tenemos bolsas de papel": eso es un síntoma, no un hecho de mercado. El grupo lo trató como tal.</div>
+  </div>
+
+  <div style="background:white; border:1px solid var(--border); border-left:5px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 18px; margin-top:12px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:6px;">2 · Pregunta objetivo</div>
+    <div style="font-size:13.5px; color:#333; line-height:1.6;">La <strong>gran pregunta de investigación</strong> que guiará todo el trabajo. Debe ser clara, acotada y genuinamente investigable. Investiga al consumidor o al mercado: no es una recomendación ni una decisión.</div>
+  </div>
+
+  <div class="ejemplo-box" style="border-left-color:var(--blue); background:#edf4fc;">
+    <div class="ejemplo-label" style="color:var(--blue);">Ejemplos del semestre pasado</div>
+    <div class="ejemplo-text" style="color:#1a3a5c;">"¿Qué factores determinan la decisión de los clientes de La 2000 de ir a cenar entre semana en lugar del fin de semana?" / "¿Qué percepción tiene el consumidor joven de Montevideo sobre la marca Häven y qué barreras limitan su adopción?"</div>
+  </div>
+</div>
+</section>
+
+<!-- Entrega 1: sección 3 y 4 -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 1: secciones 3 y 4</div>
+  <div class="slide-h">Preguntas específicas y justificación</div>
+
+  <div style="background:white; border:1px solid var(--border); border-left:5px solid var(--gold); border-radius:0 8px 8px 0; padding:14px 18px; margin-bottom:12px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:6px;">3 · Preguntas específicas</div>
+    <div style="font-size:13px; color:#333; margin-bottom:8px; line-height:1.5;">Derivar de la pregunta principal <strong>3 a 5 sub-preguntas</strong> más concretas que orienten la recolección de información y el análisis. En E2 estas preguntas se convierten en las preguntas de investigación formales.</div>
+    <div class="ejemplo-box" style="background:#fffbec; border-left-color:var(--gold); margin-top:0;">
+      <div class="ejemplo-label" style="color:var(--gold);">Ejemplo del semestre pasado</div>
+      <div class="ejemplo-text" style="color:#4a3a00;">El grupo de Vincent Café formuló: "¿Qué atributos del local valoran más los clientes habituales?", "¿Qué los llevó a elegir Vincent por primera vez?", "¿Recomendarían el local y por qué?". Preguntas concretas, todas orientadas al consumidor, todas respondibles con una encuesta.</div>
+    </div>
+  </div>
+
+  <div style="background:white; border:1px solid var(--border); border-left:5px solid var(--green); border-radius:0 8px 8px 0; padding:14px 18px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--green); text-transform:uppercase; margin-bottom:6px;">4 · Justificación y público objetivo</div>
+    <ul class="bullets">
+      <li>Por qué es relevante este proyecto: aporte al sector, innovación, relevancia social, económica o ambiental. No alcanza con decir "es un tema importante", hay que argumentarlo</li>
+      <li>A quién beneficia directamente: el tomador de decisiones real, los consumidores afectados, el sector. La justificación no puede ser genérica</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ENTREGA 2 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Entrega 2</div>
+  <div class="sec-title">Propuesta de<br>investigación</div>
+  <div class="sec-sub">PIM · PI · Hipótesis · Fuentes</div>
+</div>
+</section>
+
+<!-- Entrega 2: qué incluye -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 2: trabajo de campo inicial</div>
+  <div class="slide-h">Visitar la empresa y traducir el problema de negocio en un PIM</div>
+
+  <ul class="bullets">
+    <li><strong>Programar una cita</strong> y visitar el negocio elegido. La entrevista en profundidad con el tomador de decisiones es la materia prima de esta entrega: sin esa conversación, no hay PDA real</li>
+    <li>Identificar el <strong>problema de decisión gerencial (PDA)</strong> y traducirlo al <strong>problema de investigación de mercados (PIM)</strong>. El PDA plantea un dilema de acción. El PIM pregunta qué información se necesita para resolverlo</li>
+    <li>Formular <strong>preguntas de investigación (PI)</strong> orientadas al consumidor. Las PI preguntan qué piensan, perciben o hacen los consumidores, no qué debería hacer la empresa</li>
+    <li>Formular <strong>hipótesis (H)</strong> fundadas en teoría o evidencia, con umbral justificado. "Se espera que al menos el 60% prefiera X" necesita un argumento, no una estimación del dueño</li>
+    <li>Identificar las <strong>fuentes de información</strong> disponibles: primarias y secundarias. Las secundarias van primero</li>
+  </ul>
+
+  <div style="margin-top:14px; padding:10px 16px; background:#f0f4f8; border-left:4px solid var(--blue); border-radius:0 6px 6px 0; font-size:13px; color:#1a3a5c; line-height:1.6;">
+    La entrevista en profundidad con el tomador de decisiones es la materia prima de esta entrega. Sin esa conversación, no hay PDA real y el resto del documento se construye sobre supuestos.
+  </div>
+</div>
+</section>
+
+<!-- Entrega 2: preguntas a responder -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 2: preguntas a responder en el documento</div>
+  <div class="slide-h">Cuatro preguntas que estructuran la propuesta</div>
+
+  <div class="q-card">
+    <div class="q-num">Pregunta 1</div>
+    <div class="q-text">¿Cuál es el problema de negocio? El PDA: ¿qué decisión concreta enfrenta el tomador de decisiones? Es una pregunta de acción, no de información. Ejemplo: "¿Debe PAMER ingresar al mercado de bolsas de papel?"</div>
+  </div>
+  <div class="q-card">
+    <div class="q-num">Pregunta 2</div>
+    <div class="q-text">¿Cuál es el problema de investigación? El PIM: ¿qué información se necesita y cómo puede obtenerse? Ni demasiado amplio ("entender al consumidor") ni demasiado estrecho ("saber si les gusta el logo nuevo")</div>
+  </div>
+  <div class="q-card">
+    <div class="q-num">Pregunta 3</div>
+    <div class="q-text">¿Cuáles son las preguntas de investigación y las hipótesis? Las PI refinan los componentes del PIM. Las H son afirmaciones sobre relaciones propuestas, testables con los datos que van a recolectar</div>
+  </div>
+  <div class="q-card">
+    <div class="q-num">Pregunta 4</div>
+    <div class="q-text">¿Cuáles son las fuentes de información? Primarias y secundarias. Las secundarias van primero: no se diseña investigación primaria sin haber revisado qué ya existe sobre el tema</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ENTREGA 3 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Entrega 3</div>
+  <div class="sec-title">Trabajo de campo,<br>instrumento<br>y primeros datos</div>
+  <div class="sec-sub">Recolección · Metodología · Plan de análisis</div>
+</div>
+</section>
+
+<!-- Entrega 3: qué es -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 3: qué se entrega</div>
+  <div class="slide-h">Dos componentes: el instrumento y los primeros datos</div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:4px;">
+    <div style="background:white; border:1px solid var(--border); border-top:4px solid var(--gold); border-radius:0 0 8px 8px; padding:16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:8px;">Componente A</div>
+      <div style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; margin-bottom:8px;">Instrumento de recolección de datos</div>
+      <ul class="bullets">
+        <li>Cuestionario, guía de entrevista o ficha de observación según el diseño elegido</li>
+        <li>Justificación de cada pregunta/ítem en relación al PIM y las hipótesis</li>
+        <li>Escalas de medición utilizadas</li>
+        <li>Protocolo de aplicación: cómo, cuándo, a quién</li>
+      </ul>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-top:4px solid var(--blue); border-radius:0 0 8px 8px; padding:16px;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--blue); text-transform:uppercase; margin-bottom:8px;">Componente B</div>
+      <div style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; margin-bottom:8px;">Primeros datos recolectados</div>
+      <ul class="bullets">
+        <li>Primeras respuestas obtenidas en campo (no se exige muestra completa)</li>
+        <li>Descripción del proceso de recolección realizado hasta la entrega</li>
+        <li>Observaciones sobre dificultades encontradas y ajustes realizados al instrumento</li>
+        <li>Muestra alcanzada a la fecha y plan para completarla</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Entrega 3: instrumento en detalle -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 3 · Componente A: instrumento de recolección</div>
+  <div class="slide-h">Qué debe contener el instrumento y cómo construirlo</div>
+
+  <ul class="bullets">
+    <li><strong>Tipo de instrumento:</strong> cuestionario estructurado (para investigación cuantitativa), guía semi-estructurada (para cuali) o ficha de observación, según el diseño de la Entrega 2. El instrumento responde al PIM que formularon, no a otro</li>
+    <li><strong>Cada pregunta debe tener una justificación:</strong> ¿a qué PI responde? ¿qué hipótesis ayuda a probar o refutar? Si no saben para qué sirve una pregunta, no va en el instrumento</li>
+    <li><strong>Escalas:</strong> nominal, ordinal, de intervalos, de razón, elegidas según el tipo de variable y el análisis previsto. La elección de escala define qué análisis pueden hacer después</li>
+    <li><strong>Pre-test:</strong> el instrumento debe haberse probado con al menos 3 personas antes de salir al campo. Documentar los ajustes: eso es evidencia de proceso</li>
+    <li><strong>Consentimiento informado:</strong> si usan datos de personas, incluir cláusula de uso de datos conforme a la Ley 18.331 de protección de datos personales de Uruguay</li>
+  </ul>
+</div>
+</section>
+
+<!-- Entrega 3: primeros datos -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 3 · Componente B: primeros datos recolectados</div>
+  <div class="slide-h">Qué presentar y cómo organizar los primeros resultados</div>
+
+  <ul class="bullets">
+    <li><strong>Descripción de la muestra alcanzada:</strong> cantidad de respuestas obtenidas, perfil de los encuestados, fechas de recolección. Sin descripción de la muestra, los datos no se pueden interpretar</li>
+    <li><strong>Presentación de datos brutos:</strong> tablas de frecuencia o transcripciones parciales. No se exige análisis completo todavía, pero los datos tienen que estar organizados</li>
+    <li><strong>Observaciones del trabajo de campo:</strong> dificultades encontradas, sesgos potenciales, ajustes al instrumento. Lo que salió diferente a lo planificado es información: documentarlo</li>
+    <li><strong>Plan para completar la muestra:</strong> cuántas respuestas faltan, cómo se van a obtener, cronograma hasta E4</li>
+  </ul>
+
+  <div style="background:white; border:1px solid var(--border); border-left:5px solid var(--accent); border-radius:0 8px 8px 0; padding:14px 18px; margin-top:14px;">
+    <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); text-transform:uppercase; margin-bottom:6px;">A presentar también en esta entrega</div>
+    <ul class="bullets" style="margin:0;">
+      <li>Descripción del estado del trabajo de campo al momento de la entrega</li>
+      <li>Observaciones sobre dificultades encontradas y ajustes realizados al instrumento</li>
+      <li>Muestra alcanzada a la fecha y plan para completarla antes de la Entrega 4</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- Entrega 4: herramientas -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Entrega 4 · Herramientas de análisis</div>
+  <div class="slide-h slide-h-white">En otros talleres del curso aprenderemos estas herramientas</div>
+
+  <div class="tool-grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="tool-item">
+      <div class="tool-name">LaTeX</div>
+      <div class="tool-use">Redacción y presentación profesional de informes académicos y técnicos</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Excel</div>
+      <div class="tool-use">Organización de datos, tablas de frecuencia, gráficos, estadística descriptiva básica</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Python</div>
+      <div class="tool-use">Análisis de datos, visualizaciones avanzadas, procesamiento de grandes volúmenes, machine learning</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">R</div>
+      <div class="tool-use">Análisis estadístico, modelos de regresión, visualización con ggplot2, análisis de encuestas</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Google Forms / Typeform</div>
+      <div class="tool-use">Diseño y distribución de cuestionarios digitales con exportación directa a Excel/CSV</div>
+    </div>
+  </div>
+
+  <div class="nota-dark" style="margin-top:14px;">
+    <div class="nota-dark-text">El taller de herramientas no reemplaza la clase: complementa el proyecto. El criterio para elegir la herramienta es siempre la pregunta de investigación, no la disponibilidad de la herramienta.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     ENTREGA 4 — SECCIÓN
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-section">
+  <div class="sec-num">Entrega 4</div>
+  <div class="sec-title">Resultados,<br>informe y<br>presentación final</div>
+  <div class="sec-sub">Análisis completo · Informe escrito · Presentación oral</div>
+</div>
+</section>
+
+<!-- Entrega 4: qué incluye -->
+<section>
+<div class="slide s-light">
+  <div class="eyebrow">Entrega 4: qué se entrega al final del curso</div>
+  <div class="slide-h">Tres elementos: análisis, informe escrito y presentación oral</div>
+
+  <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+    <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 16px; background:white; border:1px solid var(--border); border-left:5px solid var(--green); border-radius:0 8px 8px 0;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--green); text-transform:uppercase; letter-spacing:1.5px; flex-shrink:0; padding-top:2px; min-width:80px;">Metodología</div>
+      <div style="font-size:13.5px; color:#333; line-height:1.55;">Descripción del método de análisis: estadística descriptiva, análisis de contenido, regresión u otros. Cómo cada análisis responde a las PI e hipótesis formuladas en la Entrega 2.</div>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 16px; background:white; border:1px solid var(--border); border-left:5px solid var(--accent); border-radius:0 8px 8px 0;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); text-transform:uppercase; letter-spacing:1.5px; flex-shrink:0; padding-top:2px; min-width:80px;">Análisis</div>
+      <div style="font-size:13.5px; color:#333; line-height:1.55;">Aplicación completa del plan de análisis definido en la Entrega 3. Resultados por pregunta de investigación. Confirmación o rechazo de cada hipótesis con los datos.</div>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 16px; background:white; border:1px solid var(--border); border-left:5px solid var(--blue); border-radius:0 8px 8px 0;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--blue); text-transform:uppercase; letter-spacing:1.5px; flex-shrink:0; padding-top:2px; min-width:80px;">Informe</div>
+      <div style="font-size:13.5px; color:#333; line-height:1.55;">Documento escrito con todos los elementos del proceso: contexto, PIM, metodología, análisis, conclusiones y recomendaciones para el tomador de decisiones.</div>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 16px; background:white; border:1px solid var(--border); border-left:5px solid var(--gold); border-radius:0 8px 8px 0;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); text-transform:uppercase; letter-spacing:1.5px; flex-shrink:0; padding-top:2px; min-width:80px;">Presentación</div>
+      <div style="font-size:13.5px; color:#333; line-height:1.55;">Presentación oral ante la clase de los resultados de la investigación. El equipo expone como lo haría frente al tomador de decisiones real.</div>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:14px; padding:12px 16px; background:#f0f4f8; border:1px solid #a0bfd8; border-left:5px solid var(--green); border-radius:0 8px 8px 0;">
+      <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--green); text-transform:uppercase; letter-spacing:1.5px; flex-shrink:0; padding-top:2px; min-width:80px;">Carpeta</div>
+      <div style="font-size:13.5px; color:#1a3a5c; line-height:1.55;">Carpeta completa con <strong>todos los documentos generados durante el proceso</strong>: Entregas 1 a 4, instrumento original, datos brutos, transcripciones, versiones anteriores.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CRITERIOS GENERALES
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-dark">
+  <div class="eyebrow eyebrow-light">Para tener en cuenta</div>
+  <div class="slide-h slide-h-white">Criterios que aplican a todas las entregas</div>
+  <ul class="bullets bullets-white">
+    <li>El proyecto trabaja con <strong>una empresa o negocio real</strong>: no simulaciones ni casos hipotéticos. El tomador de decisiones debe poder ser contactado por la docente</li>
+    <li>Cada entrega debe tener <strong>coherencia interna</strong>: el PIM de E2 fluye del contexto de E1; el instrumento de E3 responde al PIM y las hipótesis de E2; el análisis de E4 cierra cada hipótesis con datos. El hilo entre entregas es el proyecto</li>
+    <li>Las PI y las hipótesis deben estar <strong>fundadas en teoría</strong>: citar Malhotra u otras fuentes académicas relevantes. Los umbrales en las hipótesis necesitan argumento</li>
+    <li>Se valora el <strong>proceso de aprendizaje</strong> documentado: los ajustes que hicieron, los errores que corrigieron, las decisiones que tomaron y por qué. Un PIM bien reformulado entre E1 y E2 demuestra más que uno que no cambió nada</li>
+    <li>La <strong>carpeta final</strong> es evidencia de que el proceso ocurrió: guardar todos los borradores, versiones y registros de campo desde el inicio</li>
+  </ul>
+  <div class="nota-dark">
+    <div class="nota-dark-text">El objetivo no es una investigación perfecta: es una investigación real, honesta y coherente. La calidad del razonamiento importa más que la perfección técnica.</div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     CIERRE
+══════════════════════════════════════ -->
+<section>
+<div class="slide s-close">
+  <div class="sec-num" style="margin-bottom:16px;">El proyecto en una frase</div>
+  <div class="sec-title" style="font-size:2rem; margin-bottom:28px; color:var(--paper);">Un problema real,<br>un proceso completo,<br><em style="color:#d4a0a0;">una empresa que espera<br>los resultados.</em></div>
+  <ul class="bullets bullets-white" style="max-width:600px; margin-bottom:28px;">
+    <li><strong style="color:white;">Entrega 1 · 27/8:</strong> Definición del problema y presentación del equipo</li>
+    <li><strong style="color:white;">Entrega 2 · setiembre (TBD):</strong> Propuesta de investigación: PIM, PI, hipótesis</li>
+    <li><strong style="color:white;">Entrega 3 · octubre (TBD):</strong> Instrumento de recolección y primeros datos</li>
+    <li><strong style="color:white;">Entrega 4 · 19/11:</strong> Análisis, informe y presentación final</li>
+  </ul>
+  <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
+</div>
+</section>
+
+
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  slideNumber: true,
+  transition: 'fade',
+  transitionSpeed: 'fast',
+  controls: true,
+  progress: true,
+  center: false,
+  width: 1280,
+  height: 720,
+  margin: 0,
+  minScale: 0.2,
+  maxScale: 2.0,
+});
+</script>
+</body>
+</html>
