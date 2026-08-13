@@ -116,6 +116,9 @@ ul.bullets-white li::before { color: var(--accent); }
 
 /* CIERRE */
 .s-close { background: var(--ink); padding: 60px 72px; justify-content: center; }
+
+/* PIZARRÓN */
+.piz { margin-top:9px; padding:7px 13px; background:#f0ece4; border-left:3px solid var(--muted); border-radius:0 5px 5px 0; font-size:11.5px; color:var(--muted); font-style:italic; }
 </style>
 </head>
 <body>
@@ -134,24 +137,22 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── APERTURA min 0–8 ─────────────────── -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Apertura · minutos 0–8</div>
+  <div class="eyebrow">Apertura</div>
   <div class="slide-h">El capítulo más importante del libro</div>
   <ul class="bullets">
     <li>El capítulo 1 definió qué es la investigación de mercado y para qué sirve</li>
     <li>Este capítulo responde lo que queda abierto: <strong>¿cómo sabe el investigador qué pregunta hacer?</strong></li>
-    <li>Todo lo que viene después — diseño, instrumentos, muestreo, análisis — depende de haber hecho bien <strong>una sola cosa</strong>: definir correctamente el problema</li>
+    <li>Todo lo que viene después (diseño, instrumentos, muestreo, análisis) depende de haber hecho bien <strong>una sola cosa</strong>: definir correctamente el problema</li>
     <li>Y definir el problema correctamente es mucho más difícil de lo que parece</li>
   </ul>
-  <div class="callout">
-    <strong>Antes de arrancar:</strong> ¿quién usa Duolingo? El caso funciona mejor si los estudiantes se reconocen como usuarios
-  </div>
+
 </div>
 </section>
 
 <!-- ── CASO DUOLINGO: SECCIÓN ──────────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Caso de apertura · minutos 8–25</div>
+  <div class="sec-num">Caso de apertura</div>
   <div class="sec-title">Duolingo:<br>del síntoma<br>a la solución</div>
   <div class="sec-sub">El proceso completo del capítulo en un solo caso</div>
 </div>
@@ -161,7 +162,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Síntoma · Duolingo 2021</div>
-  <div class="slide-h slide-h-white">Lo que los datos mostraban — y lo que no</div>
+  <div class="slide-h slide-h-white">Lo que los datos mostraban, y lo que no</div>
   <div style="display:flex; gap:36px; margin-bottom:20px; flex-wrap:wrap;">
     <div>
       <div style="font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;color:#d4a0a0;line-height:1;">80%</div>
@@ -174,9 +175,9 @@ ul.bullets-white li::before { color: var(--accent); }
   </div>
   <ul class="bullets bullets-white">
     <li>Los datos mostraban el <strong style="color:white;">síntoma</strong> con claridad: abandono masivo en los primeros días</li>
-    <li>La hipótesis obvia — contenido aburrido, app difícil, competencia — habría llevado a invertir en la dirección equivocada</li>
+    <li>La hipótesis obvia (contenido aburrido, app difícil, competencia) habría llevado a invertir en la dirección equivocada</li>
     <li>El equipo hizo lo que Malhotra describe: <strong style="color:white;">entrevistaron</strong> a usuarios que abandonaron en lugar de solo encuestarlos</li>
-    <li>Hallazgo: el problema no era el contenido — era la ausencia de un mecanismo de compromiso interno</li>
+    <li>Hallazgo: el problema no era el contenido, sino la ausencia de un mecanismo de compromiso interno</li>
   </ul>
 </div>
 </section>
@@ -184,12 +185,12 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- Duolingo: nombrando el proceso -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Duolingo — El proceso completo · min 17–25</div>
+  <div class="eyebrow">Duolingo: el proceso completo</div>
   <div class="slide-h">Cada paso tiene un nombre en Malhotra</div>
   <div style="display:flex;flex-direction:column;gap:9px;margin-top:4px;">
     <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid #bbb;border-radius:0 6px 6px 0;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:72px;">Síntoma</div>
-      <div style="font-size:13.5px;color:#333;">Abandono masivo después del día 7 — visible en los datos, no explicado</div>
+      <div style="font-size:13.5px;color:#333;">Abandono masivo después del día 7: visible en los datos, no explicado</div>
     </div>
     <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:0 6px 6px 0;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:72px;">Auditoría</div>
@@ -197,28 +198,25 @@ ul.bullets-white li::before { color: var(--accent); }
     </div>
     <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 6px 6px 0;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:72px;">PDA</div>
-      <div style="font-size:13.5px;color:#333;">¿Debería Duolingo rediseñar la app para retener usuarios? — orientado a la <strong>acción</strong></div>
+      <div style="font-size:13.5px;color:#333;">¿Debería Duolingo rediseñar la app para retener usuarios? Orientado a la <strong>acción</strong>.</div>
     </div>
     <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:72px;">PIM</div>
-      <div style="font-size:13.5px;color:#333;">¿Qué factores predicen el abandono temprano y qué intervenciones lo reducen? — orientado a la <strong>información</strong></div>
+      <div style="font-size:13.5px;color:#333;">¿Qué factores predicen el abandono temprano y qué intervenciones lo reducen? Orientado a la <strong>información</strong>.</div>
     </div>
     <div style="display:flex;align-items:flex-start;gap:14px;padding:10px 14px;background:#edf4fc;border:1px solid #a0bfd8;border-left:4px solid var(--blue);border-radius:0 6px 6px 0;">
       <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;flex-shrink:0;padding-top:2px;min-width:72px;">Decisión</div>
       <div style="font-size:13.5px;color:#1a3a5c;">Sistema de rachas validado por A/B testing → núcleo del producto</div>
     </div>
   </div>
-  <div class="pause-box">
-    <div class="pause-label">⏸ Pregunta</div>
-    <div class="pause-q">¿En qué se parecen el proceso de Duolingo y el de Harley-Davidson del libro? ¿Qué tienen en común aunque los sectores sean distintos?</div>
-  </div>
+
 </div>
 </section>
 
 <!-- ── SECCIÓN: 4 TAREAS ───────────────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 01 · minutos 25–55</div>
+  <div class="sec-num">Sección 01</div>
   <div class="sec-title">Las cuatro tareas<br>para definir<br>el problema</div>
 </div>
 </section>
@@ -226,14 +224,14 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- Tarea 1: Auditoría -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Tarea 1 · minutos 25–35</div>
+  <div class="eyebrow">Tarea 1</div>
   <div class="slide-h">Debates y auditoría del problema</div>
   <div class="def-block">
-    <div class="def-term-label">Auditoría del problema — Malhotra</div>
+    <div class="def-term-label">Auditoría del problema · Malhotra</div>
     <div class="def-text">Examen exhaustivo para entender el <strong>origen y naturaleza</strong> del problema. Cubre: antecedentes de la situación, cursos de acción considerados, e información que la gerencia necesita para decidir.</div>
   </div>
   <ul class="bullets" style="margin-top:14px;">
-    <li>Quienes deciden se enfocan en <strong>síntomas</strong> — su desempeño se evalúa en esos términos</li>
+    <li>Quienes deciden se enfocan en <strong>síntomas</strong>: su desempeño se evalúa en esos términos</li>
     <li>La investigación que agrega valor va hacia las <strong>causas subyacentes</strong></li>
     <li>Una definición basada en síntomas es casi siempre engañosa</li>
   </ul>
@@ -247,16 +245,16 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- Tarea 2: Expertos + Tarea 3: Secundarios -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Tareas 2 y 3 · minutos 35–43</div>
+  <div class="eyebrow">Tareas 2 y 3</div>
   <div class="slide-h">Expertos y datos secundarios</div>
   <div class="two-col">
     <div class="col-box">
-      <div class="col-label">Tarea 2 — Expertos</div>
+      <div class="col-label">Tarea 2: Expertos</div>
       <div class="col-title">Para formular mejor la pregunta</div>
       <div class="col-body">No estructurada, sin cuestionario formal. Hoy se identifican en <strong>LinkedIn</strong>, Google Scholar, podcasts especializados (Hablemos de Marcas, Marketing Salvaje)</div>
     </div>
     <div class="col-box">
-      <div class="col-label">Tarea 3 — Datos secundarios</div>
+      <div class="col-label">Tarea 3: Datos secundarios</div>
       <div class="col-title">Siempre antes que los primarios</div>
       <div class="col-body">Regla absoluta: agotar las fuentes secundarias antes de diseñar cualquier instrumento primario. Muchas veces la respuesta ya existe.</div>
     </div>
@@ -271,20 +269,20 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- Tarea 4: Cuali -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Tarea 4 · minutos 43–55</div>
-  <div class="slide-h">Investigación cualitativa — la tarea que revela lo invisible</div>
+  <div class="eyebrow">Tarea 4</div>
+  <div class="slide-h">Investigación cualitativa: la tarea que revela lo invisible</div>
   <div class="def-block">
-    <div class="def-term-label">Investigación cualitativa — Malhotra</div>
-    <div class="def-text">Metodología <strong>exploratoria y no estructurada</strong>, basada en pequeñas muestras. Propósito: comprender los aspectos subyacentes — no medir, no representar estadísticamente.</div>
+    <div class="def-term-label">Investigación cualitativa · Malhotra</div>
+    <div class="def-text">Metodología <strong>exploratoria y no estructurada</strong>, basada en pequeñas muestras. Propósito: comprender los aspectos subyacentes, no medir ni representar estadísticamente.</div>
   </div>
   <ul class="bullets" style="margin-top:12px;">
-    <li>Los cuantitativos dicen <strong>QUÉ</strong> está pasando — los cualitativos dicen <strong>POR QUÉ</strong></li>
+    <li>Los cuantitativos dicen <strong>QUÉ</strong> está pasando; los cualitativos dicen <strong>POR QUÉ</strong></li>
     <li>Técnicas vigentes: focus groups, entrevistas en profundidad, asociación de palabras</li>
     <li>Técnicas nuevas: etnografía digital, focus groups asincrónicos (Discuss.io), ZMET, NVivo/Dovetail con IA</li>
-    <li><strong>Límite crítico:</strong> la IA identifica que el 40% mencionó "culpa" — no puede interpretar qué significa esa culpa en Uruguay vs. México vs. Colombia</li>
+    <li><strong>Límite crítico:</strong> la IA identifica que el 40% mencionó "culpa", pero no puede interpretar qué significa esa culpa en Uruguay vs. México vs. Colombia</li>
   </ul>
   <div class="pause-box">
-    <div class="pause-label">⏸ Caso Rappi — "fatiga de conveniencia"</div>
+    <div class="pause-label">⏸ Caso Rappi: "fatiga de conveniencia"</div>
     <div class="pause-q">¿Qué técnica cualitativa usarían para estudiar la fatiga de conveniencia en usuarios de Rappi en Uruguay? ¿Focus groups, entrevistas en profundidad, etnografía digital? ¿Por qué?</div>
   </div>
 </div>
@@ -293,7 +291,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── SECCIÓN: CONTEXTO ───────────────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 02 · minutos 55–65</div>
+  <div class="sec-num">Sección 02</div>
   <div class="sec-title">Contexto ambiental<br>del problema</div>
   <div class="sec-sub">7 factores + el octavo que el libro no anticipó</div>
 </div>
@@ -301,17 +299,18 @@ ul.bullets-white li::before { color: var(--accent); }
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Figura 2.4 — Malhotra · Acrónimo PROBLEM</div>
+  <div class="eyebrow">Figura 2.4 · Malhotra · Acrónimo PROBLEM</div>
   <div class="slide-h">Los 7 factores del contexto ambiental + 1</div>
   <div class="problem-grid">
-    <div class="p-letter">P</div><div class="p-text"><strong>Past information & forecasts</strong> — ¿La tendencia es nueva o venía de antes? ¿Solo esta empresa o toda la industria?</div>
-    <div class="p-letter">R</div><div class="p-text"><strong>Resources & constraints</strong> — Presupuesto y tiempo definen el alcance posible del estudio</div>
-    <div class="p-letter">O</div><div class="p-text"><strong>Objectives</strong> — Los objetivos organizacionales y los personales del tomador de decisiones no siempre coinciden</div>
-    <div class="p-letter">B</div><div class="p-text"><strong>Buyer behavior</strong> — El factor que más cambió: hoy muchas empresas tienen datos de comportamiento en tiempo real</div>
-    <div class="p-letter">L</div><div class="p-text"><strong>Legal environment</strong> — LFPDPPP (México) · LGPD (Brasil) · Ley 25.326 (Argentina): afectan el diseño del instrumento</div>
-    <div class="p-letter">E</div><div class="p-text"><strong>Economic environment</strong> — Modifica la disposición a participar en investigación y los patrones de consumo</div>
-    <div class="p-letter">M</div><div class="p-text"><strong>Marketing & tech skills</strong> — Incluye hoy: <strong style="color:var(--accent);">qué datos internos ya tiene la empresa</strong> (el octavo factor no contemplado en 2016)</div>
+    <div class="p-letter">P</div><div class="p-text"><strong>Past information & forecasts:</strong> ¿La tendencia es nueva o venía de antes? ¿Solo esta empresa o toda la industria?</div>
+    <div class="p-letter">R</div><div class="p-text"><strong>Resources & constraints:</strong> Presupuesto y tiempo definen el alcance posible del estudio</div>
+    <div class="p-letter">O</div><div class="p-text"><strong>Objectives:</strong> Los objetivos organizacionales y los personales del tomador de decisiones no siempre coinciden</div>
+    <div class="p-letter">B</div><div class="p-text"><strong>Buyer behavior:</strong> El factor que más cambió; hoy muchas empresas tienen datos de comportamiento en tiempo real</div>
+    <div class="p-letter">L</div><div class="p-text"><strong>Legal environment:</strong> LFPDPPP (México) · LGPD (Brasil) · Ley 25.326 (Argentina); afectan el diseño del instrumento</div>
+    <div class="p-letter">E</div><div class="p-text"><strong>Economic environment:</strong> Modifica la disposición a participar en investigación y los patrones de consumo</div>
+    <div class="p-letter">M</div><div class="p-text"><strong>Marketing & tech skills:</strong> Incluye hoy <strong style="color:var(--accent);">qué datos internos ya tiene la empresa</strong> (el octavo factor no contemplado en 2016)</div>
   </div>
+  <div class="piz">✏ Figura 2.4 en pizarrón: acrónimo PROBLEM con los 7 factores — dejar visible durante la discusión del contexto ambiental</div>
   <div class="pause-box">
     <div class="pause-label">⏸ Pregunta</div>
     <div class="pause-q">Una startup con 200,000 usuarios quiere contratar un estudio externo. Usando PROBLEM, ¿qué factores analizarían primero antes de decidir si el estudio es necesario?</div>
@@ -322,7 +321,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── SECCIÓN: PDA vs. PIM ────────────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 03 · minutos 65–80</div>
+  <div class="sec-num">Sección 03</div>
   <div class="sec-title">PDA vs. PIM</div>
   <div class="sec-sub">La distinción más importante del capítulo</div>
 </div>
@@ -330,18 +329,19 @@ ul.bullets-white li::before { color: var(--accent); }
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Tabla 2.2 — Malhotra</div>
+  <div class="eyebrow">Tabla 2.2 · Malhotra</div>
+  <div class="piz">✏ Tabla 2.2 en pizarrón: dos columnas PDA / PIM con las definiciones — queda visible durante los ejemplos de la Tabla 2.3</div>
   <div class="slide-h">Dos preguntas que parecen iguales y no lo son</div>
   <div class="def-block">
-    <div class="def-term-label">PDA — Problema de decisión administrativa</div>
+    <div class="def-term-label">PDA · Problema de decisión administrativa</div>
     <div class="def-text">Pregunta <strong>qué debe hacer</strong> quien decide. Orientado a la <strong>acción</strong>. Se enfoca en los síntomas.</div>
   </div>
   <div class="def-block" style="margin-top:10px;">
-    <div class="def-term-label">PIM — Problema de investigación de mercados</div>
+    <div class="def-term-label">PIM · Problema de investigación de mercados</div>
     <div class="def-text">Pregunta <strong>qué información se necesita</strong> y cómo obtenerla. Orientado a la <strong>información</strong>. Se enfoca en las causas subyacentes.</div>
   </div>
   <div class="callout" style="margin-top:14px;">
-    <strong>El error más común:</strong> "Determinar si debemos bajar el precio" es un PDA disfrazado de PIM. No es una pregunta de información — es una pregunta de acción.
+    <strong>El error más común:</strong> "Determinar si debemos bajar el precio" es un PDA disfrazado de PIM. No es una pregunta de información: es una pregunta de acción.
   </div>
 </div>
 </section>
@@ -349,7 +349,8 @@ ul.bullets-white li::before { color: var(--accent); }
 <section>
 <div class="slide s-dark">
   <div class="eyebrow eyebrow-light">Tabla 2.3 actualizada</div>
-  <div class="slide-h slide-h-white">Del PDA al PIM — casos actuales</div>
+  <div class="piz" style="background:rgba(255,255,255,0.07);border-left-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.45);">✏ Tabla 2.3 en pizarrón: tres columnas Empresa / PDA / PIM — completar con los casos a medida que se discuten</div>
+  <div class="slide-h slide-h-white">Del PDA al PIM: casos actuales</div>
   <table class="ref-table ref-table-dark">
     <tr><th>Empresa</th><th>PDA</th><th>PIM</th></tr>
     <tr>
@@ -370,7 +371,7 @@ ul.bullets-white li::before { color: var(--accent); }
   </table>
   <div class="pause-box" style="margin-top:14px;">
     <div class="pause-label">⏸ Pregunta</div>
-    <div class="pause-q">"¿Debemos abrir en TikTok Shop?" — ¿PIM o PDA disfrazado? ¿Cómo reformularían el PIM correctamente?</div>
+    <div class="pause-q">"¿Debemos abrir en TikTok Shop?": ¿PIM o PDA disfrazado? ¿Cómo reformularían el PIM correctamente?</div>
   </div>
 </div>
 </section>
@@ -378,15 +379,16 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── SECCIÓN: DEFINICIÓN DEL PIM ───────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 04 · minutos 80–93</div>
+  <div class="sec-num">Sección 04</div>
   <div class="sec-title">Definición del PIM:<br>dos errores<br>y la solución</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Figuras 2.5 y 2.6 — Malhotra</div>
-  <div class="slide-h">Dos errores opuestos — ambos igualmente peligrosos</div>
+  <div class="eyebrow">Figuras 2.5 y 2.6 · Malhotra</div>
+  <div class="piz">✏ Figuras 2.5 y 2.6 en pizarrón: espectro horizontal con "demasiado amplio" a la izquierda, "demasiado estrecho" a la derecha, y la zona correcta al centro con flecha de planteamiento general + componentes específicos</div>
+  <div class="slide-h">Dos errores opuestos, ambos igualmente peligrosos</div>
   <div class="two-col">
     <div class="col-box" style="border-top:3px solid var(--accent);">
       <div class="col-label" style="color:var(--accent);">Error 1 · Demasiado amplio</div>
@@ -398,7 +400,7 @@ ul.bullets-white li::before { color: var(--accent); }
     </div>
   </div>
   <div class="def-block" style="margin-top:14px; background:#1a2a1a;">
-    <div class="def-term-label" style="color:#6db86d;">Solución — Figura 2.6</div>
+    <div class="def-term-label" style="color:#6db86d;">Solución · Figura 2.6</div>
     <div class="def-text"><strong>Planteamiento general</strong> (salvaguarda vs. estrechez) + <strong>componentes específicos</strong> (salvaguarda vs. amplitud). Los dos niveles actúan como checks mutuos.</div>
   </div>
 </div>
@@ -433,7 +435,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── SECCIÓN: ENFOQUE ────────────────── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 05 · minutos 93–108</div>
+  <div class="sec-num">Sección 05</div>
   <div class="sec-title">Componentes<br>del enfoque</div>
   <div class="sec-sub">Marco analítico · PI · Hipótesis · Especificación de la información</div>
 </div>
@@ -441,32 +443,28 @@ ul.bullets-white li::before { color: var(--accent); }
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Componentes del enfoque — Malhotra</div>
+  <div class="eyebrow">Componentes del enfoque · Malhotra</div>
   <div class="slide-h">Los tres componentes que guían el diseño metodológico</div>
   <div class="def-block">
-    <div class="def-term-label">Marco de referencia analítico</div>
-    <div class="def-text">Planteamiento teórico aplicado al PIM. La investigación <strong>no empieza de cero</strong> — se construye sobre teoría existente. Los <strong>modelos gráficos</strong> aíslan variables y sugieren la dirección de las relaciones.</div>
-  </div>
-  <div class="def-block" style="margin-top:8px;">
     <div class="def-term-label">Preguntas de investigación (PI)</div>
     <div class="def-text">Planteamientos <strong>refinados de los componentes específicos</strong> del PIM. Cada componente puede originar varias PI.</div>
   </div>
   <div class="def-block" style="margin-top:8px;">
     <div class="def-term-label">Hipótesis (H)</div>
-    <div class="def-text">Afirmación <strong>aún no comprobada</strong>. <strong>No son preguntas</strong> — son afirmaciones sobre relaciones propuestas, testables empíricamente. Su función: definir qué variables medir.</div>
+    <div class="def-text">Afirmación <strong>aún no comprobada</strong>. <strong>No son preguntas</strong>: son afirmaciones sobre relaciones propuestas, testables empíricamente. Su función: definir qué variables medir.</div>
   </div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Modelo gráfico actualizado — McKinsey 2022</div>
-  <div class="slide-h">Customer Decision Journey — proceso circular, no embudo</div>
+  <div class="eyebrow">Modelo gráfico actualizado · McKinsey 2022</div>
+  <div class="slide-h">Customer Decision Journey: proceso circular, no embudo</div>
   <ul class="bullets">
     <li><strong>Consideración inicial:</strong> el consumidor activa un conjunto reducido de marcas conocidas</li>
-    <li><strong>Evaluación activa:</strong> el conjunto puede <em>crecer</em> — nuevas marcas entran. Reseñas y social media tienen su mayor impacto aquí</li>
+    <li><strong>Evaluación activa:</strong> el conjunto puede <em>crecer</em>; nuevas marcas entran. Reseñas y social media tienen su mayor impacto aquí</li>
     <li><strong>Momento de compra:</strong> decisión final en el punto de venta o experiencia digital</li>
-    <li><strong>Post-compra — Loyalty loop:</strong> si la experiencia es buena, el consumidor entra directo al siguiente ciclo sin volver a evaluar. Es el activo más valioso de una marca</li>
+    <li><strong>Post-compra · Loyalty loop:</strong> si la experiencia es buena, el consumidor entra directo al siguiente ciclo sin volver a evaluar. Es el activo más valioso de una marca</li>
   </ul>
   <div class="pause-box">
     <div class="pause-label">⏸ Pregunta</div>
@@ -507,7 +505,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── SECCIÓN: INTERNACIONAL Y ÉTICA ─── -->
 <section>
 <div class="slide s-section">
-  <div class="sec-num">Sección 06 · minutos 108–118</div>
+  <div class="sec-num">Sección 06</div>
   <div class="sec-title">Internacional,<br>Social media<br>y Ética</div>
 </div>
 </section>
@@ -525,7 +523,7 @@ ul.bullets-white li::before { color: var(--accent); }
   </ul>
   <div class="latam-box">
     <div class="latam-label">🌎 Particularidades metodológicas LatAm</div>
-    <div class="latam-text"><strong>Sesgo de aquiescencia</strong> — tendencia a responder positivamente · <strong>Sesgo de deseabilidad social</strong> — en precio y hábitos · <strong>Equivalencia de constructos</strong> — "confianza" puede significar cosas distintas entre países de la región</div>
+    <div class="latam-text"><strong>Sesgo de aquiescencia:</strong> tendencia a responder positivamente · <strong>Sesgo de deseabilidad social:</strong> se acentúa en precio y hábitos · <strong>Equivalencia de constructos:</strong> "confianza" puede significar cosas distintas entre países de la región</div>
   </div>
   <div class="pause-box">
     <div class="pause-label">⏸ Pregunta</div>
@@ -537,14 +535,14 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- Social media + Ética -->
 <section>
 <div class="slide s-light">
-  <div class="eyebrow">Social media y ética · minutos 113–118</div>
+  <div class="eyebrow">Social media y ética</div>
   <div class="slide-h">Dove 2023 · Tres temas éticos nuevos</div>
   <ul class="bullets" style="margin-bottom:14px;">
-    <li><strong>Dove/Brandwatch:</strong> detectó +65% en conversaciones negativas sobre beauty filters antes de que apareciera en métricas de negocio — social listening para <em>anticipar</em> el problema, no reaccionar</li>
+    <li><strong>Dove/Brandwatch:</strong> detectó +65% en conversaciones negativas sobre beauty filters antes de que apareciera en métricas de negocio. Social listening para <em>anticipar</em> el problema, no para reaccionar</li>
     <li><strong>Límite:</strong> captura lo que se dice públicamente, no lo que se piensa. Sesgo masivo hacia usuarios jóvenes y urbanos</li>
   </ul>
   <div style="display:flex;flex-direction:column;gap:8px;">
-    <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:#333;"><strong>① Synthetic respondents:</strong> útiles para pilotar instrumentos — no válidos como sustituto de datos reales</div>
+    <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:13px;color:#333;"><strong>① Synthetic respondents:</strong> útiles para pilotar instrumentos, no válidos como sustituto de datos reales</div>
     <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:0 6px 6px 0;font-size:13px;color:#333;"><strong>② Consentimiento en investigación digital:</strong> analizar posts puede requerir informar a los autores (LFPDPPP · LGPD · Ley 25.326)</div>
     <div style="padding:9px 14px;background:white;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;font-size:13px;color:#333;"><strong>③ HARKing:</strong> presentar hipótesis post-hoc como si fueran previas. En investigación comercial: usar la investigación para "documentar" una decisión ya tomada</div>
   </div>
@@ -558,7 +556,7 @@ ul.bullets-white li::before { color: var(--accent); }
 <!-- ── CIERRE ──────────────────────────── -->
 <section>
 <div class="slide s-close">
-  <div class="sec-num" style="margin-bottom:16px;">Cierre · minutos 118–120</div>
+  <div class="sec-num" style="margin-bottom:16px;">Cierre</div>
   <div class="sec-title" style="font-size:2.1rem;margin-bottom:26px;color:var(--paper);">Un problema bien definido<br>es un problema<br><em style="color:#d4a0a0;">parcialmente resuelto.</em></div>
   <ul class="bullets bullets-white" style="max-width:600px;margin-bottom:28px;">
     <li><strong style="color:white;">Duolingo</strong> — definió bien, pasó de abandono masivo a 600M usuarios</li>
