@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Taller — LaTeX con Overleaf</title>
+<title>Taller — LaTeX con Prism</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
 <style>
@@ -52,9 +52,9 @@
 .slide-h-white { color:white; }
 
 ul.bullets { list-style:none; padding:0; margin:0; }
-ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 22px; border-bottom:1px solid var(--border); position:relative; }
+ul.bullets li { font-size:clamp(12.5px,1.6vw,14px); line-height:1.55; color:#333; padding:6px 0 6px 0; border-bottom:1px solid var(--border); position:relative; }
 ul.bullets li:last-child { border-bottom:none; }
-ul.bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent); font-weight:700; }
+ul.bullets li::before { content:''; }
 ul.bullets-white li { color:rgba(255,255,255,0.85); border-color:rgba(255,255,255,0.1); }
 ul.bullets-white li::before { color:var(--accent); }
 
@@ -145,7 +145,7 @@ ul.bullets-white li::before { color:var(--accent); }
 <section>
 <div class="slide s-cover">
   <div class="cover-eyebrow">Taller de Herramientas · Investigación de Mercado</div>
-  <div class="cover-title">LaTeX con<br><em>Overleaf</em></div>
+  <div class="cover-title">LaTeX con<br><em>Prism</em></div>
   <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
     <div class="cover-chip">Taller práctico</div>
     <div class="cover-chip">Paula Pereda Suárez · Universidad de Montevideo</div>
@@ -199,20 +199,20 @@ ul.bullets-white li::before { color:var(--accent); }
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Bloque 1</div>
-  <div class="slide-h">¿Qué es LaTeX y qué es Overleaf?</div>
+  <div class="slide-h">¿Qué es LaTeX y qué es Prism?</div>
 
   <ul class="bullets">
     <li><strong>LaTeX</strong> es un sistema de composición tipográfica: el autor escribe contenido y estructura; LaTeX genera el formato. Se usa en investigación académica, economía, estadística e ingeniería en todo el mundo</li>
-    <li><strong>Overleaf</strong> es un editor de LaTeX en el navegador — sin instalación, con vista previa en tiempo real, con historial de versiones y colaboración simultánea</li>
-    <li>La cuenta gratuita de Overleaf es suficiente para todo el trabajo del curso: ilimitados proyectos, compilación en tiempo real, plantillas disponibles</li>
+    <li><strong>Prism</strong> (OpenAI, 2026) es un editor de LaTeX en el navegador: sin instalación, con vista previa en tiempo real, colaboración ilimitada y asistente IA integrado directamente en el flujo de edición</li>
+    <li>La cuenta gratuita de Prism es suficiente para todo el trabajo del curso: proyectos ilimitados, colaboradores ilimitados, compilación ilimitada, y funciones de IA sin cuota diaria</li>
   </ul>
 
   <div class="tip-box">
-    <div class="tip-label">Overleaf hoy</div>
-    <div class="tip-text">Abrir <strong>overleaf.com</strong> → <em>Register for free</em> con el correo universitario. El editor carga en el navegador. No hace falta instalar nada más.</div>
+    <div class="tip-label">Prism hoy</div>
+    <div class="tip-text">Abrir <strong>prism.openai.com</strong> → iniciar sesión con cuenta de ChatGPT, Google o GitHub. El editor carga en el navegador. No hace falta instalar nada más.</div>
   </div>
 
-  <div class="piz">✏ Mostrar Overleaf proyectado: crear cuenta, abrir un proyecto en blanco, señalar las tres columnas: árbol de archivos / editor / PDF preview.</div>
+  <div class="piz">✏ Mostrar Prism proyectado: iniciar sesión, abrir un proyecto en blanco con "+ New", señalar las tres columnas (árbol de archivos / editor / PDF preview) y el chatbox de IA en la parte inferior.</div>
 </div>
 </section>
 
@@ -269,7 +269,7 @@ ul.bullets-white li::before { color:var(--accent); }
   <div class="code-block">
 <span class="cmd">\section</span><span class="arg">{Contexto del problema}</span>
 <span class="str">Este es el primer párrafo. LaTeX separa párrafos
-con una línea en blanco — no con Enter.</span>
+con una línea en blanco, no con Enter.</span>
 <br>
 <span class="str">Este es el segundo párrafo.</span>
 <br>
@@ -287,7 +287,7 @@ con una línea en blanco — no con Enter.</span>
 <span class="cmd">\end</span><span class="arg">{enumerate}</span>
   </div>
 
-  <div class="piz">✏ Práctica en vivo: cada estudiante abre Overleaf y reproduce esta estructura. Darles 4 minutos.</div>
+  <div class="piz">✏ Práctica en vivo: cada estudiante abre Prism (prism.openai.com) y reproduce esta estructura en un proyecto nuevo. Darles 4 minutos.</div>
 </div>
 </section>
 
@@ -428,7 +428,7 @@ con una línea en blanco — no con Enter.</span>
   </div>
 
   <div class="nota-dark">
-    <div class="nota-dark-text"><code style="color:#79c0ff">booktabs</code> elimina las líneas verticales — el estándar en publicaciones académicas. La regla: una línea gruesa arriba, una delgada bajo el encabezado, una gruesa abajo.</div>
+    <div class="nota-dark-text"><code style="color:#79c0ff">booktabs</code> elimina las líneas verticales; es el estándar en publicaciones académicas. La regla: una línea gruesa arriba, una delgada bajo el encabezado, una gruesa abajo.</div>
   </div>
 </div>
 </section>
@@ -454,7 +454,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Flujo recomendado</div>
-    <div class="tip-text">Exportar el gráfico desde Excel o Python como <strong>.png o .pdf</strong> → subirlo al proyecto en Overleaf (botón de upload en el árbol de archivos) → referenciarlo con <code>\includegraphics</code>.</div>
+    <div class="tip-text">Exportar el gráfico desde Excel o Python como <strong>.png o .pdf</strong> → subirlo al proyecto en Prism (botón de upload en el árbol de archivos) → referenciarlo con <code>\includegraphics</code>.</div>
   </div>
 </div>
 </section>
@@ -495,7 +495,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Exportar desde Google Scholar</div>
-    <div class="tip-text">Buscar la obra en Scholar → botón <em>Citar</em> → <em>BibTeX</em> → copiar y pegar en el archivo <code>.bib</code>. La entrada ya viene con los campos correctos.</div>
+    <div class="tip-text">Buscar la obra en Scholar → botón <em>Citar</em> → <em>BibTeX</em> → copiar y pegar en el archivo <code>.bib</code> dentro de Prism. La entrada ya viene con los campos correctos. El Agent de Prism también puede buscar y agregar citas automáticamente.</div>
   </div>
 </div>
 </section>
@@ -589,26 +589,26 @@ con una línea en blanco — no con Enter.</span>
   <div class="slide-h">Generadores automáticos: evitar escribir tablas a mano</div>
 
   <ul class="bullets">
-    <li><strong>tables-generator.com</strong> — pegar datos, elegir estilo <em>booktabs</em>, copiar el código LaTeX generado directo en Overleaf. Es la herramienta más práctica para el trabajo del curso</li>
-    <li><strong>Excel2LaTeX</strong> (plugin de Excel) — seleccionar rango en Excel → exportar como código LaTeX. Útil cuando ya se tiene la tabla en Excel con formato</li>
-    <li><strong>csvautotabular</strong> (paquete LaTeX) — leer directamente un archivo <code>.csv</code> y convertirlo en tabla sin intermediarios</li>
+    <li><strong>tables-generator.com</strong>: pegar datos, elegir estilo <em>booktabs</em>, copiar el código LaTeX generado directo en Prism. Es la herramienta más práctica para el trabajo del curso</li>
+    <li><strong>Excel2LaTeX</strong> (plugin de Excel): seleccionar rango en Excel → exportar como código LaTeX. Útil cuando ya se tiene la tabla en Excel con formato</li>
+    <li><strong>csvautotabular</strong> (paquete LaTeX): leer directamente un archivo <code>.csv</code> y convertirlo en tabla sin intermediarios</li>
   </ul>
 
   <div class="tip-box" style="margin-top:12px;">
     <div class="tip-label">Anatomía de una tabla booktabs bien hecha</div>
     <div class="tip-text">
-      <code>\toprule</code> — línea gruesa inicial<br>
+      <code>\toprule</code>: línea gruesa inicial<br>
       Fila de encabezados (en negrita, <code>\textbf</code>)<br>
-      <code>\midrule</code> — línea delgada bajo el encabezado<br>
+      <code>\midrule</code>: línea delgada bajo el encabezado<br>
       Filas de datos (separadas por <code>\\</code>)<br>
-      <code>\bottomrule</code> — línea gruesa final<br>
-      Sin líneas verticales — el estándar APA y académico
+      <code>\bottomrule</code>: línea gruesa final<br>
+      Sin líneas verticales; es el estándar APA y académico
     </div>
   </div>
 
   <div class="pause-box" style="margin-top:10px;">
     <div class="pause-label">Ejercicio rápido</div>
-    <div class="pause-q">Abrir tables-generator.com → tab LaTeX → cargar la tabla de variables de su entrega → copiar el código y pegarlo en Overleaf. ¿Cuánto tarda?</div>
+    <div class="pause-q">Abrir tables-generator.com → tab LaTeX → cargar la tabla de variables de su entrega → copiar el código y pegarlo en Prism. ¿Cuánto tarda?</div>
   </div>
 </div>
 </section>
@@ -707,7 +707,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:8px;">
     <div class="tip-label">Editor visual de ecuaciones</div>
-    <div class="tip-text"><strong>codecogs.com/latex/eqneditor.php</strong> — escribir la ecuación con botones (similar al editor de Word) y copiar el código LaTeX generado. Ideal para fórmulas complejas.</div>
+    <div class="tip-text"><strong>codecogs.com/latex/eqneditor.php</strong>: escribir la ecuación con botones (similar al editor de Word) y copiar el código LaTeX generado. Ideal para fórmulas complejas.</div>
   </div>
 </div>
 </section>
@@ -747,7 +747,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Por qué usar variables</div>
-    <div class="tip-text">Si el nombre de la empresa cambia, el tamaño muestral se actualiza, o se reutiliza la plantilla para otra entrega: se cambia <strong>en un solo lugar del preámbulo</strong> y LaTeX actualiza todo el documento automáticamente. La plantilla del curso ya usa este patrón con <code>\nombreentrega</code>.</div>
+    <div class="tip-text">Si el nombre de la empresa cambia, el tamaño muestral se actualiza, o se reutiliza la plantilla para otra entrega: se cambia <strong>en un solo lugar del preámbulo</strong> y LaTeX actualiza todo el documento automáticamente. La plantilla del curso ya usa este patrón con <code>\nombreentrega</code>. En Prism, el PDF preview refleja el cambio al instante.</div>
   </div>
 </div>
 </section>
@@ -775,7 +775,7 @@ con una línea en blanco — no con Enter.</span>
   </div>
 
   <div class="nota-dark" style="margin-top:10px;">
-    <div class="nota-dark-text">Una función escribe el código repetitivo una sola vez. El Template-Informe de Overleaf que usamos en el curso ya define funciones como <code>\portada</code> con exactamente este mecanismo. Cuando necesiten algo que se repite 5 veces, vale la pena crear un <code>\newcommand</code>.</div>
+    <div class="nota-dark-text">Una función escribe el código repetitivo una sola vez. La plantilla del curso que importaron en Prism ya define funciones como <code>\portada</code> con exactamente este mecanismo. Cuando necesiten algo que se repite 5 veces, vale la pena crear un <code>\newcommand</code>.</div>
   </div>
 </div>
 </section>
@@ -800,7 +800,7 @@ con una línea en blanco — no con Enter.</span>
   <ul class="bullets">
     <li><strong>TikZ</strong> (paquete <code>tikz</code>) permite dibujar cualquier figura vectorial con código: diagramas de flujo, árboles de decisión, grafos, mapas de proceso. El resultado es tipográficamente perfecto y escala sin perder calidad</li>
     <li>Para investigación de mercado: útil para diagramar el proceso de muestreo, el Customer Decision Journey, o el diseño del cuestionario</li>
-    <li>La curva de aprendizaje es alta — para uso en el curso se recomienda empezar con plantillas de <strong>texample.net/tikz</strong> y adaptar</li>
+    <li>La curva de aprendizaje es alta; para uso en el curso se recomienda empezar con plantillas de <strong>texample.net/tikz</strong> y adaptar</li>
   </ul>
 
   <div class="two-col" style="gap:12px; margin-top:10px;">
@@ -855,14 +855,14 @@ con una línea en blanco — no con Enter.</span>
       </div>
       <div class="col-box">
         <div class="col-label" style="color:var(--blue);">Recursos</div>
-        <div class="col-body">overleaf.com/learn/latex/Pgfplots_package<br>pgfplots.net — galería de ejemplos</div>
+        <div class="col-body">overleaf.com/learn/latex/Pgfplots_package — documentación técnica<br>pgfplots.net — galería de ejemplos</div>
       </div>
     </div>
   </div>
 
   <div class="tip-box" style="margin-top:10px;">
-    <div class="tip-label">Control de versiones con Git</div>
-    <div class="tip-text">Al ser texto plano, los archivos <code>.tex</code> funcionan perfectamente con Git. Overleaf tiene integración nativa con GitHub: cada compilación queda como commit. Ideal para proyectos largos o entregas en equipo donde se quiere rastrear quién cambió qué.</div>
+    <div class="tip-label">Control de versiones</div>
+    <div class="tip-text">Al ser texto plano, los archivos <code>.tex</code> funcionan perfectamente con Git. Prism mantiene historial de versiones del proyecto en la nube. Para integración con GitHub, exportar el proyecto como .zip y subirlo al repositorio. Ideal para proyectos largos donde se quiere rastrear quién cambió qué.</div>
   </div>
 </div>
 </section>
@@ -875,19 +875,19 @@ con una línea en blanco — no con Enter.</span>
 <div class="slide s-section">
   <div class="sec-num">Bloque 4</div>
   <div class="sec-title">La plantilla<br>del curso</div>
-  <div class="sec-sub">Cómo copiarla · Qué contiene · Práctica guiada</div>
+  <div class="sec-sub">Cómo importarla en Prism · Qué contiene · Práctica guiada</div>
 </div>
 </section>
 
 <section>
 <div class="slide s-light">
   <div class="eyebrow">Bloque 4</div>
-  <div class="slide-h">Paso 1 — Abrir el link y copiar el proyecto</div>
+  <div class="slide-h">Paso 1 — Descargar la plantilla e importarla en Prism</div>
 
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-text">Abrir el link de la plantilla del curso:<br>
+      <div class="step-text">Abrir el link de la plantilla del curso en Overleaf (solo para descargarla):<br>
         <a href="https://www.overleaf.com/read/cyngkcsbkrdz#137c46"
            style="font-family:'DM Mono',monospace; font-size:12px; color:var(--blue); word-break:break-all;">
           overleaf.com/read/cyngkcsbkrdz#137c46
@@ -896,19 +896,19 @@ con una línea en blanco — no con Enter.</span>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-text">El link abre en modo <em>lectura</em> — se puede ver el código pero no editar. Para trabajar sobre ella: botón <strong>Menu</strong> (arriba a la izquierda) → <strong>Copy Project</strong></div>
+      <div class="step-text">Desde Overleaf, botón <strong>Menu</strong> (arriba a la izquierda) → <strong>Download Source</strong> → se descarga un archivo <code>.zip</code> con todos los archivos de la plantilla</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-text">Overleaf pide un nombre para la copia — recomendado: <code>EntregaN_NombreEmpresa</code>. La copia queda en su cuenta, lista para editar</div>
+      <div class="step-text">Abrir <strong>prism.openai.com</strong> → botón <strong>Import</strong> → subir el <code>.zip</code> descargado. Prism importa el proyecto y lo deja listo para editar. Recomendado renombrar: <code>EntregaN_NombreEmpresa</code></div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <div class="step-text">Para trabajar en equipo: desde la copia, botón <strong>Share</strong> → <em>Turn on link sharing</em> → compartir el link de edición con los integrantes del grupo</div>
+      <div class="step-text">Para trabajar en equipo: botón <strong>Share</strong> en Prism → link de edición → compartir con los integrantes del grupo. Colaboración simultánea sin límite de personas</div>
     </div>
   </div>
 
-  <div class="piz">✏ Demo en vivo: abrir el link proyectado → Menu → Copy Project → mostrar la copia en la cuenta.</div>
+  <div class="piz">✏ Demo en vivo: descargar el .zip de la plantilla → importar en Prism → mostrar el proyecto cargado con los cuatro archivos.</div>
 </div>
 </section>
 
@@ -928,7 +928,7 @@ con una línea en blanco — no con Enter.</span>
     </div>
     <div class="col-box">
       <div class="col-label">referencias.bib</div>
-      <div class="col-body">Bibliografía. Malhotra (2016) ya está cargado. Agregar las fuentes propias en BibTeX — una entrada por fuente, exportable desde Google Scholar.</div>
+      <div class="col-body">Bibliografía. Malhotra (2016) ya está cargado. Agregar las fuentes propias en BibTeX: una entrada por fuente, exportable desde Google Scholar.</div>
     </div>
     <div class="col-box">
       <div class="col-label">logoum_transparente.png</div>
@@ -938,7 +938,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Una sola línea cambia la entrega en toda la plantilla</div>
-    <div class="tip-text"><code style="color:var(--blue);">\def\nombreentrega{Primera entrega}</code> al inicio del <code>.tex</code> — cambiar el texto entre llaves. Aparece automáticamente en el encabezado de todas las páginas.</div>
+    <div class="tip-text"><code style="color:var(--blue);">\def\nombreentrega{Primera entrega}</code> al inicio del <code>.tex</code>: cambiar el texto entre llaves. Aparece automáticamente en el encabezado de todas las páginas. Prism compila y muestra el cambio en el PDF en tiempo real.</div>
   </div>
 </div>
 </section>
@@ -996,7 +996,7 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="tip-box" style="margin-top:10px;">
     <div class="tip-label">Tarea del ejercicio</div>
-    <div class="tip-text">Tenés el <code>.docx</code> de esta entrega. La meta: reproducirla en LaTeX usando la plantilla del curso — portada, secciones, imagen e incluida — y descargar el PDF final.</div>
+    <div class="tip-text">Tenés el <code>.docx</code> de esta entrega. La meta: reproducirla en LaTeX usando la plantilla del curso importada en Prism (portada, secciones, imagen incluida) y descargar el PDF final.</div>
   </div>
 </div>
 </section>
@@ -1008,9 +1008,9 @@ con una línea en blanco — no con Enter.</span>
 
   <div class="two-col" style="gap:14px; margin-top:6px;">
     <div>
-      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:8px;">Paso 1 — Subir el archivo a Overleaf</div>
+      <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:8px;">Paso 1 — Subir el archivo a Prism</div>
       <div class="code-block" style="font-size:11.5px;">
-<span class="cmt">% En Overleaf: botón de upload (ícono de flecha</span>
+<span class="cmt">% En Prism: botón de upload (ícono de flecha</span>
 <span class="cmt">% hacia arriba en el árbol de archivos)</span>
 <span class="cmt">% Subir: imagen_ejemplo.png</span>
 <span class="cmt">% El archivo aparece junto a los .tex y .sty</span>
@@ -1028,7 +1028,7 @@ con una línea en blanco — no con Enter.</span>
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="col-box" style="background:#2a2a2a; border-color:#444;">
         <div class="col-label" style="color:#79c0ff;">¿Dónde va en el documento?</div>
-        <div class="col-body-w">En Mendoza Wines, la imagen aparece al final de la <strong style="color:white;">Sección 1</strong> — después del párrafo de la entrevista con Rodrigo Fontana y antes de la Sección 2.</div>
+        <div class="col-body-w">En Mendoza Wines, la imagen aparece al final de la <strong style="color:white;">Sección 1</strong>, después del párrafo de la entrevista con Rodrigo Fontana y antes de la Sección 2.</div>
       </div>
       <div class="col-box" style="background:#2a2a2a; border-color:#444;">
         <div class="col-label" style="color:#ffa657;">width=\textwidth</div>
@@ -1049,17 +1049,17 @@ con una línea en blanco — no con Enter.</span>
   <div class="slide-h">Práctica guiada — completar la plantilla con su entrega real</div>
 
   <ul class="bullets">
-    <li><strong>Abrir la copia</strong> que hicieron en el paso anterior — si no llegaron a copiarla, hacerlo ahora</li>
+    <li><strong>Abrir el proyecto importado</strong> en Prism (si aún no lo importaron, descargarlo de Overleaf como .zip e importarlo ahora con el botón <strong>Import</strong>)</li>
     <li><strong>Completar los cuatro campos</strong> marcados con <code>← COMPLETAR</code>: título del proyecto, entrega, integrantes, fecha real del equipo</li>
-    <li><strong>Cambiar <code>\nombreentrega</code></strong> a <code>Primera entrega</code> → compilar → verificar que el encabezado cambia en todas las páginas del PDF</li>
-    <li><strong>Subir <code>imagen_ejemplo.png</code></strong> a Overleaf e insertarla al final de la Sección 1 con <code>\begin{figure}...\end{figure}</code></li>
+    <li><strong>Cambiar <code>\nombreentrega</code></strong> a <code>Primera entrega</code> → Prism compila automáticamente → verificar que el encabezado cambia en todas las páginas del PDF</li>
+    <li><strong>Subir <code>imagen_ejemplo.png</code></strong> a Prism (botón upload en el árbol de archivos) e insertarla al final de la Sección 1 con <code>\begin{figure}...\end{figure}</code></li>
     <li><strong>Agregar una referencia</strong> en <code>referencias.bib</code>: buscarla en Google Scholar → Citar → BibTeX → citar con <code>\parencite{clave}</code></li>
     <li><strong>Download PDF</strong> → verificar portada, imagen, encabezado y referencia</li>
   </ul>
 
   <div class="pause-box">
     <div class="pause-label">Para los que terminan antes</div>
-    <div class="pause-q">¿Cómo invitarían a los integrantes del equipo a editar el proyecto al mismo tiempo? Encontrar el botón Share en Overleaf y probar el link de edición colaborativa.</div>
+    <div class="pause-q">¿Cómo invitarían a los integrantes del equipo a editar el proyecto al mismo tiempo? Encontrar el botón Share en Prism y probar el link de edición colaborativa con un compañero.</div>
   </div>
 </div>
 </section>
@@ -1115,7 +1115,7 @@ con una línea en blanco — no con Enter.</span>
   </table>
 
   <div class="nota-dark">
-    <div class="nota-dark-text">Overleaf muestra los errores en el panel inferior derecho con el número de línea. La mayoría se resuelven solos leyendo el mensaje de error.</div>
+    <div class="nota-dark-text">Prism muestra los errores de compilación en el panel de herramientas (Tools) con el número de línea. El botón <strong>Fix with AI</strong> permite pedirle al asistente que corrija el error directamente; siempre pide confirmación antes de aplicar el cambio.</div>
   </div>
 </div>
 </section>
@@ -1151,7 +1151,7 @@ con una línea en blanco — no con Enter.</span>
       <tr><td>\cite{clave}</td><td>Cita en texto</td></tr>
       <tr><td>\printbibliography</td><td>Lista de referencias</td></tr>
       <tr><th colspan="2">Recursos</th></tr>
-      <tr><td>overleaf.com/learn</td><td>Documentación oficial</td></tr>
+      <tr><td>overleaf.com/learn</td><td>Documentación de referencia LaTeX</td></tr>
       <tr><td>tables-generator.com</td><td>Generar tablas visualmente</td></tr>
     </table>
   </div>
@@ -1195,7 +1195,7 @@ con una línea en blanco — no con Enter.</span>
       <tr><td>tables-generator.com</td><td>Tablas visuales → código LaTeX</td></tr>
       <tr><td>codecogs.com/eqneditor</td><td>Editor visual de ecuaciones</td></tr>
       <tr><td>texample.net/tikz</td><td>Galería de diagramas TikZ</td></tr>
-      <tr><td>overleaf.com/learn</td><td>Documentación oficial</td></tr>
+      <tr><td>overleaf.com/learn</td><td>Documentación de referencia LaTeX</td></tr>
     </table>
   </div>
 </div>
@@ -1219,7 +1219,7 @@ con una línea en blanco — no con Enter.</span>
       <div class="vs-item">El informe tiene figuras numeradas, tablas y bibliografía</div>
       <div class="vs-item">El PDF debe verse idéntico en cualquier computadora</div>
       <div class="vs-item">Hay ecuaciones o notación estadística formal</div>
-      <div class="vs-item">Trabajás en equipo sobre el mismo documento (Overleaf Share)</div>
+      <div class="vs-item">Trabajás en equipo sobre el mismo documento (Prism Share, colaboradores ilimitados)</div>
       <div class="vs-item">El documento es una tesis, paper o entrega de curso formal</div>
     </div>
   </div>
@@ -1238,20 +1238,20 @@ con una línea en blanco — no con Enter.</span>
     <div style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; color:var(--paper); line-height:1.1; margin-bottom:28px;">A partir de hoy,<br>las entregas<br><em style="color:#d4a0a0;">se ven igual</em><br>en todos lados.</div>
     <div style="display:flex; gap:24px; flex-wrap:wrap;">
       <div style="border-left:3px solid var(--accent); padding:4px 14px;">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PARA SEGUIR</div>
-        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/learn — documentación oficial</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">EDITOR</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">prism.openai.com — LaTeX con IA integrada</div>
       </div>
       <div style="border-left:3px solid var(--blue); padding:4px 14px;">
         <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">TABLAS SIN CÓDIGO</div>
         <div style="font-size:13px; color:rgba(255,255,255,0.7);">tables-generator.com — modo LaTeX</div>
       </div>
       <div style="border-left:3px solid var(--gold); padding:4px 14px;">
-        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">ECUACIONES</div>
-        <div style="font-size:13px; color:rgba(255,255,255,0.7);">codecogs.com/eqneditor — editor visual</div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">DOCUMENTACIÓN</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/learn — referencia LaTeX completa</div>
       </div>
       <div style="border-left:3px solid rgba(255,255,255,0.3); padding:4px 14px;">
         <div style="font-family:'DM Mono',monospace; font-size:10px; color:rgba(255,255,255,0.35); letter-spacing:2px; margin-bottom:3px;">PLANTILLA DEL CURSO</div>
-        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/read/cyngkcsbkrdz — copiar y editar</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.7);">overleaf.com/read/cyngkcsbkrdz — descargar .zip → importar en Prism</div>
       </div>
     </div>
   </div>
